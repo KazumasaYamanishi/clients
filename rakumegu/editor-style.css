@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+
+*:before, *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+body#tinymce.wp-editor {
+	margin: 0; padding: 10px 20px !important;
+	font-size: 14px; color: #424242; letter-spacing: 1px;
+	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+}

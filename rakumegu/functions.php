@@ -390,7 +390,7 @@ function getNewItems($atts) {
 
 	$oldpost = $post;
 	$myposts = get_posts('numberposts=' . $num . '&order=DESC&orderby=post_date&category=' . $cat);
-	$retHtml = '<ul class="news-list">';
+	$retHtml = '<ul class="news-list list-unstyled">';
 
 	foreach($myposts as $post) :
 
@@ -402,7 +402,7 @@ function getNewItems($atts) {
 
 		$retHtml .= '<li>';
 		$retHtml .= '<span class="news-date">' . get_post_time( get_option( 'date_format' )) . '</span>';
-		$retHtml .= '<span class="cat ' . $catslug . '">' . $catname . '</span>';
+		// $retHtml .= '<span class="cat ' . $catslug . '">' . $catname . '</span>';
 		$retHtml .= '<span class="news-title"><a href="' . get_permalink() . '">' . the_title("", "", false) . '</a></span>';
 		$retHtml .= '</li>';
 
@@ -414,6 +414,280 @@ function getNewItems($atts) {
 	return $retHtml;
 }
 add_shortcode("news", "getNewItems");
+
+
+
+
+
+// ==================================================
+//
+//	カテゴリー「チケット」の入力補助
+//
+// ==================================================
+function my_admin_footer_script() {
+
+?>
+
+<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'>
+<script>
+jQuery(document).ready(function($) {
+	$(document).on("click", "#cft_selectbox input.button", (function(){
+		$.ajax({
+			type: "POST",
+			url: ajaxurl,
+			data: {
+				// functions.phpに記載されている関数を実行
+				'action' : 'ajax_get_posts',
+			},
+			success: function( response ) {
+				jsonData 	= JSON.parse( response );
+				var count 	= jsonData.length;
+				if ( count == '0' ) {
+					// 検索結果がない場合
+				} else {
+					// リストに出力
+					$.each( jsonData, function( i, val ){
+						$('#hotel2_0').append('<option value="' + val['post_title'] + '">' + val['post_title'] + '</option>');
+					});
+				}
+			},
+			error: function( response ) {
+				// ajaxエラーの場合
+			}
+		});
+	}));
+});
+</script>
+
+<?php
+}
+add_action('admin_print_footer_scripts', 'my_admin_footer_script');
+
+// get_postsでデータをjsonへ（ホテル名）
+function ajax_get_posts(){
+	$returnObj = array();
+	// get_posts オプション
+	$args = array(
+		'post_type' => 'post',
+		'category' => 2,
+		'numberposts' => -1,
+	);
+	$posts = get_posts( $args );
+	foreach( $posts as $key => $post ) {
+		$returnObj[$key] = array(
+			// 出力するデータを格納
+			'post_title' => $post->post_title,
+		);
+	}
+	// json形式に出力
+	echo json_encode( $returnObj );
+	die();
+}
+add_action( 'wp_ajax_ajax_get_posts', 'ajax_get_posts' );
+add_action( 'wp_ajax_nopriv_ajax_get_posts', 'ajax_get_posts' );
+
+// get_postsでデータをjsonへ（観光地名）
+function ajax_get_title(){
+	$returnObj = array();
+	// get_posts オプション
+	if( $_POST['sight'] == '' ) {
+		$args = array(
+			'post_type' 	=> 'post',
+			'category' 		=> 3,
+			'numberposts' 	=> -1,
+			'meta_key' 		=> 'Yomigana',
+			'orderby' 		=> 'meta_value',
+			'order' 		=> 'ASC',
+		);
+	} else {
+		$args = array(
+			'post_type' 	=> 'post',
+			'category' 		=> 3,
+			'numberposts' 	=> -1,
+			'meta_key' 		=> 'Yomigana',
+			'orderby' 		=> 'meta_value',
+			'order' 		=> 'ASC',
+			'meta_query' 	=> array(
+								array(
+									'key' 		=> 'City',
+									'value' 	=> $_POST['sight'],
+					)
+				),
+		);
+	}
+	$posts = get_posts( $args );
+	foreach( $posts as $key => $post ) {
+		$returnObj[$key] = array(
+			// 出力するデータを格納
+			'post_title' => $post->post_title,
+		);
+	}
+	if( $posts ) {
+	} else {
+		$returnObj[] = array(
+			'post_title' => '登録されている観光地はありません',
+		);
+	}
+
+	// json形式に出力
+	echo json_encode( $returnObj );
+	die();
+}
+add_action( 'wp_ajax_ajax_get_title', 'ajax_get_title' );
+add_action( 'wp_ajax_nopriv_ajax_get_title', 'ajax_get_title' );
+
+
+
+// ==================================================
+//
+//	管理画面の投稿一覧の投稿をログイン中のユーザーの投稿のみにする
+//
+// ==================================================
+if (!current_user_can('level_10')) {
+	function exclude_other_posts( $wp_query ) {
+	    if ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) {
+	        $post_type = get_post_type_object( $_REQUEST['post_type'] );
+	        $cap_type = $post_type->cap->edit_other_posts;
+	    } else {
+	        $cap_type = 'edit_others_posts';
+	    }
+	    if ( is_admin() && $wp_query->is_main_query() && ! $wp_query->get( 'author' ) && ! current_user_can( $cap_type ) ) {
+	        $user = wp_get_current_user();
+	        $wp_query->set( 'author', $user->ID );
+	    }
+	}
+	add_action( 'pre_get_posts', 'exclude_other_posts' );
+}
+
+// ==================================================
+//
+//	管理画面のメニューを非表示にする
+//
+// ==================================================
+function remove_menus () {
+	if (!current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
+		remove_menu_page('wpcf7'); //Contact Form 7
+		global $menu;
+		//unset($menu[2]); // ダッシュボード
+		//unset($menu[4]); // メニューの線1
+		//unset($menu[5]); // 投稿
+		//unset($menu[10]); // メディア
+		unset($menu[15]); // リンク
+		unset($menu[20]); // ページ
+		unset($menu[25]); // コメント
+		//unset($menu[59]); // メニューの線2
+		unset($menu[60]); // テーマ
+		unset($menu[65]); // プラグイン
+		// unset($menu[70]); // プロフィール
+		unset($menu[75]); // ツール
+		unset($menu[80]); // 設定
+		unset($menu[90]); // メニューの線3
+	}
+}
+add_action('admin_menu', 'remove_menus');
+
+
+
+
+
+// ==================================================
+//
+//	WP-Members ログイン後にリダイレクト
+//
+// ==================================================
+add_filter( 'wpmem_login_redirect', 'my_login_redirect', 10, 2 );
+function my_login_redirect( $redirect_to, $user_id ) {
+    return 'http://addas4.sakura.ne.jp/rakuraku/wp-admin/';
+}
+
+
+
+// ==================================================
+//
+//	集計ページを追加
+//
+// ==================================================
+function original_page() {
+	add_menu_page('集計', '集計', 1, 'original_page', 'original_menu');
+}
+add_action('admin_menu', 'original_page');
+function original_menu() {
+	include 'original_menu.php';
+}
+
+
+
+// ==================================================
+//
+//	「WordPressへようこそ！」を非表示にする
+//
+// ==================================================
+remove_action( 'welcome_panel', 'wp_welcome_panel' );
+// ==================================================
+//
+//	ダッシュボードトップ画面のウィジェットを非表示にする
+//
+// ==================================================
+function example_remove_dashboard_widgets() {
+	global $wp_meta_boxes;
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']); 		// 現在の状況（概要）
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']); 	// 最近のコメント
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']); 	// 被リンク
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']); 			// プラグイン
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']); 		// クイック投稿
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']); 		// 最近の下書き
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']); 			// WordPressブログ
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']); 			// WordPressフォーラム
+}
+add_action('wp_dashboard_setup', 'example_remove_dashboard_widgets');
+// ==================================================
+//
+//	管理画面上部のメニューを非表示にする
+//
+// ==================================================
+add_action( 'wp_before_admin_bar_render', 'my_wp_before_admin_bar_render' );
+function my_wp_before_admin_bar_render() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wp-logo');		// wordpressロゴ
+	$wp_admin_bar->remove_menu('updates');		// 更新
+	$wp_admin_bar->remove_menu('comments');		// コメント
+	$wp_admin_bar->remove_menu('new-content');	// 新規
+	$wp_admin_bar->remove_menu('user-info');	// マイアカウント内「プロフィール」
+	$wp_admin_bar->remove_menu('edit-profile');	// マイアカウント内「プロフィールを編集」
+}
+// ==================================================
+//
+//	ログアウトを左側に表示
+//
+// ==================================================
+function add_new_item_in_admin_bar() {
+	global $wp_admin_bar;
+	$wp_admin_bar->add_menu(array(
+		'id' 	=> 'new_item_in_admin_bar',
+		'title' => __('ログアウト'),
+		'href' 	=> wp_logout_url()
+	));
+}
+add_action('wp_before_admin_bar_render', 'add_new_item_in_admin_bar');
+// ==================================================
+//
+//	表示オプションとヘルプを非表示
+//
+// ==================================================
+function my_admin_head(){
+	echo '<style type="text/css">#contextual-help-link-wrap{display:none;}</style>';
+	echo '<style type="text/css">#screen-options-link-wrap{display:none;}</style>';
+}
+add_action('admin_head', 'my_admin_head');
+// ==================================================
+//
+//	「WordPress のご利用ありがとうございます」を消す
+//
+// ==================================================
+function custom_admin_footer() {
+	echo '&nbsp;';
+}
+add_filter('admin_footer_text', 'custom_admin_footer');
 
 
 

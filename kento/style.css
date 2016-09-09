@@ -6,4 +6,6 @@ Author: アドダス
 Author URI: http://addas.jp/
 */
 
-
+body {
+    border: 12px solid #006837;
+}
