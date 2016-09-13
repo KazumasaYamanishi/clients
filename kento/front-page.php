@@ -9,8 +9,8 @@
 	//
 	// ==================================================
 ?>
-<section class="wow fadeIn">
-<div class="text-center"><img src="/wp-content/uploads/2016/09/test.jpg"></div>
+<section class="wow fadeIn mt32pd0">
+<div class="text-center"><img src="http://kento-kenko.com/kento/wp-content/uploads/2016/09/test.jpg"></div>
 </section>
 <?php
 	// ==================================================
@@ -19,10 +19,13 @@
 	//
 	// ==================================================
 ?>
-<section id="service" class="wow fadeIn">
+<div class="wrap-service-detail">
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/list.png" /></div>
+<section id="service" class="wow fadeIn pd0">
+
 	<h1>サービス内容</h1>
 	<p class="lead">公共団体、個人、企業の方へ、様々な健康指導を行っています。</p>
-	<div class="wrap-service-detail">
+	
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3"><p>健康づくり講演</p></div>
@@ -42,8 +45,9 @@
 				<div class="col-sm-3"><p>ウォーキングイベント<br>企画・実施（運営）</p></div>
 			</div>
 		</div>
-	</div>
+	
 </section>
+</div>
 <?php
 	// ==================================================
 	//
@@ -51,16 +55,17 @@
 	//
 	// ==================================================
 ?>
+<div class="wrap-service-detail3">
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/toha.png" /></div>
 <section id="coaching" class="wow fadeIn">
+
 	<h1>健康運動指導士とは</h1>
 	<p class="lead">健康の維持・改善を目指し、運動プログラムの提案・指導をする専門家</p>
+
 	<div class="container">
-		<div class="box-80per">
-			<div class="row box-dan">
-				<div class="col-sm-6">
-					<img src="<?php echo get_template_directory_uri(); ?>/img/14195614.jpg" alt="健康運動指導士とは">
-				</div>
-				<div class="col-sm-6 col-sm-pull-1">
+		
+			
+				
 					<ol>
 						<li>医学的基礎知識、運動生理学の知識に基づき個々人に対して、安全で適切な運動の指導を行う。</li>
 						<li>特定の競技種目の普及や競技能力の向上ではなく、日常生活に健康づくりになる運動を普及、指導を行う。</li>
@@ -68,11 +73,11 @@
 						<li>半健康人、生活習慣病の危険因子を有する人へ運動プログラムの作成、指導を行う。</li>
 						<li>医師、栄養士、保健師等と連携して運動指導を行う。</li>
 					</ol>
-				</div>
-			</div>
-		</div>
 	</div>
+		
 </section>
+</div>
+
 <?php
 	// ==================================================
 	//
@@ -80,19 +85,71 @@
 	//
 	// ==================================================
 ?>
+<div class="wrap-service-detail4">
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/keisai.png" /></div>
 <section id="media" class="wow fadeIn">
 	<h1>掲載記事</h1>
-	<p class="lead">弊社の活動が「健康づくり」に掲載されました</p>
-	<div class="wrap-btn">
+	<p class="lead">弊社の活動がメディアに取り上げられました</p>
+<div class="container">
+		
+			<div class="row row-0">
+<div class="col-sm-6 height-some"><img src="<?php echo get_template_directory_uri(); ?>/img/14195614.jpg" alt="活動詳細">
+</div>
+				<div class="col-sm-6 tomei height-some">
+
+<!-- <ul class="kome">
+<li>平成１２年５月<br>
+南日本新聞「元気です、女です」で掲載</li>
+
+<li>平成２０年６月・同年１２月<br>
+財団法人　長寿社会開発センター５０代からのイキイキ発見マガジン「ひょうひょう」に介護予防ご当地体操で掲載</li>
+
+<li>平成２８年９月号に掲載<br>
+公益財団法人　健康・体力づくり事業財団の広報誌 月刊「健康づくり」<br>
+テーマ　拓く～健康づくりの現場から～　99<br>
+関節の痛みを緩和する運動プログラムを開発し介護予防に取り組む
+</li>
+</ul> -->
+
+
+<dl>
+	<dt>平成12年5月</dt>
+	<dd>南日本新聞「元気です、女です」で掲載</dd>
+	<dt>平成20年6月・同年12月</dt>
+	<dd>財団法人 長寿社会開発センター<br>
+	50代からのイキイキ発見マガジン「ひょうひょう」に介護予防ご当地体操で掲載</dd>
+	<dt>平成28年9月号に掲載</dt>
+	<dd>公益財団法人　健康・体力づくり事業財団の広報誌<br>
+	月刊「健康づくり」<br>
+	テーマ　拓く～健康づくりの現場から～　99<br>
+	関節の痛みを緩和する運動プログラムを開発し介護予防に取り組む</dd>
+</dl>
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+	<div class="wrap-btn mt24">
+
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-sm-push-3">
-					<a href="" target="_blank" class="btn btn-block btn-ghost">詳細はこちらから<i class="fa fa-external-link fa-fw" aria-hidden="true"></i></a>
+					<a href="http://www.health-net.or.jp/syuppan/kenkozukuri/" target="_blank" class="btn btn-block btn-ghost">詳細はこちらから<i class="fa fa-external-link fa-fw" aria-hidden="true"></i></a>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </section>
+</div>
 <?php
 	// ==================================================
 	//
@@ -100,41 +157,18 @@
 	//
 	// ==================================================
 ?>
+<div class="wrap-service-detail6">
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/katsu.png" /></div>
 <section id="lecture-activity" class="wow fadeIn">
 	<h1>活動内容</h1>
-	<div class="img-activity"></div>
-</section>
-<?php
-	// ==================================================
-	//
-	// 主な講演先
-	//
-	// ==================================================
-?>
-<section id="lecture" class="wow fadeIn">
-	<h1>主な講演先</h1>
-	<p class="lead">弊社の活動が「健康づくり」に掲載されました</p>
+<p class="lead">イベント企画、講話、TV出演、運動療法指導など</p>
 	<div class="container">
-		<p class="kome">※県（保健所）、市町村、JA、各団体、企業、社会保険協会、ライオンズクラブ、市教育委員会、県社会福祉協議会、学校PTA、ロータリークラブ、鹿児島地域産業保健センター、等その他で講演</p>
-	</div>
-</section>
-<?php
-	// ==================================================
-	//
-	// 活動詳細
-	//
-	// ==================================================
-?>
-<section id="activity" class="wow fadeIn">
-	<h1>活動詳細</h1>
-	<p class="lead">弊社の活動が「健康づくり」に掲載されました</p>
-	<div class="container">
-		<div class="box-80per">
-			<div class="row box-dan">
-				<div class="col-sm-6">
+		
+			<div class="row row-0">
+				<div class="col-sm-6 height-some">
 					<img src="<?php echo get_template_directory_uri(); ?>/img/14195614.jpg" alt="活動詳細">
 				</div>
-				<div class="col-sm-6 col-sm-pull-1">
+				<div class="col-sm-6 tomei height-some">
 					<ul class="kome">
 						<li>※ウォーキングイベント企画、実施
 						<li>※企業の安全衛生大会での保健講話及び安全衛生管理者への保健教育</li>
@@ -146,9 +180,40 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+		
 	</div>
+
+
+	
 </section>
+</div>
+<?php
+	// ==================================================
+	//
+	// 主な講演先
+	//
+	// ==================================================
+?>
+<div class="wrap-service-detail5">
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/koen.png" /></div>
+<section id="lecture" class="wow fadeIn">
+	<h1>主な講演先</h1>
+	<p class="lead">様々な団体に講演しています。(一部抜粋)</p>
+
+	<div class="container">
+		<div class="mb50 text-center"><span class="kadomaru">県保健所</span><span class="kadomaru">市町村</span><span class="kadomaru">JA鹿児島県経済連</span><span class="kadomaru">各団体</span><span class="kadomaru">一般企業</span><span class="kadomaru">社会保険協会</span><span class="kadomaru">ライオンズクラブ</span></div>
+
+<div class="text-center"><span class="kadomaru">市教育委員会</span><span class="kadomaru">県社会福祉協議会</span><span class="kadomaru">学校PTA</span><span class="kadomaru">ロータリークラブ</span><span class="kadomaru">鹿児島地域産業保健センター</span></div>
+
+	</div>
+
+
+</section>
+</div>
+
+
+	
+
 <?php
 	// ==================================================
 	//
@@ -156,17 +221,20 @@
 	//
 	// ==================================================
 ?>
+<div class="lined-paper">
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/tema.png" /></div>
 <section id="theme" class="wow fadeIn">
 	<h1>講演テーマ</h1>
-	<p class="lead">弊社の活動が「健康づくり」に掲載されました</p>
+	<p class="lead">様々なテーマにて講演実績があります(一部抜粋)</p>
+
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-6 col-sm-push-3">
+			<div class="col-sm-6 col-sm-push-2">
 				<ul class="kome">
 					<li>＊うつ予防は食事と運動で改善
 					<li>＊更年期は第二の人生の始まり・健康元年<br>～ここで老化に差がつく？健康づくり～</li>
 					<li>＊ヘルシーエイジング運動〜健やかに年を重ねるために〜<br>（膝痛・腰痛・肩痛等痛みを和らげスムーズに動ける体づくり）</li>
-					<li>＊内臓を強化するためのヘルシーエイジング運動<br>↑講演内容ココまで必須　↓以下はデザイン次第で</li>
+					<li>＊内臓を強化するためのヘルシーエイジング運動<br></li>
 					<li>＊現代人の健康と運動<br>〜元気でいきいき暮らす為のライフスタイル〜</li>
 					<li>＊脳卒中予防「目からうろこ運動と食生活」</li>
 					<li>＊がん、脳卒中、心臓病、高血圧、糖尿病、高脂血症など<br>生活習慣病の予防の為に必要な運動について理論と実際の理解。</li>
@@ -176,10 +244,12 @@
 					<li>＊ストレスが体に及ぼす影響と解消するための運動</li>
 					<li>＊特定保健指導（講義・運動）について</li>
 					<li>＊筋肉は健康を生み出す源の臓器</li>
-				</ul>
+				</ul></div>
+<div class="col-sm-4"><div class="va-b"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/onna.png" /></div></div>
 			</div>
 		</div>
 	</div>
+</div>
 </section>
 <?php
 	// ==================================================
@@ -188,18 +258,18 @@
 	//
 	// ==================================================
 ?>
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/hello.png" /></div>
 <section id="greeting" class="wow fadeIn">
 	<h1>代表のご挨拶</h1>
 	<p class="lead">はじめまして、株式会社健戸です。</p>
-	<div class="container">
-		<p class="text-center">株式会社　健　戸　KENTO</p>
-		<p class="text-center">私どもの会社では、「健康とは、自らの戸びらをひらくことから」<br class="pc-break">
-		皆様もよくご存じでしょうが、健康な状態を損なうとは、<br class="pc-break">
-		それぞれに持った生活環境が、時代の変化に、身体の対応が遅れ<br class="pc-break">
-		それがストレスとなり、健康な心身が損なわれると私たちは考えております。</p>
-		<p class="text-center">そこで健戸では、環境の変化に対応できるよう、<br class="pc-break">
-		皆様のお手伝いをして行きたいというのが、健戸の目標です。</p>
+
+	<div class="container lh-hello">
+<div class="hello-waku">
+<p class="text-center mb32"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/logo2.png" class="maru"/></p>
+		<p class="text-center comname">株式会社 健戸 KENTO</p>
+		<p class="">私どもの会社では、「健康とは、自らの戸びらをひらくことから」と考えております。皆様もよくご存じでしょうが、健康な状態を損なうとは、それぞれの生活環境に身体の対応が遅れ、ストレスとなり、健康な心身が損なわれる状態です。皆様が環境の変化に対応できるよう、皆様のお手伝いをして行きたい！それが健戸の目標です。</p>
 	</div>
+</div>
 </section>
 <?php
 	// ==================================================
@@ -208,22 +278,26 @@
 	//
 	// ==================================================
 ?>
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/daihyo2.png" /></div>
 <section id="qualification" class="wow fadeIn">
-	<h1>代表の略歴、資格</h1>
+	<h1>代表の略歴,資格</h1>
 	<p class="lead">常にチャレンジ！拓く精神！常に勉強しやり続けます！</p>
-	<div class="container">
+	<div class="container lh-hello">
+<div class="hello-waku">
+<div class="text-center mb16"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/daihyo.png" /></div>
+<div class="text-center mb32"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/name-2.png" /></div>
 		<div class="row">
-			<div class="col-sm-6 col-sm-push-3">
-				<p class="text-center">前野睦子<br>
+			<div class="col-sm-8 col-sm-push-2">
+				<p class="text-center">
 				鹿児島市立病院他看護師として13年勤務<br>
 				平成9年　株式会社健戸設立<br>
 				厚労省認定　健康運動指導士<br>
-				看護師<br>
-				第一種衛生管理者<br>
+				看護師・第一種衛生管理者<br>
 				心理学を心理学博士より15年学ぶ</p>
 			</div>
 		</div>
 	</div>
+</div>
 </section>
 <?php
 	// ==================================================
@@ -232,21 +306,51 @@
 	//
 	// ==================================================
 ?>
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/gaiyo.png" /></div>
 <section id="company" class="wow fadeIn">
 	<h1>会社概要</h1>
-	<p class="lead">健康とは、自らの戸びらを開くことから始まる。私たちがその支援をいたします。</p>
+	<p class="lead">健康とは自らの戸びらを開くことから始まる。<br class="pc-break">私たちがその支援をいたします。</p>
 	<div class="container">
+<div class="hello-waku">
+<p class="text-center mb32"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/logo2.png" class="maru"/></p>
 		<div class="row">
-			<div class="col-sm-6 col-sm-push-3">
-				<p>会社名　株式会社健戸<br>
+			<!-- <div class="col-sm-6 col-sm-push-3"> -->
+			<div class="col-sm-10 col-sm-push-1">
+				<!-- <p>会社名　株式会社健戸<br>
 				創業　平成9年4月15日<br>
 				代表取締役　前野睦子<br>
 				所在地　鹿児島市西伊敷4-22-4（小川町19-1A1102）<br>
 				TEL　099-210-7834<br>099-227-2907<br>
 				FAX　099-210-7349<br>
-				営業所　東京都港区三田2-7-22 TEL.03-6435-2514</p>
+				営業所　東京都港区三田2-7-22 TEL.03-6435-2514</p> -->
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>会社名</th><td>株式会社健戸</td>
+						</tr>
+						<tr>
+							<th>創業</th><td>平成9年4月15日</td>
+						</tr>
+						<tr>
+							<th>代表者</th><td>代表取締役 前野 睦子</td>
+						</tr>
+						<tr>
+							<th>所在地</th><td>鹿児島市西伊敷4-22-4（小川町19-1A1102）</td>
+						</tr>
+						<tr>
+							<th>TEL</th><td>099-210-7834<br>099-227-2907</td>
+						</tr>
+						<tr>
+							<th>FAX</th><td>099-210-7349</td>
+						</tr>
+						<tr>
+							<th>営業所</th><td>東京都港区三田2-7-22<br>TEL.03-6435-2514</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
+</div>
 	</div>
 </section>
 <?php
@@ -256,12 +360,16 @@
 	//
 	// ==================================================
 ?>
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/enkaku.png" /></div>
 <section id="history" class="wow fadeIn">
 	<h1>会社沿革</h1>
-	<p class="lead">健康とは、自らの戸びらを開くことから始まる。私たちがその支援をいたします。</p>
+	<p class="lead">健康とは自らの戸びらを開くことから始まる。<br class="pc-break">私たちがその支援をいたします。</p>
 	<div class="container">
+<div class="hello-waku">
+<p class="text-center mb32"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/cph.png" class="maru"/></p>
 		<div class="row">
-			<div class="col-sm-6 col-sm-push-3">
+			<!-- <div class="col-sm-8 col-sm-push-2"> -->
+			<div class="col-sm-10 col-sm-push-1">
 				<table class="table">
 					<tbody>
 						<tr>
@@ -286,6 +394,7 @@
 				</table>
 			</div>
 		</div>
+</div>
 	</div>
 </section>
 <?php
@@ -295,6 +404,7 @@
 	//
 	// ==================================================
 ?>
+<div class="text-center"><img src="http://kenkoukanri.sakura.ne.jp/kento/wp-content/uploads/2016/09/otoi.png" /></div>
 <section id="contact" class="wow fadeIn">
 	<h1>お問い合わせ</h1>
 	<p class="lead">公共団体、企業、個人の方、お気軽にご相談ください。</p>

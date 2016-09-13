@@ -6,7 +6,7 @@
 
 /** ==================================================
 **
-**  Bootstrap
+**  B ootstrap
 **
 ================================================== **/
 
@@ -310,12 +310,12 @@ footer {
 ================================================== **/
 
 section > h1:first-child {
-    font-size: 40px;
+    font-size: 32px;
 }
 
 section > h1:first-child + .lead {
-    margin-bottom: 64px;
-    font-size: 26px;
+    margin-bottom: 38px;
+    font-size: 22px;
 }
 
 
@@ -325,11 +325,9 @@ section > h1:first-child + .lead {
 **
 ================================================== */
 
-
-
 .wrap-service-detail {
-    padding-top: 42px;
-    background: url(../img/bg-service.png) center no-repeat;
+    padding: 56px 0 26px 0;
+    background: url(../img/gaikan.jpg) center no-repeat;
     background-size: cover;
 }
 
@@ -363,6 +361,12 @@ section > h1:first-child + .lead {
     margin-top: 96px;
 }
 
+.wrap-service-detail3 {
+    padding: 80px 0;
+    background: url(../img/undousi.jpg) center no-repeat;
+    background-size: cover;
+}
+
 
 /* ==================================================
 **
@@ -381,6 +385,27 @@ section > h1:first-child + .lead {
     border: 1px solid #006837;
 }
 
+.wrap-service-detail4 {
+    padding: 80px 0;
+    background: url(../img/hon.jpg) center no-repeat;
+    background-size: cover;
+}
+
+#media dl {
+    margin: 0 1em;
+}
+#media dl dt {
+    margin-bottom: .5em;
+    color: #006837;
+}
+#media dl dd {
+    margin-bottom: 3em;
+    text-align: left;
+}
+#media dl > dd:last-child {
+    margin-bottom: 0;
+}
+
 
 /* ==================================================
 **
@@ -393,12 +418,39 @@ section > h1:first-child + .lead {
     background: url(../img/img-activity) center no-repeat;
 }
 
+.wrap-service-detail6 {
+    padding: 80px 0;
+    background: url(../img/walk.jpg) center no-repeat;
+    background-size: cover;
+}
+
+.tomei {
+    background: url(../img/tomei.png) center no-repeat;
+    padding: 36px;
+}
+
+#lecture-activity .col-sm-6.tomei ul {
+    margin-left: 1.5em;
+}
+
 
 /* ==================================================
 **
 **  主な講演先
 **
 ================================================== */
+
+.wrap-service-detail2 {
+    padding: 56px 0;
+    background: url(../img/bg-service.png) center no-repeat;
+    background-size: cover;
+}
+
+.wrap-service-detail5 {
+    padding: 80px 0;
+    background: url(../img/semina.jpg) center no-repeat;
+    background-size: cover;
+}
 
 
 /* ==================================================
@@ -413,7 +465,9 @@ section > h1:first-child + .lead {
 **  講演テーマ
 **
 ================================================== */
-
+.lined-paper {
+    margin-bottom: 64px;
+}
 
 /* ==================================================
 **
@@ -435,12 +489,24 @@ section > h1:first-child + .lead {
 **
 ================================================== */
 
+#company .table tr th {
+    width: 7em;
+}
+
+#company .table tr td {
+    text-align: left;
+}
+
 
 /* ==================================================
 **
 **  会社沿革
 **
 ================================================== */
+
+#history .table tr th {
+    width: 7em;
+}
 
 
 /* ==================================================

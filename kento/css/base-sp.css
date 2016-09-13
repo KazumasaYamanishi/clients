@@ -12,7 +12,7 @@ body {
 
 ul,
 ol {
-    margin-left: 1em;
+    margin-left: 2em;
     line-height: 1.64;
 }
 
@@ -35,6 +35,8 @@ ol li {
 .col-sm-12 {
     float: none;
 }
+
+
 /** ==================================================
 **
 **  グローバルナビゲーション
@@ -114,7 +116,7 @@ ol li {
     /*height: 68px;*/
     background: url(../img/logo-header.png) no-repeat;
     text-indent: -9999em;
-    width: 202px;
+    width: 182px;
     background-size: contain;
 }
 
@@ -200,7 +202,6 @@ ul.kome {
 }
 
 
-
 /* ==================================================
 **
 **  サービス内容
@@ -209,6 +210,7 @@ ul.kome {
 
 .wrap-service-detail .col-sm-3 p {
     display: flex;
+    margin-bottom: 10px;
     justify-content: center;
     align-items: center;
     height: 64px;
@@ -216,6 +218,8 @@ ul.kome {
     line-height: 1.4;
     border: 1px solid #006837;
 }
+
+
 /* ==================================================
 **
 **  活動内容
@@ -229,6 +233,57 @@ ul.kome {
     background-size: contain;
 }
 
+#lecture-activity img {
+    margin-bottom: 20px;
+}
+
+
+/* ==================================================
+**
+**  主な講演先
+**
+================================================== */
+
+#lecture .mb50 {
+    margin-bottom: 0 !important;
+}
+
+#lecture .kadomaru {
+    display: block;
+    margin: 0 0 10px;
+    padding: 10px 20px;
+}
+
+
+/* ==================================================
+**
+**  講演テーマ
+**
+================================================== */
+
+#theme .kome li {
+    letter-spacing: 0;
+}
+
+#theme .va-b {
+    display: none;
+}
+
+
+/* ==================================================
+**
+**  代表のご挨拶
+**
+================================================== */
+
+#greeting .hello-waku,
+#qualification .hello-waku,
+#company .hello-waku,
+#history .hello-waku {
+    padding: 24px;
+    width: 100%;
+}
+
 
 /** ==================================================
 **
@@ -238,4 +293,28 @@ ul.kome {
 
 #history .table tbody th {
     width: 6em;
+}
+
+
+/** ==================================================
+**
+**  お問い合わせ
+**
+================================================== **/
+
+#contact .wrap-privacy {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, .35);
+    height: 300px;
+    overflow: auto;
+    font-size: 13px;
+    line-height: 1.64;
+    letter-spacing: 1px;
+}
+
+#contact .text-center input[type="submit"] {
+    margin-top: 24px;
+    margin-right: -16px;
 }
