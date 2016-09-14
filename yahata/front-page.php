@@ -2,8 +2,6 @@
 
 
 
-
-
 <?php // 記事一覧 ?>
 <div class="container">
 	<h2 class="text-center text-primary">インフォメーション</h2>
@@ -37,6 +35,65 @@
 	?>
 	<div class="text-center"><a href="<?php echo get_permalink(get_page_by_path('news')); ?>" class="btn btn-ghost btn-primary btn-lg btn-block round">最新情報一覧</a></div>
 </div>
+
+
+
+<?php
+	// =======================================================
+	//
+	//	今月のギャラリー
+	//
+	// =======================================================
+?>
+<div class="wrap-gallery">
+	<h2 class="text-center text-primary">今月のギャラリー</h2>
+	<?php
+		query_posts('posts_per_page=1&cat=3');
+		if ( have_posts() ) :
+
+			while ( have_posts() ) : the_post();
+
+				$images = get_field('gallery');
+				if( $images ):
+
+					$i 		= 0;
+					$result = count($images);
+?>
+
+<div class="superbox">
+	<?php
+
+		foreach( $images as $image ):
+
+			$i++;
+
+	?>
+
+<?php if( $i > 1 ) echo '-->'; ?><div class="superbox-list"><img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" data-img="<?php echo $image['sizes']['large']; ?>" class="superbox-img"></div><?php if( $result != $i ) echo '<!--'; ?>
+
+	<?php
+
+		endforeach;
+
+	?>
+</div>
+
+<?php
+
+				endif;
+
+			endwhile;
+
+		endif;
+		wp_reset_query();
+	?>
+</div>
+
+
+
+
+
+
 
 
 
