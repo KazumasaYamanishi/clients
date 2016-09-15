@@ -52,5 +52,26 @@
 
 <?php wp_footer(); ?>
 <script src="<?php bloginfo('template_url'); ?>/js/myScript.js"></script>
+
+
+
+<?php
+	// 郵便番号による住所の自動入力
+	if(is_page('contact')):
+?>
+<script src="//ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+<script src="<?php bloginfo('template_directory');?>/js/jquery.autotab.min.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("input[name='郵便番号[data][0]'], input[name='郵便番号[data][1]']").on('change',function( e ) {
+			AjaxZip3.zip2addr( '郵便番号[data][0]', '郵便番号[data][1]','pref', 'city', 'adrs' );
+		});
+		jQuery('input[type=text]').autotab();
+	});
+</script>
+<?php endif; ?>
+
+
+
 </body>
 </html>
