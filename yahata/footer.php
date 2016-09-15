@@ -52,12 +52,15 @@
 
 
 <?php wp_footer(); ?>
-<script src="<?php bloginfo('template_url'); ?>/js/superbox.min.js"></script>
+<script src="//webfont.fontplus.jp/accessor/script/fontplus.js?sShks6dWSsw%3D&pm=1&aa=1" charset="utf-8"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/myScript.js"></script>
-<script>
-	$(function() {
-	    $('.superbox').SuperBox();
-	});
-</script>
+<?php if(is_front_page()): ?>
+	<script src="<?php bloginfo('template_url'); ?>/js/superbox.min.js"></script>
+	<script>
+		$(function() {
+		    $('.superbox').SuperBox();
+		});
+	</script>
+<?php endif; ?>
 </body>
 </html>

@@ -9,18 +9,18 @@
 *,
 *:after,
 *:before {
-	margin:0;
+/*	margin:0;
 	padding:0;
 	box-sizing:border-box;
 	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
+	-moz-box-sizing:border-box;*/
 	-webkit-font-smoothing:antialiased;
 	-moz-font-smoothing:antialiased;
 	-o-font-smoothing:antialiased;
 	font-smoothing:antialiased;
 	text-rendering:optimizeLegibility;
 }
-body {
+/*body {
 	background:#e16461;
 }
 ul {
@@ -39,7 +39,7 @@ img {
 }
 .logo-img {
 	max-width:95%;
-}
+}*/
 /* SuperBox */
 .superbox-list {
 	display:inline-block;
