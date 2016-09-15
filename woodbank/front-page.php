@@ -3,39 +3,183 @@
 
 
 
+<?php
+//	==================================================
+//
+//	メインコピー
+//
+//	==================================================
+?>
+<div class="main-img"><img src="<?php echo get_template_directory_uri(); ?>/img/home-main.png" alt="WOOD BANK ウッドバンク"></div>
+<div class="to-sample"><a href="<?php echo home_url(); ?>/sample"><img src="<?php echo get_template_directory_uri(); ?>/img/sample.png" alt="サンプル・送料すべて無料！"></a></div>
 
-<?php // 記事一覧 ?>
-<div class="container">
-	<h2 class="text-center text-primary">インフォメーション</h2>
+
+
+<?php
+//	==================================================
+//
+//	Recommend
+//
+//	==================================================
+?>
+<div class="wrap-recommend">
+	<h2 class="text-center"><img src="<?php echo get_template_directory_uri(); ?>/img/title-rec.png" alt="recommend"></h2>
+</div>
+
+
+
+<?php
+//	==================================================
+//
+//	Line Up
+//
+//	==================================================
+?>
+<div class="wrap-lineup">
+	<h2 class="text-center"><img src="<?php echo get_template_directory_uri(); ?>/img/title-lineup.png" alt="recommend"></h2>
+	<h3><span class="first">フローリング</span><span class="second">Flooring</span></h3>
+	<div class="row">
+		<?php
+			// ==============================
+			// フローリング
+			// ==============================
+			$taxonomies = array(
+				'cat_flooring'
+			);
+			$args = array(
+				'get' => 'all'
+			);
+			$terms = get_terms($taxonomies, $args);
+			foreach($terms as $key => $value):
+		?>
+			<div class="col-sm-3">
+				<a href="<?php echo home_url() . '/cat_flooring/' . $value->slug; ?>" class="box-items">
+					<div class="header"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center"></div>
+					<h4 class="text-center"><?php echo $value->name; ?></h4>
+				</a>
+				<?php // echo var_dump($value); ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<h3><span class="first">羽目板</span><span class="second">Paneling</span></h3>
+	<div class="row">
+		<?php
+			// ==============================
+			// 羽目板
+			// ==============================
+			$taxonomies = array(
+				'cat_paneling'
+			);
+			$args = array(
+				'get' => 'all'
+			);
+			$terms = get_terms($taxonomies, $args);
+			foreach($terms as $key => $value):
+		?>
+			<div class="col-sm-3">
+				<a href="<?php echo home_url() . '/cat_paneling/' . $value->slug; ?>" class="box-items">
+					<div class="header"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center"></div>
+					<h4 class="text-center"><?php echo $value->name; ?></h4>
+				</a>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<h3><span class="first">デッキ材</span><span class="second">Decking</span></h3>
+	<div class="row">
+		<?php
+			// ==============================
+			// デッキ材
+			// ==============================
+			$taxonomies = array(
+				'cat_decking'
+			);
+			$args = array(
+				'get' => 'all'
+			);
+			$terms = get_terms($taxonomies, $args);
+			foreach($terms as $key => $value):
+		?>
+			<div class="col-sm-3">
+				<a href="<?php echo home_url() . '/cat_decking/' . $value->slug; ?>" class="box-items">
+					<div class="header"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center"></div>
+					<h4 class="text-center"><?php echo $value->name; ?></h4>
+				</a>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<h3><span class="first">その他</span><span class="second">Other</span></h3>
+	<div class="row">
+		<?php
+			// ==============================
+			// その他
+			// ==============================
+			$taxonomies = array(
+				'cat_other'
+			);
+			$args = array(
+				'get' => 'all'
+			);
+			$terms = get_terms($taxonomies, $args);
+			foreach($terms as $key => $value):
+		?>
+			<div class="col-sm-3">
+				<a href="<?php echo home_url() . '/cat_other/' . $value->slug; ?>" class="box-items">
+					<div class="header"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center"></div>
+					<h4 class="text-center"><?php echo $value->name; ?></h4>
+				</a>
+			</div>
+		<?php endforeach; ?>
+	</div>
+</div>
+
+
+
+<?php
+//	==================================================
+//
+//	Information & Contents
+//
+//	==================================================
+?>
+<div class="wrap-info-cts">
+<h3><span class="first">最新情報</span><span class="second">一覧▶︎</span></h3>
 	<?php
-		$num = 6;
-		query_posts('posts_per_page='.$num);
-		if ( have_posts() ) :
-			echo '<div class="row">';
-			while ( have_posts() ) : the_post();
-				$pLink = get_the_permalink();
-				$time = get_the_time('Y.n.j');
-				$title = get_the_title();
-				$cat_info = apt_category_info();
-				$cat_slug = esc_attr($cat_info->slug);
-				$cat_name = esc_html($cat_info->name);
-				$theme_url = get_template_directory_uri();
-				if(has_post_thumbnail()) {
-					$thumbnail_id = get_post_thumbnail_id($post->ID);
-					$src_info = wp_get_attachment_image_src($thumbnail_id, 'full');
-					$src = $src_info[0];
-				} else {
-					$src = $theme_url . '/img/dammy.png';
-				}
-				echo '<div class="col-sm-4"><div class="card"><a href="' . $pLink . '"><div class="wrap-card-img"><img src="' . $src . '" alt=""></div><div class="card-inner"><p class="card-ribon card-' . $cat_slug . '">' . $cat_name . '</p><h4 class="title">' . $title . '</h4><p class="date">' . $time . '</p></div></a></div></div>';
-			endwhile;
-			echo '</div>';
-		else :
-			echo '<p>現在、記事はありません。</p>';
-		endif;
-		wp_reset_query();
+	// Information
 	?>
-	<div class="text-center"><a href="<?php echo get_permalink(get_page_by_path('news')); ?>" class="btn btn-ghost btn-primary btn-lg btn-block round">最新情報一覧</a></div>
+	<?php
+	// Contents
+	?>
+<h3><span class="first">コンテンツ</span><span class="second">contents</span></h3>
+</div>
+
+
+
+<?php
+//	==================================================
+//
+//	サンプル請求 & 注文書 & お問い合わせ
+//
+//	==================================================
+?>
+<div class="to-sample"><a href="<?php echo home_url(); ?>/sample"><img src="<?php echo get_template_directory_uri(); ?>/img/sample.png" alt="サンプル・送料すべて無料！"></a></div>
+<div class="wrap-info-cts">
+
+<div class="row">
+<div class="col-sm-6"><img src="<?php echo get_template_directory_uri(); ?>/img/bnr-dl-footer.png" alt="注文書ダウンロード"></div>
+<div class="col-sm-6"><img src="<?php echo get_template_directory_uri(); ?>/img/bnr-mail-footer.png" alt="メールお問い合わせ"></div>
+</div>
+
+<div class="row mt16">
+<div class="col-sm-6"><img src="<?php echo get_template_directory_uri(); ?>/img/btn-fax-footer.png" alt="FAX注文"></div>
+<div class="col-sm-6"><img src="<?php echo get_template_directory_uri(); ?>/img/bnr-tel-footer.png" alt="電話受付"></div>
+</div>
+
+</div>
+
+
+
+</div><!-- end of main -->
+<div class="side height-some"><?php get_sidebar(); ?></div>
 </div>
 
 

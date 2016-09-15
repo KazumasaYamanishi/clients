@@ -2,6 +2,14 @@
 
 // ==================================================
 //
+//	セッション
+//
+// ==================================================
+function init_sessions(){if(!session_id()){session_start();}}
+add_action('init', 'init_sessions');
+
+// ==================================================
+//
 //	外部のjQueryを読み込む
 //
 // ==================================================
@@ -42,42 +50,42 @@
 //	管理画面の記事/固定ページ一覧のテーブルにIDの列を加える
 //
 // ==================================================
-	add_filter('manage_posts_columns', 'posts_columns_id', 5);
-	add_action('manage_posts_custom_column', 'posts_custom_id_columns', 5, 2);
-	add_filter('manage_pages_columns', 'posts_columns_id', 5);
-	add_action('manage_pages_custom_column', 'posts_custom_id_columns', 5, 2);
-	function posts_columns_id($defaults){
-		$defaults['wps_post_id'] = __('ID');
-		return $defaults;
-	}
-	function posts_custom_id_columns($column_name, $id){
-		if($column_name === 'wps_post_id'){
-			echo $id;
-		}
-	}
+//	add_filter('manage_posts_columns', 'posts_columns_id', 5);
+//	add_action('manage_posts_custom_column', 'posts_custom_id_columns', 5, 2);
+//	add_filter('manage_pages_columns', 'posts_columns_id', 5);
+//	add_action('manage_pages_custom_column', 'posts_custom_id_columns', 5, 2);
+//	function posts_columns_id($defaults){
+//		$defaults['wps_post_id'] = __('ID');
+//		return $defaults;
+//	}
+//	function posts_custom_id_columns($column_name, $id){
+//		if($column_name === 'wps_post_id'){
+//			echo $id;
+//		}
+//	}
 // ==================================================
 //
 //	投稿一覧にアイキャッチを表示
 //
 // ==================================================
-	function add_thumbnail_column( $columns ) {
-		$post_type = isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : 'post';
-			if ( post_type_supports( $post_type, 'thumbnail' ) ) {
-				$columns['thumbnail'] = __( 'Featured Images' );
-			}
-			return $columns;
-	}
-	function display_thumbnail_column( $column_name, $post_id ) {
-		if ( $column_name == 'thumbnail' ) {
-			if ( has_post_thumbnail( $post_id ) ) {
-				echo get_the_post_thumbnail( $post_id, array( 50, 50 ) );
-			} else {
-				_e( 'none' );
-			}
-		}
-	}
-	add_filter( 'manage_posts_columns', 'add_thumbnail_column' );
-	add_action( 'manage_posts_custom_column', 'display_thumbnail_column', 10, 2 );
+//	function add_thumbnail_column( $columns ) {
+//		$post_type = isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : 'post';
+//			if ( post_type_supports( $post_type, 'thumbnail' ) ) {
+//				$columns['thumbnail'] = __( 'Featured Images' );
+//			}
+//			return $columns;
+//	}
+//	function display_thumbnail_column( $column_name, $post_id ) {
+//		if ( $column_name == 'thumbnail' ) {
+//			if ( has_post_thumbnail( $post_id ) ) {
+//				echo get_the_post_thumbnail( $post_id, array( 50, 50 ) );
+//			} else {
+//				_e( 'none' );
+//			}
+//		}
+//	}
+//	add_filter( 'manage_posts_columns', 'add_thumbnail_column' );
+//	add_action( 'manage_posts_custom_column', 'display_thumbnail_column', 10, 2 );
 // ==================================================
 //
 //	ウィジェット
@@ -415,6 +423,138 @@ function getNewItems($atts) {
 }
 add_shortcode("news", "getNewItems");
 
+
+
+
+
+function add_my_ajaxurl() {
+?>
+    <script>
+        var ajaxurl = '<?php echo admin_url( 'admin-ajax.php'); ?>';
+    </script>
+<?php
+}
+add_action( 'wp_footer', 'add_my_ajaxurl', 1 );
+
+function view_sitename(){
+    echo get_bloginfo( 'name' );
+    die();
+}
+add_action( 'wp_ajax_view_sitename', 'view_sitename' );
+add_action( 'wp_ajax_nopriv_view_sitename', 'view_sitename' );
+
+function my_ajax_get_posts(){
+
+    $itemName = $_POST['itemName'];
+
+    foreach ($_SESSION['items'] as $key => $item) {
+		if ($_SESSION['items'][$key]['id'] === $itemName) {
+		    unset($_SESSION['items'][$key]);
+		    break;
+		}
+	}
+    die();
+}
+add_action( 'wp_ajax_my_ajax_get_posts', 'my_ajax_get_posts' );
+add_action( 'wp_ajax_nopriv_my_ajax_get_posts', 'my_ajax_get_posts' );
+
+
+
+
+
+// カスタム投稿一覧にカスタムフィールドの値を表示させる
+function manage_posts_columns($columns) {
+	$columns['i-case'] 	= "ケース単価";
+	$columns['i-meter'] 	= "平米単価";
+	$columns['i-stock'] 	= "在庫";
+	return $columns;
+}
+function add_column($column_name, $post_id) {
+	if( $column_name == 'i-case' ) {
+		$stitle = get_post_meta($post_id, 'i-case', true);
+	}
+	if( $column_name == 'i-meter' ) {
+		$stitle = get_post_meta($post_id, 'i-meter', true);
+	}
+	if( $column_name == 'i-stock' ) {
+		$stitle = get_post_meta($post_id, 'i-stock', true);
+	}
+	if ( isset($stitle) && $stitle ) {
+		echo attribute_escape($stitle);
+	} else {
+		echo __('None');
+	}
+}
+add_filter( 'manage_posts_columns', 'manage_posts_columns' );
+add_action( 'manage_posts_custom_column', 'add_column', 10, 2 );
+
+
+function display_my_custom_quickedit( $column_name, $post_type ) {
+    static $print_nonce = TRUE;
+    if ( $print_nonce ) {
+        $print_nonce = FALSE;
+        wp_nonce_field( 'quick_edit_action', $post_type . '_edit_nonce' ); //CSRF対策
+    }
+
+    ?>
+    <fieldset class="inline-edit-col-right inline-custom-meta">
+        <div class="inline-edit-col column-<?php echo $column_name ?>">
+            <label class="inline-edit-group">
+                <?php
+                switch ( $column_name ) {
+                    case 'i-case':
+                        ?><span class="title">ケース単価</span><input name="i-case"><?php
+                        break;
+                    case 'i-meter':
+                        //チェックボックスの場合
+                        ?><span class="title">平米単価</span><input name="i-meter"><?php
+                        break;
+                }
+                ?>
+            </label>
+        </div>
+    </fieldset>
+<?php
+}
+add_action( 'quick_edit_custom_box', 'display_my_custom_quickedit', 10, 2 );
+
+
+function my_admin_edit_foot() {
+    global $post_type;
+    $slug = 'flooring'; //他の一覧ページで動作しないように投稿タイプの指定をする
+
+    if ( $post_type == $slug ) {
+        echo '<script type="text/javascript" src="', get_stylesheet_directory_uri() .'/js/admin_edit.js', '"></script>';
+    }
+}
+add_action('admin_footer-edit.php', 'my_admin_edit_foot');
+
+
+function save_custom_meta( $post_id ) {
+    $slug = 'flooring'; //カスタムフィールドの保存処理をしたい投稿タイプを指定
+
+    if ( $slug !== get_post_type( $post_id ) ) {
+        return;
+    }
+    if ( !current_user_can( 'edit_post', $post_id ) ) {
+        return;
+    }
+
+    $_POST += array("{$slug}_edit_nonce" => '');
+    if ( !wp_verify_nonce( $_POST["{$slug}_edit_nonce"], 'quick_edit_action' ) ) {
+        return;
+    }
+
+    if ( isset( $_REQUEST['i-case'] ) ) {
+        update_post_meta( $post_id, 'i-case', $_REQUEST['i-case'] );
+    }
+
+    if ( isset( $_REQUEST['i-meter'] ) ) {
+        update_post_meta( $post_id, 'i-meter', $_REQUEST['i-meter'] );
+    }
+
+}
+add_action( 'save_post', 'save_custom_meta' );
 
 
 ?>

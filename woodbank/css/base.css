@@ -1,0 +1,311 @@
+@charset "UTF-8";
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+:after,
+:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    word-wrap: break-word;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #424242;
+    font-weight: 500;
+    font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+    text-align: justify;
+    text-justify: inter-ideograph;
+}
+
+a,
+a:hover {
+    color: #424242;
+    text-decoration: none;
+    outline: none;
+    transition: .3s;
+}
+
+a:active,
+a:focus {
+    outline: none;
+    border: 0;
+    text-decoration: none;
+}
+
+a img {
+    border-style: none;
+    outline: none;
+    -webkit-transition: opacity .35s, -webkit-transform .35s;
+    transition: opacity .35s, transform .35s;
+}
+
+a:hover img {
+    border: 0;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter: "alpha(opacity=70)";
+}
+
+a:active img {
+    outline: none;
+    border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+    font-style: normal;
+}
+
+caption,
+th {
+    text-align: left;
+}
+
+object,
+embed {
+    vertical-align: top;
+}
+
+legend {
+    display: none;
+}
+
+img,
+abbr,
+acronym,
+fieldset {
+    border: 0;
+    vertical-align: bottom;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width/***/
+    : auto;
+    vertical-align: middle;
+}
+
+img {
+    box-shadow: #000 0 0 0;
+}
+
+img,
+x:-moz-any-link,
+x:default {
+    box-shadow: #000 0 0 0;
+}
+
+
+/*  ==================================================
+**
+**  title
+**
+==================================================  */
+
+.page-title .title {
+    text-align: center;
+}
+
+
+/*  ==================================================
+**
+**  sidebar
+**
+==================================================  */
+
+.side ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.side .wrap-widget ul li h3 {
+    display: none;
+}
+
+
+/*  ==================================================
+**
+**  footer
+**
+==================================================  */
+
+footer .copy {
+    text-align: center;
+}
+
+.wrap-btn-blog {
+    margin-top: 60px;
+}
+
+
+/*  ==================================================
+**
+**  WordPress
+**
+==================================================  */
+
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignleft {
+    float: left;
+}
+
+.alignright {
+    float: right;
+}
+
+.wp-caption {
+    border: 1px solid #ddd;
+    text-align: center;
+    background-color: #f3f3f3;
+    padding-top: 4px;
+    margin: 10px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.wp-caption img {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+}
+
+.wp-caption p.wp-caption-text {
+    font-size: 11px;
+    line-height: 17px;
+    padding: 0 4px 5px;
+    margin: 0;
+}
+
+
+/*  ==================================================
+**
+**  common
+**
+==================================================  */
+
+.box {}
+
+.bg-light {
+    padding: 44px 0;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+.bg-red {
+    padding: 36px 60px;
+    background-color: rgba(128, 28, 40, .15);
+}
+
+.inner > .bg-red:not(:last-child) {
+    margin-bottom: 60px;
+}
+
+.inner p,
+.inner table,
+.inner ul,
+.inner ol,
+.inner dl > dd {
+    color: #000;
+}
+
+.lr-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hl-center {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.lr-hl-center-parent {
+    position: relative;
+}
+
+.lr-hl-center-parent .child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#toPageTop {
+    position: fixed;
+    bottom: 5rem;
+    right: 1rem;
+    z-index: 9999;
+    text-indent: -9999em;
+}
+
+#toPageTop a {
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: url(../img/totop.png) 0 0 no-repeat;
+}
+
+#toPageTop a:hover {
+    background: url(../img/totop.png) 0 -50px no-repeat;
+}
+
+
+/***  字下げ  ***/
+
+.kome {
+    list-style: none;
+    text-indent: -1em;
+    padding-left: 1em;
+}
+
+
+/***  蛍光  ***/
+
+.neon {
+    background: linear-gradient(transparent 40%, #ffff66 40%);
+}
+
+
+/*  ==================================================
+**
+**  HOME
+**
+==================================================  */
+
+.wrap-news h2 {
+    text-align: center;
+}
+
+.wrap-news h2 .sub-title {
+    display: block;
+}
