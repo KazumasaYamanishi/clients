@@ -9,9 +9,105 @@ Author URI: http://addas.jp/
 
 /* ==================================================
 **
+**  かわなべ薬品の特徴
+**
+================================================== */
+#feature .wrap-circle {
+	margin: 44px 0;
+}
+#feature .wrap-circle .col-xs-4 p {
+	margin: 0 auto 10px;
+	width: 90px;
+	font-size: 12px;
+	letter-spacing: 0;
+	border: 1px solid #ff7bac;
+	border-radius: 50%;
+	color: #fff;
+	background-color: #ff7bac;
+	line-height: 88px;
+}
+#feature .wrap-circle .col-xs-4 p.w {
+	color: #ff7bac;
+	background-color: #fff;
+}
+#feature .wrap-recommend .wrap-recommend-item {
+	margin: 20px 0;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 {
+	padding: 1em;
+	background-color: #fef7f6;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 h4 {
+	margin-top: 4px;
+	color: rgba(237, 30, 121, 1.0);
+	font-size: 16px;
+	font-weight: 600;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 .disp-table {
+	display: table;
+	width: 100%;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 .disp-table dl {
+	display: table-row;
+	margin-bottom: 10px;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 dt,
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 dd {
+	display: table-cell;
+	font-size: 12px;
+	text-align: left;
+	vertical-align: middle;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 dt {
+	margin-bottom: 0;
+	width: 5.5em;
+	color: #424242;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 dd {
+	margin-bottom: 0;
+	padding: 6px 0;
+}
+#feature .wrap-recommend .wrap-recommend-item .col-sm-7 .lead {
+	margin: 22px 0;
+	font-size: 14px;
+	color: #424242;
+}
+/* ==================================================
+**
+**  初めての方
+**
+================================================== */
+#first article .wrap-flow h4.catch {
+	padding: 1.2em;
+	font-weight: 600;
+	background-color: rgba(255, 123, 172, 1.0);
+	color: #fff;
+}
+/* ==================================================
+**
+**  Q&A
+**
+================================================== */
+#faq article dl {
+	padding: 1em;
+	background-color: rgba(242, 216, 191, .3);
+	border: 2px dotted #f2bfc0;
+	border-radius: 4px;
+}
+#faq article dl dt {
+	margin: .5em 0 1em;
+}
+#faq article dl dd {
+	margin-bottom: 1em;
+}
+/* ==================================================
+**
 **  アクセス
 **
 ================================================== */
 #access .embed-responsive.embed-responsive-4by3 {
 	height: 350px;
+}
+#access .box-alert {
+	padding: 15px 15px 25px;
 }

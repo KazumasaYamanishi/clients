@@ -433,10 +433,12 @@ div.aligncenter {
   overflow: hidden;
 }
 
-.box-80per {
-  margin: 0 auto;
-  padding: 0 15px;
-  width: 80%;
+@media (min-width: 768px) {
+  .box-80per {
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 80%;
+  }
 }
 
 .small,
@@ -1021,6 +1023,7 @@ h2 {
   font-weight: 600;
   text-align: center;
   letter-spacing: 3px;
+  color: rgba(237, 30, 121, 1.0);
 }
 
 @media (min-width: 768px) {
@@ -1125,10 +1128,10 @@ thead th {
 **  カラー
 **
 ================================================== */
-article .inner > h1,
-article .inner > h1 .small,
-article .inner > h2,
-article .inner > h3,
+article .inner h1,
+article .inner h1 .small,
+article .inner h2,
+article .inner h3,
 article .inner dt {
   display: block;
   color: rgba(237, 30, 121, 1.0);
@@ -1142,13 +1145,13 @@ article .inner,
 article .inner p {
   text-align: center;
 }
-article .inner > h1 {
+article .inner h1 {
   border-bottom: none;
 }
-article .inner > h2 {
+article .inner h2 {
   font-size: 20px;
 }
-article .inner > h3 {
+article .inner h3 {
   margin: 24px 0;
   font-size: 18px;
   letter-spacing: 0;
@@ -1265,6 +1268,9 @@ article .inner .strong {
   background-color: #f1f1f1;
   border: 1px solid transparent;
   border-radius: 4px;
+}
+.box-alert > *:last-child {
+  margin-bottom: 0;
 }
 .box-alert h4 {
   margin: 10px 0 20px;
