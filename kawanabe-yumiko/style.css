@@ -9,11 +9,194 @@ Author URI: http://addas.jp/
 
 /* ==================================================
 **
+**  不妊の原因
+**
+================================================== */
+#cause h1 .sub {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 13px;
+}
+#cause h1 > .sub.sub-interview {
+	display: none;
+}
+.box-center-ttl {
+  position: relative;
+  /*width: 500px;*/
+  margin: 0 auto;
+  padding: 10px 0;
+  /*font-family: sans-serif;*/
+  /*font-size: 20px;*/
+  color: rgba(237, 30, 121, 1.0);
+}
+.box-center-ttl .heading {
+  margin: 26px 0 10px;
+}
+.box-center-ttl .wrap-box {
+  padding: 5px;
+  text-align: center;
+  border: 3px solid;
+  border-top: none;
+  /*width: 500px;*/
+}
+.box-center-ttl .wrap-box .caption {
+  -ms-transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  overflow: hidden;
+  margin: -5px -8px 0 -8px;
+  position: absolute;
+  width: 100%;
+  /*font-size: 16px;*/
+}
+.box-center-ttl .wrap-box .caption:before,
+.box-center-ttl .wrap-box .caption:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  margin-top: -2px;
+  border-top: 3px solid;
+  top: 50%;
+}
+.box-center-ttl .wrap-box .caption:before {
+  -ms-transform: translate(-100%, 0);
+  -webkit-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
+  margin-left: -14px;
+}
+.box-center-ttl .wrap-box .caption:after {
+  margin-left: 14px;
+}
+.box-center-ttl .wrap-box .caption .bg-pink {
+	display: inline-block;
+	padding: 0 12px;
+	background: rgba(237, 30, 121, 1.0);
+    color: #fff;
+    line-height: 34px;
+    border-radius: 18px;
+}
+.box-center-ttl .wrap-box .heading p {
+	border: 1px solid #ed1e79;
+	border-radius: 50%;
+}
+.flex {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px;
+    width: 100px;
+    height: 100px;
+}
+#cause .profile-name {
+	margin: 0;
+	font-size: 24px;
+	letter-spacing: 12px;
+}
+#cause .profile-name .sub {
+	display: block;
+	margin-bottom: 2px;
+	font-size: 14px;
+	letter-spacing: 0;
+}
+@media (min-width: 768px) {
+	#cause h1 .sub, #cause h1 > .sub.sub-interview {
+		display: inline;
+		margin-bottom: 0;
+		margin-right: 18px;
+		font-size: 20px;
+		vertical-align: middle;
+	}
+	#cause h1 > .sub.sub-interview {
+		margin-left: 18px;
+		margin-right: 0;
+	}
+	.box-center-ttl {
+		margin: 24px auto;
+	}
+	.box-center-ttl .heading {
+		margin: 26px auto 10px;
+		width: 100%;
+	}
+	.box-center-ttl .wrap-box .caption .bg-pink {
+		padding: 4px 44px;
+		border-radius: 22px;
+	}
+	#cause .wrap-profile {
+		position: relative;
+		margin-top: 120px;
+	}
+	#cause .wrap-profile .col-sm-3 img {
+		position: absolute;
+		top: -80px;
+	}
+	#cause .wrap-profile .profile-meta {
+		font-size: 13px;
+		text-align: left;
+	}
+	#cause .wrap-profile .profile-name {
+		text-align: right;
+		letter-spacing: 4px;
+		font-weight: 600;
+	}
+	#cause .wrap-profile .profile-name .sub {
+		display: inline;
+		margin-right: 6px;
+	}
+	#cause .wrap-profile .profile-name > .sub:last-child {
+		margin-left: 6px;
+		margin-right: 0;
+	}
+	#cause .wrap-profile h4,
+	#cause .wrap-profile p {
+		text-align: left;
+	}
+	#cause .wrap-profile h4 {
+		margin-bottom: 6px;
+		color: #424242;
+		font-weight: 500;
+	}
+}
+/* ==================================================
+**
+**  妊活について
+**
+================================================== */
+#about .alert-pink h4 {
+	margin-top: 8px;
+}
+#about .alert-pink .list-unstyled {
+	padding-left: 0;
+}
+#about .alert-pink .list-unstyled li {
+	margin: 0 0 10px 0;
+	padding: 13px 0;
+	letter-spacing: 0;
+    font-size: 12px;
+    text-align: center;
+	background-color: #fff;
+	color: #000;
+	border-radius: 4px;
+}
+@media (min-width: 768px) {
+	#about .wrap-bdr-round li {
+		display: inline-block;
+		padding: 10px 64px;
+		border-radius: 24px;
+	}
+	#about .alert-pink h4 {
+		margin-top: 0;
+	}
+	#about .box-alert {
+		padding: 30px 24px;
+	}
+}
+/* ==================================================
+**
 **  かわなべ薬品の特徴
 **
 ================================================== */
 #feature .wrap-circle {
-	margin: 44px 0;
+	margin: 44px auto;
 }
 #feature .wrap-circle .col-xs-4 p {
 	margin: 0 auto 10px;
@@ -72,6 +255,43 @@ Author URI: http://addas.jp/
 	font-size: 14px;
 	color: #424242;
 }
+@media (min-width: 768px) {
+	#feature .wrap-circle .col-xs-4 p {
+		margin: 0 auto 20px;
+	    width: 200px;
+	    font-size: 20px;
+	    letter-spacing: 4px;
+	    line-height: 198px;
+	}
+	#feature .wrap-recommend {
+		margin-top: 64px;
+	}
+	#feature .wrap-recommend .wrap-recommend-item {
+		margin-bottom: 44px;
+	}
+	#feature .wrap-recommend .wrap-recommend-item .col-sm-7 {
+		padding: 2em;
+	}
+	#feature .wrap-recommend .wrap-recommend-item .col-sm-7 h4 {
+		margin-bottom: 6px;
+		text-align: left;
+		font-size: 24px;
+		color: #ff7bac;
+	}
+	#feature .wrap-recommend .wrap-recommend-item .col-sm-7 .disp-table dt,
+	#feature .wrap-recommend .wrap-recommend-item .col-sm-7 .disp-table dd {
+		font-size: 14px;
+	}
+	#feature .wrap-recommend .wrap-recommend-item .col-sm-7 .disp-table dt {
+		width: 11.5em;
+	}
+	#feature .wrap-recommend .wrap-recommend-item .col-sm-7 p,
+	#feature .wrap-recommend .wrap-recommend-item .col-sm-7 .disp-table + .lead {
+		text-align: left;
+		letter-spacing: 1px;
+		font-size: 14px;
+	}
+}
 /* ==================================================
 **
 **  初めての方
@@ -100,6 +320,11 @@ Author URI: http://addas.jp/
 #faq article dl dd {
 	margin-bottom: 1em;
 }
+@media (min-width: 768px) {
+	#faq article dl {
+		padding: 1em 3em;
+	}
+}
 /* ==================================================
 **
 **  アクセス
@@ -110,4 +335,14 @@ Author URI: http://addas.jp/
 }
 #access .box-alert {
 	padding: 15px 15px 25px;
+}
+/* ==================================================
+**
+**  お問い合わせ
+**
+================================================== */
+@media (min-width: 768px) {
+	#contact .wrap-btn {
+		margin-bottom: 88px;
+	}
 }

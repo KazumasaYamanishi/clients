@@ -24,6 +24,7 @@
 <header>
     <nav class="navbar">
         <div class="container">
+            <?php if(!is_mobile()): ?><h1 class="site-name hidden-xs"><?php echo bloginfo('description'); ?></h1><?php endif; ?>
             <div class="navbar-header">
                 <a class="navbar-brand" href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a>
                 <?php
@@ -31,6 +32,9 @@
                         echo '<a class="nav-phone" href="tel:"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></a>';
                         echo '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#snav" aria-expanded="false">';
                     } else {
+                        echo '<div class="header-box-right"><ul class="list-inline"><li><a href="' . home_url() . '/access">アクセス</a></li>';
+                        echo '<li><a href="' . home_url() . '/contact">お問い合わせ</a></li></ul>';
+                        echo '<p class="header-tel">TEL．099-267-5058</p></div>';
                         echo '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnav" aria-expanded="false">';
                     }
                 ?>

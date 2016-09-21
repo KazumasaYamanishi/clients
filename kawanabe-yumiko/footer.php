@@ -26,7 +26,7 @@
 							<li><a href="<?php echo home_url(); ?>/about">妊活について</a></li>
 							<li><a href="<?php echo home_url(); ?>/feature">かわなべ薬品の特徴</a></li>
 							<li><a href="<?php echo home_url(); ?>/first">初めての方</a></li>
-							<li><a href="<?php echo home_url(); ?>/faq">Q&smp;A</a></li>
+							<li><a href="<?php echo home_url(); ?>/faq">Q&amp;A</a></li>
 						</ul>
 					</div>
 					<div class="col-sm-6">
