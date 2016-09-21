@@ -14,7 +14,7 @@ $(function(){
 	btnOpacity = 1;
 	pnOpacity = 1;
 
-	elementsD = 'http://dongurifukushikai.net/wp-content/themes/addas/img';
+	elementsD = 'https://kg-rakumegu.com/wp-content/themes/addas/img';
 
 	ua = navigator.userAgent;
 

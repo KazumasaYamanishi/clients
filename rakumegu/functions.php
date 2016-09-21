@@ -12,12 +12,18 @@
 			wp_deregister_script('jquery-ui-core');
 			wp_enqueue_script('jquery-ui-core','//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js', array(), '1.11.1');
 			wp_deregister_script('bootstrap');
-			wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '');
+			wp_enqueue_script('bootstrap', '//kg-rakumegu.com/wp-content/themes/addas/js/bootstrap.min.js', array(), '');
 			wp_deregister_script('matchheight');
-			wp_enqueue_script('matchheight', get_template_directory_uri() . '/js/jquery.matchHeight-min.js', array(), '');
+			wp_enqueue_script('matchheight', '//kg-rakumegu.com/wp-content/themes/addas/js/jquery.matchHeight-min.js', array(), '');
 		}
 	}
 	add_action('init', 'load_cdn');
+// ==================================================
+//
+//	WordPress4.4以降からhead内に挿入されるようになった不要なタグ「Embed」を削除
+//
+// ==================================================
+	remove_action('wp_head','wp_oembed_add_host_js');
 // ==================================================
 //
 //	カスタムメニュー
@@ -414,11 +420,6 @@ function getNewItems($atts) {
 	return $retHtml;
 }
 add_shortcode("news", "getNewItems");
-
-
-
-
-
 // ==================================================
 //
 //	カテゴリー「チケット」の入力補助
@@ -535,9 +536,6 @@ function ajax_get_title(){
 }
 add_action( 'wp_ajax_ajax_get_title', 'ajax_get_title' );
 add_action( 'wp_ajax_nopriv_ajax_get_title', 'ajax_get_title' );
-
-
-
 // ==================================================
 //
 //	管理画面の投稿一覧の投稿をログイン中のユーザーの投稿のみにする
@@ -569,27 +567,25 @@ function remove_menus () {
 		remove_menu_page('wpcf7'); //Contact Form 7
 		global $menu;
 		//unset($menu[2]); // ダッシュボード
-		//unset($menu[4]); // メニューの線1
-		//unset($menu[5]); // 投稿
-		//unset($menu[10]); // メディア
+		unset($menu[4]); // メニューの線1
+		unset($menu[5]); // 投稿
+		unset($menu[10]); // メディア
 		unset($menu[15]); // リンク
 		unset($menu[20]); // ページ
 		unset($menu[25]); // コメント
-		//unset($menu[59]); // メニューの線2
+		unset($menu[59]); // メニューの線2
 		unset($menu[60]); // テーマ
 		unset($menu[65]); // プラグイン
 		// unset($menu[70]); // プロフィール
 		unset($menu[75]); // ツール
 		unset($menu[80]); // 設定
 		unset($menu[90]); // メニューの線3
+		unset($menu[26]); // 宿泊施設
+		unset($menu[27]); // 観光施設
+		unset($menu[28]); // 証明書
 	}
 }
 add_action('admin_menu', 'remove_menus');
-
-
-
-
-
 // ==================================================
 //
 //	WP-Members ログイン後にリダイレクト
@@ -597,26 +593,22 @@ add_action('admin_menu', 'remove_menus');
 // ==================================================
 add_filter( 'wpmem_login_redirect', 'my_login_redirect', 10, 2 );
 function my_login_redirect( $redirect_to, $user_id ) {
-    return 'http://addas4.sakura.ne.jp/rakuraku/wp-admin/';
+    return 'https://kg-rakumegu.com/wp-login.php';
 }
-
-
-
 // ==================================================
 //
-//	集計ページを追加
+//	集計ページを追加（管理者のみ実行）
 //
 // ==================================================
-function original_page() {
-	add_menu_page('集計', '集計', 1, 'original_page', 'original_menu');
-}
-add_action('admin_menu', 'original_page');
 function original_menu() {
 	include 'original_menu.php';
 }
-
-
-
+function original_page() {
+	if (current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
+		add_menu_page('集計', '集計', 1, 'original_page', 'original_menu');
+	}
+}
+add_action('admin_menu', 'original_page');
 // ==================================================
 //
 //	「WordPressへようこそ！」を非表示にする
@@ -688,6 +680,44 @@ function custom_admin_footer() {
 	echo '&nbsp;';
 }
 add_filter('admin_footer_text', 'custom_admin_footer');
+// ==================================================
+//
+//	WP-MembersにPlaceholderを追加する
+//
+// ==================================================
+function my_register_form_rows_filter( $rows, $toggle ) {
+    $rows['username'][field] 			= '<input type="text" name="user_login" value="" id="user_login" placeholder="半角英数字　例）rakurakumeguri">';
+    $rows['password'][field] 			= '<input type="password" name="password" id="password" class="textbox" placeholder="半角英数字（8文字以上）">';
+    $rows['confirm_password'][field] 	= '<input type="password" name="confirm_password" id="confirm_password" class="textbox" placeholder="半角英数字（8文字以上）">';
+    $rows['company_name'][field] 		= '<input type="text" name="company_name" id="company_name" class="textbox" placeholder="例）楽々巡りレンタカー中央駅前店"><p><span class="small">※営業所ごとに登録する場合は、会社名のあとに営業所名を入力してください。</span></p>';
+    $rows['company_kana'][field] 		= '<input type="text" name="company_kana" id="company_kana" class="textbox" placeholder="例）らくらくめぐりれんたかーちゅうおうえきまえてん"><p><span class="small">※※株式会社、有限会社などを省いた読み仮名を<strong>ひらがな</strong>で入力してください。</span></p>';
+    $rows['zip'][field] 				= '<input type="text" name="zip" id="zip" class="textbox" placeholder="例）892-0862">';
+    $rows['city'][field] 				= '<input type="text" name="city" id="city" class="textbox" placeholder="例）鹿児島市山下町">';
+    $rows['addr1'][field] 				= '<input type="text" name="addr1" id="addr1" class="textbox" placeholder="例）17-4 照国ビル302号">';
+    $rows['phone1'][field] 				= '<input type="text" name="phone1" id="phone1" class="textbox" placeholder="例）099-123-4567"><p><span class="small">※広報サイトに表示されます。</span></p>';
+    $rows['user_email'][field] 			= '<input type="email" name="user_email" id="user_email" class="textbox" placeholder="例）info@rakumegu.jp"><p><span class="small">※登録完了メールが届きますので、必ず<strong>使用できるメールアドレス</strong>を登録してください。</span></p>';
+    // $rows['user_url'][field] 			= '<input type="url" name="url" id="user_url" class="textbox" placeholder="※広報サイトに表示されます。">';
+    $rows['user_url'][field] 			= '<input type="url" name="user_url" id="user_url" class="textbox" value="" placeholder="例）http://ktscr.co.jp"><p><span class="small">※広報サイトに表示されます。</span></p>';
+    return $rows;
+}
+add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
+// ==================================================
+//
+//	プロフィールページの修正（管理者以外）
+//
+// ==================================================
+function userprofile_script() {
+    if (!current_user_can('administrator')) {
+        global $hook_suffix;
+        if('profile.php' == $hook_suffix) {
+            wp_enqueue_script('userprofile_js', get_stylesheet_directory_uri().'/js/userprofile.js', array('jquery'));
+        }
+    }
+}
+add_action('admin_enqueue_scripts', 'userprofile_script');
+
+
+
 
 
 

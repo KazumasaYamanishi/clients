@@ -3,9 +3,9 @@
 	<div class="container">
 		<?php
 			if(is_mobile()){
-				echo '<p class="copy container"><i class="fa fa-copyright" aria-hidden="true"></i> ' . date('Y') . ' らくらくかごしま巡り事業</p>';
+				echo '<p class="copy container"><i class="fa fa-copyright" aria-hidden="true"></i> ' . date('Y') . ' らくらくかごしま巡り</p>';
 			} else {
-				echo '<p class="copy container"><i class="fa fa-copyright" aria-hidden="true"></i> ' . date('Y') . ' らくらくかごしま巡り事業</p>';
+				echo '<p class="copy container"><i class="fa fa-copyright" aria-hidden="true"></i> ' . date('Y') . ' らくらくかごしま巡り</p>';
 			}
 		?>
 	</div>
