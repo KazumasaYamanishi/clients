@@ -7,3 +7,164 @@ Author URI: http://addas.jp/
 */
 
 
+/* =======================================================
+**
+**  HOME
+**
+======================================================= */
+/*** スライダー ***/
+#wrap-slider {
+	margin-bottom: 44px;
+}
+#inner-slider {
+	height: 92vh;
+}
+#inner-slider h1,
+#inner-slider .lead {
+	color: #f15a24;
+	text-align: center;
+	text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+	line-height: 1.42;
+}
+#inner-slider h1 {
+	margin: 28vh 0 0;
+	border-bottom: none;
+}
+#inner-slider .lead {
+	margin-top: 0;
+}
+/*** ピックアップ（ボタン） ***/
+body.home .wrap-pickup {
+	margin-bottom: 44px;
+}
+body.home .wrap-pickup a {
+	display: block;
+	margin-bottom: 1em;
+	padding: 2em;
+	font-size: 20px;
+	text-align: center;
+	background-color: #ccc;
+	color: #fff;
+}
+body.home .wrap-pickup .row > .col-sm-4:last-child a {
+	margin-bottom: 0;
+}
+/*** おしらせ ***/
+body.home .wrap-info {
+	margin-bottom: 44px;
+}
+body.home .wrap-info .title-ticker {
+	margin-bottom: 0;
+	background-color: #f15a24;
+	color: #fff;
+	border-radius: 44px 0 0 44px;
+	line-height: 44px;
+	text-align: center;
+}
+body.home .wrap-info .ticker {
+	padding: 8px;
+	width: 100%;
+	border-radius: 0 44px 44px 0;
+}
+body.home .wrap-info .ticker ul li a {
+	display: block;
+}
+body.home .wrap-info .ticker ul li a .news-date {
+	display: block;
+	font-size: 9px;
+}
+body.home .wrap-info .ticker ul li a .news-title {
+	display: block;
+	font-size: 12px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/*** ブログ記事一覧 ***/
+body.home .wrap-news {
+	margin-bottom: 44px;
+}
+body.home .wrap-news ul {
+	padding-left: 0;
+	list-style: none;
+}
+body.home .wrap-news ul li {
+	border-bottom: 1px dotted #000;
+}
+body.home .wrap-news ul li a {
+	display: block;
+	color: #000;
+	line-height: 44px;
+	overflow: hidden;
+}
+body.home .wrap-news ul li a .news-date {
+	margin-right: 6px;
+	font-size: 9px;
+	vertical-align: middle;
+}
+body.home .wrap-news ul li a .news-title {
+	font-size: 13px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/*** 今月のギャラリー ***/
+body.home .wrap-gallery h2 {
+	margin-top: 0;
+	color: #f15a24;
+	text-align: center;
+}
+body.home .wrap-gallery .wrap-gallery-meta {
+	margin-bottom: 44px;
+}
+body.home .wrap-gallery .wrap-gallery-meta h3 {
+	margin-top: 0;
+	color: #f15a24;
+	font-size: 16px;
+	text-align: center;
+}
+body.home .wrap-gallery .wrap-gallery-meta .wrap-comment {
+	padding: 10px 15px;
+	font-size: 13px;
+	letter-spacing: 0;
+	background-color: #ccc;
+	border-radius: 4px;
+}
+body.home .wrap-gallery .wrap-gallery-meta .wrap-comment > *:last-child {
+	margin-bottom: 0;
+}
+@media (min-width: 768px) {
+	#inner-slider {
+		height: 70vh;
+	}
+	body.home .wrap-info .ticker ul li a {
+		line-height: 38px;
+	}
+	body.home .wrap-info .ticker ul li a .news-date {
+		display: inline;
+		margin-right: 1em;
+		font-size: 14px;
+		vertical-align: top;
+	}
+	body.home .wrap-info .ticker ul li a .news-title {
+		display: inline;
+		font-size: 16px;
+	}
+	body.home .wrap-news ul li a {
+		padding: 0 15px;
+	}
+	body.home .wrap-news ul li a .news-date {
+		margin-right: 15px;
+		font-size: 14px;
+	}
+	body.home .wrap-news ul li a .news-title {
+		font-size: 14px;
+	}
+	body.home .wrap-gallery .wrap-gallery-meta h3 {
+		margin-bottom: 24px;
+	}
+	body.home .wrap-gallery .wrap-gallery-meta .wrap-comment {
+		padding: 20px 40px;
+		font-size: 16px;
+	}
+}

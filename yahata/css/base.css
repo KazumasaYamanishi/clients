@@ -37,7 +37,9 @@ a {
 }
 
 a:hover, a:active, a:focus {
+  text-decoration: none;
   border: none;
+  color: rgba(241, 90, 36, .7);
 }
 
 a img {
@@ -568,6 +570,11 @@ br.pc-break {
   font-size: 13px;
 }
 
+/* =======================================================
+**
+**  footer
+**
+======================================================= */
 footer {
   font-size: 12px;
   background-color: #f2f2f2;
@@ -636,6 +643,98 @@ footer .copy {
   padding: 1.2em 0;
   text-align: center;
   font-size: 11px;
+}
+
+footer ul {
+  margin: 0 -15px;
+  padding-left: 0;
+  list-style: none;
+}
+
+footer ul li {
+  width: 50%;
+  float: left;
+  border-top: 1px solid #f15a24;
+}
+
+footer ul li a {
+  display: block;
+  padding-left: 1em;
+  line-height: 34px;
+}
+
+footer ul.unit01 > li:nth-child(even),
+footer ul.unit03 > li:nth-child(even) {
+  border-left: 1px solid #f15a24;
+}
+
+footer ul.unit02 > li:nth-child(odd) {
+  border-left: 1px solid #f15a24;
+}
+
+footer ul.unit03 > li:nth-child(2),
+footer ul.unit03 > li:nth-child(3) {
+  border-bottom: 1px solid #f15a24;
+}
+
+footer ul.unit03 > li:nth-child(3) {
+  border-right: 1px solid #f15a24;
+}
+
+@media (min-width: 768px) {
+  footer {
+    padding: 64px 0 32px;
+  }
+  footer h5 {
+    margin: 0 0 34px;
+    color: #f15a24;
+  }
+  footer h5 .name-footer {
+    display: block;
+    font-size: 44px;
+    letter-spacing: 6px;
+  }
+  footer address, footer p, footer .copy {
+    font-size: 16px;
+  }
+  footer .copy {
+    text-align: left;
+  }
+  footer .tel-footer {
+    color: #f15a24;
+    font-size: 46px;
+  }
+  footer .time-footer {
+    color: #f15a24;
+  }
+  footer ul {
+    margin: 0;
+    padding-left: 2em;
+    list-style-type: disc;
+  }
+  footer ul li {
+    width: 100%;
+    float: none;
+    border: none;
+  }
+  footer ul.unit01 > li:nth-child(even),
+  footer ul.unit03 > li:nth-child(even) {
+    border-left: none;
+  }
+  footer ul.unit02 > li:nth-child(odd) {
+    border-left: none;
+  }
+  footer ul.unit03 > li:nth-child(2),
+  footer ul.unit03 > li:nth-child(3) {
+    border-bottom: none;
+  }
+  footer ul.unit03 > li:nth-child(3) {
+    border-right: none;
+  }
+  footer ul li a {
+    padding-left: 0;
+    line-height: 1.64;
+  }
 }
 
 #toPageTop {
@@ -841,7 +940,7 @@ article {
 }
 
 .navbar-nav > li > a {
-  background-color: rgba(241, 90, 36, 1.0);
+  background-color: rgba(241, 90, 36, .9);
   color: #fff;
   font-size: 13px;
 }
@@ -852,7 +951,7 @@ article {
 }
 
 .navbar-nav > li.current-menu-item > a {
-  background-color: rgba(241, 90, 36, .8);
+  background-color: rgba(241, 90, 36, .7);
 }
 
 .navbar-toggle .icon-bar {

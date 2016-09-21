@@ -1,0 +1,22 @@
+.ticker {
+  padding: 1em;
+  width: 85%;
+  text-align: left;
+  border: #ef7243 1px solid;
+  position: relative;
+  overflow: hidden;
+  background-color:#fff;
+  border-radius: 0 4px 4px 0;
+}
+
+.ticker ul {
+  width: 100%;
+  position: relative;
+  margin-top: -4px;
+}
+
+.ticker ul li {
+  width: 100%;
+  display: none;
+}
+

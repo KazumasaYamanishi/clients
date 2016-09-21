@@ -16,12 +16,31 @@
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <?php
+        // 背景スライドショー
+        if(is_front_page()):
+    ?>
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/vegas.min.css">
+        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/jquery.simpleTicker.css">
+    <?php endif; ?>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?> id="<?php echo esc_attr( $post->post_name ); ?>">
 <div id="wrapper">
 
-<?php // カスタムメニューを表示 ?>
+
+
+<?php
+    //
+    // スライドショー
+    //
+    if(is_front_page()):
+?>
+<div id="wrap-slider">
+<?php endif; ?>
+
+
+
 <header>
     <nav class="navbar">
         <div class="container">
@@ -65,3 +84,28 @@
         </div>
     </nav>
 </header>
+
+
+
+<?php
+    if(is_front_page()):
+?>
+
+
+    <?php
+        // スライダーエリア
+    ?>
+    <div id="inner-slider">
+        <div class="container">
+            <h1>のびのびとした環境で<br class="pc-break">すなおでやさしい元気な子どもに</h1>
+            <p class="lead">この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています</p>
+        </div>
+    </div>
+
+
+
+<?php
+    // end of #wrap-slider
+?>
+</div>
+<?php endif; ?>

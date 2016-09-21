@@ -1,43 +1,87 @@
 <?php get_header(); ?>
-
-
-
-<?php // 記事一覧 ?>
-<div class="container">
-	<h2 class="text-center text-primary">インフォメーション</h2>
-	<?php
-		$num = 6;
-		query_posts('posts_per_page='.$num);
-		if ( have_posts() ) :
-			echo '<div class="row">';
-			while ( have_posts() ) : the_post();
-				$pLink = get_the_permalink();
-				$time = get_the_time('Y.n.j');
-				$title = get_the_title();
-				$cat_info = apt_category_info();
-				$cat_slug = esc_attr($cat_info->slug);
-				$cat_name = esc_html($cat_info->name);
-				$theme_url = get_template_directory_uri();
-				if(has_post_thumbnail()) {
-					$thumbnail_id = get_post_thumbnail_id($post->ID);
-					$src_info = wp_get_attachment_image_src($thumbnail_id, 'full');
-					$src = $src_info[0];
-				} else {
-					$src = $theme_url . '/img/dammy.png';
-				}
-				echo '<div class="col-sm-4"><div class="card"><a href="' . $pLink . '"><div class="wrap-card-img"><img src="' . $src . '" alt=""></div><div class="card-inner"><p class="card-ribon card-' . $cat_slug . '">' . $cat_name . '</p><h4 class="title">' . $title . '</h4><p class="date">' . $time . '</p></div></a></div></div>';
-			endwhile;
-			echo '</div>';
-		else :
-			echo '<p>現在、記事はありません。</p>';
-		endif;
-		wp_reset_query();
-	?>
-	<div class="text-center"><a href="<?php echo get_permalink(get_page_by_path('news')); ?>" class="btn btn-ghost btn-primary btn-lg btn-block round">最新情報一覧</a></div>
+<?php
+	// =======================================================
+	//
+	//	3ブロック
+	//
+	// =======================================================
+?>
+<div class="wrap-pickup">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<a href="<?php echo home_url(); ?>/support/">一時預かり・延長保育</a>
+			</div>
+			<div class="col-sm-4">
+				<a href="<?php echo home_url(); ?>/mama/">未就園児教室</a>
+			</div>
+			<div class="col-sm-4">
+				<a href="<?php echo home_url(); ?>/gallery/">ギャラリー</a>
+			</div>
+		</div>
+	</div>
 </div>
-
-
-
+<?php
+	// =======================================================
+	//
+	//	おしらせ
+	//
+	// =======================================================
+?>
+<?php
+	$num = 3;
+	query_posts('cat=2&posts_per_page='.$num);
+	if(have_posts()):
+?>
+<div class="wrap-info">
+	<div class="container">
+		<div class="box-80per">
+			<div class="row row-0">
+				<div class="col-xs-3">
+					<p class="title-ticker">おしらせ</p>
+				</div>
+				<div class="col-xs-9">
+					<div id="newsticker" class="ticker">
+						<ul>
+							<?php while (have_posts()):the_post(); ?>
+								<li><a href="<?php the_permalink(); ?>"><span class="news-date"><?php the_time('Y.m.d'); ?></span><span class="news-title"><?php the_title(); ?></span></a></li>
+							<?php endwhile; ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif; ?>
+<?php
+	// =======================================================
+	//
+	//	ブログ記事一覧
+	//
+	// =======================================================
+?>
+<div class="wrap-news">
+	<div class="container">
+		<div class="box-80per">
+			<?php
+				$num = 4;
+				query_posts('cat=1&posts_per_page='.$num);
+				if ( have_posts() ) :
+					echo '<ul>';
+					while ( have_posts() ) : the_post();
+						$pLink = get_the_permalink();
+						$time = get_the_time('Y.m.d');
+						$title = get_the_title();
+						echo '<li><a href="' . $pLink . '"><span class="news-date">' . $time . '</span><span class="news-title">' . $title . '</span></a></li>';
+					endwhile;
+					echo '</ul>';
+				endif;
+				wp_reset_query();
+			?>
+		</div>
+	</div>
+</div>
 <?php
 	// =======================================================
 	//
@@ -46,54 +90,47 @@
 	// =======================================================
 ?>
 <div class="wrap-gallery">
-	<h2 class="text-center text-primary">今月のギャラリー</h2>
+	<div class="container">
+		<h2>今月のギャラリー</h2>
+	</div>
 	<?php
 		query_posts('posts_per_page=1&cat=3');
 		if ( have_posts() ) :
-
 			while ( have_posts() ) : the_post();
+
+				echo '<div class="wrap-gallery-meta">';
+				echo '<div class="container">';
+				echo '<h3>' . get_the_title() . '</h3>';
+				echo '<div class="box-80per">';
+				echo '<div class="wrap-comment">';
+						the_content();
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
+				echo '</div>';
 
 				$images = get_field('gallery');
 				if( $images ):
-
 					$i 		= 0;
 					$result = count($images);
 ?>
-
 <div class="superbox">
 	<?php
-
 		foreach( $images as $image ):
-
 			$i++;
-
 	?>
-
 <?php if( $i > 1 ) echo '-->'; ?><div class="superbox-list"><img src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" data-img="<?php echo $image['sizes']['large']; ?>" class="superbox-img"></div><?php if( $result != $i ) echo '<!--'; ?>
-
 	<?php
-
 		endforeach;
-
 	?>
 </div>
-
 <?php
-
 				endif;
-
 			endwhile;
-
 		endif;
 		wp_reset_query();
 	?>
 </div>
-
-
-
-
-
-
 
 
 
