@@ -377,49 +377,49 @@
 //	固定ページのみ自動整形機能を無効化します。
 //
 // ==================================================
-function disable_page_wpautop() {
-	if ( is_page() ) remove_filter( 'the_content', 'wpautop' );
-}
-add_action( 'wp', 'disable_page_wpautop' );
+	function disable_page_wpautop() {
+		if ( is_page() ) remove_filter( 'the_content', 'wpautop' );
+	}
+	add_action( 'wp', 'disable_page_wpautop' );
 // ==================================================
 //
 //	最新記事リスト [news cat="2,3,5" num="5"]などで出力
 //
 // ==================================================
-function getNewItems($atts) {
-	extract(shortcode_atts(array(
-		"num" => '',	// 最新記事リストの取得数
-		"cat" => ''	    // 表示する記事のカテゴリー指定
-	), $atts));
+	function getNewItems($atts) {
+		extract(shortcode_atts(array(
+			"num" => '',	// 最新記事リストの取得数
+			"cat" => ''	    // 表示する記事のカテゴリー指定
+		), $atts));
 
-	global $post;
+		global $post;
 
-	$oldpost = $post;
-	$myposts = get_posts('numberposts=' . $num . '&order=DESC&orderby=post_date&category=' . $cat);
-	$retHtml = '<ul class="news-list list-unstyled">';
+		$oldpost = $post;
+		$myposts = get_posts('numberposts=' . $num . '&order=DESC&orderby=post_date&category=' . $cat);
+		$retHtml = '<ul class="news-list list-unstyled">';
 
-	foreach($myposts as $post) :
+		foreach($myposts as $post) :
 
-		$cat 		= get_the_category();
-		$catname 	= $cat[0]->cat_name;
-		$catslug 	= $cat[0]->slug;
+			$cat 		= get_the_category();
+			$catname 	= $cat[0]->cat_name;
+			$catslug 	= $cat[0]->slug;
 
-		setup_postdata($post);
+			setup_postdata($post);
 
-		$retHtml .= '<li>';
-		$retHtml .= '<span class="news-date">' . get_post_time( get_option( 'date_format' )) . '</span>';
-		// $retHtml .= '<span class="cat ' . $catslug . '">' . $catname . '</span>';
-		$retHtml .= '<span class="news-title"><a href="' . get_permalink() . '">' . the_title("", "", false) . '</a></span>';
-		$retHtml .= '</li>';
+			$retHtml .= '<li>';
+			$retHtml .= '<span class="news-date">' . get_post_time( get_option( 'date_format' )) . '</span>';
+			// $retHtml .= '<span class="cat ' . $catslug . '">' . $catname . '</span>';
+			$retHtml .= '<span class="news-title"><a href="' . get_permalink() . '">' . the_title("", "", false) . '</a></span>';
+			$retHtml .= '</li>';
 
-	endforeach;
+		endforeach;
 
-	$retHtml .= '</ul>';
-	$post = $oldpost;
-	wp_reset_postdata();
-	return $retHtml;
-}
-add_shortcode("news", "getNewItems");
+		$retHtml .= '</ul>';
+		$post = $oldpost;
+		wp_reset_postdata();
+		return $retHtml;
+	}
+	add_shortcode("news", "getNewItems");
 // ==================================================
 //
 //	カテゴリー「チケット」の入力補助
@@ -429,7 +429,7 @@ function my_admin_footer_script() {
 
 ?>
 
-<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'>
+<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
 <script>
 jQuery(document).ready(function($) {
 	$(document).on("click", "#cft_selectbox input.button", (function(){
@@ -582,7 +582,7 @@ function remove_menus () {
 		unset($menu[90]); // メニューの線3
 		unset($menu[26]); // 宿泊施設
 		unset($menu[27]); // 観光施設
-		unset($menu[28]); // 証明書
+		// unset($menu[28]); // 証明書
 	}
 }
 add_action('admin_menu', 'remove_menus');
@@ -604,9 +604,9 @@ function original_menu() {
 	include 'original_menu.php';
 }
 function original_page() {
-	if (current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
+	// if (current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
 		add_menu_page('集計', '集計', 1, 'original_page', 'original_menu');
-	}
+	// }
 }
 add_action('admin_menu', 'original_page');
 // ==================================================
