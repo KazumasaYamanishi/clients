@@ -606,8 +606,9 @@ br.pc-break {
 footer {
   padding-top: 44px;
   font-size: 12px;
-  background-color: #fef7f6;
-  color: #ed1e79;
+  /* background-color: rgba(255, 123, 172, 1.0); */
+  background-color:#fef7f6;
+  color: #fff;
 }
 
 footer h5 {
@@ -616,7 +617,7 @@ footer h5 {
 }
 
 footer a {
-  color: #ed1e79;
+  color: #fff;
 }
 
 footer h5 a {
@@ -670,7 +671,6 @@ footer .btn {
   line-height: 44px;
   border: 1px solid #fff;
   font-weight: 600;
-  color: #fff;
 }
 
 footer .copy {
@@ -683,15 +683,6 @@ footer .copy {
 footer .wrap-btn .btn:hover {
   background: rgba(237, 30, 121, .7);
   color: #fff;
-}
-
-@media (min-width: 768px) {
-  footer {
-    padding-top: 210px;
-    background: #fef7f6 url(../img/foot-wave.png) center top no-repeat;
-    background-size: contain;
-  }
-
 }
 
 #toPageTop {
@@ -1046,7 +1037,7 @@ article {
     border-radius: 10px;
   }*/
   .navbar .site-name {
-    margin: 12px 0 0;
+    margin: 30px 0 0;
     font-size: 14px;
     font-weight: 500;
     color: #ed1e79;
@@ -1057,10 +1048,10 @@ article {
     float: none;
   }
   .navbar .navbar-header .navbar-brand {
-    margin: 10px 0 0 0;
+    margin: 0;
     background: url(../img/logo-pc.png) no-repeat;
     width: 318px;
-    height: 130px;
+    height: 168px;
   }
   .navbar .header-box-right {
     float: right;
@@ -1072,7 +1063,6 @@ article {
    color:rgba(237, 30, 121, 1.0);
    border: 1px solid #ec1e79;
    padding :10px 40px;
-   margin-top: -38px;
   }
   .navbar-nav:hover, .navbar-nav:focus, .nav > li > a:hover, .nav > li > a:focus {
     background-color: transparent;
@@ -1445,8 +1435,6 @@ article .inner .strong {
 }
 .box-alert.alert-pink {
   background-color: #fef7f6;
-      background: #fef7f6;
-background-image: url("/yumikodakara/wp-content/themes/addas/img/bg-hana-big.jpg");
 }
 .wrap-bdr-round {
   padding-left: 0;
@@ -1482,8 +1470,4 @@ background-image: url("/yumikodakara/wp-content/themes/addas/img/bg-hana-big.jpg
   .box-alert {
     padding: 30px 60px;
   }
-
-  .imgkage {box-shadow: 14px 14px 0 -4px rgba(251, 237, 243, 1);}
-.bg-hana {background: url(../img/bg-hana.jpg) 50% 0% no-repeat;line-height: 3.0;}
-.line-h20 {line-height: 3.0}
 }

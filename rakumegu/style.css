@@ -67,6 +67,21 @@ Author URI: http://addas.jp/
     border-radius: .25rem;
 }
 
+/*  注意事項
+================================================== */
+#wpmem_reg .wrap-attention {
+    margin: .5em 0 1em 1em;
+    padding: 1em;
+    background: #d6d6d6;
+    border-radius: 4px;
+}
+#wpmem_reg .wrap-attention .kome {
+    padding-left: 1em;
+}
+#wpmem_reg .wrap-attention .link-login {
+    padding-left: 1em;
+}
+
 #wpmem_reg .button_div {
     margin: 44px auto;
 }

@@ -12,159 +12,642 @@ Author URI: http://addas.jp/
 **  HOME
 **
 ======================================================= */
+
+
 /*** スライダー ***/
+
 #wrap-slider {
-	margin-bottom: 44px;
+    margin-bottom: 44px;
 }
+
 #inner-slider {
-	height: 92vh;
+    position: relative;
+    height: 92vh;
 }
+
 #inner-slider h1,
 #inner-slider .lead {
-	color: #f15a24;
-	text-align: center;
-	text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-	line-height: 1.42;
+    color: #f15a24;
+    text-align: center;
+    text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    line-height: 1.84;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
+    /*font-family: "FOT-ベビポップ Std EB";*/
 }
+
 #inner-slider h1 {
-	margin: 28vh 0 0;
-	border-bottom: none;
+    margin: 28vh 0 0;
+    border-bottom: none;
 }
+
 #inner-slider .lead {
-	margin-top: 0;
+    margin-top: 0;
 }
-/*** ピックアップ（ボタン） ***/
-body.home .wrap-pickup {
-	margin-bottom: 44px;
-}
-body.home .wrap-pickup a {
-	display: block;
-	margin-bottom: 1em;
-	padding: 2em;
-	font-size: 20px;
-	text-align: center;
-	background-color: #ccc;
-	color: #fff;
-}
-body.home .wrap-pickup .row > .col-sm-4:last-child a {
-	margin-bottom: 0;
-}
+
+
 /*** おしらせ ***/
+
 body.home .wrap-info {
-	margin-bottom: 44px;
+    margin-bottom: 44px;
 }
+
 body.home .wrap-info .title-ticker {
-	margin-bottom: 0;
-	background-color: #f15a24;
-	color: #fff;
-	border-radius: 44px 0 0 44px;
-	line-height: 44px;
-	text-align: center;
+    margin-bottom: 0;
+    background-color: #f15a24;
+    color: #fff;
+    border-radius: 44px 0 0 44px;
+    line-height: 44px;
+    text-align: center;
 }
+
 body.home .wrap-info .ticker {
-	padding: 8px;
-	width: 100%;
-	border-radius: 0 44px 44px 0;
+    padding: 8px;
+    width: 100%;
+    border-radius: 0 44px 44px 0;
 }
+
 body.home .wrap-info .ticker ul li a {
-	display: block;
+    display: block;
 }
+
 body.home .wrap-info .ticker ul li a .news-date {
-	display: block;
-	font-size: 9px;
+    display: block;
+    font-size: 9px;
 }
+
 body.home .wrap-info .ticker ul li a .news-title {
-	display: block;
-	font-size: 12px;
-	overflow: hidden;
+    display: block;
+    font-size: 12px;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+
 /*** ブログ記事一覧 ***/
+
 body.home .wrap-news {
-	margin-bottom: 44px;
+    margin-bottom: 44px;
 }
+
 body.home .wrap-news ul {
-	padding-left: 0;
-	list-style: none;
+    padding-left: 0;
+    list-style: none;
 }
+
 body.home .wrap-news ul li {
-	border-bottom: 1px dotted #000;
+    border-bottom: 1px dotted #000;
 }
+
 body.home .wrap-news ul li a {
-	display: block;
-	color: #000;
-	line-height: 44px;
-	overflow: hidden;
+    display: block;
+    color: #000;
+    line-height: 44px;
+    overflow: hidden;
 }
+
 body.home .wrap-news ul li a .news-date {
-	margin-right: 6px;
-	font-size: 9px;
-	vertical-align: middle;
+    margin-right: 6px;
+    font-size: 9px;
+    vertical-align: middle;
 }
+
 body.home .wrap-news ul li a .news-title {
-	font-size: 13px;
-	overflow: hidden;
+    font-size: 13px;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+
 /*** 今月のギャラリー ***/
-body.home .wrap-gallery h2 {
-	margin-top: 0;
-	color: #f15a24;
-	text-align: center;
+
+#home .wrap-gallery h2 {
+    margin-top: 0;
+    color: #f15a24;
+    text-align: center;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
+    font-size: 28px;
 }
-body.home .wrap-gallery .wrap-gallery-meta {
-	margin-bottom: 44px;
+
+#home .wrap-gallery .wrap-gallery-meta {
+    /*margin-bottom: 44px;*/
+    margin-bottom: 28px;
 }
-body.home .wrap-gallery .wrap-gallery-meta h3 {
-	margin-top: 0;
-	color: #f15a24;
-	font-size: 16px;
-	text-align: center;
+
+#home .wrap-gallery .wrap-gallery-meta h3 {
+    margin: 0 0 28px;
+    /*color: #f15a24;*/
+    font-size: 24px;
+    text-align: center;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
 }
-body.home .wrap-gallery .wrap-gallery-meta .wrap-comment {
-	padding: 10px 15px;
-	font-size: 13px;
-	letter-spacing: 0;
-	background-color: #ccc;
-	border-radius: 4px;
+
+#home .wrap-gallery .wrap-gallery-meta .wrap-comment {
+    padding: 10px 15px;
+    font-size: 13px;
+    letter-spacing: 0;
+    background-color: #ffffed;
+    border-radius: 4px;
 }
-body.home .wrap-gallery .wrap-gallery-meta .wrap-comment > *:last-child {
-	margin-bottom: 0;
+
+#home .wrap-gallery .wrap-gallery-meta .wrap-comment > *:last-child {
+    margin-bottom: 0;
 }
+
 @media (min-width: 768px) {
-	#inner-slider {
-		height: 70vh;
+    #inner-slider {
+        height: 70vh;
+    }
+    #inner-slider h1 {
+        margin: 24vh 0 0;
+        font-size: 44px;
+        border-bottom: none;
+    }
+    body.home .wrap-info .ticker ul li a {
+        line-height: 38px;
+    }
+    body.home .wrap-info .ticker ul li a .news-date {
+        display: inline;
+        margin-right: 1em;
+        font-size: 14px;
+        vertical-align: top;
+    }
+    body.home .wrap-info .ticker ul li a .news-title {
+        display: inline;
+        font-size: 16px;
+    }
+    body.home .wrap-news ul li a {
+        padding: 0 15px;
+    }
+    body.home .wrap-news ul li a .news-date {
+        margin-right: 15px;
+        font-size: 14px;
+    }
+    body.home .wrap-news ul li a .news-title {
+        font-size: 14px;
+    }
+    body.home .wrap-gallery .wrap-gallery-meta h3 {
+        margin-bottom: 24px;
+        font-size: 24px;
+    }
+    body.home .wrap-gallery .wrap-gallery-meta .wrap-comment {
+        padding: 20px 40px;
+        font-size: 16px;
+    }
+}
+
+
+/* =======================================================
+**
+**  ごあいさつ
+**
+======================================================= */
+
+
+/* =======================================================
+**
+**  学園の概要
+**
+======================================================= */
+
+#outline article .box-alert {
+    margin-top: 44px;
+}
+
+@media (min-width: 768px) {
+    #outline article .box-alert {
+        margin-top: 64px;
+    }
+    #outline article .table {
+        margin-top: 64px;
+    }
+}
+
+
+/* =======================================================
+**
+**  教育方針
+**
+======================================================= */
+
+#education .lr-center + h3.text-center {
+    font-size: 28px;
+}
+
+
+/* =======================================================
+**
+**  よくあるご質問
+**
+======================================================= */
+
+#faq article dl {
+    margin-bottom: 44px;
+    /*padding: 1em;
+	background-color: rgba(242, 216, 191, .3);
+	border: 2px dotted #f2bfc0;
+	border-radius: 4px;*/
+}
+
+#faq article dl dt {
+    position: relative;
+    margin: .5em 0 1em;
+    padding-bottom: 1em;
+    color: #f15a24;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
+    font-size: 18px;
+    text-align: justify;
+    line-height: 1.2;
+    border-bottom: 2px solid;
+}
+
+#faq article dl dt:before {
+    position: absolute;
+    display: block;
+    content: "";
+    bottom: -7px;
+    left: 33px;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 7px 7px 0 7px;
+    border-color: #fff transparent transparent transparent;
+    z-index: 0;
+}
+
+#faq article dl dt:after {
+    position: absolute;
+    display: block;
+    content: "";
+    bottom: -10px;
+    left: 30px;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: #f15a24 transparent transparent transparent;
+    z-index: -1;
+}
+
+#faq article dl dd {
+    padding: 15px;
+    background-color: #fefce4;
+    border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+    #faq article dl {
+        margin-bottom: 44px;
+        padding: 1em 3em;
+    }
+    #faq article dl dt {
+        font-size: 24px;
+    }
+    #faq article dl dd {
+        padding: 3em;
+        line-height: 1.8;
+    }
+}
+
+
+/* =======================================================
+**
+**  園での1日
+**
+======================================================= */
+
+
+/* =======================================================
+**
+**  年間行事
+**
+======================================================= */
+
+#events article {
+    color: #f15a24;
+}
+
+#events article .lr-center {
+    margin-bottom: 10px;
+}
+
+#events .wrap-spring p,
+#events .wrap-summer p,
+#events .wrap-autumn p,
+#events .wrap-winter p {
+    text-align: center;
+    line-height: 44px;
+    border: 2px solid #f15a24;
+    border-radius: 22px;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
+    font-size: 18px;
+}
+
+@media (min-width: 768px) {
+    #events .wrap-spring,
+    #events .wrap-summer,
+    #events .wrap-autumn,
+    #events .wrap-winter {
+        padding: 10px 0 0;
+    }
+    #events .wrap-spring,
+    #events .wrap-autumn {
+        position: relative;
+    }
+    #events .wrap-spring:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 612px;
+        content: '';
+        background-color: #f15a24;
+    }
+    #events .wrap-autumn:before {
+        position: absolute;
+        top: -120px;
+        left: 0;
+        width: 100%;
+        height: 478px;
+        content: '';
+        background-color: #ffe114;
+        z-index: -1;
+    }
+    #events .wrap-spring p,
+    #events .wrap-summer p,
+    #events .wrap-autumn p,
+    #events .wrap-winter p {
+        line-height: 34px;
+    }
+    #events .wrap-spring p {
+        border: 2px solid #fff;
+    }
+    #events .wrap-spring {
+        padding-top: 30px;
+        color: #fff;
+    }
+}
+
+
+/* =======================================================
+**
+**  お問い合わせ
+**
+======================================================= */
+
+#contact article .table td .mwform-tel-field input {
+    display: inline-block;
+    width: 5.45em;
+}
+
+#contact article .table td #zip1,
+#contact article .table td #zip2 {
+    display: inline-block;
+    width: 5.45em;
+}
+
+#contact article input[type=submit] {
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
+    border-style: solid;
+    line-height: 44px;
+}
+
+#contact article input[name=submitBack] {
+    color: #424242;
+    background-color: #d4d4d4;
+    border: 1px solid #8c8c8c;
+}
+
+@media (min-width: 768px) {
+    #contact article .table + .text-center {
+        display: flex;
+        margin: 44px auto;
+        width: 500px;
+        justify-content: center;
+    }
+    #contact article .table + .text-center input {
+        margin: 10px;
+        width: 240px;
+    }
+}
+
+
+/* =======================================================
+**
+**  アクセス
+**
+======================================================= */
+
+#access #map {
+    height: 500px;
+}
+
+#access article .btn {
+    line-height: 44px;
+}
+
+#access article .box-alert h4 span {
+    display: block;
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+#access article .box-alert p {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    #access article .box-alert {
+        padding: 64px 0 32px;
+    }
+}
+
+
+/* =======================================================
+**
+**  入園案内
+**
+======================================================= */
+
+
+/* =======================================================
+**
+**  一時預かり・延長保育
+**
+======================================================= */
+
+#support article .table td {
+    text-align: center;
+}
+
+
+/* =======================================================
+**
+**  未就園児教室
+**
+======================================================= */
+
+#mama .table thead tr th {
+    border: 1px solid #ddd;
+    line-height: 44px;
+    letter-spacing: 10px;
+}
+
+#mama .table > tbody > tr > td:before {
+    display: block;
+    margin: -16px -16px 16px;
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: 16px;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
+    letter-spacing: 10px;
+    line-height: 44px;
+}
+
+
+/*#mama .table > tbody > tr > td:nth-of-type(1) { padding: 12px 8px; background-color: #777; color: #fff; font-weight: bold; }*/
+
+#mama .table > tbody > tr > td:nth-of-type(1):before {
+    content: '日時';
+}
+
+#mama .table > tbody > tr > td:nth-of-type(2):before {
+    content: '内容';
+}
+
+#mama .table > tbody > tr > td:nth-of-type(3):before {
+    content: '準備';
+}
+
+@media (min-width: 768px) {
+    #mama .table > tbody > tr > td:before {
+        display: none;
+    }
+}
+
+
+/* =======================================================
+**
+**  情報公開・苦情相談
+**
+======================================================= */
+
+.wrap-public-inner,
+.wrap-claim ul {
+    margin-bottom: 44px;
+    padding: 20px;
+    border: 2px solid #fde5dc;
+}
+
+.wrap-public-inner p {
+    margin: 0 0 14px;
+    padding-bottom: 14px;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
+}
+
+.wrap-public-inner .btn {
+    line-height: 44px;
+}
+
+.wrap-claim ul {
+    list-style: none;
+}
+
+.wrap-claim ul li {
+    border-bottom: 2px dashed #fde5dc;
+}
+
+.wrap-claim ul li a {
+    display: block;
+    padding: 1em 0;
+}
+
+.wrap-claim ul li a .news-date {
+    font-size: 9px;
+    color: #000;
+    font-family: "FOT-筑紫A丸ゴシック Std E";
+}
+
+.wrap-claim ul li a .news-title {
+    display: block;
+    padding-top: 3px;
+    line-height: 1.3;
+    font-size: 13px;
+}
+
+@media (min-width: 768px) {
+	.wrap-public-inner,
+	.wrap-claim ul {
+		border: none;
 	}
-	body.home .wrap-info .ticker ul li a {
-		line-height: 38px;
-	}
-	body.home .wrap-info .ticker ul li a .news-date {
-		display: inline;
-		margin-right: 1em;
+    .wrap-public-inner p {
+        margin: 0;
+        padding-bottom: ;
+        line-height: 44px;
+        font-size: 18px;
+    }
+	.wrap-claim ul li a .news-date {
+		display: inline-block;
+		width: 10em;
 		font-size: 14px;
-		vertical-align: top;
 	}
-	body.home .wrap-info .ticker ul li a .news-title {
-		display: inline;
-		font-size: 16px;
+	.wrap-claim ul li a .news-title {
+	    display: inline-block;
+	    padding-top: 0;
+	    font-size: 16px;
 	}
-	body.home .wrap-news ul li a {
-		padding: 0 15px;
-	}
-	body.home .wrap-news ul li a .news-date {
-		margin-right: 15px;
-		font-size: 14px;
-	}
-	body.home .wrap-news ul li a .news-title {
-		font-size: 14px;
-	}
-	body.home .wrap-gallery .wrap-gallery-meta h3 {
-		margin-bottom: 24px;
-	}
-	body.home .wrap-gallery .wrap-gallery-meta .wrap-comment {
-		padding: 20px 40px;
-		font-size: 16px;
-	}
+}
+
+
+/* =======================================================
+**
+**  プライバシーポリシー
+**
+======================================================= */
+
+#privacy article li {
+    margin-bottom: 1em;
+}
+
+
+/* =======================================================
+**
+**  ダウンロード
+**
+======================================================= */
+
+#download article .wrap-btn .btn {
+    line-height: 34px;
+}
+
+
+/* =======================================================
+**
+**  ギャラリー
+**
+======================================================= */
+
+.category-gallery article .box-fukidashi + p.small {
+    margin-top: 10px;
+}
+
+.category-gallery article .wrap-btn {
+    margin: 22px 0;
+}
+
+.category-gallery article .btn {
+    line-height: 44px;
+}
+
+.avatar {
+    width: 44px;
+}
+
+@media (min-width: 768px) {
+    .avatar {
+        width: 64px;
+    }
 }

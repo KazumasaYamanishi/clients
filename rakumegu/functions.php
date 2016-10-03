@@ -698,6 +698,7 @@ function my_register_form_rows_filter( $rows, $toggle ) {
     $rows['user_email'][field] 			= '<input type="email" name="user_email" id="user_email" class="textbox" placeholder="例）info@rakumegu.jp"><p><span class="small">※登録完了メールが届きますので、必ず<strong>使用できるメールアドレス</strong>を登録してください。</span></p>';
     // $rows['user_url'][field] 			= '<input type="url" name="url" id="user_url" class="textbox" placeholder="※広報サイトに表示されます。">';
     $rows['user_url'][field] 			= '<input type="url" name="user_url" id="user_url" class="textbox" value="" placeholder="例）http://ktscr.co.jp"><p><span class="small">※広報サイトに表示されます。</span></p>';
+    $rows['attention'][field] 			= '<div class="wrap-attention"><p class="kome">※らくらくかごしま巡りシステムのログインする際は、御社が入力された<span class="strong">ユーザー名</span>と<span class="strong">パスワード</span>を使用して、下記リンクURLよりログインすることができます。</p><p class="link-login"><a href="https://kg-rakumegu.com/wp-login.php" target="_blank">https://kg-rakumegu.com/wp-login.php</a></p></div>';
     return $rows;
 }
 add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
@@ -715,9 +716,6 @@ function userprofile_script() {
     }
 }
 add_action('admin_enqueue_scripts', 'userprofile_script');
-
-
-
 
 
 

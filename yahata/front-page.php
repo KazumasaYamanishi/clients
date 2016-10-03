@@ -10,13 +10,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4">
-				<a href="<?php echo home_url(); ?>/support/">一時預かり・延長保育</a>
+				<a href="<?php echo home_url(); ?>/support"><img src="<?php echo home_url(); ?>/wp-content/uploads/2016/09/bnr-itiji.png" alt="一時預かり・延長保育" class="lr-center"></a>
 			</div>
 			<div class="col-sm-4">
-				<a href="<?php echo home_url(); ?>/mama/">未就園児教室</a>
+				<a href="<?php echo home_url(); ?>/mama"><img src="<?php echo home_url(); ?>/wp-content/uploads/2016/09/bnr-misyu.png" alt="未就園児教室" class="lr-center"></a>
 			</div>
 			<div class="col-sm-4">
-				<a href="<?php echo home_url(); ?>/gallery/">ギャラリー</a>
+				<a href="<?php echo home_url(); ?>/gallery"><img src="<?php echo home_url(); ?>/wp-content/uploads/2016/09/bnr-gall.png" alt="ギャラリー" class="lr-center"></a>
 			</div>
 		</div>
 	</div>
@@ -101,10 +101,14 @@
 				echo '<div class="wrap-gallery-meta">';
 				echo '<div class="container">';
 				echo '<h3>' . get_the_title() . '</h3>';
-				echo '<div class="box-80per">';
-				echo '<div class="wrap-comment">';
+				echo '<div class="box-80per clearfix">';
+				// echo '<div class="wrap-comment">';
+				//		the_content();
+				// echo '</div>';
+				echo '<div class="avatar"><img src="http://youhoyahata.com/wp/wp-content/themes/addas/img/hoikushi.png" alt=""></div>';
+				echo '<div class="box-fukidashi"><p>';
 						the_content();
-				echo '</div>';
+				echo '</p></div>';
 				echo '</div>';
 				echo '</div>';
 				echo '</div>';

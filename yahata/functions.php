@@ -414,6 +414,103 @@ function getNewItems($atts) {
 	return $retHtml;
 }
 add_shortcode("news", "getNewItems");
+// ==================================================
+//
+//	固定ページの子ページかどうか判定 判定させたい場所で「is_subpage()」
+//
+// ==================================================
+function is_subpage() {
+	global $post;
+	if (is_page() && $post->post_parent){
+		$parentID = $post->post_parent;
+		return $parentID;
+	} else {
+		return false;
+	};
+};
+// ==================================================
+//
+//	サイトURLを取得 投稿内で [url], WordssURLを取得 投稿内で [wpurl], テーマフォルダのパス取得 投稿内で [template_url]
+//
+// ==================================================
+function shortcode_url() {
+    return  esc_url( home_url( '/' ) );
+}
+add_shortcode('url', 'shortcode_url');
+
+function shortcode_wpurl() {
+    return  esc_url( site_url() );
+}
+add_shortcode('wpurl', 'shortcode_wpurl');
+
+function shortcode_templateurl() {
+    return  get_template_directory_uri();
+}
+add_shortcode('template_url', 'shortcode_templateurl');
+// ==================================================
+//
+//	管理画面のメニューを非表示にする
+//
+// ==================================================
+function remove_menus () {
+	if (!current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
+		remove_menu_page('wpcf7'); //Contact Form 7
+		global $menu;
+		//unset($menu[2]); // ダッシュボード
+		unset($menu[4]); // メニューの線1
+		// unset($menu[5]); // 投稿
+		// unset($menu[10]); // メディア
+		unset($menu[15]); // リンク
+		unset($menu[20]); // ページ
+		unset($menu[25]); // コメント
+		unset($menu[59]); // メニューの線2
+		unset($menu[60]); // テーマ
+		unset($menu[65]); // プラグイン
+		unset($menu[70]); // プロフィール
+		unset($menu[75]); // ツール
+		unset($menu[80]); // 設定
+		unset($menu[90]); // メニューの線3
+	}
+}
+add_action('admin_menu', 'remove_menus');
+// ==================================================
+//
+//	「WordPressへようこそ！」を非表示にする
+//
+// ==================================================
+remove_action( 'welcome_panel', 'wp_welcome_panel' );
+// ==================================================
+//
+//	ダッシュボードトップ画面のウィジェットを非表示にする
+//
+// ==================================================
+function example_remove_dashboard_widgets() {
+	global $wp_meta_boxes;
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']); 		// 現在の状況（概要）
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']); 	// 最近のコメント
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']); 	// 被リンク
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']); 			// プラグイン
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']); 		// クイック投稿
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']); 		// 最近の下書き
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']); 			// WordPressブログ
+	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']); 			// WordPressフォーラム
+}
+add_action('wp_dashboard_setup', 'example_remove_dashboard_widgets');
+// ==================================================
+//
+//	管理画面上部のメニューを非表示にする
+//
+// ==================================================
+add_action( 'wp_before_admin_bar_render', 'my_wp_before_admin_bar_render' );
+function my_wp_before_admin_bar_render() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wp-logo');		// wordpressロゴ
+	$wp_admin_bar->remove_menu('updates');		// 更新
+	$wp_admin_bar->remove_menu('comments');		// コメント
+	$wp_admin_bar->remove_menu('new-content');	// 新規
+	$wp_admin_bar->remove_menu('user-info');	// マイアカウント内「プロフィール」
+	$wp_admin_bar->remove_menu('edit-profile');	// マイアカウント内「プロフィールを編集」
+}
 
 
 
