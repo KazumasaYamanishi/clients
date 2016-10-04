@@ -377,6 +377,28 @@ function disable_page_wpautop() {
 add_action( 'wp', 'disable_page_wpautop' );
 // ==================================================
 //
+//	ショートコード
+//
+// ==================================================
+	/* サイトURLを取得 投稿内で [url] */
+	function shortcode_url() {
+		return  esc_url( home_url( '/' ) );
+	}
+	add_shortcode('url', 'shortcode_url');
+
+	/* WordssURLを取得 投稿内で [wpurl] */
+	function shortcode_wpurl() {
+		return  esc_url( site_url() );
+	}
+	add_shortcode('wpurl', 'shortcode_wpurl');
+
+	/* テーマフォルダのパス取得 投稿内で [template_url] */
+	function shortcode_templateurl() {
+		return  get_template_directory_uri();
+	}
+	add_shortcode('template_url', 'shortcode_templateurl');
+// ==================================================
+//
 //	最新記事リスト [news cat="2,3,5" num="5"]などで出力
 //
 // ==================================================
@@ -414,6 +436,28 @@ function getNewItems($atts) {
 	return $retHtml;
 }
 add_shortcode("news", "getNewItems");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

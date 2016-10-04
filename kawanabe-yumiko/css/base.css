@@ -136,25 +136,34 @@ div.aligncenter {
   border: 1px solid rgba(237, 30, 121, 1.0);
   text-align: center;
   background-color: #f3f3f3;
-  padding-top: 4px;
-  margin: 10px;
+  /*padding-top: 4px;*/
+  /*margin: 10px;*/
   -moz-border-radius: 3px;
   -khtml-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
+
+  margin: 10px 0 20px 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .wp-caption img {
+  display: block;
   margin: 0;
   padding: 0;
   border: 0 none;
 }
 
-.wp-caption p.wp-caption-text {
-  font-size: 11px;
+.main .wp-caption p.wp-caption-text {
+  /*font-size: 11px;
   line-height: 17px;
-  padding: 0 4px 5px;
+  padding: 0 4px 5px;*/
   margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 16px;
+  text-align: center;
 }
 
 .row-0 {

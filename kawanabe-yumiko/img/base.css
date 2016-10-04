@@ -606,9 +606,8 @@ br.pc-break {
 footer {
   padding-top: 44px;
   font-size: 12px;
-  /* background-color: rgba(255, 123, 172, 1.0); */
-  background-color:#fef7f6;
-  color: #fff;
+  background-color: #fef7f6;
+  color: #ed1e79;
 }
 
 footer h5 {
@@ -617,7 +616,7 @@ footer h5 {
 }
 
 footer a {
-  color: #fff;
+  color: #ed1e79;
 }
 
 footer h5 a {
@@ -671,6 +670,7 @@ footer .btn {
   line-height: 44px;
   border: 1px solid #fff;
   font-weight: 600;
+  color: #fff;
 }
 
 footer .copy {
@@ -683,6 +683,15 @@ footer .copy {
 footer .wrap-btn .btn:hover {
   background: rgba(237, 30, 121, .7);
   color: #fff;
+}
+
+@media (min-width: 768px) {
+  footer {
+    padding-top: 210px;
+    background: #fef7f6 url(../img/foot-wave.png) center top no-repeat;
+    background-size: contain;
+  }
+
 }
 
 #toPageTop {
@@ -1435,6 +1444,8 @@ article .inner .strong {
 }
 .box-alert.alert-pink {
   background-color: #fef7f6;
+      background: #fef7f6;
+background-image: url("/yumikodakara/wp-content/themes/addas/img/bg-hana-big.jpg");
 }
 .wrap-bdr-round {
   padding-left: 0;
@@ -1470,4 +1481,8 @@ article .inner .strong {
   .box-alert {
     padding: 30px 60px;
   }
+
+  .imgkage {box-shadow: 14px 12px 0 -4px rgba(251, 237, 243, .3);}
+.bg-hana {background: url(../img/bg-hana.jpg) 50% 0% no-repeat;line-height: 3.0;}
+.line-h20 {line-height: 3.0}
 }

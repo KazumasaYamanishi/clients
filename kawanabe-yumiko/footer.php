@@ -1,14 +1,15 @@
 <footer>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
-				<h5 class="clearfix">かわなべ薬品<span class="tel-footer tel_link">TEL.099-267-5058</span></h5>
-				<address>〒891-0141 鹿児島県鹿児島市谷山中央7-25-5</address>
-				<p><span class="strong">営業時間</span>9:00～19:00<span class="strong">定休日</span>日曜・祝日</p>
-				<p><span class="strong">バス</span>本町バス停より徒歩5分<span class="strong">JR</span>慈眼寺駅より徒歩10分<span class="strong">駐車場</span>4台</p>
+			<div class="col-sm-5">
+				<img src="/yumikodakara/wp-content/themes/addas/img/logo-pc.png" class="lr-center">
+				<h5 class="clearfix text-center">かわなべ薬品<span class="tel-footer tel_link">TEL.099-267-5058</span></h5>
+				<address class="text-center">〒891-0141 鹿児島県鹿児島市谷山中央7-25-5</address>
+				<p class="text-center"><span class="strong">営業時間</span>9:00～19:00<span class="strong">定休日</span>日曜・祝日</p>
+				<p class="text-center"><span class="strong">バス</span>本町バス停より徒歩5分<span class="strong">JR</span>慈眼寺駅より徒歩10分<span class="strong">駐車場</span>4台</p>
 			</div>
-			<div class="col-sm-4 wrap-btn">
-				<div class="row row-10">
+			<div class="col-sm-3 wrap-btn">
+				<div class="row row-10 mts50">
 					<div class="col-xs-6">
 						<a href="<?php echo home_url(); ?>/contact" class="btn btn-block">お問い合わせ</a>
 					</div>
@@ -18,7 +19,7 @@
 				</div>
 			</div>
 			<div class="hidden-xs col-sm-4">
-				<div class="row">
+				<div class="row mts70">
 					<div class="col-sm-6">
 						<ul>
 							<li><a href="<?php echo home_url(); ?>">HOME</a></li>
