@@ -420,122 +420,16 @@
 		return $retHtml;
 	}
 	add_shortcode("news", "getNewItems");
-// ==================================================
-//
-//	カテゴリー「チケット」の入力補助
-//
-// ==================================================
-function my_admin_footer_script() {
 
-?>
 
-<script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
-<script>
-jQuery(document).ready(function($) {
-	$(document).on("click", "#cft_selectbox input.button", (function(){
-		$.ajax({
-			type: "POST",
-			url: ajaxurl,
-			data: {
-				// functions.phpに記載されている関数を実行
-				'action' : 'ajax_get_posts',
-			},
-			success: function( response ) {
-				jsonData 	= JSON.parse( response );
-				var count 	= jsonData.length;
-				if ( count == '0' ) {
-					// 検索結果がない場合
-				} else {
-					// リストに出力
-					$.each( jsonData, function( i, val ){
-						$('#hotel2_0').append('<option value="' + val['post_title'] + '">' + val['post_title'] + '</option>');
-					});
-				}
-			},
-			error: function( response ) {
-				// ajaxエラーの場合
-			}
-		});
-	}));
-});
-</script>
 
-<?php
-}
-add_action('admin_print_footer_scripts', 'my_admin_footer_script');
 
-// get_postsでデータをjsonへ（ホテル名）
-function ajax_get_posts(){
-	$returnObj = array();
-	// get_posts オプション
-	$args = array(
-		'post_type' => 'post',
-		'category' => 2,
-		'numberposts' => -1,
-	);
-	$posts = get_posts( $args );
-	foreach( $posts as $key => $post ) {
-		$returnObj[$key] = array(
-			// 出力するデータを格納
-			'post_title' => $post->post_title,
-		);
-	}
-	// json形式に出力
-	echo json_encode( $returnObj );
-	die();
-}
-add_action( 'wp_ajax_ajax_get_posts', 'ajax_get_posts' );
-add_action( 'wp_ajax_nopriv_ajax_get_posts', 'ajax_get_posts' );
 
-// get_postsでデータをjsonへ（観光地名）
-function ajax_get_title(){
-	$returnObj = array();
-	// get_posts オプション
-	if( $_POST['sight'] == '' ) {
-		$args = array(
-			'post_type' 	=> 'post',
-			'category' 		=> 3,
-			'numberposts' 	=> -1,
-			'meta_key' 		=> 'Yomigana',
-			'orderby' 		=> 'meta_value',
-			'order' 		=> 'ASC',
-		);
-	} else {
-		$args = array(
-			'post_type' 	=> 'post',
-			'category' 		=> 3,
-			'numberposts' 	=> -1,
-			'meta_key' 		=> 'Yomigana',
-			'orderby' 		=> 'meta_value',
-			'order' 		=> 'ASC',
-			'meta_query' 	=> array(
-								array(
-									'key' 		=> 'City',
-									'value' 	=> $_POST['sight'],
-					)
-				),
-		);
-	}
-	$posts = get_posts( $args );
-	foreach( $posts as $key => $post ) {
-		$returnObj[$key] = array(
-			// 出力するデータを格納
-			'post_title' => $post->post_title,
-		);
-	}
-	if( $posts ) {
-	} else {
-		$returnObj[] = array(
-			'post_title' => '登録されている観光地はありません',
-		);
-	}
 
-	// json形式に出力
-	echo json_encode( $returnObj );
-	die();
-}
-add_action( 'wp_ajax_ajax_get_title', 'ajax_get_title' );
-add_action( 'wp_ajax_nopriv_ajax_get_title', 'ajax_get_title' );
+
+
+
+
 // ==================================================
 //
 //	管理画面の投稿一覧の投稿をログイン中のユーザーの投稿のみにする
@@ -716,6 +610,89 @@ function userprofile_script() {
     }
 }
 add_action('admin_enqueue_scripts', 'userprofile_script');
+
+
+
+
+
+
+
+
+
+
+
+// ==================================================
+//
+//	Custom Field Templateの読込ボタンを自動で押す
+//
+// ==================================================
+	function _register_custom_js( ) {
+	    $_current_theme_dir 	= get_template_directory_uri();
+	    $_custom_js 			= '<script src="' . get_template_directory_uri() . '/js/autoread.js"></script>';
+	    echo $_custom_js . "n";
+	}
+	add_action('admin_head', '_register_custom_js');
+// ==================================================
+//
+//	カスタム投稿タイプ「証明書」の宿泊施設の入力補助
+//
+// ==================================================
+	function my_admin_footer_script() {
+		echo '<script src="' . get_template_directory_uri() . '/js/autocomplete.js"></script>';
+		echo '<script src="' . get_template_directory_uri() . '/js/autocomplete-k.js"></script>';
+	}
+	add_action('admin_print_footer_scripts', 'my_admin_footer_script');
+// ==================================================
+//
+//	Ajaxで宿泊施設名を取得 ※autocomplete.jsから呼び出される関数
+//
+// ==================================================
+	function ajax_get_stay_list() {
+		$returnObj = array();
+		// get_posts オプション
+		$args = array(
+			'post_type' => 'stay',
+			'numberposts' => -1,
+		);
+		$posts = get_posts( $args );
+		foreach( $posts as $key => $post ) {
+			$returnObj[$key] = array(
+				// 出力するデータを格納
+				'post_title' => $post->post_title,
+			);
+		}
+		// json形式に出力
+		echo json_encode( $returnObj );
+		die();
+	}
+	add_action( 'wp_ajax_ajax_get_stay_list', 'ajax_get_stay_list' );
+	add_action( 'wp_ajax_nopriv_ajax_get_stay_list', 'ajax_get_stay_list' );
+// ==================================================
+//
+//	Ajaxで観光施設名を取得 ※autocomplete-k.jsから呼び出される関数
+//
+// ==================================================
+	function ajax_get_spot_list() {
+		$returnObj = array();
+		$args = array(
+			'post_type' => 'spot',
+			'numberposts' => -1,
+		);
+		$posts = get_posts( $args );
+		foreach( $posts as $key => $post ) {
+			$returnObj[$key] = array(
+				'post_title' => $post->post_title,
+			);
+		}
+		// json形式に出力
+		echo json_encode( $returnObj );
+		die();
+	}
+	add_action( 'wp_ajax_ajax_get_spot_list', 'ajax_get_spot_list' );
+	add_action( 'wp_ajax_nopriv_ajax_get_spot_list', 'ajax_get_spot_list' );
+
+
+
 
 
 

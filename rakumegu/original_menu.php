@@ -41,7 +41,8 @@
 		$uCom 	= get_user_meta( $user->ID , 'type_com' , true ); 		// 企業種別
 		$uKana 	= get_user_meta( $user->ID , 'company_kana' , true ); 	// よみがな
 		$uZip 	= get_user_meta( $user->ID , 'zip' , true ); 			// 郵便番号
-		$uPref 	= get_user_meta( $user->ID , 'thestate' , true ); 		// 県
+		// $uPref 	= get_user_meta( $user->ID , 'thestate' , true ); 		// 県
+		$uPref 	= get_user_meta( $user->ID , 'pref' , true ); 		// 県
 		$uCity 	= get_user_meta( $user->ID , 'city' , true ); 			// 市町村
 		$uAdrs 	= get_user_meta( $user->ID , 'addr1' , true ); 			// 市町村以降の住所
 		$uTel 	= get_user_meta( $user->ID , 'phone1' , true ); 		// TEL
