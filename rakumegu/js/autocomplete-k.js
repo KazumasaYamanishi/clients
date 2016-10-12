@@ -18,10 +18,10 @@ jQuery(document).ready(function($) {
 					$.each( jsonData, function( i, val ){
 						availableTags[i] = val['post_title'];
 					});
-					$("#sightseeing013_0").autocomplete({
+					$("#sightseeing015_0").autocomplete({
 						source: availableTags
 					});
-					$("#sightseeing025_0").autocomplete({
+					$("#sightseeing027_0").autocomplete({
 						source: availableTags
 					});
 				}

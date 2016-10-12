@@ -39,125 +39,6 @@
 	add_theme_support( 'menus' );
 // ==================================================
 //
-//	アイキャッチ画像を使えるようにする
-//
-// ==================================================
-	add_theme_support( 'post-thumbnails' );
-// ==================================================
-//
-//	管理画面の記事/固定ページ一覧のテーブルにIDの列を加える
-//
-// ==================================================
-	add_filter('manage_posts_columns', 'posts_columns_id', 5);
-	add_action('manage_posts_custom_column', 'posts_custom_id_columns', 5, 2);
-	add_filter('manage_pages_columns', 'posts_columns_id', 5);
-	add_action('manage_pages_custom_column', 'posts_custom_id_columns', 5, 2);
-	function posts_columns_id($defaults){
-		$defaults['wps_post_id'] = __('ID');
-		return $defaults;
-	}
-	function posts_custom_id_columns($column_name, $id){
-		if($column_name === 'wps_post_id'){
-			echo $id;
-		}
-	}
-// ==================================================
-//
-//	投稿一覧にアイキャッチを表示
-//
-// ==================================================
-	function add_thumbnail_column( $columns ) {
-		$post_type = isset( $_REQUEST['post_type'] ) ? $_REQUEST['post_type'] : 'post';
-			if ( post_type_supports( $post_type, 'thumbnail' ) ) {
-				$columns['thumbnail'] = __( 'Featured Images' );
-			}
-			return $columns;
-	}
-	function display_thumbnail_column( $column_name, $post_id ) {
-		if ( $column_name == 'thumbnail' ) {
-			if ( has_post_thumbnail( $post_id ) ) {
-				echo get_the_post_thumbnail( $post_id, array( 50, 50 ) );
-			} else {
-				_e( 'none' );
-			}
-		}
-	}
-	add_filter( 'manage_posts_columns', 'add_thumbnail_column' );
-	add_action( 'manage_posts_custom_column', 'display_thumbnail_column', 10, 2 );
-// ==================================================
-//
-//	ウィジェット
-//
-// ==================================================
-	if (function_exists('register_sidebar')) {
-		register_sidebar( array(
-			'name' => __( '広告エリア' ),
-			'id' => 'ad_widget',
-			'before_widget' => '<li class="widget-container ad_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="ad_widget">',
-			'after_title' => '</h3>',
-		));
-		register_sidebar( array(
-			'name' => __( '人気の記事' ),
-			'id' => 'ppost_widget',
-			'before_widget' => '<li class="widget-container ppost_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="ppost_widget">',
-			'after_title' => '</h3>',
-		));
-		register_sidebar( array(
-			'name' => __( '新着記事' ),
-			'id' => 'rentry_widget',
-			'before_widget' => '<li class="widget-container rentry_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="rentry_widget">',
-			'after_title' => '</h3>',
-		));
-		register_sidebar( array(
-			'name' => __( 'カテゴリー' ),
-			'id' => 'category_widget',
-			'before_widget' => '<li class="widget-container category_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="category_widget">',
-			'after_title' => '</h3>',
-		));
-		register_sidebar( array(
-			'name' => __( 'キーワード検索' ),
-			'id' => 'search_widget',
-			'before_widget' => '<li class="widget-container search_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="search_widget">',
-			'after_title' => '</h3>',
-		));
-		register_sidebar( array(
-			'name' => __( 'エディタについて' ),
-			'id' => 'about_widget',
-			'before_widget' => '<li class="widget-container about_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="about_widget">',
-			'after_title' => '</h3>',
-		));
-		register_sidebar( array(
-			'name' => __( 'Side Widget' ),
-			'id' => 'side-widget',
-			'before_widget' => '<li class="widget-container">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3>',
-			'after_title' => '</h3>',
-		));
-		// フッターエリアのウィジェット
-		register_sidebar( array(
-			'name' => __( 'Footer Widget' ),
-			'id' => 'footer-widget',
-			'before_widget' => '<div class="widget-area"><ul><li class="widget-container">',
-			'after_widget' => '</li></ul></div>',
-			'before_title' => '<h3>',
-			'after_title' => '</h3>',
-		));
-	}
-// ==================================================
-//
 //	bodyとpost classにカテゴリー名ポストクラス名をclass名として追加する
 //
 // ==================================================
@@ -435,21 +316,21 @@
 //	管理画面の投稿一覧の投稿をログイン中のユーザーの投稿のみにする
 //
 // ==================================================
-if (!current_user_can('level_10')) {
-	function exclude_other_posts( $wp_query ) {
-	    if ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) {
-	        $post_type = get_post_type_object( $_REQUEST['post_type'] );
-	        $cap_type = $post_type->cap->edit_other_posts;
-	    } else {
-	        $cap_type = 'edit_others_posts';
-	    }
-	    if ( is_admin() && $wp_query->is_main_query() && ! $wp_query->get( 'author' ) && ! current_user_can( $cap_type ) ) {
-	        $user = wp_get_current_user();
-	        $wp_query->set( 'author', $user->ID );
-	    }
-	}
-	add_action( 'pre_get_posts', 'exclude_other_posts' );
-}
+// if (!current_user_can('level_10')) {
+// 	function exclude_other_posts( $wp_query ) {
+// 		if ( isset( $_REQUEST['post_type'] ) && post_type_exists( $_REQUEST['post_type'] ) ) {
+// 			$post_type = get_post_type_object( $_REQUEST['post_type'] );
+// 			$cap_type = $post_type->cap->edit_other_posts;
+// 		} else {
+// 			$cap_type = 'edit_others_posts';
+// 		}
+// 		if ( is_admin() && $wp_query->is_main_query() && ! $wp_query->get( 'author' ) && ! current_user_can( $cap_type ) ) {
+// 			$user = wp_get_current_user();
+// 			$wp_query->set( 'author', $user->ID );
+// 		}
+// 	}
+// 	add_action( 'pre_get_posts', 'exclude_other_posts' );
+// }
 
 // ==================================================
 //
@@ -487,7 +368,7 @@ add_action('admin_menu', 'remove_menus');
 // ==================================================
 add_filter( 'wpmem_login_redirect', 'my_login_redirect', 10, 2 );
 function my_login_redirect( $redirect_to, $user_id ) {
-    return 'https://kg-rakumegu.com/wp-login.php';
+	return 'https://kg-rakumegu.com/wp-login.php';
 }
 // ==================================================
 //
@@ -580,20 +461,20 @@ add_filter('admin_footer_text', 'custom_admin_footer');
 //
 // ==================================================
 function my_register_form_rows_filter( $rows, $toggle ) {
-    $rows['username'][field] 			= '<input type="text" name="user_login" value="" id="user_login" placeholder="半角英数字　例）rakurakumeguri">';
-    $rows['password'][field] 			= '<input type="password" name="password" id="password" class="textbox" placeholder="半角英数字（8文字以上）">';
-    $rows['confirm_password'][field] 	= '<input type="password" name="confirm_password" id="confirm_password" class="textbox" placeholder="半角英数字（8文字以上）">';
-    $rows['company_name'][field] 		= '<input type="text" name="company_name" id="company_name" class="textbox" placeholder="例）楽々巡りレンタカー中央駅前店"><p><span class="small">※営業所ごとに登録する場合は、会社名のあとに営業所名を入力してください。</span></p>';
-    $rows['company_kana'][field] 		= '<input type="text" name="company_kana" id="company_kana" class="textbox" placeholder="例）らくらくめぐりれんたかーちゅうおうえきまえてん"><p><span class="small">※※株式会社、有限会社などを省いた読み仮名を<strong>ひらがな</strong>で入力してください。</span></p>';
-    $rows['zip'][field] 				= '<input type="text" name="zip" id="zip" class="textbox" placeholder="例）892-0862">';
-    $rows['city'][field] 				= '<input type="text" name="city" id="city" class="textbox" placeholder="例）鹿児島市山下町">';
-    $rows['addr1'][field] 				= '<input type="text" name="addr1" id="addr1" class="textbox" placeholder="例）17-4 照国ビル302号">';
-    $rows['phone1'][field] 				= '<input type="text" name="phone1" id="phone1" class="textbox" placeholder="例）099-123-4567"><p><span class="small">※広報サイトに表示されます。</span></p>';
-    $rows['user_email'][field] 			= '<input type="email" name="user_email" id="user_email" class="textbox" placeholder="例）info@rakumegu.jp"><p><span class="small">※登録完了メールが届きますので、必ず<strong>使用できるメールアドレス</strong>を登録してください。</span></p>';
-    // $rows['user_url'][field] 			= '<input type="url" name="url" id="user_url" class="textbox" placeholder="※広報サイトに表示されます。">';
-    $rows['user_url'][field] 			= '<input type="url" name="user_url" id="user_url" class="textbox" value="" placeholder="例）http://ktscr.co.jp"><p><span class="small">※広報サイトに表示されます。</span></p>';
-    $rows['attention'][field] 			= '<div class="wrap-attention"><p class="kome">※らくらくかごしま巡りシステムのログインする際は、御社が入力された<span class="strong">ユーザー名</span>と<span class="strong">パスワード</span>を使用して、下記リンクURLよりログインすることができます。</p><p class="link-login"><a href="https://kg-rakumegu.com/wp-login.php" target="_blank">https://kg-rakumegu.com/wp-login.php</a></p></div>';
-    return $rows;
+	$rows['username'][field] 			= '<input type="text" name="user_login" value="" id="user_login" placeholder="半角英数字　例）rakurakumeguri">';
+	$rows['password'][field] 			= '<input type="password" name="password" id="password" class="textbox" placeholder="半角英数字（8文字以上）">';
+	$rows['confirm_password'][field] 	= '<input type="password" name="confirm_password" id="confirm_password" class="textbox" placeholder="半角英数字（8文字以上）">';
+	$rows['company_name'][field] 		= '<input type="text" name="company_name" id="company_name" class="textbox" placeholder="例）楽々巡りレンタカー中央駅前店"><p><span class="small">※営業所ごとに登録する場合は、会社名のあとに営業所名を入力してください。</span></p>';
+	$rows['company_kana'][field] 		= '<input type="text" name="company_kana" id="company_kana" class="textbox" placeholder="例）らくらくめぐりれんたかーちゅうおうえきまえてん"><p><span class="small">※※株式会社、有限会社などを省いた読み仮名を<strong>ひらがな</strong>で入力してください。</span></p>';
+	$rows['zip'][field] 				= '<input type="text" name="zip" id="zip" class="textbox" placeholder="例）892-0862">';
+	$rows['city'][field] 				= '<input type="text" name="city" id="city" class="textbox" placeholder="例）鹿児島市山下町">';
+	$rows['addr1'][field] 				= '<input type="text" name="addr1" id="addr1" class="textbox" placeholder="例）17-4 照国ビル302号">';
+	$rows['phone1'][field] 				= '<input type="text" name="phone1" id="phone1" class="textbox" placeholder="例）099-123-4567"><p><span class="small">※広報サイトに表示されます。</span></p>';
+	$rows['user_email'][field] 			= '<input type="email" name="user_email" id="user_email" class="textbox" placeholder="例）info@rakumegu.jp"><p><span class="small">※登録完了メールが届きますので、必ず<strong>使用できるメールアドレス</strong>を登録してください。</span></p>';
+	// $rows['user_url'][field] 			= '<input type="url" name="url" id="user_url" class="textbox" placeholder="※広報サイトに表示されます。">';
+	$rows['user_url'][field] 			= '<input type="url" name="user_url" id="user_url" class="textbox" value="" placeholder="例）http://ktscr.co.jp"><p><span class="small">※広報サイトに表示されます。</span></p>';
+	$rows['attention'][field] 			= '<div class="wrap-attention"><p class="kome">※らくらくかごしま巡りシステムのログインする際は、御社が入力された<span class="strong">ユーザー名</span>と<span class="strong">パスワード</span>を使用して、下記リンクURLよりログインすることができます。</p><p class="link-login"><a href="https://kg-rakumegu.com/wp-login.php" target="_blank">https://kg-rakumegu.com/wp-login.php</a></p></div>';
+	return $rows;
 }
 add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
 // ==================================================
@@ -601,17 +482,61 @@ add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
 //	プロフィールページの修正（管理者以外）
 //
 // ==================================================
-function userprofile_script() {
-    if (!current_user_can('administrator')) {
-        global $hook_suffix;
-        if('profile.php' == $hook_suffix) {
-            wp_enqueue_script('userprofile_js', get_stylesheet_directory_uri().'/js/userprofile.js', array('jquery'));
-        }
-    }
-}
-add_action('admin_enqueue_scripts', 'userprofile_script');
-
-
+	function userprofile_script() {
+		if (!current_user_can('administrator')) {
+			global $hook_suffix;
+			if('profile.php' == $hook_suffix) {
+				wp_enqueue_script('userprofile_js', get_stylesheet_directory_uri().'/js/userprofile.js', array('jquery'));
+			}
+		}
+	}
+	add_action('admin_enqueue_scripts', 'userprofile_script');
+// ==================================================
+//
+//	管理画面のbody_classにrole-権限名でクラスを付与する
+//
+// ==================================================
+	function add_user_role_class( $admin_body_class ) {
+		global $current_user;
+		if ( ! $admin_body_class ) {
+			$admin_body_class .= ' ';
+		}
+		$admin_body_class .= 'role-' . urlencode( $current_user->roles[0] );
+		return $admin_body_class;
+	}
+	add_filter( 'admin_body_class', 'add_user_role_class' );
+// ==================================================
+//
+//	カスタム投稿の一覧にカスタムフィールドの値を表示（投稿者以外）
+//
+// ==================================================
+	global $current_user;
+	get_currentuserinfo();
+	$agrLevel = $current_user->user_level;
+	// ユーザーのレベルを判断
+	if ( $agrLevel != 2 ) {
+		// 一覧に項目の追加
+		function manage_posts_columns($columns) {
+			$columns['CheckKCR'] 	= "確認ステータス";
+			return $columns;
+		}
+		add_filter( 'manage_posts_columns', 'manage_posts_columns' );
+		// 一覧に追加された項目に対する値の表示
+		function my_posts_custom_column( $column, $post_id ) {
+			switch ( $column ) {
+				case 'CheckKCR':
+					//チェックボックスの場合
+					if ( get_post_meta( $post_id , 'CheckKCR' , true ) ) {
+						$checked = get_post_meta( $post_id , 'CheckKCR' , true );
+					} else {
+						$checked = '';
+					}
+					echo $checked;
+					break;
+			}
+		}
+		add_action( 'manage_posts_custom_column' , 'my_posts_custom_column', 10, 2 );
+	}
 
 
 
@@ -627,9 +552,9 @@ add_action('admin_enqueue_scripts', 'userprofile_script');
 //
 // ==================================================
 	function _register_custom_js( ) {
-	    $_current_theme_dir 	= get_template_directory_uri();
-	    $_custom_js 			= '<script src="' . get_template_directory_uri() . '/js/autoread.js"></script>';
-	    echo $_custom_js . "n";
+		$_current_theme_dir 	= get_template_directory_uri();
+		$_custom_js 			= '<script src="' . get_template_directory_uri() . '/js/autoread.js"></script>';
+		echo $_custom_js . "n";
 	}
 	add_action('admin_head', '_register_custom_js');
 // ==================================================
@@ -690,6 +615,13 @@ add_action('admin_enqueue_scripts', 'userprofile_script');
 	}
 	add_action( 'wp_ajax_ajax_get_spot_list', 'ajax_get_spot_list' );
 	add_action( 'wp_ajax_nopriv_ajax_get_spot_list', 'ajax_get_spot_list' );
+
+
+
+
+
+
+
 
 
 

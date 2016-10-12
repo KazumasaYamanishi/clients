@@ -183,8 +183,100 @@
 	if ( $the_query->have_posts() ) :
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 
-		$postID 			= get_the_ID();
-		$postName 			= get_the_title(); 					// 観光施設
+		$userName 			= get_the_author(); 				// 投稿者名
+		$userType 			= get_the_author_meta('type_com'); 	// taxi or rentalcar
+
+		$stampID 			= get_the_ID();
+		$stampName 			= get_the_title(); 					// 証明書番号
+		$stampStatus 		= post_custom( 'CheckKCR' );		// 確認ステータス
+		$stampKokai 		= get_the_time(); 					// 公開日
+		$stampDay 			= post_custom( 'Date' ); 			// 回収日
+		$stampBefore 		= post_custom( 'UseBefore' ); 		// 利用開始日
+		$stampAfter 		= post_custom( 'UseAfter' ); 		// 利用終了日
+		$stampSpotDay1 		= post_custom( 'Date01' ); 			// 観光施設訪問日（1回目）
+		$stampSpotName1 	= post_custom( 'Sightseeing01' ); 	// 観光施設名（1回目）
+		$stampSpotDay2 		= post_custom( 'Date02' ); 			// 観光施設訪問日（2回目）
+		$stampSpotName2 	= post_custom( 'Sightseeing02' ); 	// 観光施設名（1回目）
+		$stampHotelArea 	= post_custom( 'HotelArea' ); 		// 宿泊施設エリア
+		$stampPriceBefore 	= post_custom( 'PriceBefore' ); 	// 割引前の利用料金
+		$stampPriceAfter 	= post_custom( 'PriceAfter' ); 		// 割引後の利用料金
+		$stampQ1 			= post_custom( 'Q1' ); 				// 性別をお教えください
+		$stampQ2 			= post_custom( 'Q2' ); 				// 年齢をお教えください
+		$stampQ3 			= post_custom( 'Q3' ); 				// お住まいはどちらかお教えください
+		$stampQ4 			= post_custom( 'Q4' ); 				// 今回、タクシー・レンタカーは、代表者を含めて何人で利用したかお教えください
+		$stampQ5 			= post_custom( 'Q5' ); 				// 鹿児島県まではどの交通手段で来られましたか
+		$stampQ5Content 	= post_custom( 'Q5content' ); 		// その他の交通手段
+		$stampQ6 			= post_custom( 'Q6' ); 				// 今回、鹿児島県を旅行しようと思ったのは次のうちどちらですか
+		$stampQ7 			= post_custom( 'Q7' ); 				// かごしまらくめぐりを何がきっかけで知りましたか
+		$stampQ7Content 	= post_custom( 'Q7content' ); 		// その他のきっかけ
+		$stampQ8 			= post_custom( 'Q8' ); 				// 今回はパンフレットに記載の地域のうち、どこを旅行されましたか（複数回答可）
+		$stampQ9 			= post_custom( 'Q9' ); 				// 今回の旅行で、1人当たりどのくらいの金額を使用しましたか（宿泊費・交通費・飲食代・お土産・入場料）
+		$stampQ10 			= post_custom( 'Q10' ); 			// 今回、かごしまらくめぐりを利用した感想・鹿児島県を旅行した感想をお聞かせください
+		$stampQ10Content 	= post_custom( 'Q10content' ); 		// 改善して欲しいところ
+
+		if( $userType == 'taxi' ) {
+
+			$rrTaxi[$userName]['stamp']['name'] 						= $stampName;
+			$rrTaxi[$userName]['stamp'][$stampName]['id'] 				= $stampID;
+			$rrTaxi[$userName]['stamp'][$stampName]['status'] 			= $stampStatus;
+			$rrTaxi[$userName]['stamp'][$stampName]['kokai'] 			= $stampKokai;
+			$rrTaxi[$userName]['stamp'][$stampName]['day'] 				= $stampDay;
+			$rrTaxi[$userName]['stamp'][$stampName]['usebefore'] 		= $stampBefore;
+			$rrTaxi[$userName]['stamp'][$stampName]['useafter'] 		= $stampAfter;
+			$rrTaxi[$userName]['stamp'][$stampName]['spotday1'] 		= $stampSpotDay1;
+			$rrTaxi[$userName]['stamp'][$stampName]['spotname1'] 		= $stampSpotName1;
+			$rrTaxi[$userName]['stamp'][$stampName]['spotday2'] 		= $stampSpotDay2;
+			$rrTaxi[$userName]['stamp'][$stampName]['spotname2'] 		= $stampSpotName2;
+			$rrTaxi[$userName]['stamp'][$stampName]['hotelarea'] 		= $stampHotelArea;
+			$rrTaxi[$userName]['stamp'][$stampName]['pricebefore'] 		= $stampPriceBefore;
+			$rrTaxi[$userName]['stamp'][$stampName]['priceafter'] 		= $stampPriceAfter;
+
+			$rrTaxi[$userName]['stamp'][$stampName]['q1'] 				= $stampQ1;
+			$rrTaxi[$userName]['stamp'][$stampName]['q2'] 				= $stampQ2;
+			$rrTaxi[$userName]['stamp'][$stampName]['q3'] 				= $stampQ3;
+			$rrTaxi[$userName]['stamp'][$stampName]['q4'] 				= $stampQ4;
+			$rrTaxi[$userName]['stamp'][$stampName]['q5'] 				= $stampQ5;
+			$rrTaxi[$userName]['stamp'][$stampName]['q5con'] 			= $stampQ5Content;
+			$rrTaxi[$userName]['stamp'][$stampName]['q6'] 				= $stampQ6;
+			$rrTaxi[$userName]['stamp'][$stampName]['q7'] 				= $stampQ7;
+			$rrTaxi[$userName]['stamp'][$stampName]['q7con'] 			= $stampQ7Content;
+			$rrTaxi[$userName]['stamp'][$stampName]['q8'] 				= $stampQ8;
+			$rrTaxi[$userName]['stamp'][$stampName]['q9'] 				= $stampQ9;
+			$rrTaxi[$userName]['stamp'][$stampName]['q10'] 				= $stampQ10;
+			$rrTaxi[$userName]['stamp'][$stampName]['q10con'] 			= $stampQ10Content;
+
+		} elseif( $userType == 'rentalcar' ) {
+
+			$rrRentalcar[$userName]['stamp']['name'] 						= $stampName;
+			$rrRentalcar[$userName]['stamp'][$stampName]['id'] 				= $stampID;
+			$rrRentalcar[$userName]['stamp'][$stampName]['status'] 			= $stampStatus;
+			$rrRentalcar[$userName]['stamp'][$stampName]['kokai'] 			= $stampKokai;
+			$rrRentalcar[$userName]['stamp'][$stampName]['day'] 			= $stampDay;
+			$rrRentalcar[$userName]['stamp'][$stampName]['usebefore'] 		= $stampBefore;
+			$rrRentalcar[$userName]['stamp'][$stampName]['useafter'] 		= $stampAfter;
+			$rrRentalcar[$userName]['stamp'][$stampName]['spotday1'] 		= $stampSpotDay1;
+			$rrRentalcar[$userName]['stamp'][$stampName]['spotname1'] 		= $stampSpotName1;
+			$rrRentalcar[$userName]['stamp'][$stampName]['spotday2'] 		= $stampSpotDay2;
+			$rrRentalcar[$userName]['stamp'][$stampName]['spotname2'] 		= $stampSpotName2;
+			$rrRentalcar[$userName]['stamp'][$stampName]['hotelarea'] 		= $stampHotelArea;
+			$rrRentalcar[$userName]['stamp'][$stampName]['pricebefore'] 	= $stampPriceBefore;
+			$rrRentalcar[$userName]['stamp'][$stampName]['priceafter'] 		= $stampPriceAfter;
+
+			$rrRentalcar[$userName]['stamp'][$stampName]['q1'] 				= $stampQ1;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q2'] 				= $stampQ2;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q3'] 				= $stampQ3;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q4'] 				= $stampQ4;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q5'] 				= $stampQ5;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q5con'] 			= $stampQ5Content;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q6'] 				= $stampQ6;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q7'] 				= $stampQ7;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q7con'] 			= $stampQ7Content;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q8'] 				= $stampQ8;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q9'] 				= $stampQ9;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q10'] 			= $stampQ10;
+			$rrRentalcar[$userName]['stamp'][$stampName]['q10con'] 			= $stampQ10Content;
+
+		}
 
 	endwhile;
 	endif;
@@ -355,14 +447,18 @@ if( $agrLevel >= 7 ) {
 	// echo '<pre>';
 	// echo var_dump($rrPlace);
 	// echo '</pre>';
-	// echo '<h2>タクシー会社</h2>';
+	// echo '<h2>テスト</h2>';
 	// echo '<pre>';
-	// echo var_dump($rrTaxi);
+	// echo var_dump($ppp);
 	// echo '</pre>';
-	// echo '<h2>レンタカー会社</h2>';
-	// echo '<pre>';
-	// echo var_dump($rrRentalcar);
-	// echo '</pre>';
+	echo '<h2>タクシー会社</h2>';
+	echo '<pre>';
+	echo var_dump($rrTaxi);
+	echo '</pre>';
+	echo '<h2>レンタカー会社</h2>';
+	echo '<pre>';
+	echo var_dump($rrRentalcar);
+	echo '</pre>';
 	echo '<h2>証明書</h2>';
 	echo '<pre>';
 	echo var_dump($rrStamp);

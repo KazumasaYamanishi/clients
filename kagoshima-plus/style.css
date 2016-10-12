@@ -7,3 +7,46 @@ Author URI: http://addas.jp/
 */
 
 
+/* ==================================================
+**
+**  グルメ
+**
+================================================== */
+.post-type-archive-gourmet article {
+	margin: 0 -15px 22px;
+	font-size: 13px;
+}
+.post-type-archive-gourmet article > .inner .wrap-name {
+	padding: 15px;
+}
+.post-type-archive-gourmet article > .inner .wrap-name h1 {
+	margin-top: 0;
+	margin-bottom: 6px;
+	color: #0071b2;
+	font-size: 20px;
+}
+.post-type-archive-gourmet article > .inner .wrap-tel-adrs > .row {
+	margin: 0;
+	border-top: 1px solid #dbdbdb;
+	border-bottom: 1px solid #dbdbdb;
+}
+.post-type-archive-gourmet article > .inner .wrap-tel-adrs > .row > .col-xs-6 {
+	padding: 15px;
+}
+.post-type-archive-gourmet article > .inner .wrap-tel-adrs > .row > .col-xs-6:first-child {
+	border-right: 1px solid #dbdbdb;
+}
+.post-type-archive-gourmet article > .inner .wrap-tel-adrs > .row > .col-xs-6 p {
+	margin: 0;
+}
+.post-type-archive-gourmet article > .inner .wrap-genre,
+.post-type-archive-gourmet article > .inner .wrap-service {
+	padding: 15px;
+}
+.post-type-archive-gourmet article > .inner .wrap-genre {
+	border-bottom: 1px dashed #dbdbdb;
+}
+.post-type-archive-gourmet article > .inner .wrap-genre ul,
+.post-type-archive-gourmet article > .inner .wrap-service ul {
+	margin: 0;
+}

@@ -17,26 +17,6 @@ jQuery(document).ready(function($){
     });
 });
 /* --------------------------------------------------
-  Formタグに class form-horizontal を追加
--------------------------------------------------- */
-jQuery(document).ready(function($){
-  $('.page-id-19 form').addClass('form-horizontal');
-});
-/* --------------------------------------------------
-  郵便番号自動入力
--------------------------------------------------- */
-jQuery(document).ready(function($){
-  $('.page-id-19 #zip').jpostal({
-    postcode : [
-      '#zip'
-    ],
-    address : {
-      '#pref' : '%3',
-      '#city' : '%4%5'
-    }
-  });
-});
-/* --------------------------------------------------
   高さを揃える
 -------------------------------------------------- */
 jQuery(document).ready(function($){

@@ -24,12 +24,8 @@
 //
 // ==================================================
 	register_nav_menu( 'g_menu1', 'グローバルナビ1' );
-	register_nav_menu( 'g_menu2', 'グローバルナビ2' );
-	register_nav_menu( 'g_menu3', 'グローバルナビ3' );
 	register_nav_menu( 'f_menu', 'フッターメニュー' );
-	register_nav_menu( 'f_sub_menu', 'フッターサブメニュー' );
 	register_nav_menu( 'g_menu_sp', 'スマホメニュー' );
-	register_nav_menu( 'list_menu_sp', 'スマホリスト' );
 	add_theme_support( 'menus' );
 // ==================================================
 //
@@ -37,24 +33,6 @@
 //
 // ==================================================
 	add_theme_support( 'post-thumbnails' );
-// ==================================================
-//
-//	管理画面の記事/固定ページ一覧のテーブルにIDの列を加える
-//
-// ==================================================
-	add_filter('manage_posts_columns', 'posts_columns_id', 5);
-	add_action('manage_posts_custom_column', 'posts_custom_id_columns', 5, 2);
-	add_filter('manage_pages_columns', 'posts_columns_id', 5);
-	add_action('manage_pages_custom_column', 'posts_custom_id_columns', 5, 2);
-	function posts_columns_id($defaults){
-		$defaults['wps_post_id'] = __('ID');
-		return $defaults;
-	}
-	function posts_custom_id_columns($column_name, $id){
-		if($column_name === 'wps_post_id'){
-			echo $id;
-		}
-	}
 // ==================================================
 //
 //	投稿一覧にアイキャッチを表示
