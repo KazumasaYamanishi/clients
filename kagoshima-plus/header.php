@@ -19,13 +19,13 @@
 </head>
 <body <?php body_class(); ?> id="<?php echo esc_attr( $post->post_name ); ?>">
 <div id="wrapper">
-
 <?php // カスタムメニューを表示 ?>
 <header>
 	<nav class="navbar">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<?php echo home_url(); ?>/"><?php bloginfo('name'); ?></a>
+				<!-- <a class="navbar-brand" href="<?php echo home_url(); ?>/"><img src="<?php echo get_template_directory_uri(); ?>/img/logo-sp.png" width="50%" height="50%"></a> -->
+				<a class="navbar-brand" href="<?php echo home_url(); ?>/">カゴシマプラス</a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#gnav" aria-expanded="false">
 				<?php
 					// if(is_mobile()){

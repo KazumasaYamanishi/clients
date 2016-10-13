@@ -1,10 +1,16 @@
 <?php get_header(); ?>
 
-
+<?php
+	// タイトル表示
+	// ==================================================
+	get_template_part( 'title' );
+?>
 
 <div class="container">
 
 	<?php
+
+		$rowNum = 0;
 
 		if(have_posts()): while(have_posts()):the_post();
 
@@ -38,72 +44,94 @@
 
 	?>
 
-	<article<?php if( $memberStatus == '有料' ) echo ' class="pay-mbr"'; ?>>
-		<div class="inner">
-			<?php
-				// アイキャッチ画像
-				echo '<div class="wrap-thumbnail"><img src="';
-				if ( has_post_thumbnail() ) {
-					$image_id = get_post_thumbnail_id ();
-					$image_url = wp_get_attachment_image_src ($image_id, true);
-					echo $image_url[0];
-				} else {
-					echo get_bloginfo( 'template_directory' ) . '/img/thumbnail.png';
-				}
-				echo '" alt="' . get_the_title() . '"></div>';
-				// 店名＆店舗紹介
-				echo '<div class="wrap-name bg-base">';
-					// 店名
-					echo '<h1>' . get_the_title() . '</h1>';
-					// 店舗紹介
-					echo '<div class="wrap-intro">';
-					echo esc_html($introduction);
-					echo '</div>';
-				echo '</div>';
-				// 電話番号＆住所
-				echo '<div class="wrap-tel-adrs">';
-				echo '<div class="row bg-base-light">';
-					// 電話番号
-					echo '<div class="col-xs-6"><p class="text-center"><i class="fa fa-mobile fa-fw" aria-hidden="true"></i>';
-					if( $tel ) { echo $tel; }
-					echo '</p></div>';
-					// 住所
-					echo '<div class="col-xs-6">';
-						$areaAll = array();
-						if( $areaKagoshima ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア</p>';
-						if( $areaAira ) 		echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市・霧島市エリア</p>';
-						if( $areaHokusatsu ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>北薩エリア</p>';
-						if( $areaNakasatsu ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>中薩エリア</p>';
-						if( $areaNansatsu ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>南薩エリア</p>';
-						if( $areaOsumi ) 		echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>大隅エリア</p>';
-					echo '</div>';
-				echo '</div>';
-				echo '</div>';
-				// ジャンル
-				echo '<div class="wrap-genre bg-base-light">';
-				if ( is_array ( $genre ) ) {
-					echo '<ul class="list-inline">';
-					foreach ( $genre as $value ) {
-						echo '<li>' . $value . '</li>';
-					}
-					echo '</ul>';
-				}
-				echo '</div>';
-				// サービス
-				echo '<div class="wrap-service bg-base-light">';
-				if ( is_array ( $service ) ) {
-					echo '<ul class="list-inline">';
-					foreach ( $service as $value ) {
-						echo '<li>' . $value . '</li>';
-					}
-					echo '</ul>';
-				}
-				echo '</div>';
-			?>
-		</div>
-	</article>
+	<?php
+		$rowNum++;
+		$reNum = $rowNum % 4;
+		if($reNum === 1) echo '<div class="row">';
+	?>
 
-	<?php endwhile; endif; ?>
+	<div class="col-sm-3">
+		<article<?php if( $memberStatus == '有料' ) echo ' class="pay-mbr"'; ?>>
+			<div class="inner">
+				<?php
+					// アイキャッチ画像
+					echo '<div class="wrap-thumbnail"><a href="' . get_the_permalink() . '"><img src="';
+					if ( has_post_thumbnail() ) {
+						$image_id = get_post_thumbnail_id ();
+						$image_url = wp_get_attachment_image_src ($image_id, true);
+						echo $image_url[0];
+					} else {
+						echo get_bloginfo( 'template_directory' ) . '/img/thumbnail.png';
+					}
+					echo '" alt="' . get_the_title() . '"></a></div>';
+					// 店名＆店舗紹介
+					echo '<div class="wrap-name bg-base">';
+						// 店名
+						echo '<h1><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h1>';
+						// 店舗紹介
+						echo '<div class="wrap-intro">';
+						echo esc_html($introduction);
+						echo '</div>';
+					echo '</div>';
+					// 電話番号＆住所
+					echo '<div class="wrap-tel-adrs">';
+					echo '<div class="row bg-base-light">';
+						// 電話番号
+						echo '<div class="col-xs-6"><p class="text-center"><i class="fa fa-mobile fa-fw" aria-hidden="true"></i>';
+						if( $tel ) { echo $tel; }
+						echo '</p></div>';
+						// 住所
+						echo '<div class="col-xs-6">';
+							$areaAll = array();
+							if( $areaKagoshima ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア</p>';
+							if( $areaAira ) 		echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市・霧島市エリア</p>';
+							if( $areaHokusatsu ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>北薩エリア</p>';
+							if( $areaNakasatsu ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>中薩エリア</p>';
+							if( $areaNansatsu ) 	echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>南薩エリア</p>';
+							if( $areaOsumi ) 		echo '<p class="text-center"><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>大隅エリア</p>';
+						echo '</div>';
+					echo '</div>';
+					echo '</div>';
+					// ジャンル
+					echo '<div class="wrap-genre bg-base-light"><ul class="list-inline">';
+					if ( is_array ( $genre ) ) {
+						foreach ( $genre as $value ) {
+							echo '<li>' . $value . '</li>';
+						}
+					} else {
+						echo $genre;
+					}
+					echo '</ul></div>';
+					// サービス、設備、シーン
+					echo '<div class="wrap-service bg-base-light"><ul class="list-inline">';
+					if ( is_array ( $service ) ) {
+						foreach ( $service as $value ) {
+							echo '<li>' . $value . '</li>';
+						}
+					} else {
+						echo $service;
+					}
+					echo '</ul></div>';
+				?>
+			</div>
+		</article>
+	</div>
+
+	<?php
+		// 1行に4つカードが埋まっていれば .row を閉じる
+		if($reNum === 0) {
+			echo '</div>';
+			$endDiv = 'off';
+		} else {
+			$endDiv = 'on';
+		}
+		// ループ処理終了
+		endwhile; endif;
+		// 最終行のカードが4未満なら .row を閉じないといけないための処理
+		if($endDiv === 'on') {
+			echo '</div>';
+		}
+	?>
 
 </div>
 

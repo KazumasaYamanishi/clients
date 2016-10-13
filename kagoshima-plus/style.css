@@ -19,11 +19,13 @@ Author URI: http://addas.jp/
 .post-type-archive-gourmet article > .inner .wrap-name {
 	padding: 15px;
 }
-.post-type-archive-gourmet article > .inner .wrap-name h1 {
+.post-type-archive-gourmet article > .inner .wrap-name h1,
+.single-gourmet article > .inner h1 {
 	margin-top: 0;
-	margin-bottom: 6px;
+	margin-bottom: 8px;
 	color: #0071b2;
-	font-size: 20px;
+	font-size: 18px;
+	letter-spacing: 0;
 }
 .post-type-archive-gourmet article > .inner .wrap-tel-adrs > .row {
 	margin: 0;
@@ -50,3 +52,76 @@ Author URI: http://addas.jp/
 .post-type-archive-gourmet article > .inner .wrap-service ul {
 	margin: 0;
 }
+	/*** シングル ***/
+	.single-gourmet article {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+	.single-gourmet article > .inner h1,
+	.single-gourmet article > .inner .wrap-intro,
+	.single-gourmet article > .inner .tab-content {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+	.single-gourmet article > .inner h1 {
+		margin-top: 15px;
+	}
+	.single-gourmet article > .inner h2 {
+		position: relative;
+		margin: 22px 15px;
+		font-size: 16px;
+		color: #0071b2;
+	}
+	.single-gourmet article > .inner .tab-content .table {
+		font-size: 12px;
+		border-bottom: 1px solid #ddd;
+	}
+	.single-gourmet article > .inner .tab-content .table th,
+	.single-gourmet article > .inner .tab-content .table td {
+		vertical-align: middle;
+	}
+	.single-gourmet article > .inner .tab-content .table th {
+		background-color: #f1f1f1;
+		text-align: center;
+		width: 7em;
+		border-right: 1px solid #ddd;
+	}
+	.single-gourmet article > .inner .tab-content .table td ul {
+		margin-bottom: 0;
+	}
+	.single-gourmet article > .inner .wrap-call {
+		margin-top: 44px;
+	}
+	.single-gourmet article > .inner .tab-content .wrap-coupon {
+		margin-bottom: 22px;
+		padding: 15px;
+	}
+	.single-gourmet article > .inner .tab-content .wrap-coupon h4 {
+		margin-top: 0;
+		letter-spacing: 0;
+		font-size: 20px;
+		font-weight: 600;
+	}
+	.single-gourmet article > .inner .tab-content .wrap-coupon .wrap-intro {
+		margin: 0;
+	}
+	.single-gourmet article > .inner .tab-content .wrap-coupon .wrap-attention {
+		margin: 1rem 0;
+		padding: 1rem;
+		background-color: #f2dede;
+	    border-color: #ebcccc;
+	    color: #a94442;
+	    border-radius: .25rem;
+	    font-size: 12px;
+	}
+	.single-gourmet article > .inner .tab-content .wrap-coupon .wrap-attention h5 {
+		margin-top: 4px;
+		font-weight: 600;
+		font-size: 14px;
+	}
+	.single-gourmet article > .inner .tab-content .wrap-coupon .limit {
+		font-weight: 600;
+	}
+	.single-gourmet article > .inner .tab-content .wrap-coupon .limit .contents {
+		margin-left: 1em;
+	}
