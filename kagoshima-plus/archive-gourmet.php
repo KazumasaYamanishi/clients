@@ -9,17 +9,54 @@
 <div class="container">
 
 	<?php
+		// 詳細検索
+		// ==================================================
+		echo '<div class="wrap-search">';
+		echo '<img src="' . get_template_directory_uri() . '/img/kensaku.png" alt="" class="lr-center">';
+		echo '</div>';
+	?>
+
+	<?php
 
 		$rowNum = 0;
 
 		if(have_posts()): while(have_posts()):the_post();
 
+		global $wpdb;
+		$query 	= "SELECT meta_id,post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post->ID ORDER BY meta_id ASC";
+		$cf 	= $wpdb->get_results($query, ARRAY_A);
+
+		// *** クーポン 値を取得
+		$couponName 		= array();
+		$couponIntroduction = array();
+		$couponAttention 	= array();
+		$couponDay 			= array();
+		foreach( $cf as $row ){
+			if( $row['meta_key'] == "coupon-name" ){
+				if ( !empty ( $row['meta_value'] ) ) {
+					array_push( $couponName, $row['meta_value'] );
+				}
+			}
+			if( $row['meta_key'] == "coupon-introduction" ){
+				if ( !empty ( $row['meta_value'] ) ) {
+					array_push( $couponIntroduction, $row['meta_value'] );
+				}
+			}
+			if( $row['meta_key'] == "coupon-attention" ){
+				if ( !empty ( $row['meta_value'] ) ) {
+					array_push( $couponAttention, $row['meta_value'] );
+				}
+			}
+			if( $row['meta_key'] == "coupon-day" ){
+				if ( !empty ( $row['meta_value'] ) ) {
+					array_push( $couponDay, $row['meta_value'] );
+				}
+			}
+		}
+		$lengthCoupon = count ( $couponName );
+
 		$memberStatus 	= post_custom('member-status'); 	// 会員ステータス
-		$city 			= post_custom('city'); 				// 市町村
-		$address 		= post_custom('address'); 			// 市町村以降の住所
 		$tel 			= post_custom('tel'); 				// 電話番号
-		$openLast 		= post_custom('open-last'); 		// 営業時間
-		$holiday 		= post_custom('holiday'); 			// 定休日
 		$introduction 	= post_custom('introduction'); 		// 店舗紹介
 		$areaKagoshima 	= post_custom('area-kagoshima'); 	// 鹿児島市エリア
 		$areaAira 		= post_custom('area-aira'); 		// 姶良市・霧島市エリア
@@ -31,26 +68,16 @@
 		$service 		= post_custom('service'); 			// サービス
 		$facility 		= post_custom('facility'); 			// 設備
 		$scene 			= post_custom('scene'); 			// シーン
-		$outphoto 		= wp_get_attachment_image_src(post_custom('outphoto'),'full' ); 	// 外観写真
-		$inphoto 		= wp_get_attachment_image_src(post_custom('inphoto'),'full' ); 		// 内観写真
-		$gallery 		= post_custom('gallery'); 			// ギャラリー
-		$car 			= post_custom('car'); 				// 駐車場
-		$credit 		= post_custom('credit'); 			// クレジットカード
-		$charge 		= post_custom('charge'); 			// サービス・チャージ料
-		$seat 			= post_custom('seat'); 				// 席数
-		$private 		= post_custom('private'); 			// 個室
-		$site 			= post_custom('site'); 				// ホームページ
-		$note 			= post_custom('note'); 				// 備考
 
 	?>
 
 	<?php
 		$rowNum++;
-		$reNum = $rowNum % 4;
+		$reNum = $rowNum % 3;
 		if($reNum === 1) echo '<div class="row">';
 	?>
 
-	<div class="col-sm-3">
+	<div class="col-sm-4">
 		<article<?php if( $memberStatus == '有料' ) echo ' class="pay-mbr"'; ?>>
 			<div class="inner">
 				<?php
@@ -63,7 +90,17 @@
 					} else {
 						echo get_bloginfo( 'template_directory' ) . '/img/thumbnail.png';
 					}
-					echo '" alt="' . get_the_title() . '"></a></div>';
+					echo '" alt="' . get_the_title() . '" class="main-img lr-center"></a>';
+					// *** クーポン判定
+					if ( $lengthCoupon > 0 ) {
+						echo '<img src="' . get_template_directory_uri() . '/img/icon-q.png" alt="" class="icon-coupon">';
+					}
+					// *** 有料会員判定
+					if ( $memberStatus ) {
+						echo '<img src="' . get_template_directory_uri() . '/img/icon-good.png" alt="" class="icon-status">';
+					}
+					// *** .wrap-thumbnail end
+					echo '</div>';
 					// 店名＆店舗紹介
 					echo '<div class="wrap-name bg-base">';
 						// 店名
@@ -103,13 +140,34 @@
 					}
 					echo '</ul></div>';
 					// サービス、設備、シーン
-					echo '<div class="wrap-service bg-base-light"><ul class="list-inline">';
+					$shopMeta = array();
+					// *** サービス
 					if ( is_array ( $service ) ) {
 						foreach ( $service as $value ) {
-							echo '<li>' . $value . '</li>';
+							array_push ( $shopMeta, $value );
 						}
 					} else {
-						echo $service;
+						array_push ( $shopMeta, $service );
+					}
+					// *** 設備
+					if ( is_array ( $facility ) ) {
+						foreach ( $facility as $value ) {
+							array_push ( $shopMeta, $value );
+						}
+					} else {
+						array_push ( $shopMeta, $facility );
+					}
+					// *** シーン
+					if ( is_array ( $scene ) ) {
+						foreach ( $scene as $value ) {
+							array_push ( $shopMeta, $value );
+						}
+					} else {
+						array_push ( $shopMeta, $scene );
+					}
+					echo '<div class="wrap-service bg-base-light"><ul class="list-inline">';
+					foreach ( $shopMeta as $value ) {
+						echo '<li>' . $value . '</li>';
 					}
 					echo '</ul></div>';
 				?>
@@ -118,7 +176,7 @@
 	</div>
 
 	<?php
-		// 1行に4つカードが埋まっていれば .row を閉じる
+		// 1行に3つカードが埋まっていれば .row を閉じる
 		if($reNum === 0) {
 			echo '</div>';
 			$endDiv = 'off';

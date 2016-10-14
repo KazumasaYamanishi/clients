@@ -341,7 +341,7 @@ function remove_menus () {
 	if (!current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
 		remove_menu_page('wpcf7'); //Contact Form 7
 		global $menu;
-		//unset($menu[2]); // ダッシュボード
+		unset($menu[2]); // ダッシュボード
 		unset($menu[4]); // メニューの線1
 		unset($menu[5]); // 投稿
 		unset($menu[10]); // メディア
@@ -380,7 +380,7 @@ function original_menu() {
 }
 function original_page() {
 	// if (current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
-		add_menu_page('集計', '集計', 1, 'original_page', 'original_menu');
+		add_menu_page('集計', '集計', 1, 'original_page', 'original_menu', 'dashicons-chart-line', 1);
 	// }
 }
 add_action('admin_menu', 'original_page');
@@ -507,36 +507,263 @@ add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
 	add_filter( 'admin_body_class', 'add_user_role_class' );
 // ==================================================
 //
-//	カスタム投稿の一覧にカスタムフィールドの値を表示（投稿者以外）
+//	証明書一覧にカスタムフィールドの列を追加
 //
 // ==================================================
-	global $current_user;
-	get_currentuserinfo();
-	$agrLevel = $current_user->user_level;
-	// ユーザーのレベルを判断
-	if ( $agrLevel != 2 ) {
-		// 一覧に項目の追加
-		function manage_posts_columns($columns) {
-			$columns['CheckKCR'] 	= "確認ステータス";
-			return $columns;
-		}
-		add_filter( 'manage_posts_columns', 'manage_posts_columns' );
-		// 一覧に追加された項目に対する値の表示
-		function my_posts_custom_column( $column, $post_id ) {
-			switch ( $column ) {
-				case 'CheckKCR':
-					//チェックボックスの場合
-					if ( get_post_meta( $post_id , 'CheckKCR' , true ) ) {
-						$checked = get_post_meta( $post_id , 'CheckKCR' , true );
-					} else {
-						$checked = '';
-					}
-					echo $checked;
-					break;
-			}
-		}
-		add_action( 'manage_posts_custom_column' , 'my_posts_custom_column', 10, 2 );
+	// 一覧に項目の追加
+	function manage_posts_columns($columns) {
+
+		global $current_user;
+		get_currentuserinfo();
+		$agrLevel = $current_user->user_level;
+
+		if ( $agrLevel != 2 ) $columns['CheckKCR'] = "確認ステータス";
+
+		$columns['kaishu'] 			= "回収日";
+		$columns['UseBefore'] 		= "開始日";
+		$columns['UseAfter'] 		= "終了日";
+		$columns['Sightseeing01'] 	= "施設名1";
+		$columns['Date01'] 			= "証明日1";
+		$columns['Sightseeing02'] 	= "施設名2";
+		$columns['Date02'] 			= "証明日2";
+		$columns['HotelArea'] 		= "宿泊エリア";
+		$columns['PriceBefore'] 	= "割引前";
+		$columns['PriceAfter'] 		= "割引後";
+		unset($columns['date']);
+		return $columns;
 	}
+	add_filter( 'manage_posts_columns', 'manage_posts_columns' );
+
+	// 一覧に追加された項目に対する値の表示
+	function my_posts_custom_column( $column, $post_id ) {
+
+		switch ( $column ) {
+
+			case 'CheckKCR':
+				if ( get_post_meta ( $post_id , 'CheckKCR' , true ) ) {
+					$checked = get_post_meta( $post_id , 'CheckKCR' , true );
+				} else {
+					$checked = '';
+				}
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'kaishu':
+				$checked = get_post_meta( $post_id , 'kaishu' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'UseBefore':
+				$checked = get_post_meta( $post_id , 'UseBefore' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'UseAfter':
+				$checked = get_post_meta( $post_id , 'UseAfter' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'Sightseeing01':
+				$checked = get_post_meta( $post_id , 'Sightseeing01' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'Date01':
+				$checked = get_post_meta( $post_id , 'Date01' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'Sightseeing02':
+				$checked = get_post_meta( $post_id , 'Sightseeing02' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'Date02':
+				$checked = get_post_meta( $post_id , 'Date02' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'HotelArea':
+				$checked = get_post_meta( $post_id , 'HotelArea' , true );
+				if ( !empty ( $checked ) ) echo $checked;
+				break;
+
+			case 'PriceBefore':
+				$checked = get_post_meta( $post_id , 'PriceBefore' , true );
+				if ( !empty ( $checked ) ) echo number_format ( $checked ) . '円';
+				break;
+
+			case 'PriceAfter':
+				$checked = get_post_meta( $post_id , 'PriceAfter' , true );
+				if ( !empty ( $checked ) ) {
+					echo number_format ( $checked ) . '円';
+				} else {
+					echo number_format ( 0 ) . '円';
+				}
+				break;
+		}
+	}
+	add_action( 'manage_posts_custom_column' , 'my_posts_custom_column', 10, 2 );
+	// ソート処理
+	function make_order_column_sortable( $columns ) {
+		$columns['kaishu'] 		= 'kaishu';
+		$columns['UseBefore'] 	= "UseBefore";
+		$columns['UseAfter'] 	= "UseAfter";
+		$columns['Date01'] 		= "Date01";
+		$columns['Date02'] 		= "Date02";
+		$columns['PriceBefore'] = "PriceBefore";
+		$columns['PriceAfter'] 	= "PriceAfter";
+		return $columns;
+	}
+	add_filter( 'manage_edit-stamp_sortable_columns', 'make_order_column_sortable' );
+// ==================================================
+//
+//	デフォルトで表示されている投稿日付で絞り込み検索を非表示にする
+//
+// ==================================================
+	// function custom_load_edit() {
+	// 	add_filter( 'disable_months_dropdown' , 'custom_disable_months_dropdown' , 10 , 2 );
+	// 	function custom_disable_months_dropdown( $false , $post_type ) {
+	// 		$disable_months_dropdown = $false;
+	// 		$disable_post_types = array( '{stamp}' );
+	// 		if( in_array( $post_type , $disable_post_types ) ) {
+	// 			$disable_months_dropdown = true;
+	// 		}
+	// 		return $disable_months_dropdown;
+	// 	}
+	// }
+	// add_action( 'load-edit.php' , 'custom_load_edit' );
+// ==================================================
+//
+//	カスタムフィールドで絞り込み検索する場合の例
+//
+// ==================================================
+	function add_author_filter() {
+		global $post_type;
+		if ( $post_type == 'stamp' ) { ?>
+			<select name="kaishu">
+            	<option value="0">回収月を選択してください</option>
+            	<option value="201611">2016年11月</option>
+            	<option value="201612">2016年12月</option>
+            	<option value="201701">2017年1月</option>
+            </select>
+	<?php	}
+	}
+	add_action( 'restrict_manage_posts', 'add_author_filter' );
+
+	function kaishu_query ( $query ) {
+		global $pagenow;
+		global $post_type;
+		if ( $post_type == 'stamp' && $_GET['kaishu'] ) {
+			$kaishuMonth = $_GET['kaishu'];
+			if ( $kaishuMonth == '201611' ) {
+// http://d.hatena.ne.jp/deeeki/20100408/wordpress_search_hook 参照
+$args = array(
+	// 'post_type'  => 'stamp',
+	// 'meta_query' => array(
+	// 	'relation' => 'AND',
+	// 	array(
+	// 		'key'     => 'kaishu',
+	// 		'value'   => '2016-11-01',
+	// 		'compare' => '>=',
+	// 	),
+	// 	array(
+	// 		'key'     => 'kaishu',
+	// 		'value'   => '2016-11-30',
+	// 		'compare' => '<=',
+	// 	),
+	// ),
+);
+$query = new WP_Query( $args );
+			} elseif ( $kaishuMonth == '201612' ) {
+				
+			} elseif ( $kaishuMonth == '201701' ) {
+				
+			}
+			// $query->query_vars[ 'meta_value' ] = $_GET['kaishu'];
+		}
+		return $query;
+	}
+	add_filter('parse_query', 'kaishu_query');
+// add_filter('parse_query', 'gender_query');
+// function gender_query($query) {
+//  global $pagenow;
+//  global $post_type;
+//  if ($pagenow == 'edit.php?post_type=stamp' && $post_type == '{stamp}' && $_GET['kaishu']) {
+//   // $query->query_vars[ 'meta_key' ] = '{kaishu}';
+//   // $query->query_vars[ 'meta_value' ] = $_GET['kaishu'];
+//  	echo 'aaaa';
+//  } else {
+//  	echo var_dump($query);
+//  }
+//  return $query;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+// ==================================================
+//
+//	投稿画面から不要な機能を削除する
+//
+// ==================================================
+	function remove_post_supports() {
+		// remove_post_type_support( 'post', 'title' ); // タイトル
+		remove_post_type_support( 'post', 'editor' ); // 本文欄
+		// remove_post_type_support( 'post', 'author' ); // 作成者
+		// remove_post_type_support( 'post', 'thumbnail' ); // アイキャッチ
+		// remove_post_type_support( 'post', 'excerpt' ); // 抜粋
+		// remove_post_type_support( 'post', 'trackbacks' ); // トラックバック
+		// remove_post_type_support( 'post', 'custom-fields' ); // カスタムフィールド
+		// remove_post_type_support( 'post', 'comments' ); // コメント
+		// remove_post_type_support( 'post', 'revisions' ); // リビジョン
+		// remove_post_type_support( 'post', 'page-attributes' ); // ページ属性
+		// remove_post_type_support( 'post', 'post-formats' ); // 投稿フォーマット
+
+		unregister_taxonomy_for_object_type( 'category', 'post' ); // カテゴリ
+		unregister_taxonomy_for_object_type( 'post_tag', 'post' ); // タグ
+	}
+	add_action( 'init', 'remove_post_supports' );
+/**
+* 投稿画面から不要な枠(メタボックス)を無効にします。
+*/
+// function remove_post_meta_boxes() {
+// 	remove_meta_box( 'slugdiv', 'post', 'normal' ); // スラッグ
+// 	remove_meta_box( 'submitdiv', 'post', 'side' ); // 公開
+// }
+// add_action( 'admin_menu', 'remove_post_meta_boxes' );
+// ==================================================
+//
+//	ログイン後、集計ページを表示させる
+//
+// ==================================================
+	function redirect_dashiboard() {
+		if ( '/wp-admin/index.php' == $_SERVER['SCRIPT_NAME'] ) {
+			wp_redirect( admin_url( 'admin.php?page=original_page' ) );
+		}
+	}
+	add_action( 'admin_init', 'redirect_dashiboard' );
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

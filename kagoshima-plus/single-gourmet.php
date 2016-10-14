@@ -30,7 +30,7 @@
 	$scene 			= post_custom('scene'); 			// シーン
 	$outphoto 		= wp_get_attachment_image_src(post_custom('outphoto'),'full' ); 	// 外観写真
 	$inphoto 		= wp_get_attachment_image_src(post_custom('inphoto'),'full' ); 		// 内観写真
-	$gallery 		= post_custom('gallery'); 			// ギャラリー
+	// $gallery 		= post_custom('gallery'); 			// ギャラリー
 	$car 			= post_custom('car'); 				// 駐車場
 	$credit 		= post_custom('credit'); 			// クレジットカード
 	$charge 		= post_custom('charge'); 			// サービス・チャージ料
@@ -64,6 +64,41 @@
 							// 基本情報
 							// ==================================================
 							// *** アイキャッチ画像、外観写真、内観写真
+
+							global $wpdb;
+							$query 	= "SELECT meta_id,post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post->ID ORDER BY meta_id ASC";
+							$cf 	= $wpdb->get_results($query, ARRAY_A);
+
+							// *** クーポン 値を取得
+							$couponName 		= array();
+							$couponIntroduction = array();
+							$couponAttention 	= array();
+							$couponDay 			= array();
+							foreach( $cf as $row ){
+								if( $row['meta_key'] == "coupon-name" ){
+									if ( !empty ( $row['meta_value'] ) ) {
+										array_push( $couponName, $row['meta_value'] );
+									}
+								}
+								if( $row['meta_key'] == "coupon-introduction" ){
+									if ( !empty ( $row['meta_value'] ) ) {
+										array_push( $couponIntroduction, $row['meta_value'] );
+									}
+								}
+								if( $row['meta_key'] == "coupon-attention" ){
+									if ( !empty ( $row['meta_value'] ) ) {
+										array_push( $couponAttention, $row['meta_value'] );
+									}
+								}
+								if( $row['meta_key'] == "coupon-day" ){
+									if ( !empty ( $row['meta_value'] ) ) {
+										array_push( $couponDay, $row['meta_value'] );
+									}
+								}
+							}
+							$lengthCoupon = count ( $couponName );
+							// *** クーポン 値を取得 ここまで
+
 							echo '<div class="wrap-thumbnail"><img src="';
 							if ( has_post_thumbnail() ) {
 								$image_id = get_post_thumbnail_id ();
@@ -72,7 +107,17 @@
 							} else {
 								echo get_bloginfo( 'template_directory' ) . '/img/thumbnail.png';
 							}
-							echo '" alt="' . get_the_title() . '"></div>';
+							echo '" alt="' . get_the_title() . '" class="main-img lr-center">';
+							// *** クーポン判定
+							if ( $lengthCoupon > 0 ) {
+								echo '<img src="' . get_template_directory_uri() . '/img/icon-q.png" alt="" class="icon-coupon">';
+							}
+							// *** 有料会員判定
+							if ( $memberStatus ) {
+								echo '<img src="' . get_template_directory_uri() . '/img/icon-good.png" alt="" class="icon-status">';
+							}
+							// *** .wrap-thumbnail end
+							echo '</div>';
 							// *** 外観写真
 							echo '<img src="' . $outphoto[0] . '" alt="' . get_the_title() . '" class="lr-center">';
 							// *** 内観写真
@@ -88,7 +133,7 @@
 							// お店の基本情報
 							// ==================================================
 						?>
-						<h2>お店の基本情報</h2>
+						<h2><object type="image/svg+xml" data="<?= get_template_directory_uri(); ?>/img/icon-comment.svg"></object>お店の基本情報</h2>
 						<table class="table">
 							<tbody>
 								<tr>
@@ -250,6 +295,28 @@
 					<div role="tabpanel" class="tab-pane fade" id="Section2">
 						<?php
 							// 写真
+							// ==================================================
+							$galleryPhoto 				= array();
+							$galleryCaption 			= array();
+
+							foreach( $cf as $row ){
+								if( $row['meta_key'] == "gallery-photo" ){
+									array_push( $galleryPhoto, $row['meta_value'] );
+								}
+								if( $row['meta_key'] == "gallery-caption" ){
+									array_push( $galleryCaption, $row['meta_value'] );
+								}
+							}
+
+							$length = count ( $galleryPhoto );
+
+							for ( $i = 0; $i < $length; $i++ ) {
+								$postImg = wp_get_attachment_image ( $galleryPhoto[$i], 'full' );
+								echo '<div class="box-card">';
+								echo '<figure class="postImg">' . $postImg . '</figure>';
+								echo '<p class="figure-caption kome"><i class="fa fa-camera" aria-hidden="true"></i> ' . $galleryCaption[$i] . '</p>';
+								echo '</div>';
+							}
 						?>
 					</div>
 
@@ -259,9 +326,6 @@
 						<?php
 							// メニュー
 							// ==================================================
-							global $wpdb;
-							$query 	= "SELECT meta_id,post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post->ID ORDER BY meta_id ASC";
-							$cf 	= $wpdb->get_results($query, ARRAY_A);
 							$menuName 				= array();
 							$menuIntroduction 		= array();
 							$menuPhoto 				= array();
@@ -270,6 +334,7 @@
 							$otherMenuPrice 		= array();
 
 							// *** 人気メニュー
+							echo '<h2 class="ttl-popular"><object type="image/svg+xml" data="' . get_template_directory_uri() . '/img/icon-ninkimenu.svg"></object>人気メニュー</h2>';
 							foreach( $cf as $row ){
 								if( $row['meta_key'] == "menu-name" ){
 									array_push( $menuName, $row['meta_value'] );
@@ -309,7 +374,7 @@
 
 							$length = count ( $otherMenuName );
 
-							echo '<div class="wrap-other-menu"><h3>その他主なメニュー</h3><table class="table"><tbody>';
+							echo '<div class="wrap-other-menu"><h2><object type="image/svg+xml" data="' . get_template_directory_uri() . '/img/icon-tamenu.svg"></object>その他主なメニュー</h2><table class="table"><tbody>';
 							for ( $i = 0; $i < $length; $i++ ) {
 								echo '<tr>';
 								echo '<th>' . $otherMenuName[$i] . '</th>';
@@ -342,29 +407,7 @@
 						<?php
 							// クーポン
 							// ==================================================
-							$couponName 		= array();
-							$couponIntroduction = array();
-							$couponAttention 	= array();
-							$couponDay 			= array();
-
-							foreach( $cf as $row ){
-								if( $row['meta_key'] == "coupon-name" ){
-									array_push( $couponName, $row['meta_value'] );
-								}
-								if( $row['meta_key'] == "coupon-introduction" ){
-									array_push( $couponIntroduction, $row['meta_value'] );
-								}
-								if( $row['meta_key'] == "coupon-attention" ){
-									array_push( $couponAttention, $row['meta_value'] );
-								}
-								if( $row['meta_key'] == "coupon-day" ){
-									array_push( $couponDay, $row['meta_value'] );
-								}
-							}
-
-							$length = count ( $couponName );
-
-							for ( $i = 0; $i < $length; $i++ ) {
+							for ( $i = 0; $i < $lengthCoupon; $i++ ) {
 								echo '<div class="box-default wrap-coupon">';
 								echo '<h4 class="ttl">' . $couponName[$i] . '</h4>';
 								echo '<div class="wrap-intro">' . $couponIntroduction[$i] . '</div>';

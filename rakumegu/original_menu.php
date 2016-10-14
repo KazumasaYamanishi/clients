@@ -190,7 +190,7 @@
 		$stampName 			= get_the_title(); 					// 証明書番号
 		$stampStatus 		= post_custom( 'CheckKCR' );		// 確認ステータス
 		$stampKokai 		= get_the_time(); 					// 公開日
-		$stampDay 			= post_custom( 'Date' ); 			// 回収日
+		$stampDay 			= post_custom( 'kaishu' ); 			// 回収日
 		$stampBefore 		= post_custom( 'UseBefore' ); 		// 利用開始日
 		$stampAfter 		= post_custom( 'UseAfter' ); 		// 利用終了日
 		$stampSpotDay1 		= post_custom( 'Date01' ); 			// 観光施設訪問日（1回目）
@@ -434,7 +434,6 @@ if( $agrLevel >= 7 ) {
 	echo '<td>1月</td><td>' . number_format( $rakuraku["4"][$userID]["ticket"]["01"] ) . '</td><td>' . number_format( $rakuraku["4"][$userID]["gokei01"] ) . '</td>';
 	echo '</tr>';
 	echo '</tbody></table>';
-
 
 }
 

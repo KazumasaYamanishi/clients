@@ -349,6 +349,7 @@ header .navbar .navbar-header .navbar-brand {
 }
 
 header .navbar .navbar-header .navbar-toggle {
+    margin-top: 16px;
     padding: 8px;
     background-color: #0071b2;
     border-radius: 1px;
@@ -396,6 +397,8 @@ header .navbar #gnav {
     border: none;
     box-shadow: none;
     background-color: #0071b2;
+    width: 100vw;
+    float: left;
 }
 
 header .navbar #gnav ul {
@@ -405,6 +408,7 @@ header .navbar #gnav ul {
 header .navbar #gnav ul li a {
     display: block;
     color: #fff;
+    line-height: 44px;
 }
 
 
@@ -451,10 +455,14 @@ header .navbar #gnav ul li a {
 **
 ================================================== */
 .single article .inner .nav-tabs {
+    margin: 10px 0;
     border-bottom: none;
 }
 .single article .inner .nav-tabs > li {
     width: 20%;
+}
+.single article .inner .nav-tabs > li.active {
+    background-color: rgba(0, 113, 178, .1);
 }
 .single article .inner .nav-tabs > li > a {
     margin: 0;
