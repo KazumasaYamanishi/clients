@@ -99,6 +99,7 @@
 
 		$postName 			= get_the_title(); 					// 宿泊施設
 		$postKana 			= post_custom( 'Yomigana' ); 		// よみがな
+		$postArea 			= post_custom( 'Area' ); 			// 施設エリア
 		$postZip 			= post_custom( 'Zip' ); 			// 郵便番号
 		$postPref 			= post_custom( 'Pref' ); 			// 県
 		$postCity 			= post_custom( 'City' ); 			// 市町村
@@ -114,6 +115,7 @@
 
 		$rrHotel[$postID]["name"]		= $postName; 	// 宿泊施設名（記事タイトル）
 		$rrHotel[$postID]["kana"]		= $postKana; 	// 宿泊施設名（カタカナ） ※半角カナを全角に。空白を削除。英数字、記号を半角に。
+		$rrHotel[$postID]["area"]		= $postArea; 	// 施設エリア
 		$rrHotel[$postID]["zip"]		= $postZip; 	// 郵便番号
 		$rrHotel[$postID]["pref"]		= $postPref; 	// 県
 		$rrHotel[$postID]["city"]		= $postCity; 	// 市町村
@@ -145,6 +147,7 @@
 		$postID 			= get_the_ID();
 		$postName 			= get_the_title(); 					// 観光施設
 		$postKana 			= post_custom( 'Yomigana' ); 		// よみがな
+		$postArea 			= post_custom( 'Area' ); 			// 施設エリア
 		$postZip 			= post_custom( 'Zip' ); 			// 郵便番号
 		$postPref 			= post_custom( 'Pref' ); 			// 県
 		$postCity 			= post_custom( 'City' ); 			// 市町村
@@ -158,6 +161,7 @@
 
 		$rrPlace[$postID]["name"]		= $postName; 	// 観光施設名（記事タイトル）
 		$rrPlace[$postID]["kana"]		= $postKana; 	// 宿泊施設名（カタカナ） ※半角カナを全角に。空白を削除。英数字、記号を半角に。
+		$rrPlace[$postID]["area"]		= $postArea; 	// 施設エリア
 		$rrPlace[$postID]["zip"]		= $postZip; 	// 郵便番号
 		$rrPlace[$postID]["pref"]		= $postPref; 	// 県
 		$rrPlace[$postID]["city"]		= $postCity; 	// 市町村
@@ -216,7 +220,7 @@
 
 		if( $userType == 'taxi' ) {
 
-			$rrTaxi[$userName]['stamp']['name'] 						= $stampName;
+			// $rrTaxi[$userName]['stamp']['name'] 						= $stampName;
 			$rrTaxi[$userName]['stamp'][$stampName]['id'] 				= $stampID;
 			$rrTaxi[$userName]['stamp'][$stampName]['status'] 			= $stampStatus;
 			$rrTaxi[$userName]['stamp'][$stampName]['kokai'] 			= $stampKokai;
@@ -247,7 +251,7 @@
 
 		} elseif( $userType == 'rentalcar' ) {
 
-			$rrRentalcar[$userName]['stamp']['name'] 						= $stampName;
+			// $rrRentalcar[$userName]['stamp']['name'] 						= $stampName;
 			$rrRentalcar[$userName]['stamp'][$stampName]['id'] 				= $stampID;
 			$rrRentalcar[$userName]['stamp'][$stampName]['status'] 			= $stampStatus;
 			$rrRentalcar[$userName]['stamp'][$stampName]['kokai'] 			= $stampKokai;
@@ -404,7 +408,71 @@ if( $agrLevel >= 7 ) {
 //
 // =================================
 
+
+
+	// **************************************************
+	// $agrName に投稿者名（ユーザー名）
+	// $agrID に投稿者ID（ユーザーID）
+	// **************************************************
+
+
+
+	// **************************************************
+	// ログインしているユーザーはタクシー会社かレンタカー会社かの判断
+	// **************************************************
+	$userID 	= $current_user->ID;
+	$user_info 	= get_userdata($agrID);
+	$userType 	= $user_info->type_com; // $userType に taxi or rentalcar
+
+	if ( $userType === 'taxi' ) {
+
+		// 配列のカウント
+		// ----------------------------------------
+			$aryNum 	= count( $rrTaxi[$agrName]['stamp'] );
+			$aryStamp 	= $rrTaxi[$agrName]['stamp'];
+
+			$stp11 = 0;
+			$stp12 = 0;
+			$stp01 = 0;
+
+			foreach ( $aryStamp as $value ) {
+				$stpDay = intval ( str_replace ( "-", "", $value['useafter'] ) ); // 数値に変換
+				if ( $stpDay >= 20161101 && $stpDay <= 20161130 ) {
+					// 11月の証明書集計
+					// ----------------------------------------
+					$stp11++;
+					echo $stp11;
+
+				} elseif ( $stpDay >= 20161201 && $stpDay <= 20161231 ) {
+					// 12月の証明書集計
+					// ----------------------------------------
+					$stp12++;
+					echo $stp12;
+
+				} elseif ( $stpDay >= 20170101 && $stpDay <= 20170131 ) {
+					// 1月の証明書集計
+					// ----------------------------------------
+					$stp01++;
+					echo '<p>' . $stp01 . '</p>';
+
+				}
+			}
+
+
+		// echo '<pre>';
+		// echo var_dump($rrTaxi[$agrName]['stamp']);
+		// echo '</pre>';
+	} else {
+		// echo '<pre>';
+		// echo var_dump($rrRentalcar[$agrName]['stamp']);
+		// echo '</pre>';
+	}
+
+
+
 	echo '<h1>集計</h1>';
+
+
 
 	// 現在の予算消化金額、使用されたチケット枚数
 	// --------------------------------------------------
@@ -415,6 +483,8 @@ if( $agrLevel >= 7 ) {
 		   $rakuraku["4"][$userID]["ticket"]["12"] +
 		   $rakuraku["4"][$userID]["ticket"]["01"];
     echo '<p>' . number_format( $cnt ) . '<span class="small">枚</span></p>';
+
+
 
     // 月毎の合計金額と枚数
 	// --------------------------------------------------
@@ -435,6 +505,26 @@ if( $agrLevel >= 7 ) {
 	echo '</tr>';
 	echo '</tbody></table>';
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 	// echo '<h1>配列の中身</h1>';
@@ -450,18 +540,14 @@ if( $agrLevel >= 7 ) {
 	// echo '<pre>';
 	// echo var_dump($ppp);
 	// echo '</pre>';
-	echo '<h2>タクシー会社</h2>';
-	echo '<pre>';
-	echo var_dump($rrTaxi);
-	echo '</pre>';
-	echo '<h2>レンタカー会社</h2>';
-	echo '<pre>';
-	echo var_dump($rrRentalcar);
-	echo '</pre>';
-	echo '<h2>証明書</h2>';
-	echo '<pre>';
-	echo var_dump($rrStamp);
-	echo '</pre>';
+	// echo '<h2>タクシー会社</h2>';
+	// echo '<pre>';
+	// echo var_dump($rrTaxi);
+	// echo '</pre>';
+	// echo '<h2>レンタカー会社</h2>';
+	// echo '<pre>';
+	// echo var_dump($rrRentalcar);
+	// echo '</pre>';
 
 
 // 元の投稿データを復元

@@ -337,146 +337,158 @@
 //	管理画面のメニューを非表示にする
 //
 // ==================================================
-function remove_menus () {
-	if (!current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
-		remove_menu_page('wpcf7'); //Contact Form 7
-		global $menu;
-		unset($menu[2]); // ダッシュボード
-		unset($menu[4]); // メニューの線1
-		unset($menu[5]); // 投稿
-		unset($menu[10]); // メディア
-		unset($menu[15]); // リンク
-		unset($menu[20]); // ページ
-		unset($menu[25]); // コメント
-		unset($menu[59]); // メニューの線2
-		unset($menu[60]); // テーマ
-		unset($menu[65]); // プラグイン
-		// unset($menu[70]); // プロフィール
-		unset($menu[75]); // ツール
-		unset($menu[80]); // 設定
-		unset($menu[90]); // メニューの線3
-		unset($menu[26]); // 宿泊施設
-		unset($menu[27]); // 観光施設
-		// unset($menu[28]); // 証明書
+	function remove_menus () {
+		if (!current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
+			remove_menu_page('wpcf7'); //Contact Form 7
+			global $menu;
+			unset($menu[2]); // ダッシュボード
+			unset($menu[4]); // メニューの線1
+			unset($menu[5]); // 投稿
+			unset($menu[10]); // メディア
+			unset($menu[15]); // リンク
+			unset($menu[20]); // ページ
+			unset($menu[25]); // コメント
+			unset($menu[59]); // メニューの線2
+			unset($menu[60]); // テーマ
+			unset($menu[65]); // プラグイン
+			// unset($menu[70]); // プロフィール
+			unset($menu[75]); // ツール
+			unset($menu[80]); // 設定
+			unset($menu[90]); // メニューの線3
+			unset($menu[26]); // 宿泊施設
+			unset($menu[27]); // 観光施設
+			// unset($menu[28]); // 証明書
+		}
 	}
-}
-add_action('admin_menu', 'remove_menus');
+	add_action('admin_menu', 'remove_menus');
+// ==================================================
+//
+//	管理画面にPDF形式のマニュアルを埋め込む
+//
+// ==================================================
+	function manual_menu() {
+		include 'manual_menu.php';
+	}
+	function manual_page() {
+		add_menu_page('操作マニュアル', '操作マニュアル', 1, 'manual_page', 'manual_menu', 'dashicons-admin-page', 99);
+	}
+	add_action ( 'admin_menu', 'manual_page' );
 // ==================================================
 //
 //	WP-Members ログイン後にリダイレクト
 //
 // ==================================================
-add_filter( 'wpmem_login_redirect', 'my_login_redirect', 10, 2 );
-function my_login_redirect( $redirect_to, $user_id ) {
-	return 'https://kg-rakumegu.com/wp-login.php';
-}
+	add_filter( 'wpmem_login_redirect', 'my_login_redirect', 10, 2 );
+	function my_login_redirect( $redirect_to, $user_id ) {
+		return 'https://kg-rakumegu.com/wp-login.php';
+	}
 // ==================================================
 //
-//	集計ページを追加（管理者のみ実行）
+//	集計ページを追加
 //
 // ==================================================
-function original_menu() {
-	include 'original_menu.php';
-}
-function original_page() {
-	// if (current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
-		add_menu_page('集計', '集計', 1, 'original_page', 'original_menu', 'dashicons-chart-line', 1);
-	// }
-}
-add_action('admin_menu', 'original_page');
+	function original_menu() {
+		include 'original_menu.php';
+	}
+	function original_page() {
+		// if (current_user_can('level_10')) { //level10以下のユーザーの場合メニューをunsetする
+			add_menu_page('集計', '集計', 1, 'original_page', 'original_menu', 'dashicons-chart-line', 1);
+		// }
+	}
+	add_action('admin_menu', 'original_page');
 // ==================================================
 //
 //	「WordPressへようこそ！」を非表示にする
 //
 // ==================================================
-remove_action( 'welcome_panel', 'wp_welcome_panel' );
+	remove_action( 'welcome_panel', 'wp_welcome_panel' );
 // ==================================================
 //
 //	ダッシュボードトップ画面のウィジェットを非表示にする
 //
 // ==================================================
-function example_remove_dashboard_widgets() {
-	global $wp_meta_boxes;
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']); 		// 現在の状況（概要）
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']); 	// 最近のコメント
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']); 	// 被リンク
-	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']); 			// プラグイン
-	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']); 		// クイック投稿
-	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']); 		// 最近の下書き
-	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']); 			// WordPressブログ
-	unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']); 			// WordPressフォーラム
-}
-add_action('wp_dashboard_setup', 'example_remove_dashboard_widgets');
+	function example_remove_dashboard_widgets() {
+		global $wp_meta_boxes;
+		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']); 		// 現在の状況（概要）
+		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']); 	// 最近のコメント
+		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']); 	// 被リンク
+		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']); 			// プラグイン
+		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']); 		// クイック投稿
+		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']); 		// 最近の下書き
+		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']); 			// WordPressブログ
+		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']); 			// WordPressフォーラム
+	}
+	add_action('wp_dashboard_setup', 'example_remove_dashboard_widgets');
 // ==================================================
 //
 //	管理画面上部のメニューを非表示にする
 //
 // ==================================================
-add_action( 'wp_before_admin_bar_render', 'my_wp_before_admin_bar_render' );
-function my_wp_before_admin_bar_render() {
-	global $wp_admin_bar;
-	$wp_admin_bar->remove_menu('wp-logo');		// wordpressロゴ
-	$wp_admin_bar->remove_menu('updates');		// 更新
-	$wp_admin_bar->remove_menu('comments');		// コメント
-	$wp_admin_bar->remove_menu('new-content');	// 新規
-	$wp_admin_bar->remove_menu('user-info');	// マイアカウント内「プロフィール」
-	$wp_admin_bar->remove_menu('edit-profile');	// マイアカウント内「プロフィールを編集」
-}
+	add_action( 'wp_before_admin_bar_render', 'my_wp_before_admin_bar_render' );
+	function my_wp_before_admin_bar_render() {
+		global $wp_admin_bar;
+		$wp_admin_bar->remove_menu('wp-logo');		// wordpressロゴ
+		$wp_admin_bar->remove_menu('updates');		// 更新
+		$wp_admin_bar->remove_menu('comments');		// コメント
+		$wp_admin_bar->remove_menu('new-content');	// 新規
+		$wp_admin_bar->remove_menu('user-info');	// マイアカウント内「プロフィール」
+		$wp_admin_bar->remove_menu('edit-profile');	// マイアカウント内「プロフィールを編集」
+	}
 // ==================================================
 //
 //	ログアウトを左側に表示
 //
 // ==================================================
-function add_new_item_in_admin_bar() {
-	global $wp_admin_bar;
-	$wp_admin_bar->add_menu(array(
-		'id' 	=> 'new_item_in_admin_bar',
-		'title' => __('ログアウト'),
-		'href' 	=> wp_logout_url()
-	));
-}
-add_action('wp_before_admin_bar_render', 'add_new_item_in_admin_bar');
+	// function add_new_item_in_admin_bar() {
+	// 	global $wp_admin_bar;
+	// 	$wp_admin_bar->add_menu(array(
+	// 		'id' 	=> 'new_item_in_admin_bar',
+	// 		'title' => __('ログアウト'),
+	// 		'href' 	=> wp_logout_url()
+	// 	));
+	// }
+	// add_action('wp_before_admin_bar_render', 'add_new_item_in_admin_bar');
 // ==================================================
 //
 //	表示オプションとヘルプを非表示
 //
 // ==================================================
-function my_admin_head(){
-	echo '<style type="text/css">#contextual-help-link-wrap{display:none;}</style>';
-	echo '<style type="text/css">#screen-options-link-wrap{display:none;}</style>';
-}
-add_action('admin_head', 'my_admin_head');
+	function my_admin_head(){
+		echo '<style type="text/css">#contextual-help-link-wrap{display:none;}</style>';
+		echo '<style type="text/css">#screen-options-link-wrap{display:none;}</style>';
+	}
+	add_action('admin_head', 'my_admin_head');
 // ==================================================
 //
 //	「WordPress のご利用ありがとうございます」を消す
 //
 // ==================================================
-function custom_admin_footer() {
-	echo '&nbsp;';
-}
-add_filter('admin_footer_text', 'custom_admin_footer');
+	function custom_admin_footer() {
+		echo '&nbsp;';
+	}
+	add_filter('admin_footer_text', 'custom_admin_footer');
 // ==================================================
 //
 //	WP-MembersにPlaceholderを追加する
 //
 // ==================================================
-function my_register_form_rows_filter( $rows, $toggle ) {
-	$rows['username'][field] 			= '<input type="text" name="user_login" value="" id="user_login" placeholder="半角英数字　例）rakurakumeguri">';
-	$rows['password'][field] 			= '<input type="password" name="password" id="password" class="textbox" placeholder="半角英数字（8文字以上）">';
-	$rows['confirm_password'][field] 	= '<input type="password" name="confirm_password" id="confirm_password" class="textbox" placeholder="半角英数字（8文字以上）">';
-	$rows['company_name'][field] 		= '<input type="text" name="company_name" id="company_name" class="textbox" placeholder="例）楽々巡りレンタカー中央駅前店"><p><span class="small">※営業所ごとに登録する場合は、会社名のあとに営業所名を入力してください。</span></p>';
-	$rows['company_kana'][field] 		= '<input type="text" name="company_kana" id="company_kana" class="textbox" placeholder="例）らくらくめぐりれんたかーちゅうおうえきまえてん"><p><span class="small">※※株式会社、有限会社などを省いた読み仮名を<strong>ひらがな</strong>で入力してください。</span></p>';
-	$rows['zip'][field] 				= '<input type="text" name="zip" id="zip" class="textbox" placeholder="例）892-0862">';
-	$rows['city'][field] 				= '<input type="text" name="city" id="city" class="textbox" placeholder="例）鹿児島市山下町">';
-	$rows['addr1'][field] 				= '<input type="text" name="addr1" id="addr1" class="textbox" placeholder="例）17-4 照国ビル302号">';
-	$rows['phone1'][field] 				= '<input type="text" name="phone1" id="phone1" class="textbox" placeholder="例）099-123-4567"><p><span class="small">※広報サイトに表示されます。</span></p>';
-	$rows['user_email'][field] 			= '<input type="email" name="user_email" id="user_email" class="textbox" placeholder="例）info@rakumegu.jp"><p><span class="small">※登録完了メールが届きますので、必ず<strong>使用できるメールアドレス</strong>を登録してください。</span></p>';
-	// $rows['user_url'][field] 			= '<input type="url" name="url" id="user_url" class="textbox" placeholder="※広報サイトに表示されます。">';
-	$rows['user_url'][field] 			= '<input type="url" name="user_url" id="user_url" class="textbox" value="" placeholder="例）http://ktscr.co.jp"><p><span class="small">※広報サイトに表示されます。</span></p>';
-	$rows['attention'][field] 			= '<div class="wrap-attention"><p class="kome">※らくらくかごしま巡りシステムのログインする際は、御社が入力された<span class="strong">ユーザー名</span>と<span class="strong">パスワード</span>を使用して、下記リンクURLよりログインすることができます。</p><p class="link-login"><a href="https://kg-rakumegu.com/wp-login.php" target="_blank">https://kg-rakumegu.com/wp-login.php</a></p></div>';
-	return $rows;
-}
-add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
+	function my_register_form_rows_filter( $rows, $toggle ) {
+		$rows['username'][field] 			= '<input type="text" name="user_login" value="" id="user_login" placeholder="半角英数字　例）rakurakumeguri">';
+		$rows['password'][field] 			= '<input type="password" name="password" id="password" class="textbox" placeholder="半角英数字（8文字以上）">';
+		$rows['confirm_password'][field] 	= '<input type="password" name="confirm_password" id="confirm_password" class="textbox" placeholder="半角英数字（8文字以上）">';
+		$rows['company_name'][field] 		= '<input type="text" name="company_name" id="company_name" class="textbox" placeholder="例）楽々巡りレンタカー中央駅前店"><p><span class="small">※営業所ごとに登録する場合は、会社名のあとに営業所名を入力してください。</span></p>';
+		$rows['company_kana'][field] 		= '<input type="text" name="company_kana" id="company_kana" class="textbox" placeholder="例）らくらくめぐりれんたかーちゅうおうえきまえてん"><p><span class="small">※※株式会社、有限会社などを省いた読み仮名を<strong>ひらがな</strong>で入力してください。</span></p>';
+		$rows['zip'][field] 				= '<input type="text" name="zip" id="zip" class="textbox" placeholder="例）892-0862">';
+		$rows['city'][field] 				= '<input type="text" name="city" id="city" class="textbox" placeholder="例）鹿児島市山下町">';
+		$rows['addr1'][field] 				= '<input type="text" name="addr1" id="addr1" class="textbox" placeholder="例）17-4 照国ビル302号">';
+		$rows['phone1'][field] 				= '<input type="text" name="phone1" id="phone1" class="textbox" placeholder="例）099-123-4567"><p><span class="small">※広報サイトに表示されます。</span></p>';
+		$rows['user_email'][field] 			= '<input type="email" name="user_email" id="user_email" class="textbox" placeholder="例）info@rakumegu.jp"><p><span class="small">※登録完了メールが届きますので、必ず<strong>使用できるメールアドレス</strong>を登録してください。</span></p>';
+		// $rows['user_url'][field] 			= '<input type="url" name="url" id="user_url" class="textbox" placeholder="※広報サイトに表示されます。">';
+		$rows['user_url'][field] 			= '<input type="url" name="user_url" id="user_url" class="textbox" value="" placeholder="例）http://ktscr.co.jp"><p><span class="small">※広報サイトに表示されます。</span></p>';
+		$rows['attention'][field] 			= '<div class="wrap-attention"><p class="kome">※らくらくかごしま巡りシステムのログインする際は、御社が入力された<span class="strong">ユーザー名</span>と<span class="strong">パスワード</span>を使用して、下記リンクURLよりログインすることができます。</p><p class="link-login"><a href="https://kg-rakumegu.com/wp-login.php" target="_blank">https://kg-rakumegu.com/wp-login.php</a></p></div>';
+		return $rows;
+	}
+	add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
 // ==================================================
 //
 //	プロフィールページの修正（管理者以外）
@@ -618,7 +630,7 @@ add_filter( 'wpmem_register_form_rows', 'my_register_form_rows_filter', 10, 2 );
 	add_filter( 'manage_edit-stamp_sortable_columns', 'make_order_column_sortable' );
 // ==================================================
 //
-//	デフォルトで表示されている投稿日付で絞り込み検索を非表示にする
+//	デフォルトで表示されている投稿日付で絞り込み検索を非表示にする　ここは要検討。不必要なら削除。
 //
 // ==================================================
 	// function custom_load_edit() {
@@ -718,6 +730,7 @@ $query = new WP_Query( $args );
 	function remove_post_supports() {
 		// remove_post_type_support( 'post', 'title' ); // タイトル
 		remove_post_type_support( 'post', 'editor' ); // 本文欄
+		remove_post_type_support( 'stamp', 'editor' ); // 本文欄
 		// remove_post_type_support( 'post', 'author' ); // 作成者
 		// remove_post_type_support( 'post', 'thumbnail' ); // アイキャッチ
 		// remove_post_type_support( 'post', 'excerpt' ); // 抜粋
@@ -732,14 +745,64 @@ $query = new WP_Query( $args );
 		unregister_taxonomy_for_object_type( 'post_tag', 'post' ); // タグ
 	}
 	add_action( 'init', 'remove_post_supports' );
-/**
-* 投稿画面から不要な枠(メタボックス)を無効にします。
-*/
-// function remove_post_meta_boxes() {
-// 	remove_meta_box( 'slugdiv', 'post', 'normal' ); // スラッグ
-// 	remove_meta_box( 'submitdiv', 'post', 'side' ); // 公開
-// }
-// add_action( 'admin_menu', 'remove_post_meta_boxes' );
+// ==================================================
+//
+//	1カラム
+//
+// ==================================================
+	function one_columns_screen_layout() {
+		return 1;
+	}
+	add_filter( 'get_user_option_screen_layout_stamp', 'one_columns_screen_layout', 10, 3 );
+// ==================================================
+//
+//	ユーザー、プロフィールを登録情報に変更
+//
+// ==================================================
+	function edit_admin_menus() {
+	    global $menu;
+	    global $submenu;
+	    $menu[70][0] = '登録情報';
+	    $submenu['users.php'][15][0] = '登録情報';
+	}
+	add_action('admin_menu', 'edit_admin_menus');
+// ==================================================
+//
+//	公開ボタン名を登録に
+//
+// ==================================================
+	function publish_admin_script() {
+		echo '<script>jQuery("#publish[name=publish]").val("登録");</script>'.PHP_EOL;
+		echo '<script>jQuery("#profile-page input[name=submit]").val("更新");</script>'.PHP_EOL;
+	}
+	add_action('admin_print_footer_scripts','publish_admin_script');
+// ==================================================
+//
+//	公開ボックスを最下部に再配置
+//
+// ==================================================
+	function my_footer() {
+		echo '<script type="text/javascript">
+			//<![CDATA[
+			jQuery(function(){
+			jQuery("#normal-sortables").prepend(jQuery("#side-sortables").children("#categorydiv"));
+			jQuery("#normal-sortables").append(jQuery("#side-sortables").children("#submitdiv"));
+			jQuery("#categorydiv").prependTo(jQuery("#normal-sortables"));
+			jQuery("#submitdiv").appendTo(jQuery("#normal-sortables"));
+			});
+			//]]>
+			</script>';
+	}
+	add_action('admin_footer', 'my_footer');
+// ==================================================
+//
+//	CSSファイルを読み込む
+//
+// ==================================================
+	function my_admin_style(){
+	    wp_enqueue_style( 'my_admin_style', '//fonts.googleapis.com/earlyaccess/notosansjp.css' );
+	}
+	add_action( 'admin_enqueue_scripts', 'my_admin_style' );
 // ==================================================
 //
 //	ログイン後、集計ページを表示させる
@@ -781,7 +844,7 @@ $query = new WP_Query( $args );
 	function _register_custom_js( ) {
 		$_current_theme_dir 	= get_template_directory_uri();
 		$_custom_js 			= '<script src="' . get_template_directory_uri() . '/js/autoread.js"></script>';
-		echo $_custom_js . "n";
+		echo $_custom_js . "\n";
 	}
 	add_action('admin_head', '_register_custom_js');
 // ==================================================
@@ -842,17 +905,3 @@ $query = new WP_Query( $args );
 	}
 	add_action( 'wp_ajax_ajax_get_spot_list', 'ajax_get_spot_list' );
 	add_action( 'wp_ajax_nopriv_ajax_get_spot_list', 'ajax_get_spot_list' );
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
