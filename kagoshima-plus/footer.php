@@ -8,7 +8,10 @@
 
 
 <?php wp_footer(); ?>
+<?php // Infinite Scroll ?>
+<script src="<?php bloginfo('template_url'); ?>/js/jquery.infinitescroll.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/myScript.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/search.select.js"></script>
 
 
 </body>

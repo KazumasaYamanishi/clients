@@ -397,8 +397,6 @@ header .navbar #gnav {
     border: none;
     box-shadow: none;
     background-color: #0071b2;
-    width: 100vw;
-    float: left;
 }
 
 header .navbar #gnav ul {
@@ -436,11 +434,13 @@ header .navbar #gnav ul li a {
     line-height: 44px;
 }
 
+
 /* ==================================================
 **
 **  Breadcrumb
 **
 ================================================== */
+
 .breadcrumb {
     margin: 0 -15px;
     padding: 10px;
@@ -449,21 +449,26 @@ header .navbar #gnav ul li a {
     letter-spacing: 0;
 }
 
+
 /* ==================================================
 **
 **  シングルページ内のナビゲーション
 **
 ================================================== */
+
 .single article .inner .nav-tabs {
     margin: 10px 0;
     border-bottom: none;
 }
+
 .single article .inner .nav-tabs > li {
     width: 20%;
 }
+
 .single article .inner .nav-tabs > li.active {
     background-color: rgba(0, 113, 178, .1);
 }
+
 .single article .inner .nav-tabs > li > a {
     margin: 0;
     padding: 0;
@@ -472,26 +477,32 @@ header .navbar #gnav ul li a {
     text-indent: -9999em;
     line-height: 60px;
 }
+
 .single article .inner .nav-tabs > li > a[aria-controls="basic"] {
     background: url(../img/2nd-nav-kihon-sp.png) center no-repeat;
     background-size: contain;
 }
+
 .single article .inner .nav-tabs > li > a[aria-controls="photo"] {
     background: url(../img/2nd-nav-poto-sp.png) center no-repeat;
     background-size: contain;
 }
+
 .single article .inner .nav-tabs > li > a[aria-controls="menu"] {
     background: url(../img/2nd-nav-menu-sp.png) center no-repeat;
     background-size: contain;
 }
+
 .single article .inner .nav-tabs > li > a[aria-controls="map"] {
     background: url(../img/2nd-nav-map-sp.png) center no-repeat;
     background-size: contain;
 }
+
 .single article .inner .nav-tabs > li > a[aria-controls="coupon"] {
     background: url(../img/2nd-nav-q-sp.png) center no-repeat;
     background-size: contain;
 }
+
 
 /* ==================================================
 **
@@ -514,7 +525,7 @@ footer .copy {
 
 /* ==================================================
 **
-**  トップに戻る
+**  トップに戻る, 無限スクロール
 **
 ================================================== */
 
@@ -535,6 +546,93 @@ footer .copy {
 
 #toPageTop a:hover {
     background: url(../img/totop.png) 0 -50px no-repeat;
+}
+
+#infscr-loading img {
+    display: block;
+    margin: 0 auto;
+}
+
+#infscr-loading .finished_message {
+    display: block;
+    text-align: center;
+}
+
+
+/* ==================================================
+**
+**  box-select
+**
+================================================== */
+
+.box-select {
+    position: relative;
+    padding: .5rem .75rem;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+}
+
+.box-select .wrap-search-on-detaile {
+    display: none;
+}
+
+.box-select.search-on .wrap-search-on-detaile {
+    display: block;
+}
+
+.box-select.search-on .wrap-search-on-detaile .close-icon {
+    position: absolute;
+    top: 3px;
+    left: 100%;
+    width: 100vw;
+    float: none;
+    opacity: .5;
+    z-index: 3;
+}
+
+.box-select.search-on .wrap-search-on-detaile ul {
+    position: absolute;
+    width: 100vw;
+    height: auto;
+    top: 0;
+    left: -16px;
+    background-color: #ffcc00;
+    z-index: 2;
+}
+
+.box-select.search-on .wrap-search-on-detaile ul li {
+    padding-left: 15px;
+    font-size: 12px;
+}
+.box-select.search-on .wrap-search-on-detaile ul li input {
+    margin-top: -3px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+.box-select.search-on .wrap-search-on-detaile ul li label {
+    margin-bottom: 0;
+    padding-right: 28px;
+    font-weight: 500;
+    line-height: 44px;
+    font-size: 14px;
+}
+
+.box-select h4 {
+    font-size: 13px;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.box-select button.show-ul {
+    position: absolute;
+    top: 50%;
+    right: -3px;
+    font-size: 10px;
+    margin-top: -9px;
+    background-color: transparent;
+    border: none;
 }
 
 
@@ -600,6 +698,7 @@ br.pc-break {
     margin-left: 15px;
     margin-right: 15px;
 }
+
 .box-default {
     border: 10px solid #e4e4e4;
 }
@@ -608,6 +707,7 @@ br.pc-break {
     display: block;
     line-height: 44px;
 }
+
 
 /* ==================================================
 **
