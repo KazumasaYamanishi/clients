@@ -905,3 +905,18 @@ $query = new WP_Query( $args );
 	}
 	add_action( 'wp_ajax_ajax_get_spot_list', 'ajax_get_spot_list' );
 	add_action( 'wp_ajax_nopriv_ajax_get_spot_list', 'ajax_get_spot_list' );
+
+
+
+
+
+// ==================================================
+//
+// 管理画面用のjsファイル読み込み
+//
+// ==================================================
+function my_admin_script(){
+	wp_enqueue_script( 'canvas_script', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js', '', '', true);
+	wp_enqueue_script( 'my_admin_script', get_template_directory_uri().'/js/my_admin_script.js', array('jquery'), '', true);
+}
+add_action( 'admin_enqueue_scripts', 'my_admin_script' );

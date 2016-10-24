@@ -1,3 +1,41 @@
+
+<aside>
+	<div class="wrap-sns bg-base-light">
+		<div class="container">
+			<ul class="list-inline text-center">
+				<li>
+					<a href="#">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="wrap-footer-bnr">
+		<div class="container">
+			<?php dynamic_sidebar('footer-widget'); ?>
+		</div>
+	</div>
+</aside>
 <footer>
 	<div class="container">
 		<p class="copy">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></p>
@@ -8,10 +46,10 @@
 
 
 <?php wp_footer(); ?>
+<script src="<?php bloginfo('template_url'); ?>/js/slider.js"></script>
 <?php // Infinite Scroll ?>
 <script src="<?php bloginfo('template_url'); ?>/js/jquery.infinitescroll.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/myScript.js"></script>
-<script src="<?php bloginfo('template_url'); ?>/js/search.select.js"></script>
 
 
 </body>

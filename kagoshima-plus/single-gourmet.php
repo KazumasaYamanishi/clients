@@ -17,7 +17,7 @@
 	$tel 			= post_custom('tel'); 				// 電話番号
 	$openLast 		= post_custom('open-last'); 		// 営業時間
 	$holiday 		= post_custom('holiday'); 			// 定休日
-	$introduction 	= post_custom('introduction'); 		// 店舗紹介
+	$introduction 	= post_custom('introduction'); 		// 紹介文
 	$areaKagoshima 	= post_custom('area-kagoshima'); 	// 鹿児島市エリア
 	$areaAira 		= post_custom('area-aira'); 		// 姶良市・霧島市エリア
 	$areaHokusatsu 	= post_custom('area-hokusatsu'); 	// 北薩エリア
@@ -25,11 +25,11 @@
 	$areaNansatsu 	= post_custom('area-nansatsu'); 	// 南薩エリア
 	$areaOsumi 		= post_custom('area-osumi'); 		// 大隅エリア
 	$genre 			= post_custom('genre'); 			// ジャンル
-	$service 		= post_custom('service'); 			// サービス
-	$facility 		= post_custom('facility'); 			// 設備
-	$scene 			= post_custom('scene'); 			// シーン
-	$outphoto 		= wp_get_attachment_image_src(post_custom('outphoto'),'full' ); 	// 外観写真
-	$inphoto 		= wp_get_attachment_image_src(post_custom('inphoto'),'full' ); 		// 内観写真
+	// $service 		= post_custom('service'); 			// サービス
+	// $facility 		= post_custom('facility'); 			// 設備
+	// $scene 			= post_custom('scene'); 			// シーン
+	// $outphoto 		= wp_get_attachment_image_src(post_custom('outphoto'),'full' ); 	// 外観写真
+	// $inphoto 		= wp_get_attachment_image_src(post_custom('inphoto'),'full' ); 		// 内観写真
 	// $gallery 		= post_custom('gallery'); 			// ギャラリー
 	$car 			= post_custom('car'); 				// 駐車場
 	$credit 		= post_custom('credit'); 			// クレジットカード
@@ -119,9 +119,9 @@
 							// *** .wrap-thumbnail end
 							echo '</div>';
 							// *** 外観写真
-							echo '<img src="' . $outphoto[0] . '" alt="' . get_the_title() . '" class="lr-center">';
+							// echo '<img src="' . $outphoto[0] . '" alt="' . get_the_title() . '" class="lr-center">';
 							// *** 内観写真
-							echo '<img src="' . $inphoto[0] . '" alt="' . get_the_title() . '" class="lr-center">';
+							// echo '<img src="' . $inphoto[0] . '" alt="' . get_the_title() . '" class="lr-center">';
 							// *** 店名
 							echo '<h1>' . get_the_title() . '</h1>';
 							// *** 店舗紹介
@@ -166,126 +166,35 @@
 										?>
 									</td>
 								</tr>
-								<tr>
-									<th>電話番号</th><td>
-										<?= $tel; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>住所</th><td>
-										<?= $city . $address; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>駐車場</th><td>
-										<?= $car; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>営業時間</th><td>
-										<?= $openLast; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>定休日</th><td>
-										<?= $holiday; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>カード</th><td>
-										<?php
-											if ( is_array ( $credit ) ) {
-												echo '<ul class="list-inline">';
-												foreach ( $credit as $value ) {
-													echo '<li>' . $value . '</li>';
+								<?php if ( !empty($tel) ) echo '<tr><th>電話番号</th><td>' . $tel .'</td></tr>'; ?>
+								<?php if ( !empty($city) || !empty($address) ) echo '<tr><th>住所</th><td>' . $city . $address .'</td></tr>'; ?>
+								<?php if ( !empty($car) ) echo '<tr><th>駐車場</th><td>' . $car .'</td></tr>'; ?>
+								<?php if ( !empty($openLast) ) echo '<tr><th>営業時間</th><td>' . $openLast .'</td></tr>'; ?>
+								<?php if ( !empty($holiday) ) echo '<tr><th>定休日</th><td>' . $holiday .'</td></tr>'; ?>
+								<?php if ( !empty($credit) ) : ?>
+									<tr>
+										<th>カード</th><td>
+											<?php
+												if ( is_array ( $credit ) ) {
+													echo '<ul class="list-inline">';
+													foreach ( $credit as $value ) {
+														echo '<li>' . $value . '</li>';
+													}
+													echo '</ul>';
+												} else {
+													echo $credit;
 												}
-												echo '</ul>';
-											} else {
-												echo $credit;
-											}
-										?>
-									</td>
-								</tr>
-								<tr>
-									<th>席数</th><td>
-										<?= $seat; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>個室</th><td>
-										<?= $private; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>サービス</th><td>
-										<?php
-											if ( is_array ( $service ) ) {
-												echo '<ul class="list-inline">';
-												foreach ( $service as $value ) {
-													echo '<li>' . $value . '</li>';
-												}
-												echo '</ul>';
-											} else {
-												echo $service;
-											}
-										?>
-									</td>
-								</tr>
-								<tr>
-									<th>設備</th><td>
-										<?php
-											if ( is_array ( $facility ) ) {
-												echo '<ul class="list-inline">';
-												foreach ( $facility as $value ) {
-													echo '<li>' . $value . '</li>';
-												}
-												echo '</ul>';
-											} else {
-												echo $facility;
-											}
-										?>
-									</td>
-								</tr>
-								<tr>
-									<th>シーン</th><td>
-										<?php
-											if ( is_array ( $scene ) ) {
-												echo '<ul class="list-inline">';
-												foreach ( $scene as $value ) {
-													echo '<li>' . $value . '</li>';
-												}
-												echo '</ul>';
-											} else {
-												echo $scene;
-											}
-										?>
-									</td>
-								</tr>
-								<tr>
-									<th>貸切</th><td>
-										<?= $reserve; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>サービス料チャージ料</th><td>
-										<?= $charge; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>タバコ</th><td>
-										<?= $tabaco; ?>
-									</td>
-								</tr>
-								<tr>
-									<th>Web</th><td>
-										<a href="<?= $site; ?>" target="_blank"><?= $site; ?></a>
-									</td>
-								</tr>
-								<tr>
-									<th>備考</th><td>
-										<?= $note; ?>
-									</td>
-								</tr>
+											?>
+										</td>
+									</tr>
+								<?php endif; ?>
+								<?php if ( !empty($seat) ) echo '<tr><th>席数</th><td>' . $seat .'</td></tr>'; ?>
+								<?php if ( !empty($private) ) echo '<tr><th>個室</th><td>' . $private .'</td></tr>'; ?>
+								<?php if ( !empty($reserve) ) echo '<tr><th>貸切</th><td>' . $reserve .'</td></tr>'; ?>
+								<?php if ( !empty($charge) ) echo '<tr><th>サービス料チャージ料</th><td>' . $charge .'</td></tr>'; ?>
+								<?php if ( !empty($tabaco) ) echo '<tr><th>タバコ</th><td>' . $tabaco .'</td></tr>'; ?>
+								<?php if ( !empty($site) ) echo '<tr><th>Web</th><td><a href="' . $site . '" target="_blank">' . $site . '</a></td></tr>'; ?>
+								<?php if ( !empty($note) ) echo '<tr><th>備考</th><td>' . $note .'</td></tr>'; ?>
 							</tbody>
 						</table>
 					</div>

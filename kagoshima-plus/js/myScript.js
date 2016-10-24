@@ -38,3 +38,34 @@ jQuery(document).ready(function($){
 		itemSelector : ".col-sm-3", 		// 表示させる要素を指定
 	});
 });
+/* --------------------------------------------------
+  チェックボックスをボタン風に
+-------------------------------------------------- */
+jQuery(document).ready(function($){
+    //checkedだったら最初からチェックする
+    $('.wrap-checkbox ul li').each(function(){
+        if ($(this).attr('checked') == 'checked') {
+            $(this).next().addClass('checked');
+        }
+    });
+    //クリックした要素にクラス割り当てる
+    $('.wrap-checkbox ul li label input').click(function(){
+        if ($(this).parent().parent().hasClass('checked')) {
+            $(this)
+            	.parent().parent()
+                .removeClass('checked')
+                .prev('input').removeAttr('checked');
+        } else {
+            $(this)
+            	.parent().parent()
+                .addClass('checked')
+                .prev('input').attr('checked','checked');
+        }
+    });
+});
+/* --------------------------------------------------
+  検索 >> の >> を削除
+-------------------------------------------------- */
+// jQuery(document).ready(function($){
+// 	$('.cftsearch_submit').val('検索する');
+// });

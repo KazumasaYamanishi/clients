@@ -24,6 +24,8 @@
 //
 // ==================================================
 	register_nav_menu( 'g_menu1', 'グローバルナビ1' );
+	register_nav_menu( 'g_menu_info', 'インフォメーションなど' );
+	register_nav_menu( 'g_menu_company', '主に固定ページメニュー' );
 	register_nav_menu( 'f_menu', 'フッターメニュー' );
 	register_nav_menu( 'g_menu_sp', 'スマホメニュー' );
 	add_theme_support( 'menus' );
@@ -392,7 +394,18 @@ function getNewItems($atts) {
 	return $retHtml;
 }
 add_shortcode("news", "getNewItems");
-
+// ==================================================
+//
+//	検索キーワードに何も入れなくてもsearch.phpを表示させる
+//
+// ==================================================
+function search_no_keywords() {
+if (isset($_GET['s']) && empty($_GET['s'])) {
+include(TEMPLATEPATH . '/search.php');
+exit;
+}
+}
+add_action('template_redirect', 'search_no_keywords');
 
 
 ?>

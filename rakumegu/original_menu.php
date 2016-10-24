@@ -33,7 +33,9 @@
 	// タクシー・レンタカー会社のユーザー情報を格納
 	// ※権限が投稿者のみの情報をループして集めている
 	// --------------------------------------------------
-	$users 		= get_users( array( 'role'=>'Author', 'meta_key'=>'company_kana', 'orderby'=>'meta_value', 'order'=>'ASC' ) ); // 投稿者権限のユーザーをカスタムフィールド「よみがな」で並べ替え
+	$users 		= get_users( array( 'role'=>'Author', 'meta_key'=>'company_kana', 'orderby'=>'meta_value', 'order'=>'ASC' ) );
+
+	// 投稿者権限のユーザーをカスタムフィールド「よみがな」で並べ替え
 	foreach($users as $user) {
 
 		$uName 	= get_user_meta( $user->ID , 'company_name' , true ); 	// 会社名
@@ -78,6 +80,10 @@
 			$rrRentalcar[$uNN]["tel"] 		= $uTel;
 		}
 	}
+
+	// echo '<pre>';
+	// echo var_dump($rrTaxi);
+	// echo '</pre>';
 
 	// 宿泊施設情報
 	// --------------------------------------------------
@@ -194,7 +200,7 @@
 		$stampName 			= get_the_title(); 					// 証明書番号
 		$stampStatus 		= post_custom( 'CheckKCR' );		// 確認ステータス
 		$stampKokai 		= get_the_time(); 					// 公開日
-		$stampDay 			= post_custom( 'kaishu' ); 			// 回収日
+		// $stampDay 			= post_custom( 'kaishu' ); 			// 回収日
 		$stampBefore 		= post_custom( 'UseBefore' ); 		// 利用開始日
 		$stampAfter 		= post_custom( 'UseAfter' ); 		// 利用終了日
 		$stampSpotDay1 		= post_custom( 'Date01' ); 			// 観光施設訪問日（1回目）
@@ -220,65 +226,61 @@
 
 		if( $userType == 'taxi' ) {
 
-			// $rrTaxi[$userName]['stamp']['name'] 						= $stampName;
-			$rrTaxi[$userName]['stamp'][$stampName]['id'] 				= $stampID;
-			$rrTaxi[$userName]['stamp'][$stampName]['status'] 			= $stampStatus;
-			$rrTaxi[$userName]['stamp'][$stampName]['kokai'] 			= $stampKokai;
-			$rrTaxi[$userName]['stamp'][$stampName]['day'] 				= $stampDay;
-			$rrTaxi[$userName]['stamp'][$stampName]['usebefore'] 		= $stampBefore;
-			$rrTaxi[$userName]['stamp'][$stampName]['useafter'] 		= $stampAfter;
-			$rrTaxi[$userName]['stamp'][$stampName]['spotday1'] 		= $stampSpotDay1;
-			$rrTaxi[$userName]['stamp'][$stampName]['spotname1'] 		= $stampSpotName1;
-			$rrTaxi[$userName]['stamp'][$stampName]['spotday2'] 		= $stampSpotDay2;
-			$rrTaxi[$userName]['stamp'][$stampName]['spotname2'] 		= $stampSpotName2;
-			$rrTaxi[$userName]['stamp'][$stampName]['hotelarea'] 		= $stampHotelArea;
-			$rrTaxi[$userName]['stamp'][$stampName]['pricebefore'] 		= $stampPriceBefore;
-			$rrTaxi[$userName]['stamp'][$stampName]['priceafter'] 		= $stampPriceAfter;
+			$rrTaxi[$userName]['stamp'][$stampID]['num'] 				= $stampName;
+			$rrTaxi[$userName]['stamp'][$stampID]['status'] 			= $stampStatus;
+			$rrTaxi[$userName]['stamp'][$stampID]['kokai'] 				= $stampKokai;
+			$rrTaxi[$userName]['stamp'][$stampID]['usebefore'] 			= $stampBefore;
+			$rrTaxi[$userName]['stamp'][$stampID]['useafter'] 			= $stampAfter;
+			$rrTaxi[$userName]['stamp'][$stampID]['spotday1'] 			= $stampSpotDay1;
+			$rrTaxi[$userName]['stamp'][$stampID]['spotname1'] 			= $stampSpotName1;
+			$rrTaxi[$userName]['stamp'][$stampID]['spotday2'] 			= $stampSpotDay2;
+			$rrTaxi[$userName]['stamp'][$stampID]['spotname2'] 			= $stampSpotName2;
+			$rrTaxi[$userName]['stamp'][$stampID]['hotelarea'] 			= $stampHotelArea;
+			$rrTaxi[$userName]['stamp'][$stampID]['pricebefore'] 		= $stampPriceBefore;
+			$rrTaxi[$userName]['stamp'][$stampID]['priceafter'] 		= $stampPriceAfter;
 
-			$rrTaxi[$userName]['stamp'][$stampName]['q1'] 				= $stampQ1;
-			$rrTaxi[$userName]['stamp'][$stampName]['q2'] 				= $stampQ2;
-			$rrTaxi[$userName]['stamp'][$stampName]['q3'] 				= $stampQ3;
-			$rrTaxi[$userName]['stamp'][$stampName]['q4'] 				= $stampQ4;
-			$rrTaxi[$userName]['stamp'][$stampName]['q5'] 				= $stampQ5;
-			$rrTaxi[$userName]['stamp'][$stampName]['q5con'] 			= $stampQ5Content;
-			$rrTaxi[$userName]['stamp'][$stampName]['q6'] 				= $stampQ6;
-			$rrTaxi[$userName]['stamp'][$stampName]['q7'] 				= $stampQ7;
-			$rrTaxi[$userName]['stamp'][$stampName]['q7con'] 			= $stampQ7Content;
-			$rrTaxi[$userName]['stamp'][$stampName]['q8'] 				= $stampQ8;
-			$rrTaxi[$userName]['stamp'][$stampName]['q9'] 				= $stampQ9;
-			$rrTaxi[$userName]['stamp'][$stampName]['q10'] 				= $stampQ10;
-			$rrTaxi[$userName]['stamp'][$stampName]['q10con'] 			= $stampQ10Content;
+			$rrTaxi[$userName]['stamp'][$stampID]['q1'] 				= $stampQ1;
+			$rrTaxi[$userName]['stamp'][$stampID]['q2'] 				= $stampQ2;
+			$rrTaxi[$userName]['stamp'][$stampID]['q3'] 				= $stampQ3;
+			$rrTaxi[$userName]['stamp'][$stampID]['q4'] 				= $stampQ4;
+			$rrTaxi[$userName]['stamp'][$stampID]['q5'] 				= $stampQ5;
+			$rrTaxi[$userName]['stamp'][$stampID]['q5con'] 				= $stampQ5Content;
+			$rrTaxi[$userName]['stamp'][$stampID]['q6'] 				= $stampQ6;
+			$rrTaxi[$userName]['stamp'][$stampID]['q7'] 				= $stampQ7;
+			$rrTaxi[$userName]['stamp'][$stampID]['q7con'] 				= $stampQ7Content;
+			$rrTaxi[$userName]['stamp'][$stampID]['q8'] 				= $stampQ8;
+			$rrTaxi[$userName]['stamp'][$stampID]['q9'] 				= $stampQ9;
+			$rrTaxi[$userName]['stamp'][$stampID]['q10'] 				= $stampQ10;
+			$rrTaxi[$userName]['stamp'][$stampID]['q10con'] 			= $stampQ10Content;
 
 		} elseif( $userType == 'rentalcar' ) {
 
-			// $rrRentalcar[$userName]['stamp']['name'] 						= $stampName;
-			$rrRentalcar[$userName]['stamp'][$stampName]['id'] 				= $stampID;
-			$rrRentalcar[$userName]['stamp'][$stampName]['status'] 			= $stampStatus;
-			$rrRentalcar[$userName]['stamp'][$stampName]['kokai'] 			= $stampKokai;
-			$rrRentalcar[$userName]['stamp'][$stampName]['day'] 			= $stampDay;
-			$rrRentalcar[$userName]['stamp'][$stampName]['usebefore'] 		= $stampBefore;
-			$rrRentalcar[$userName]['stamp'][$stampName]['useafter'] 		= $stampAfter;
-			$rrRentalcar[$userName]['stamp'][$stampName]['spotday1'] 		= $stampSpotDay1;
-			$rrRentalcar[$userName]['stamp'][$stampName]['spotname1'] 		= $stampSpotName1;
-			$rrRentalcar[$userName]['stamp'][$stampName]['spotday2'] 		= $stampSpotDay2;
-			$rrRentalcar[$userName]['stamp'][$stampName]['spotname2'] 		= $stampSpotName2;
-			$rrRentalcar[$userName]['stamp'][$stampName]['hotelarea'] 		= $stampHotelArea;
-			$rrRentalcar[$userName]['stamp'][$stampName]['pricebefore'] 	= $stampPriceBefore;
-			$rrRentalcar[$userName]['stamp'][$stampName]['priceafter'] 		= $stampPriceAfter;
+			$rrRentalcar[$userName]['stamp'][$stampID]['num'] 			= $stampName;
+			$rrRentalcar[$userName]['stamp'][$stampID]['status'] 		= $stampStatus;
+			$rrRentalcar[$userName]['stamp'][$stampID]['kokai'] 		= $stampKokai;
+			$rrRentalcar[$userName]['stamp'][$stampID]['usebefore'] 	= $stampBefore;
+			$rrRentalcar[$userName]['stamp'][$stampID]['useafter'] 		= $stampAfter;
+			$rrRentalcar[$userName]['stamp'][$stampID]['spotday1'] 		= $stampSpotDay1;
+			$rrRentalcar[$userName]['stamp'][$stampID]['spotname1'] 	= $stampSpotName1;
+			$rrRentalcar[$userName]['stamp'][$stampID]['spotday2'] 		= $stampSpotDay2;
+			$rrRentalcar[$userName]['stamp'][$stampID]['spotname2'] 	= $stampSpotName2;
+			$rrRentalcar[$userName]['stamp'][$stampID]['hotelarea'] 	= $stampHotelArea;
+			$rrRentalcar[$userName]['stamp'][$stampID]['pricebefore'] 	= $stampPriceBefore;
+			$rrRentalcar[$userName]['stamp'][$stampID]['priceafter'] 	= $stampPriceAfter;
 
-			$rrRentalcar[$userName]['stamp'][$stampName]['q1'] 				= $stampQ1;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q2'] 				= $stampQ2;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q3'] 				= $stampQ3;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q4'] 				= $stampQ4;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q5'] 				= $stampQ5;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q5con'] 			= $stampQ5Content;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q6'] 				= $stampQ6;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q7'] 				= $stampQ7;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q7con'] 			= $stampQ7Content;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q8'] 				= $stampQ8;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q9'] 				= $stampQ9;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q10'] 			= $stampQ10;
-			$rrRentalcar[$userName]['stamp'][$stampName]['q10con'] 			= $stampQ10Content;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q1'] 			= $stampQ1;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q2'] 			= $stampQ2;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q3'] 			= $stampQ3;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q4'] 			= $stampQ4;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q5'] 			= $stampQ5;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q5con'] 		= $stampQ5Content;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q6'] 			= $stampQ6;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q7'] 			= $stampQ7;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q7con'] 		= $stampQ7Content;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q8'] 			= $stampQ8;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q9'] 			= $stampQ9;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q10'] 			= $stampQ10;
+			$rrRentalcar[$userName]['stamp'][$stampID]['q10con'] 		= $stampQ10Content;
 
 		}
 
@@ -302,12 +304,12 @@
 	if ( $the_query->have_posts() ) :
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 
-		echo '<h1>おしらせ</h1>';
-		echo '<div class="postbox wrap-news">';
+		echo '<h1><span class="dashicons dashicons-megaphone"></span>おしらせ</h1>';
+		echo '<div class="postbox wrap-news mb-base">';
 		echo '<h2 class="hndle ui-sortable-handle"><span>事務局からのおしらせ</span></h2>';
 		echo '<div class="inside">';
-		echo '<p class="news-date">' . get_the_time('Y-m-d') . '</p>';
-		echo '<h4>' . get_the_title() . '</h4>';
+		echo '<h3>' . get_the_title() . '</h3>';
+		echo '<p class="news-date"><span class="dashicons dashicons-clock"></span>' . get_the_time('Y-m-d') . '</p>';
 		echo '<div class="contents">' . get_the_content() . '</div>';
 		echo '</div>';
 		echo '</div>';
@@ -328,78 +330,268 @@ if( $agrLevel >= 7 ) {
 
 	$gokei = $gokei11 = $gokei12 = $gokei01 = $num = $num11 = $num12 = $num01 = 0;
 
-	// 現在の予算消化金額、使用されたチケット枚数
+	$stpTX = array();
+	$stpRC = array();
+
+	// echo '<pre>';
+	// echo var_dump();
+	// echo '</pre>';
+
+	// タクシーの証明書情報をすべて取得
 	// --------------------------------------------------
-	echo '<p>' . date("Y年m月d日") . ' 現在の予算消化金額</p>';
-	foreach ($rrTicket as $key1 => $value1) {
+	$stp11ALL 	= 0;
+	$stp12ALL 	= 0;
+	$stp01ALL 	= 0;
+	$stp11ST 	= 0;
+	$stp12ST 	= 0;
+	$stp01ST 	= 0;
+	foreach ( $rrTaxi as $value1 ) {
 
-		$gokei11_com = $gokei12_com = $gokei01_com = 0;
+		// 各タクシー会社ごとにループしている
+		$tblNameT 					= $value1["name"];
+		$stpTX[$tblNameT]['name'] 	= $tblNameT;
 
-		foreach ($value1 as $key2 => $value2) {
+		if ( $value1['stamp'] != "" ) {
 
-			foreach ($value2 as $key3 => $value3) {
+			$stpST11 = 0;
+			$stpST12 = 0;
+			$stpST01 = 0;
 
-				if (array_key_exists('price', $value3)) {
+			foreach ( $value1['stamp'] as $value2 ) {
 
-					$gokei += $value3['price'];
-					$nn = get_the_author_meta('user_nicename');;
-					$num++;
+				$tblDay	= intval ( str_replace ( "-", "", $value2['useafter'] ) ); 	// 利用終了日
+				$tblPB	= intval ( $value2['pricebefore'] ); 						// 割引前の利用料金
+				$tblPA	= intval ( $value2['priceafter'] ); 						// 割引後の利用料金
 
-					$postDateF = date ('Ymd', strtotime($value3['date'])); // 日付フォーマット
-					if( '20161101' <= $postDateF && $postDateF <= '20161130' ) {
-						$gokei11 += $value3['price'];
-						$rrTicket[$nn]['gokei11'] += $value3['price'];
-						$num11++;
-					} elseif( '20161201' <= $postDateF && $postDateF <= '20161231' ) {
-						$gokei12 += $value3['price'];
-						$rrTicket[$nn]['gokei12'] += $value3['price'];
-						$num12++;
-					} elseif( '20170101' <= $postDateF && $postDateF <= '20170131' ) {
-						$gokei01 += $value3['price'];
-						$rrTicket[$nn]['gokei01'] += $value3['price'];
-						$num01++;
-					}
+				// 割引金額の算出
+				if ( $tblPA == 0 ) {
+					$tblPL 	= $tblPB;
+				} else {
+					$tblPL 	= $tblPB - $tblPA;
+				}
+
+				$stpTX[$tblNameT]['name'] = $tblNameT;
+
+				if ( $tblDay >= 20161101 && $tblDay <= 20161130 ) {
+					// 11月の証明書集計
+					// ----------------------------------------
+					$stpST11++;
+					$stpTX[$tblNameT]['stp11']['pb'] = intval ( $stpTX[$tblNameT]['stp11']['pb'] ) + $tblPB;
+					$stpTX[$tblNameT]['stp11']['pa'] = intval ( $stpTX[$tblNameT]['stp11']['pa'] ) + $tblPA;
+					$stpTX[$tblNameT]['stp11']['pl'] = intval ( $stpTX[$tblNameT]['stp11']['pl'] ) + $tblPL;
+					$stpTX[$tblNameT]['stp11']['st'] = $stpST11;
+
+					$stp11ALL += $tblPL;
+					$stp11ST++;
+
+				} elseif ( $tblDay >= 20161201 && $tblDay <= 20161231 ) {
+					// 12月の証明書集計
+					// ----------------------------------------
+					$stpST12++;
+					$stpTX[$tblNameT]['stp12']['pb'] = intval ( $stpTX[$tblNameT]['stp12']['pb'] ) + $tblPB;
+					$stpTX[$tblNameT]['stp12']['pa'] = intval ( $stpTX[$tblNameT]['stp12']['pa'] ) + $tblPA;
+					$stpTX[$tblNameT]['stp12']['pl'] = intval ( $stpTX[$tblNameT]['stp12']['pl'] ) + $tblPL;
+					$stpTX[$tblNameT]['stp12']['st'] = $stpST12;
+
+					$stp12ALL += $tblPL;
+					$stp12ST++;
+
+				} elseif ( $tblDay >= 20170101 && $tblDay <= 20170131 ) {
+					// 1月の証明書集計
+					// ----------------------------------------
+					$stpST01++;
+					$stpTX[$tblNameT]['stp01']['pb'] = intval ( $stpTX[$tblNameT]['stp01']['pb'] ) + $tblPB;
+					$stpTX[$tblNameT]['stp01']['pa'] = intval ( $stpTX[$tblNameT]['stp01']['pa'] ) + $tblPA;
+					$stpTX[$tblNameT]['stp01']['pl'] = intval ( $stpTX[$tblNameT]['stp01']['pl'] ) + $tblPL;
+					$stpTX[$tblNameT]['stp01']['st'] = $stpST01;
+
+					$stp01ALL += $tblPL;
+					$stp01ST++;
 
 				}
+
 			}
+
+		} else {
+			$stpTX[$tblNameT]['stp11']['pb'] = 0;
+			$stpTX[$tblNameT]['stp11']['pa'] = 0;
+			$stpTX[$tblNameT]['stp11']['pl'] = 0;
+			$stpTX[$tblNameT]['stp11']['st'] = 0;
+			$stpTX[$tblNameT]['stp12']['pb'] = 0;
+			$stpTX[$tblNameT]['stp12']['pa'] = 0;
+			$stpTX[$tblNameT]['stp12']['pl'] = 0;
+			$stpTX[$tblNameT]['stp12']['st'] = 0;
+			$stpTX[$tblNameT]['stp01']['pb'] = 0;
+			$stpTX[$tblNameT]['stp01']['pa'] = 0;
+			$stpTX[$tblNameT]['stp01']['pl'] = 0;
+			$stpTX[$tblNameT]['stp01']['st'] = 0;
 		}
+
+	}
+	// echo '<pre>';
+	// echo var_dump($stpTX);
+	// echo '</pre>';
+
+
+	// レンタカーの証明書情報をすべて取得
+	// --------------------------------------------------
+	foreach ( $rrRentalcar as $value1 ) {
+
+		// 各レンタカー会社ごとにループしている
+		$tblNameR 					= $value1["name"];
+		$stpRC[$tblNameR]['name'] 	= $tblNameR;
+
+		if ( $value1['stamp'] != "" ) {
+
+			$stpST11 = 0;
+			$stpST12 = 0;
+			$stpST01 = 0;
+
+			foreach ( $value1['stamp'] as $value2 ) {
+
+				$tblDay	= intval ( str_replace ( "-", "", $value2['useafter'] ) ); 	// 利用終了日
+				$tblPB	= intval ( $value2['pricebefore'] ); 						// 割引前の利用料金
+				$tblPA	= intval ( $value2['priceafter'] ); 						// 割引後の利用料金
+
+				// 割引金額の算出
+				if ( $tblPA == 0 ) {
+					$tblPL 	= $tblPB;
+				} else {
+					$tblPL 	= $tblPB - $tblPA;
+				}
+
+				$stpRC[$tblNameR]['name'] = $tblNameR;
+
+				if ( $tblDay >= 20161101 && $tblDay <= 20161130 ) {
+					// 11月の証明書集計
+					// ----------------------------------------
+					$stpST11++;
+					$stpRC[$tblNameR]['stp11']['pb'] = intval ( $stpRC[$tblNameR]['stp11']['pb'] ) + $tblPB;
+					$stpRC[$tblNameR]['stp11']['pa'] = intval ( $stpRC[$tblNameR]['stp11']['pa'] ) + $tblPA;
+					$stpRC[$tblNameR]['stp11']['pl'] = intval ( $stpRC[$tblNameR]['stp11']['pl'] ) + $tblPL;
+					$stpRC[$tblNameR]['stp11']['st'] = $stpST11;
+
+					$stp11ALL += $tblPL;
+					$stp11ST++;
+
+				} elseif ( $tblDay >= 20161201 && $tblDay <= 20161231 ) {
+					// 12月の証明書集計
+					// ----------------------------------------
+					$stpST12++;
+					$stpRC[$tblNameR]['stp12']['pb'] = intval ( $stpRC[$tblNameR]['stp12']['pb'] ) + $tblPB;
+					$stpRC[$tblNameR]['stp12']['pa'] = intval ( $stpRC[$tblNameR]['stp12']['pa'] ) + $tblPA;
+					$stpRC[$tblNameR]['stp12']['pl'] = intval ( $stpRC[$tblNameR]['stp12']['pl'] ) + $tblPL;
+					$stpRC[$tblNameR]['stp12']['st'] = $stpST12;
+
+					$stp12ALL += $tblPL;
+					$stp12ST++;
+
+				} elseif ( $tblDay >= 20170101 && $tblDay <= 20170131 ) {
+					// 1月の証明書集計
+					// ----------------------------------------
+					$stpST01++;
+					$stpRC[$tblNameR]['stp01']['pb'] = intval ( $stpRC[$tblNameR]['stp01']['pb'] ) + $tblPB;
+					$stpRC[$tblNameR]['stp01']['pa'] = intval ( $stpRC[$tblNameR]['stp01']['pa'] ) + $tblPA;
+					$stpRC[$tblNameR]['stp01']['pl'] = intval ( $stpRC[$tblNameR]['stp01']['pl'] ) + $tblPL;
+					$stpRC[$tblNameR]['stp01']['st'] = $stpST01;
+
+					$stp01ALL += $tblPL;
+					$stp01ST++;
+
+				}
+
+			}
+
+		} else {
+			$stpRC[$tblNameR]['stp11']['pb'] = 0;
+			$stpRC[$tblNameR]['stp11']['pa'] = 0;
+			$stpRC[$tblNameR]['stp11']['pl'] = 0;
+			$stpRC[$tblNameR]['stp11']['st'] = 0;
+			$stpRC[$tblNameR]['stp12']['pb'] = 0;
+			$stpRC[$tblNameR]['stp12']['pa'] = 0;
+			$stpRC[$tblNameR]['stp12']['pl'] = 0;
+			$stpRC[$tblNameR]['stp12']['st'] = 0;
+			$stpRC[$tblNameR]['stp01']['pb'] = 0;
+			$stpRC[$tblNameR]['stp01']['pa'] = 0;
+			$stpRC[$tblNameR]['stp01']['pl'] = 0;
+			$stpRC[$tblNameR]['stp01']['st'] = 0;
+		}
+
 	}
 
 
+	echo '<h1><span class="dashicons dashicons-chart-line"></span>集計</h1>';
 
-	echo '<h1>集計</h1>';
-	echo '<p>' . number_format ($gokei) . '<span class="small">円</span></p>';
-	echo '<p>使用されたチケット枚数</p>';
-	echo '<p>' . number_format ($num) . '<span class="small">枚</span></p>';
+	// 円グラフ
+	echo '<div class="displayHidden" style="display:none;">';
+		echo '<p id="allResultsYet">' . $allResultsYet . '</p>';
+		echo '<p id="firstResults">' . $firstResults . '</p>';
+		echo '<p id="secondResults">' . $secondResults . '</p>';
+		echo '<p id="firstResultsYet">' . $firstResultsYet . '</p>';
+		echo '<p id="secondResultsYet">' . $secondResultsYet . '</p>';
+	echo '</div>';
+	echo '<canvas id="budget" width="450" height="200"></canvas>';
 
-	// 表、棒グラフ
+
+
+	// 現在の割引金額総額と利用証明書総枚数
 	// --------------------------------------------------
-	echo '<table class="wp-list-table widefat fixed striped posts"><thead><tr><th>月</th><th>枚</th><th>金額</th></tr></thead>';
-	echo '<tfoot>';
-	echo '<tr>';
-	echo '<th>合計</th><td>' . number_format ($num) . '</td><td>' . number_format ($gokei) . '</td>';
-	echo '</tr>';
-	echo '</tfoot><tbody>';
-	echo '<tr>';
-	echo '<td>11月</td><td>' . number_format ($num11) . '</td><td>' . number_format ($gokei11) . '</td>';
-	echo '</tr>';
-	echo '<tr>';
-	echo '<td>12月</td><td>' . number_format ($num12) . '</td><td>' . number_format ($gokei12) . '</td>';
-	echo '</tr>';
-	echo '<tr>';
-	echo '<td>1月</td><td>' . number_format ($num01) . '</td><td>' . number_format ($gokei01) . '</td>';
-	echo '</tr>';
-	echo '</tbody></table>';
+		echo '<table class="table mb-base"><thead><tr><th>割引金額総額（' . date("Y年m月d日") . ' 現在）</th><th>利用証明書総枚数</th></tr></thead><tbody><tr>';
+		echo '<td>' . number_format( $stp11ALL + $stp12ALL + $stp01ALL ) . '円</td><td>' . number_format( $stp11ST + $stp12ST + $stp01ST ) . '枚</td>';
+		echo '</tr></tbody></table>';
+		echo '<h2>各月の割引金額総額と利用証明書総枚数</h2>';
+	    echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>月</th><th>金額</th><th>枚</th></tr></thead>';
+		echo '<tfoot>';
+		echo '<tr>';
+		echo '<th>合計</th><td>' . number_format( $stp11ALL + $stp12ALL + $stp01ALL ) . '円</td><td>' . number_format( $stp11ST + $stp12ST + $stp01ST ) . '枚</td>';
+		echo '</tr>';
+		echo '</tfoot><tbody>';
+		echo '<tr>';
+		echo '<td>11月</td><td>' . number_format( $stp11ALL ) . '円</td><td>' . number_format( $stp11ST ) . '枚</td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td>12月</td><td>' . number_format( $stp12ALL ) . '円</td><td>' . number_format( $stp12ST ) . '枚</td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td>1月</td><td>' . number_format( $stp01ALL ) . '円</td><td>' . number_format( $stp01ST ) . '枚</td>';
+		echo '</tr>';
+		echo '</tbody></table>';
 
-	echo '<h2>月別<span class="small">タクシー・レンタカー会社</span></h2>';
-	echo '<table class="wp-list-table widefat fixed striped posts"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
-	echo '<tbody>';
-	echo '<tr>';
-	echo '<td>会社名</td><td>11月</td><td>12月</td><td>1月</td><td>合計</td>';
-	echo '</tr>';
-	echo '</tbody></table>';
+	echo '<h1><span class="dashicons dashicons-awards"></span>各タクシー会社<small>（' . count($stpTX) . '社）</small></h1>';
+		echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
+		echo '<tbody>';
+		foreach ( $stpTX as $value ) {
+			echo '<tr>';
+			echo '<td>' . $value["name"] . '</td>
+				  <td>' . number_format( $value["stp11"]["pl"] ) . '円（' . number_format ( $value["stp11"]["st"] ) . '枚）</td>
+				  <td>' . number_format( $value["stp12"]["pl"] ) . '円（' . number_format ( $value["stp12"]["st"] ) . '枚）</td>
+				  <td>' . number_format( $value["stp01"]["pl"] ) . '円（' . number_format ( $value["stp01"]["st"] ) . '枚）</td>
+				  <td>' . number_format( $value["stp11"]["pl"] + $value["stp12"]["pl"] + $value["stp01"]["pl"] ) . '円（' . number_format ( $value["stp11"]["st"] + $value["stp12"]["st"] + $value["stp01"]["st"] ) . '枚）</td>';
+			echo '</tr>';
+		}
+		echo '</tbody></table>';
 
-	echo '<h2>月別<span class="small">観光地</span></h2>';
+	echo '<h1><span class="dashicons dashicons-awards"></span>各レンタカー会社<small>（' . count($stpRC) . '社）</small></h1>';
+		echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
+		echo '<tbody>';
+		foreach ( $stpRC as $value ) {
+			echo '<tr>';
+			echo '<td>' . $value["name"] . '</td>
+				  <td>' . number_format( $value["stp11"]["pl"] ) . '円（' . number_format ( $value["stp11"]["st"] ) . '枚）</td>
+				  <td>' . number_format( $value["stp12"]["pl"] ) . '円（' . number_format ( $value["stp12"]["st"] ) . '枚）</td>
+				  <td>' . number_format( $value["stp01"]["pl"] ) . '円（' . number_format ( $value["stp01"]["st"] ) . '枚）</td>
+				  <td>' . number_format( $value["stp11"]["pl"] + $value["stp12"]["pl"] + $value["stp01"]["pl"] ) . '円（' . number_format ( $value["stp11"]["st"] + $value["stp12"]["st"] + $value["stp01"]["st"] ) . '枚）</td>';
+			echo '</tr>';
+		}
+		echo '</tbody></table>';
+
+		// echo '<pre>';
+		// echo var_dump($stpRC);
+		// echo '</pre>';
+		// echo '<pre>';
+		// echo var_dump($rrRentalcar);
+		// echo '</pre>';
+
 } else {
 
 // =================================
@@ -424,6 +616,19 @@ if( $agrLevel >= 7 ) {
 	$user_info 	= get_userdata($agrID);
 	$userType 	= $user_info->type_com; // $userType に taxi or rentalcar
 
+	$stp11 		= 0;
+	$stp12 		= 0;
+	$stp01 		= 0;
+	$stpPB11 	= 0;
+	$stpPB12 	= 0;
+	$stpPB01 	= 0;
+
+	// 月毎の配列を初期化
+	// --------------------------------------------------
+		$aryName11 		= array(); // 利用証明書番号 	- 11月
+		$aryName12 		= array(); // 利用証明書番号 	- 12月
+		$aryName01 		= array(); // 利用証明書番号 	- 01月
+
 	if ( $userType === 'taxi' ) {
 
 		// 配列のカウント
@@ -431,123 +636,130 @@ if( $agrLevel >= 7 ) {
 			$aryNum 	= count( $rrTaxi[$agrName]['stamp'] );
 			$aryStamp 	= $rrTaxi[$agrName]['stamp'];
 
-			$stp11 = 0;
-			$stp12 = 0;
-			$stp01 = 0;
-
-			foreach ( $aryStamp as $value ) {
-				$stpDay = intval ( str_replace ( "-", "", $value['useafter'] ) ); // 数値に変換
-				if ( $stpDay >= 20161101 && $stpDay <= 20161130 ) {
-					// 11月の証明書集計
-					// ----------------------------------------
-					$stp11++;
-					echo $stp11;
-
-				} elseif ( $stpDay >= 20161201 && $stpDay <= 20161231 ) {
-					// 12月の証明書集計
-					// ----------------------------------------
-					$stp12++;
-					echo $stp12;
-
-				} elseif ( $stpDay >= 20170101 && $stpDay <= 20170131 ) {
-					// 1月の証明書集計
-					// ----------------------------------------
-					$stp01++;
-					echo '<p>' . $stp01 . '</p>';
-
-				}
-			}
-
-
-		// echo '<pre>';
-		// echo var_dump($rrTaxi[$agrName]['stamp']);
-		// echo '</pre>';
 	} else {
-		// echo '<pre>';
-		// echo var_dump($rrRentalcar[$agrName]['stamp']);
-		// echo '</pre>';
+
+		// 配列のカウント
+		// ----------------------------------------
+			$aryNum 	= count( $rrRentalcar[$agrName]['stamp'] );
+			$aryStamp 	= $rrRentalcar[$agrName]['stamp'];
+
 	}
 
+	foreach ( $aryStamp as $value ) {
+		$stpDay 	= intval ( str_replace ( "-", "", $value['useafter'] ) ); // 利用終了日を数値に変換
+		$stpPB 		= intval ( $value['pricebefore'] ); // 割引前の利用料金を数値に変換
+		$stpPA 		= intval ( $value['priceafter'] ); // 割引後の利用料金を数値に変換
+
+		// 割引金額の算出
+		if ( $stpPA == 0 ) {
+			$stpPL 	= $stpPB;
+		} else {
+			$stpPL 	= $stpPB - $stpPA;
+		}
+
+		if ( $stpDay >= 20161101 && $stpDay <= 20161130 ) {
+			// 11月の証明書集計
+			// ----------------------------------------
+			$stp11++;
+			$num11 = $stp11 + 10000;
+			$stpPB11 += $stpPL;
+
+			$aryName11[$num11]['num'] 		= $value['num']; 		// 利用証明書番号 	- 11月
+			$aryName11[$num11]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 11月
+			$aryName11[$num11]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 11月
+			$aryName11[$num11]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 11月
+			$aryName11[$num11]['price'] 	= $stpPL; 				// 割引金額 			- 11月
+			$aryName11[$num11]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 11月
+
+		} elseif ( $stpDay >= 20161201 && $stpDay <= 20161231 ) {
+			// 12月の証明書集計
+			// ----------------------------------------
+			$stp12++;
+			$num12 = $stp12 + 20000;
+			$stpPB12 += $stpPL;
+
+			$aryName12[$num12]['num'] 		= $value['num']; 		// 利用証明書番号 	- 12月
+			$aryName12[$num12]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 12月
+			$aryName12[$num12]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 12月
+			$aryName12[$num12]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 12月
+			$aryName12[$num12]['price'] 	= $stpPL; 				// 割引金額 			- 12月
+			$aryName12[$num12]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 12月
+
+		} elseif ( $stpDay >= 20170101 && $stpDay <= 20170131 ) {
+			// 1月の証明書集計
+			// ----------------------------------------
+			$stp01++;
+			$num01 = $stp01 + 30000;
+			$stpPB01 += $stpPL;
+
+			$aryName01[$num01]['num'] 		= $value['num']; 		// 利用証明書番号 	- 1月
+			$aryName01[$num01]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 1月
+			$aryName01[$num01]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 1月
+			$aryName01[$num01]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 1月
+			$aryName01[$num01]['price'] 	= $stpPL; 				// 割引金額 			- 1月
+			$aryName01[$num01]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 1月
+
+		}
+
+	}
+	// 証明書枚数と割引金額の算出（合計）
+	$stpAll 	= $stp11 + $stp12 + $stp01;
+	$stpPBAll 	= $stpPB11 + $stpPB12 + $stpPB01;
 
 
-	echo '<h1>集計</h1>';
-
-
-
-	// 現在の予算消化金額、使用されたチケット枚数
+	echo '<h1><span class="dashicons dashicons-chart-line"></span>集計</h1>';
+	// 現在の割引金額総額と利用証明書総枚数
 	// --------------------------------------------------
-	echo '<p>' . date("Y年m月d日") . ' 現在の予算消化金額</p>';
-	echo '<p>' . number_format( intval( $rakuraku["4"][$userID]['gokei'] ) ) . '<span class="small">円</span></p>';
-	echo '<p>使用されたチケット枚数</p>';
-	$cnt = $rakuraku["4"][$userID]["ticket"]["11"] +
-		   $rakuraku["4"][$userID]["ticket"]["12"] +
-		   $rakuraku["4"][$userID]["ticket"]["01"];
-    echo '<p>' . number_format( $cnt ) . '<span class="small">枚</span></p>';
+		echo '<table class="table mb-base"><thead><tr><th>割引金額総額（' . date("Y年m月d日") . ' 現在）</th><th>利用証明書総枚数</th></tr></thead><tbody><tr>';
+		echo '<td>' . number_format( $stpPBAll ) . '円</td><td>' . number_format( $stpAll ) . '枚</td>';
+		echo '</tr></tbody></table>';
+		echo '<h2>各月の割引金額総額と利用証明書総枚数</h2>';
+	    echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>月</th><th>枚</th><th>金額</th></tr></thead>';
+		echo '<tfoot>';
+		echo '<tr>';
+		echo '<th>合計</th><td>' . number_format( $stpAll ) . '枚</td><td>' . number_format( $stpPBAll ) . '円</td>';
+		echo '</tr>';
+		echo '</tfoot><tbody>';
+		echo '<tr>';
+		echo '<td>11月</td><td>' . number_format( $stp11 ) . '枚</td><td>' . number_format( $stpPB11 ) . '円</td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td>12月</td><td>' . number_format( $stp12 ) . '枚</td><td>' . number_format( $stpPB12 ) . '円</td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td>1月</td><td>' . number_format( $stp01 ) . '枚</td><td>' . number_format( $stpPB01 ) . '円</td>';
+		echo '</tr>';
+		echo '</tbody></table>';
 
-
-
-    // 月毎の合計金額と枚数
+	// 各月の利用証明書
 	// --------------------------------------------------
-    echo '<table class="wp-list-table widefat fixed striped posts"><thead><tr><th>月</th><th>枚</th><th>金額</th></tr></thead>';
-	echo '<tfoot>';
-	echo '<tr>';
-	echo '<th>合計</th><td>' . number_format( $cnt ) . '</td><td>' . number_format( intval( $rakuraku["4"][$userID]['gokei'] ) ) . '</td>';
-	echo '</tr>';
-	echo '</tfoot><tbody>';
-	echo '<tr>';
-	echo '<td>11月</td><td>' . number_format( $rakuraku["4"][$userID]["ticket"]["11"] ) . '</td><td>' . number_format( $rakuraku["4"][$userID]["gokei11"] ) . '</td>';
-	echo '</tr>';
-	echo '<tr>';
-	echo '<td>12月</td><td>' . number_format( $rakuraku["4"][$userID]["ticket"]["12"] ) . '</td><td>' . number_format( $rakuraku["4"][$userID]["gokei12"] ) . '</td>';
-	echo '</tr>';
-	echo '<tr>';
-	echo '<td>1月</td><td>' . number_format( $rakuraku["4"][$userID]["ticket"]["01"] ) . '</td><td>' . number_format( $rakuraku["4"][$userID]["gokei01"] ) . '</td>';
-	echo '</tr>';
+	echo '<h1><span class="dashicons dashicons-awards"></span>月毎の利用証明書</h1>';
+	echo '<h2><span class="dashicons dashicons-calendar-alt"></span>11月</h2>';
+	echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>利用証明書番号</th><th>観光施設（1回目）</th><th>観光施設（2回目）</th><th>割引前の利用料金</th><th>割引金額</th><th>割引後の利用料金</th></tr></thead><tbody>';
+	foreach ( $aryName11 as $value ) {
+		echo '<tr>';
+		echo '<td>' . $value["num"] . '</td><td>' . $value["first"] . '</td><td>' . $value["second"] . '</td><td>' . number_format( $value["priceB"] ) . '円</td><td>' . number_format( $value["price"] ) . '円</td><td>' . number_format( $value["priceA"] ) . '円</td>';
+		echo '</tr>';
+	}
 	echo '</tbody></table>';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	echo '<h2><span class="dashicons dashicons-calendar-alt"></span>12月</h2>';
+	echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>利用証明書番号</th><th>観光施設（1回目）</th><th>観光施設（2回目）</th><th>割引前の利用料金</th><th>割引金額</th><th>割引後の利用料金</th></tr></thead><tbody>';
+	foreach ( $aryName12 as $value ) {
+		echo '<tr>';
+		echo '<td>' . $value["num"] . '</td><td>' . $value["first"] . '</td><td>' . $value["second"] . '</td><td>' . number_format( $value["priceB"] ) . '円</td><td>' . number_format( $value["price"] ) . '円</td><td>' . number_format( $value["priceA"] ) . '円</td>';
+		echo '</tr>';
+	}
+	echo '</tbody></table>';
+	echo '<h2><span class="dashicons dashicons-calendar-alt"></span>1月</h2>';
+	echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>利用証明書番号</th><th>観光施設（1回目）</th><th>観光施設（2回目）</th><th>割引前の利用料金</th><th>割引金額</th><th>割引後の利用料金</th></tr></thead><tbody>';
+	foreach ( $aryName01 as $value ) {
+		echo '<tr>';
+		echo '<td>' . $value["num"] . '</td><td>' . $value["first"] . '</td><td>' . $value["second"] . '</td><td>' . number_format( $value["priceB"] ) . '円</td><td>' . number_format( $value["price"] ) . '円</td><td>' . number_format( $value["priceA"] ) . '円</td>';
+		echo '</tr>';
+	}
+	echo '</tbody></table>';
 }
 
-	// echo '<h1>配列の中身</h1>';
-	// echo '<h2>宿泊施設</h2>';
-	// echo '<pre>';
-	// echo var_dump($rrHotel);
-	// echo '</pre>';
-	// echo '<h2>観光施設</h2>';
-	// echo '<pre>';
-	// echo var_dump($rrPlace);
-	// echo '</pre>';
-	// echo '<h2>テスト</h2>';
-	// echo '<pre>';
-	// echo var_dump($ppp);
-	// echo '</pre>';
-	// echo '<h2>タクシー会社</h2>';
-	// echo '<pre>';
-	// echo var_dump($rrTaxi);
-	// echo '</pre>';
-	// echo '<h2>レンタカー会社</h2>';
-	// echo '<pre>';
-	// echo var_dump($rrRentalcar);
-	// echo '</pre>';
 
 
 // 元の投稿データを復元
