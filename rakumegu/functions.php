@@ -918,5 +918,6 @@ $query = new WP_Query( $args );
 function my_admin_script(){
 	wp_enqueue_script( 'canvas_script', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js', '', '', true);
 	wp_enqueue_script( 'my_admin_script', get_template_directory_uri().'/js/my_admin_script.js', array('jquery'), '', true);
+	wp_enqueue_style( 'font-awesome', get_template_directory_uri().'/css/font-awesome.min.css' );
 }
 add_action( 'admin_enqueue_scripts', 'my_admin_script' );

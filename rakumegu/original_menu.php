@@ -304,7 +304,7 @@
 	if ( $the_query->have_posts() ) :
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 
-		echo '<h1><span class="dashicons dashicons-megaphone"></span>おしらせ</h1>';
+		echo '<h1 class="title"><span class="dashicons dashicons-megaphone"></span>おしらせ</h1>';
 		echo '<div class="postbox wrap-news mb-base">';
 		echo '<h2 class="hndle ui-sortable-handle"><span>事務局からのおしらせ</span></h2>';
 		echo '<div class="inside">';
@@ -342,9 +342,15 @@ if( $agrLevel >= 7 ) {
 	$stp11ALL 	= 0;
 	$stp12ALL 	= 0;
 	$stp01ALL 	= 0;
+	$stp11ALLt 	= 0;
+	$stp12ALLt 	= 0;
+	$stp01ALLt 	= 0;
 	$stp11ST 	= 0;
 	$stp12ST 	= 0;
 	$stp01ST 	= 0;
+	$stp11STt 	= 0;
+	$stp12STt 	= 0;
+	$stp01STt 	= 0;
 	foreach ( $rrTaxi as $value1 ) {
 
 		// 各タクシー会社ごとにループしている
@@ -382,7 +388,9 @@ if( $agrLevel >= 7 ) {
 					$stpTX[$tblNameT]['stp11']['st'] = $stpST11;
 
 					$stp11ALL += $tblPL;
+					$stp11ALLt += $tblPL;
 					$stp11ST++;
+					$stp11STt++;
 
 				} elseif ( $tblDay >= 20161201 && $tblDay <= 20161231 ) {
 					// 12月の証明書集計
@@ -394,7 +402,9 @@ if( $agrLevel >= 7 ) {
 					$stpTX[$tblNameT]['stp12']['st'] = $stpST12;
 
 					$stp12ALL += $tblPL;
+					$stp12ALLt += $tblPL;
 					$stp12ST++;
+					$stp12STt++;
 
 				} elseif ( $tblDay >= 20170101 && $tblDay <= 20170131 ) {
 					// 1月の証明書集計
@@ -406,11 +416,16 @@ if( $agrLevel >= 7 ) {
 					$stpTX[$tblNameT]['stp01']['st'] = $stpST01;
 
 					$stp01ALL += $tblPL;
+					$stp01ALLt += $tblPL;
 					$stp01ST++;
+					$stp01STt++;
 
 				}
 
 			}
+
+			$resultTAXI = $stp11ALLt + $stp12ALLt + $stp01ALLt;
+			$nosTAXI 	= $stp11ST + $stp12ST + $stp01ST;
 
 		} else {
 			$stpTX[$tblNameT]['stp11']['pb'] = 0;
@@ -435,6 +450,12 @@ if( $agrLevel >= 7 ) {
 
 	// レンタカーの証明書情報をすべて取得
 	// --------------------------------------------------
+	$stp11ALLr 	= 0;
+	$stp12ALLr 	= 0;
+	$stp01ALLr 	= 0;
+	$stp11STr 	= 0;
+	$stp12STr 	= 0;
+	$stp01STr 	= 0;
 	foreach ( $rrRentalcar as $value1 ) {
 
 		// 各レンタカー会社ごとにループしている
@@ -443,9 +464,9 @@ if( $agrLevel >= 7 ) {
 
 		if ( $value1['stamp'] != "" ) {
 
-			$stpST11 = 0;
-			$stpST12 = 0;
-			$stpST01 = 0;
+			$stpST11 	= 0;
+			$stpST12 	= 0;
+			$stpST01 	= 0;
 
 			foreach ( $value1['stamp'] as $value2 ) {
 
@@ -472,7 +493,9 @@ if( $agrLevel >= 7 ) {
 					$stpRC[$tblNameR]['stp11']['st'] = $stpST11;
 
 					$stp11ALL += $tblPL;
+					$stp11ALLr += $tblPL;
 					$stp11ST++;
+					$stp11STr++;
 
 				} elseif ( $tblDay >= 20161201 && $tblDay <= 20161231 ) {
 					// 12月の証明書集計
@@ -484,7 +507,9 @@ if( $agrLevel >= 7 ) {
 					$stpRC[$tblNameR]['stp12']['st'] = $stpST12;
 
 					$stp12ALL += $tblPL;
+					$stp12ALLr += $tblPL;
 					$stp12ST++;
+					$stp12STr++;
 
 				} elseif ( $tblDay >= 20170101 && $tblDay <= 20170131 ) {
 					// 1月の証明書集計
@@ -496,11 +521,16 @@ if( $agrLevel >= 7 ) {
 					$stpRC[$tblNameR]['stp01']['st'] = $stpST01;
 
 					$stp01ALL += $tblPL;
+					$stp01ALLr += $tblPL;
 					$stp01ST++;
+					$stp01STr++;
 
 				}
 
 			}
+
+			$resultRENT = $stp11ALLr + $stp12ALLr + $stp01ALLr;
+			$nosRENT 	= $stp11STr + $stp12STr + $stp01STr;
 
 		} else {
 			$stpRC[$tblNameR]['stp11']['pb'] = 0;
@@ -520,45 +550,62 @@ if( $agrLevel >= 7 ) {
 	}
 
 
-	echo '<h1><span class="dashicons dashicons-chart-line"></span>集計</h1>';
+	// 円グラフ用の集計
+	// --------------------------------------------------
+	$resultALL 	= $resultTAXI + $resultRENT;	// すべての割引金額
+	$nosALL 	= $nosTAXI + $nosRENT;			// すべての証明書枚数
+
+
+	echo '<h1 class="title" style="padding-left:20px;"><i class="fa fa-pie-chart fa-fw" aria-hidden="true"></i>集計</h1>';
 
 	// 円グラフ
+	// --------------------------------------------------
 	echo '<div class="displayHidden" style="display:none;">';
-		echo '<p id="allResultsYet">' . $allResultsYet . '</p>';
-		echo '<p id="firstResults">' . $firstResults . '</p>';
-		echo '<p id="secondResults">' . $secondResults . '</p>';
-		echo '<p id="firstResultsYet">' . $firstResultsYet . '</p>';
-		echo '<p id="secondResultsYet">' . $secondResultsYet . '</p>';
+		echo '<p id="resultTAXI">' . $resultTAXI . '</p>'; 	// すべてのタクシー会社の割引金額
+		echo '<p id="resultRENT">' . $resultRENT . '</p>'; 	// すべてのレンタカー会社の割引金額
+		echo '<p id="resultALL">' . $resultALL . '</p>'; 	// すべての割引金額
+		echo '<p id="nosTAXI">' . $nosTAXI . '</p>'; 		// すべてのタクシー会社の証明書枚数
+		echo '<p id="nosRENT">' . $nosRENT . '</p>'; 		// すべてのレンタカー会社の証明書枚数
+		echo '<p id="nosALL">' . $nosALL . '</p>'; 			// すべての証明書枚数
 	echo '</div>';
-	echo '<canvas id="budget" width="450" height="200"></canvas>';
 
-
+	echo '<div class="clearfix">';
+		echo '<div class="wrap-canvas"><h2><i class="fa fa-taxi fa-fw" aria-hidden="true"></i>割引金額 <i class="fa fa-jpy fa-fw" aria-hidden="true"></i>' . number_format( $resultALL ) . '円</h2><canvas id="resGraph" width="350" height="200"></canvas>';
+		echo '<h2><i class="fa fa-ticket fa-fw" aria-hidden="true"></i>利用証明書枚数 ' . number_format( $nosALL ) . '枚</h2><canvas id="nosGraph" width="350" height="200"></canvas></div>';
+		echo '<div class="wrap-table">';
 
 	// 現在の割引金額総額と利用証明書総枚数
 	// --------------------------------------------------
-		echo '<table class="table mb-base"><thead><tr><th>割引金額総額（' . date("Y年m月d日") . ' 現在）</th><th>利用証明書総枚数</th></tr></thead><tbody><tr>';
-		echo '<td>' . number_format( $stp11ALL + $stp12ALL + $stp01ALL ) . '円</td><td>' . number_format( $stp11ST + $stp12ST + $stp01ST ) . '枚</td>';
+		echo '<h2><i class="fa fa-calendar fa-fw" aria-hidden="true"></i>' . date("Y年m月d日") . ' 現在</h2>';
+		echo '<table class="table mb-base"><thead><tr><th>割引金額総額</th><th>利用証明書総枚数</th></tr></thead><tbody><tr>';
+		echo '<td>' . number_format( $resultALL ) . '円</td><td>' . number_format( $nosALL ) . '枚</td>';
 		echo '</tr></tbody></table>';
-		echo '<h2>各月の割引金額総額と利用証明書総枚数</h2>';
-	    echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>月</th><th>金額</th><th>枚</th></tr></thead>';
+
+
+		echo '<h2 style="margin-top:70px;"><i class="fa fa-file-text fa-fw" aria-hidden="true"></i>各月の割引金額総額と利用証明書総枚数</h2>';
+	    echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>月</th><th><i class="fa fa-square fa-fw" aria-hidden="true" style="color:#65ace4;"></i>タクシー</th><th><i class="fa fa-square fa-fw" aria-hidden="true" style="color:#a0c238;"></i>レンタカー</th><th>合計</th></tr></thead>';
 		echo '<tfoot>';
 		echo '<tr>';
-		echo '<th>合計</th><td>' . number_format( $stp11ALL + $stp12ALL + $stp01ALL ) . '円</td><td>' . number_format( $stp11ST + $stp12ST + $stp01ST ) . '枚</td>';
+		echo '<th>合計</th><td>' . number_format( $resultTAXI ) . '円（' . number_format( $nosTAXI ) . '枚）</td><td>' . number_format( $resultRENT ) . '円（' . number_format( $nosRENT ) . '枚）</td><td>' . number_format( $stp11ALL + $stp12ALL + $stp01ALL ) . '円（' . number_format( $stp11ST + $stp12ST + $stp01ST ) . '枚）</td>';
 		echo '</tr>';
 		echo '</tfoot><tbody>';
 		echo '<tr>';
-		echo '<td>11月</td><td>' . number_format( $stp11ALL ) . '円</td><td>' . number_format( $stp11ST ) . '枚</td>';
+		echo '<td>11月</td><td>' . number_format( $stp11ALLt ) . '円（' . number_format( $stp11STt ) . '枚）</td><td>' . number_format( $stp11ALLr ) . '円（' . number_format( $stp11STr ) . '枚）</td><td>' . number_format( $stp11ALLt + $stp11ALLr ) . '円（' . number_format( $stp11STt + $stp11STr ) . '枚）</td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td>12月</td><td>' . number_format( $stp12ALL ) . '円</td><td>' . number_format( $stp12ST ) . '枚</td>';
+		echo '<td>12月</td><td>' . number_format( $stp12ALLt ) . '円（' . number_format( $stp12STt ) . '枚）</td><td>' . number_format( $stp12ALLr ) . '円（' . number_format( $stp12STr ) . '枚）</td><td>' . number_format( $stp12ALLt + $stp12ALLr ) . '円（' . number_format( $stp12STt + $stp12STr ) . '枚）</td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td>1月</td><td>' . number_format( $stp01ALL ) . '円</td><td>' . number_format( $stp01ST ) . '枚</td>';
+		echo '<td>1月</td><td>' . number_format( $stp01ALLt ) . '円（' . number_format( $stp01STt ) . '枚）</td><td>' . number_format( $stp01ALLr ) . '円（' . number_format( $stp01STr ) . '枚）</td><td>' . number_format( $stp01ALLt + $stp01ALLr ) . '円（' . number_format( $stp01STt + $stp01STr ) . '枚）</td>';
 		echo '</tr>';
 		echo '</tbody></table>';
 
-	echo '<h1><span class="dashicons dashicons-awards"></span>各タクシー会社<small>（' . count($stpTX) . '社）</small></h1>';
-		echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
+		echo '</div></div>';
+
+
+
+	echo '<h1 class="title" style="margin-top:70px;"><span class="dashicons dashicons-awards"></span>各タクシー会社 割引金額<small>（' . count($stpTX) . '社）</small></h1>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
 		echo '<tbody>';
 		foreach ( $stpTX as $value ) {
 			echo '<tr>';
@@ -571,8 +618,8 @@ if( $agrLevel >= 7 ) {
 		}
 		echo '</tbody></table>';
 
-	echo '<h1><span class="dashicons dashicons-awards"></span>各レンタカー会社<small>（' . count($stpRC) . '社）</small></h1>';
-		echo '<table class="wp-list-table widefat fixed striped posts mb-base"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
+	echo '<h1 class="title"><span class="dashicons dashicons-awards"></span>各レンタカー会社 割引金額<small>（' . count($stpRC) . '社）</small></h1>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-rental mb-base"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
 		echo '<tbody>';
 		foreach ( $stpRC as $value ) {
 			echo '<tr>';
@@ -707,7 +754,7 @@ if( $agrLevel >= 7 ) {
 	$stpPBAll 	= $stpPB11 + $stpPB12 + $stpPB01;
 
 
-	echo '<h1><span class="dashicons dashicons-chart-line"></span>集計</h1>';
+	echo '<h1><i class="fa fa-pie-chart fa-fw" aria-hidden="true"></i>集計</h1>';
 	// 現在の割引金額総額と利用証明書総枚数
 	// --------------------------------------------------
 		echo '<table class="table mb-base"><thead><tr><th>割引金額総額（' . date("Y年m月d日") . ' 現在）</th><th>利用証明書総枚数</th></tr></thead><tbody><tr>';

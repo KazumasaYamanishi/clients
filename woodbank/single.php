@@ -29,12 +29,26 @@
 		</div>
 	</article>
 <?php endwhile; endif; ?>
-<ul class="pager">
-	<li class="previous"><?php previous_post_link('%link', '<i class="fa fa-chevron-left fa-fw"></i>',true); ?></li>
-	<li class="next"><?php next_post_link('%link', '<i class="fa fa-chevron-right fa-fw"></i>',true); ?></li>
-</ul>
-
-
+<div class="single-pager clearfix">
+<div class="pull-left">
+	<table><tr><td style="width:20px;"><i class="fa fa-chevron-left" aria-hidden="true"></i></td><td>
+<?php if (get_previous_post()):?>
+		<?php previous_post_link('%link', '%title', true); ?>
+<?php else: ?>
+<a href="<?php echo home_url();?>"><i class="fa fa-home" aria-hidden="true"></i></a>
+<?php endif; ?>
+	</td></tr></table>
+</div>
+<div class="pull-right">
+	<table><tr><td>
+<?php if (get_next_post()):?>
+	<?php next_post_link('%link', '%title', true); ?>
+<?php else: ?>
+<a href="<?php echo home_url();?>"><i class="fa fa-home" aria-hidden="true"></i></a>
+<?php endif; ?>
+	</td><td style="width:20px;"><i class="fa fa-chevron-right" aria-hidden="true"></i></td></tr></table>
+</div>
+</div>
 
 <?php
 //	==================================================
@@ -43,16 +57,7 @@
 //
 //	==================================================
 ?>
-<div class="to-sample"><a href="<?php echo home_url(); ?>/sample"><img src="<?php echo get_template_directory_uri(); ?>/img/sample.png" alt="サンプル・送料すべて無料！"></a></div>
-<div class="wrap-info-cts">
-	<?php
-	// 注文書ダウンロード・FAXでのお申し込み
-	?>
-	<?php
-	// メールお問い合わせ・電話番号
-	?>
-</div>
-
+<?php get_template_part( 'to-sample' ); //サンプル請求バナー等表示 to-sample.php ?>
 
 
 </div><!-- end of main -->

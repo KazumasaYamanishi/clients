@@ -1,3 +1,8 @@
+<?php
+/*
+Template Name: Search Page
+*/
+?>
 <?php get_header(); ?>
 
 
@@ -20,23 +25,22 @@
 //
 //	==================================================
 ?>
+<?php
+global $query_string;
+
+$query_args = explode("&", $query_string);
+$search_query = array();
+
+foreach($query_args as $key => $string) {
+	$query_split = explode("=", $string);
+	$search_query[$query_split[0]] = $query_split[1];
+} // foreach
+
+$search = new WP_Query($search_query);
+?>
 <?php if(have_posts()): while(have_posts()): the_post(); ?>
 	<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 		<div class="inner">
-			<?php
-			//
-			// サンプル請求ページの場合
-			//
-			?>
-			<?php
-				if(is_page('sample')) {
-					get_template_part( 'sample' );
-				}
-				if(is_page('complete')) {
-					get_template_part( 'sample-complete' );
-				}
-
-			?>
 			<?php the_content(); ?>
 		</div>
 	</article>
@@ -51,7 +55,15 @@
 //
 //	==================================================
 ?>
-<?php get_template_part( 'to-sample' ); //サンプル請求バナー等表示 to-sample.php ?>
+<div class="to-sample"><a href="<?php echo home_url(); ?>/sample"><img src="<?php echo get_template_directory_uri(); ?>/img/sample.png" alt="サンプル・送料すべて無料！"></a></div>
+<div class="wrap-info-cts">
+	<?php
+	// 注文書ダウンロード・FAXでのお申し込み
+	?>
+	<?php
+	// メールお問い合わせ・電話番号
+	?>
+</div>
 
 
 

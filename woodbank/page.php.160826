@@ -32,10 +32,6 @@
 				if(is_page('sample')) {
 					get_template_part( 'sample' );
 				}
-				if(is_page('complete')) {
-					get_template_part( 'sample-complete' );
-				}
-
 			?>
 			<?php the_content(); ?>
 		</div>
@@ -51,7 +47,15 @@
 //
 //	==================================================
 ?>
-<?php get_template_part( 'to-sample' ); //サンプル請求バナー等表示 to-sample.php ?>
+<div class="to-sample"><a href="<?php echo home_url(); ?>/sample"><img src="<?php echo get_template_directory_uri(); ?>/img/sample.png" alt="サンプル・送料すべて無料！"></a></div>
+<div class="wrap-info-cts">
+	<?php
+	// 注文書ダウンロード・FAXでのお申し込み
+	?>
+	<?php
+	// メールお問い合わせ・電話番号
+	?>
+</div>
 
 
 

@@ -308,11 +308,6 @@ div.aligncenter {
     border-radius: .25rem;
 }
 
-.btn-primary.focus,
-.btn-primary:focus {
-    border-color: transparent;
-}
-
 
 /* ==================================================
 **
@@ -331,13 +326,17 @@ div.aligncenter {
 
 .thumbnail .caption {
     color: #424242;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.64;
+    background-color: #f6f6f6;
+    padding: 10px 20px 6px 20px;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .thumbnail .caption h4 {
     color: #0071b2;
     letter-spacing: 0;
+    font-size: 22px;
 }
 
 .thumbnail .caption h4 + .wrap-intro {
@@ -357,6 +356,7 @@ div.aligncenter {
     margin-bottom: 0;
 }
 
+.post-meta-top {size: 14px;color: #c3c3c3; letter-spacing: -1px;}
 
 /* ==================================================
 **
@@ -648,7 +648,8 @@ header .navbar #wrap-gnav #g_menu_company .navbar-nav li.active a {
 
 .title-bg-img {
     text-indent: -9999em;
-    height: 105px;
+    height: 85px;
+    margin: 40px 0 16px 0;
 }
 
 .wrap-magazine .title-bg-img {
@@ -890,7 +891,7 @@ aside {
 
 footer {
     margin-top: 44px;
-    background-color: #005484;
+    background-color: #0081cb;
     color: #fff;
 }
 

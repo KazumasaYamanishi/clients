@@ -125,6 +125,35 @@
     clear: both;
 }
 
+.visible-xs-block {
+    display: none;
+}
+.col-sm-pull-12{right:100%}
+.col-sm-pull-11{right:91.66666667%}
+.col-sm-pull-10{right:83.33333333%}
+.col-sm-pull-9{right:75%}
+.col-sm-pull-8{right:66.66666667%}
+.col-sm-pull-7{right:58.33333333%}
+.col-sm-pull-6{right:50%}
+.col-sm-pull-5{right:41.66666667%}
+.col-sm-pull-4{right:33.33333333%}
+.col-sm-pull-3{right:25%}
+.col-sm-pull-2{right:16.66666667%}
+.col-sm-pull-1{right:8.33333333%}
+.col-sm-pull-0{right:auto}
+.col-sm-push-12{left:100%}
+.col-sm-push-11{left:91.66666667%}
+.col-sm-push-10{left:83.33333333%}
+.col-sm-push-9{left:75%}
+.col-sm-push-8{left:66.66666667%}
+.col-sm-push-7{left:58.33333333%}
+.col-sm-push-6{left:50%}
+.col-sm-push-5{left:41.66666667%}
+.col-sm-push-4{left:33.33333333%}
+.col-sm-push-3{left:25%}
+.col-sm-push-2{left:16.66666667%}
+.col-sm-push-1{left:8.33333333%}
+.col-sm-push-0{left:auto}
 
 /*  ==================================================
 **
@@ -280,64 +309,75 @@
 
 .col-xs-12,
 .col-sm-12 {
-    width: 1046px;
+    width: 100%;
 }
 
 .col-xs-11,
 .col-sm-11 {
-    width: 958.8333333333333px;
+    width: 91.66666667%;
 }
 
 .col-xs-10,
 .col-sm-10 {
-    width: 871.6666666666667px;
+    width: 83.33333333%;
 }
 
 .col-xs-9,
 .col-sm-9 {
-    width: 784.5px;
+    width: 75%;
 }
 
 .col-xs-8,
 .col-sm-8 {
-    width: 697.3333333333333px;
+    width: 66.66666667%;
 }
 
 .col-xs-7,
 .col-sm-7 {
-    width: 610.1666666666667px;
+    width: 58.33333333%;
 }
 
 .col-xs-6,
 .col-sm-6 {
-    width: 523px;
+    width: 50%;
 }
 
 .col-xs-5,
 .col-sm-5 {
-    width: 435.8333333333333px;
+    width: 41.66666667%;
 }
 
 .col-xs-4,
 .col-sm-4 {
-    width: 348.6666666666667px;
+    width: 33.33333333%;
 }
 
 .col-xs-3,
 .col-sm-3 {
-    width: 261.5px;
+    width: 25%;
 }
 
 .col-xs-2,
 .col-sm-2 {
-    width: 174.3333333333333px;
+    width: 16.66666667%;
 }
 
 .col-xs-1,
 .col-sm-1 {
-    width: 87.16px;
+    width: 8.33333333%;
+}
+.col-sm-6 {
+	float:left;
 }
 
+.mt10 {margin-top: 10px;}
+.mt20 {margin-top: 20px;}
+.mt30 {margin-top: 30px;}
+.mt40 {margin-top: 40px;}
+.mt50 {margin-top: 50px;}
+.mt60 {margin-top: 60px;}
+.mt70 {margin-top: 70px;}
+.mt80 {margin-top: 80px;}
 
 /*  ==================================================
 **
@@ -368,6 +408,9 @@
 **
 ==================================================  */
 
+header {
+   background-color: #4d4d4d;
+}
 header .container {
     width: 1356px;
 }
@@ -399,12 +442,14 @@ header .container p .lead {
 }
 
 .searchfield {
+    position: relative;
     margin-top: 10px;
     padding: 5px;
     font-size: 14px;
     width: 135px;
     height: 60px;
     vertical-align: middle;
+    -webkit-appearance: none;
 }
 
 .searchsubmit {
@@ -462,13 +507,13 @@ header .container p .lead {
 footer {
     clear: both;
     margin: 0 auto;
-    padding: 0;
+    padding:0;
     width: 1356px;
     background-color: #4d4d4d;
 }
 
 footer .container {
-    padding: 0;
+    padding: 1em 0 0;
     width: 1156px;
     float: right;
     background-color: #fff;
@@ -504,6 +549,9 @@ footer .copy {
 **  common
 **
 ==================================================  */
+.main-container{
+background:#FFF url(../img/bg-main-container.png) repeat-y 15px top;
+}
 
 .main {
     padding: 0 70px;
@@ -539,7 +587,8 @@ footer .copy {
     text-align: center;
 }
 .to-sample {
-    margin-bottom: 72px;
+	margin-bottom: 72px;
+	margin-top:48px;
 }
 
 
@@ -593,7 +642,7 @@ footer .copy {
 ==================================================  */
 
 .box-items h4 {
-    margin: 24px 0;
+    margin: 24px 0 24px;
     font-size: 14px;
     font-weight: normal;
 }
@@ -630,6 +679,7 @@ footer .copy {
     margin-bottom: 72px;
 }
 
+
 /*  ==================================================
 **
 **  taxonomy.php フローリング一覧
@@ -645,7 +695,7 @@ footer .copy {
 }
 .archive article .table tbody tr th,
 .archive article .table tbody tr td {
-    padding: 1em;
+    padding: 0.8em 1em;
     font-size: 13px;
     border-top: 1px solid #424242;
     border-bottom: 1px solid #424242;
@@ -672,7 +722,7 @@ footer .copy {
     border-color: #ebccd1;
 }
 .wrap-btn {
-    margin-top: 44px;
+    margin-top: 36px;
 }
 .btn {
     display: inline-block;
@@ -709,6 +759,12 @@ footer .copy {
     width: 100%;
 }
 
+
+.pdf-view{
+	width:80%;
+	text-align:center;
+	margin:0 auto;
+}
 /*  ==================================================
 **
 **  アクセス
@@ -719,4 +775,74 @@ footer .copy {
     margin-bottom: 44px;
     width: 100%;
     height: 350px;
+}
+
+/*  ==================================================
+**
+**  装飾
+**
+==================================================  */
+
+.ttl-bdr-btm .heading {
+    overflow: hidden;
+    position: relative;
+    margin: 52px 0 30px 0;
+    padding-bottom: 12px;
+    font-size: 18px;
+}
+.ttl-bdr-btm .heading span {
+    padding: 3px;
+}
+.ttl-bdr-btm .heading:before {
+    content: "";
+    border-bottom: 3px solid #c40002;
+    bottom: 0;
+    height: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 0;
+}
+.ttl-bdr-btm .heading:after {
+    border-bottom: 3px solid #ddd;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+#flow .ttl-bdr-btm .heading {
+    margin-top: 8px;
+}
+
+.wrap-footer-contents {
+    margin-top: 100px;
+}
+
+#carry .inner .table {
+    margin-bottom: 15px;
+}
+
+.ttl-sprite {
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+}
+
+.ttl-sprite .heading {
+    display: block;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+.ttl-sprite .heading {
+    padding: 16px 10px;
+    border: 2px #c40002;
+    border-style: solid none;
+}
+
+.ttl-sprite .heading .en {
+    margin-left: 1em;
+    font-size: .8em;
+    vertical-align: middle;
 }
