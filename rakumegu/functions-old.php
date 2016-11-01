@@ -15,7 +15,6 @@
 			wp_enqueue_script('bootstrap', '//kg-rakumegu.com/wp-content/themes/addas/js/bootstrap.min.js', array(), '');
 			wp_deregister_script('matchheight');
 			wp_enqueue_script('matchheight', '//kg-rakumegu.com/wp-content/themes/addas/js/jquery.matchHeight-min.js', array(), '');
-			wp_enqueue_script('jquery-ui-js-ja', '//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js');
 		}
 	}
 	add_action('init', 'load_cdn');
@@ -385,7 +384,7 @@
 		include 'manual_menu.php';
 	}
 	function manual_page() {
-		add_menu_page('資料ダウンロード', '資料ダウンロード', 1, 'manual_page', 'manual_menu', 'dashicons-admin-page', 99);
+		add_menu_page('マニュアルダウンロード', 'マニュアルダウンロード', 1, 'manual_page', 'manual_menu', 'dashicons-admin-page', 99);
 	}
 	add_action ( 'admin_menu', 'manual_page' );
 // ==================================================
@@ -542,16 +541,11 @@
 
 		global $current_user;
 		get_currentuserinfo();
-		$agrName 	= $current_user->user_login;	// ログインしているユーザー名
-		$agrLevel 	= $current_user->user_level;	// ログインしているユーザーの権限レベル
-		$agrID 		= $current_user->ID;			// ログインしているユーザーID
+		$agrLevel = $current_user->user_level;
 
-		if ( $agrLevel != 2 ) $columns['CheckKCR'] = "確認";
+		if ( $agrLevel != 2 ) $columns['CheckKCR'] = "確認ステータス";
 
 		// $columns['kaishu'] 			= "回収日";
-
-		$columns['company-name'] 	= "会社名";
-
 		$columns['UseBefore'] 		= "開始日";
 		$columns['UseAfter'] 		= "終了日";
 		$columns['Sightseeing01'] 	= "施設名1";
@@ -561,7 +555,6 @@
 		$columns['HotelArea'] 		= "宿泊エリア";
 		$columns['PriceBefore'] 	= "割引前";
 		$columns['PriceAfter'] 		= "割引後";
-
 		unset($columns['date']);
 		return $columns;
 	}
@@ -581,15 +574,10 @@
 				if ( !empty ( $checked ) ) echo $checked;
 				break;
 
-			case 'company-name':
-				// $checked = get_post_meta( $post_id , 'kaishu' , true );
-				// if ( !empty ( $checked ) ) echo $checked;
-				$poststamp = get_post( $post_id );
-				if ( $poststamp ) {
-					$author = get_userdata( $poststamp->post_author );
-					if ( !empty ( $author ) ) echo $author->company_name;
-				}
-				break;
+			// case 'kaishu':
+			// 	$checked = get_post_meta( $post_id , 'kaishu' , true );
+			// 	if ( !empty ( $checked ) ) echo $checked;
+			// 	break;
 
 			case 'UseBefore':
 				$checked = get_post_meta( $post_id , 'UseBefore' , true );
@@ -645,16 +633,79 @@
 	// ソート処理
 	function make_order_column_sortable( $columns ) {
 		// $columns['kaishu'] 		= 'kaishu';
-		$columns['company-name'] 	= "company-name";
-		$columns['UseBefore'] 		= "UseBefore";
-		$columns['UseAfter'] 		= "UseAfter";
-		$columns['Date01'] 			= "Date01";
-		$columns['Date02'] 			= "Date02";
-		$columns['PriceBefore'] 	= "PriceBefore";
-		$columns['PriceAfter'] 		= "PriceAfter";
+		$columns['UseBefore'] 	= "UseBefore";
+		$columns['UseAfter'] 	= "UseAfter";
+		$columns['Date01'] 		= "Date01";
+		$columns['Date02'] 		= "Date02";
+		$columns['PriceBefore'] = "PriceBefore";
+		$columns['PriceAfter'] 	= "PriceAfter";
 		return $columns;
 	}
 	add_filter( 'manage_edit-stamp_sortable_columns', 'make_order_column_sortable' );
+// ==================================================
+//
+//	クイック編集でカスタムフィールドの値を表示し、編集できるようにする
+//
+// ==================================================
+	function display_my_quickmenu( $column_name, $post_type ) {
+		static $print_nonce = TRUE;
+		if ( $print_nonce ) {
+	        $print_nonce = FALSE;
+	        wp_nonce_field( 'quick_edit_action', $post_type . '_edit_nonce' ); //CSRF対策
+	    }
+	?>
+	<fieldset class="inline-edit-col-right inline-custom-meta">
+        <div class="inline-edit-col column-<?php echo $column_name ?>">
+            <label class="inline-edit-group">
+                <?php
+                switch ( $column_name ) {
+                    case 'CheckKCR':
+                ?>
+                	<input name="checkkcr[0][0]" value="" type="hidden">
+                	<label for="checkkcr_e69caae7a2bae8aa8d_0_0" class="selectit"><input id="checkkcr_e69caae7a2bae8aa8d_0_0" name="checkkcr[0][0]" value="未確認" type="radio" class="checkkcr0"> 未確認</label> <label for="checkkcr_e7a2bae8aa8de4b8ad_0_0" class="selectit"><input id="checkkcr_e7a2bae8aa8de4b8ad_0_0" name="checkkcr[0][0]" value="確認中" type="radio" class="checkkcr0"> 確認中</label> <label for="checkkcr_e7a2bae5ae9a_0_0" class="selectit"><input id="checkkcr_e7a2bae5ae9a_0_0" name="checkkcr[0][0]" value="確定" type="radio" class="checkkcr0"> 確定</label>
+                <?php
+                        break;
+                }
+                ?>
+            </label>
+        </div>
+    </fieldset>
+	<?php
+	}
+	add_action( 'quick_edit_custom_box', 'display_my_quickmenu', 10, 2 );
+	//jQueryの読み込み
+	function my_admin_quickedit() {
+	    global $post_type;
+	    $slug = 'stamp'; //投稿タイプの指定、カスタム投稿で仕様する場合はここを置換
+	    if ( $post_type == $slug ) {
+	        //任意のディレクトリへjsをアップロードし、読み込ませる テーマ内への記述も可
+	        echo '<script type="text/javascript" src="', get_stylesheet_directory_uri() .'/js/admin_quickedit.js', '"></script>';
+	    }
+	}
+	add_action('admin_footer-edit.php', 'my_admin_quickedit');
+	function save_custom_meta( $post_id ) {
+	    $slug = 'stamp'; //カスタムフィールドの保存処理をしたい投稿タイプを指定
+
+	    if ( $slug !== get_post_type( $post_id ) ) {
+	        return;
+	    }
+	    if ( !current_user_can( 'edit_post', $post_id ) ) {
+	        return;
+	    }
+
+	    $_POST += array("{$slug}_edit_nonce" => '');
+	    if ( !wp_verify_nonce( $_POST["{$slug}_edit_nonce"], 'quick_edit_action' ) ) {
+	        return;
+	    }
+
+	    //チェックボックスの場合
+	    if ( isset( $_REQUEST['CheckKCR'] ) ) {
+	        update_post_meta($post_id, 'CheckKCR', TRUE);
+	    } else {
+	        update_post_meta($post_id, 'CheckKCR', FALSE);
+	    }
+	}
+	add_action( 'save_post', 'save_custom_meta' );
 // ==================================================
 //
 //	デフォルトで表示されている投稿日付で絞り込み検索を非表示にする　ここは要検討。不必要なら削除。
@@ -677,156 +728,78 @@
 //	カスタムフィールドで絞り込み検索する場合の例
 //
 // ==================================================
-	function add_useafter_filter() {
+	function add_author_filter() {
 		global $post_type;
 		if ( $post_type == 'stamp' ) { ?>
-			<select name="useafter">
-            	<option value="all">すべての利用月を表示する</option>
-            	<option value="2016-11">2016年11月</option>
-            	<option value="2016-12">2016年12月</option>
-            	<option value="2017-01">2017年1月</option>
+			<select name="kaishu">
+            	<option value="0">回収月を選択してください</option>
+            	<option value="201611">2016年11月</option>
+            	<option value="201612">2016年12月</option>
+            	<option value="201701">2017年1月</option>
             </select>
 	<?php	}
 	}
-	add_action( 'restrict_manage_posts', 'add_useafter_filter' );
-	// *** URLパラメータから値を取得する
-	function add_useafter($vars) {
-		$vars[] = 'useafter';
-		return $vars;
-	}
-	add_filter('query_vars', 'add_useafter');
-	// *** カスタムフィールドの値から検索する
-	function posts_where_useafter($where) {
+	add_action( 'restrict_manage_posts', 'add_author_filter' );
 
-		global $current_user;
-		get_currentuserinfo();
-		$agrName 	= $current_user->user_login;	// ログインしているユーザー名
-		$agrLevel 	= $current_user->user_level;	// ログインしているユーザーの権限レベル
-		$agrID 		= $current_user->ID;			// ログインしているユーザーID
-
-		global $wpdb;
-		if( is_admin() ) {
-			$value = get_query_var('useafter');
-			// if( !empty($value) ) {
-			if( isset($value) ) {
-				if ( $agrLevel == 2 ) {
-					if( $value == '2016-11' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2016-11-01'
-							AND m.meta_value <= '2016-11-30'
-							AND ( post_author = %d )
-							)",
-							get_current_user_id()
-						);
-					} elseif( $value == '2016-12' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2016-12-01'
-							AND m.meta_value <= '2016-12-31'
-							AND ( post_author = %d )
-							)",
-							get_current_user_id()
-						);
-					} elseif( $value == '2017-01' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2017-01-01'
-							AND m.meta_value <= '2017-01-31'
-							AND ( post_author = %d )
-							)",
-							get_current_user_id()
-						);
-					} elseif( $value == 'all' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2016-11-01'
-							AND m.meta_value <= '2017-01-31'
-							AND ( post_author = %d )
-							)",
-							get_current_user_id()
-						);
-					}
-				} else {
-					if( $value == '2016-11' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2016-11-01'
-							AND m.meta_value <= '2016-11-30'
-							)",
-							null
-						);
-					} elseif( $value == '2016-12' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2016-12-01'
-							AND m.meta_value <= '2016-12-31'
-							)",
-							null
-						);
-					} elseif( $value == '2017-01' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2017-01-01'
-							AND m.meta_value <= '2017-01-31'
-							)",
-							null
-						);
-					} elseif( $value == 'all' ) {
-						//検索条件にカスタムフィールド「useafter」の値を追加
-						$where .= $wpdb->prepare("
-							AND EXISTS (
-							SELECT *
-							FROM {$wpdb->postmeta} as m
-							WHERE m.post_id = {$wpdb->posts}.ID
-							AND m.meta_key = 'UseAfter'
-							AND m.meta_value >= '2016-11-01'
-							AND m.meta_value <= '2017-01-31'
-							)",
-							null
-						);
-					}
-				}
+	function kaishu_query ( $query ) {
+		global $pagenow;
+		global $post_type;
+		if ( $post_type == 'stamp' && $_GET['kaishu'] ) {
+			$kaishuMonth = $_GET['kaishu'];
+			if ( $kaishuMonth == '201611' ) {
+// http://d.hatena.ne.jp/deeeki/20100408/wordpress_search_hook 参照
+$args = array(
+	// 'post_type'  => 'stamp',
+	// 'meta_query' => array(
+	// 	'relation' => 'AND',
+	// 	array(
+	// 		'key'     => 'kaishu',
+	// 		'value'   => '2016-11-01',
+	// 		'compare' => '>=',
+	// 	),
+	// 	array(
+	// 		'key'     => 'kaishu',
+	// 		'value'   => '2016-11-30',
+	// 		'compare' => '<=',
+	// 	),
+	// ),
+);
+$query = new WP_Query( $args );
+			} elseif ( $kaishuMonth == '201612' ) {
+				
+			} elseif ( $kaishuMonth == '201701' ) {
+				
 			}
+			// $query->query_vars[ 'meta_value' ] = $_GET['kaishu'];
 		}
-		return $where;
-	};
-	add_filter('posts_where', 'posts_where_useafter');
+		return $query;
+	}
+	add_filter('parse_query', 'kaishu_query');
+// add_filter('parse_query', 'gender_query');
+// function gender_query($query) {
+//  global $pagenow;
+//  global $post_type;
+//  if ($pagenow == 'edit.php?post_type=stamp' && $post_type == '{stamp}' && $_GET['kaishu']) {
+//   // $query->query_vars[ 'meta_key' ] = '{kaishu}';
+//   // $query->query_vars[ 'meta_value' ] = $_GET['kaishu'];
+//  	echo 'aaaa';
+//  } else {
+//  	echo var_dump($query);
+//  }
+//  return $query;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 // ==================================================
 //
 //	投稿画面から不要な機能を削除する
@@ -834,7 +807,7 @@
 // ==================================================
 	function remove_post_supports() {
 		// remove_post_type_support( 'post', 'title' ); // タイトル
-		// remove_post_type_support( 'post', 'editor' ); // 本文欄
+		remove_post_type_support( 'post', 'editor' ); // 本文欄
 		remove_post_type_support( 'stamp', 'editor' ); // 本文欄
 		// remove_post_type_support( 'post', 'author' ); // 作成者
 		// remove_post_type_support( 'post', 'thumbnail' ); // アイキャッチ
@@ -846,7 +819,7 @@
 		// remove_post_type_support( 'post', 'page-attributes' ); // ページ属性
 		// remove_post_type_support( 'post', 'post-formats' ); // 投稿フォーマット
 
-		// unregister_taxonomy_for_object_type( 'category', 'post' ); // カテゴリ
+		unregister_taxonomy_for_object_type( 'category', 'post' ); // カテゴリ
 		unregister_taxonomy_for_object_type( 'post_tag', 'post' ); // タグ
 	}
 	add_action( 'init', 'remove_post_supports' );
@@ -919,44 +892,7 @@
 		}
 	}
 	add_action( 'admin_init', 'redirect_dashiboard' );
-/*-------------------------------------------*/
-/* 投稿者の投稿（所有）のみにアクセス限定
-/*-------------------------------------------*/
-function show_owned_posts_only( $views ) {
-    unset($views['all']); // すべて
-    unset($views['draft']); // 下書き
-    unset($views['publish']); // 公開済み
-    unset($views['pending']); // 保留中
-    unset($views['trash']); // ゴミ箱
 
-    return $views;
-}
-add_filter('views_edit-stamp', 'show_owned_posts_only'); /* カスタム投稿の場合は「edit-post」の「post」部分をカスタム投稿のスラッグに変更 */
-/*-------------------------------------------*/
-/* 投稿が0件でも他者の投稿一覧が見えないように
-/*-------------------------------------------*/
-function hide_other_posts($wp_query) {
-
-    global $current_screen, $current_user;
-
-    get_currentuserinfo();
-    $agrName 	= $current_user->user_login;	// ログインしているユーザー名
-	$agrLevel 	= $current_user->user_level;	// ログインしているユーザーの権限レベル
-	$agrID 		= $current_user->ID;			// ログインしているユーザーID
-	if ( $agrLevel == 2 ) {
-		if($current_screen->id != "edit-stamp") { /* カスタム投稿の場合は「-post」の「post」部分をカスタム投稿のスラッグに変更 */
-	        return;
-	    }
-
-	    if(!$current_user->roles[0] == "author") { /* 対象とするユーザーグループを指定 */
-	        return false;
-	    }
-
-	    $wp_query->query_vars['author'] = $current_user->ID; /* 対象とするユーザーグループを指定 */
-	}
-
-}
-add_action('pre_get_posts', 'hide_other_posts');
 
 
 
@@ -989,11 +925,6 @@ add_action('pre_get_posts', 'hide_other_posts');
 		echo $_custom_js . "\n";
 	}
 	add_action('admin_head', '_register_custom_js');
-
-
-
-
-
 // ==================================================
 //
 //	カスタム投稿タイプ「証明書」の宿泊施設の入力補助
@@ -1052,87 +983,19 @@ add_action('pre_get_posts', 'hide_other_posts');
 	}
 	add_action( 'wp_ajax_ajax_get_spot_list', 'ajax_get_spot_list' );
 	add_action( 'wp_ajax_nopriv_ajax_get_spot_list', 'ajax_get_spot_list' );
-// ==================================================
-//
-//	証明書番号の入力を必須とする
-//
-// ==================================================
-	function my_title_required() {
-	?>
-		<script type="text/javascript">
-			jQuery(document).ready(function($){
-				if('stamp' == $('#post_type').val()){
-					$("#post").submit(function(e){
-						if('' == $('#title').val()) {
-							alert('利用証明書番号を入力してください。');
-							$('#ajax-loading').css('visibility', 'hidden');
-							$('#publish').removeClass('button-primary-disabled');
-							$('#title').focus();
-							return false;
-						} else {
-							var txt = $('#title').val();
-							var han = txt.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s){
-								return String.fromCharCode(s.charCodeAt(0)-0xFEE0);
-							});
-							han = han.replace(/[^0-9]/g,"");
-							$('#title').val(han);
-						}
-					});
-				}
-			});
-		</script>
-	<?php
-		}
-	add_action( 'admin_head-post-new.php', 'my_title_required' );
-	add_action( 'admin_head-post.php', 'my_title_required' );
-// ==================================================
-//
-//	カレンダーの日本語表示
-//
-// ==================================================
-	function admin_datepicker_js() {
-		echo '<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				Date.monthNames = [\'1月\',\'2月\',\'3月\',\'4月\',\'5月\',\'6月\',\'7月\',\'8月\',\'9月\',\'10月\',\'11月\',\'12月\'];
-				Date.dayNames = [\'日曜日\',\'月曜日\',\'火曜日\',\'水曜日\',\'木曜日\',\'金曜日\',\'土曜日\'];
-				Date.dayNamesShort = [\'日\',\'月\',\'火\',\'水\',\'木\',\'金\',\'土\'];
-				Date.dayNamesMin = [\'日\',\'月\',\'火\',\'水\',\'木\',\'金\',\'土\'];
-		});</script>';
-	}
-	add_action('admin_head', 'admin_datepicker_js');
 
 
-// ==================================================
-//
-// マップエリアリンクにスマホだけボタン表示
-//
-// ==================================================
-	function SetMapLink() {
-		if(is_mobile()){
-			$ret = '<div class="map-btn">';
-			$ret .= '<ul>';
-			$ret .= '<li class="li-kagoshima-area"><a href="#kagoshima-area">鹿児島エリア</a></li>';
-			$ret .= '<li class="li-nansatsu-area"><a href="#nansatsu-area">南薩エリア</a></li>';
-			$ret .= '<li class="li-airaisa-area"><a href="#airaisa-area">姶良・伊佐エリア</a></li>';
-			$ret .= '<li class="li-hokusatsu-area"><a href="#hokusatsu-area">北薩エリア</a></li>';
-			$ret .= '<li class="li-osumi-area"><a href="#osumi-area">大隅エリア</a></li>';
-			$ret .= '<li class="li-tanegasima-area"><a href="#tanegasima-area">種子島エリア</a></li>';
-			$ret .= '<li class="li-yakushima-area"><a href="#yakushima-area">屋久島エリア</a></li>';
-			$ret .= '<li class="li-amami-area"><a href="#amami-area">奄美群島エリア</a></li>';
-			$ret .= '</ul>';
-			$ret .= '</div>';
-			return $ret;
-		}
-	}
-	add_shortcode('maplink', 'SetMapLink');
+
+
+
 // ==================================================
 //
 // 管理画面用のjsファイル読み込み
 //
 // ==================================================
-	function my_admin_script(){
-		wp_enqueue_script( 'canvas_script', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js', '', '', true);
-		wp_enqueue_script( 'my_admin_script', get_template_directory_uri().'/js/my_admin_script.js', array('jquery'), '', true);
-		wp_enqueue_style( 'font-awesome', get_template_directory_uri().'/css/font-awesome.min.css' );
-	}
-	add_action( 'admin_enqueue_scripts', 'my_admin_script' );
+function my_admin_script(){
+	wp_enqueue_script( 'canvas_script', '//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js', '', '', true);
+	wp_enqueue_script( 'my_admin_script', get_template_directory_uri().'/js/my_admin_script.js', array('jquery'), '', true);
+	wp_enqueue_style( 'font-awesome', get_template_directory_uri().'/css/font-awesome.min.css' );
+}
+add_action( 'admin_enqueue_scripts', 'my_admin_script' );

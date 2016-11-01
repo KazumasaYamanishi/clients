@@ -874,35 +874,3 @@ table {background-color: rgba(248,246,231,0.5);}
     margin: 0 24px;
     line-height: 1.5em;
 }
-
-
-/* ==================================================
-**
-**  鹿児島県マップリンクのあるページ
-**
-================================================== */
-.map-btn {margin:1em 0 2em;}
-.map-btn:after {
-	content: "";
-	clear: both;
-	display: block;
-}
-.map-btn ul {list-style-type:none;margin:0;padding:0;}
-.map-btn li {width:50%;float:left;padding:5px;}
-.map-btn li a {display:block;padding:5px;color:#FFF;text-align:center;}
-/*
-.map-btn li a:before {
-	content: "\f107";
-	font-family: FontAwesome;
-}
-*/
-
-.li-kagoshima-area a {background-color:#01A0CA;}
-.li-nansatsu-area a {background-color:#01A33E;}
-.li-airaisa-area a {background-color:#876B00;}
-.li-hokusatsu-area a {background-color:#6357A3;}
-.li-osumi-area a {background-color:#F18507;}
-.li-tanegasima-area a {background-color:#C17045;}
-.li-yakushima-area a {background-color:#007E69;}
-.li-amami-area a {background-color:#EC6D82;}
-

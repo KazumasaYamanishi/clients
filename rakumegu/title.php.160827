@@ -1,7 +1,11 @@
-<div class="page-title"><h2 class="title text-center">
+<div class="page-title"><div class="container"><h2 class="title">
 <?php
 
-	if (is_page() || is_home()) {
+	if (is_page()) {
+
+		single_post_title();
+
+	} elseif (is_home()) {
 
 		single_post_title();
 
@@ -23,14 +27,10 @@
 
 		echo get_query_var('year').'年';
 
-	} elseif (is_search()) {
-
-		echo '検索結果';
-
 	} elseif (is_404()) {
 
 		echo 'ページが見つかりません。';
 
 	}
 ?>
-</h2></div>
+</h2></div></div>

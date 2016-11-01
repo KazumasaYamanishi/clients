@@ -1,0 +1,257 @@
+@charset "utf-8";
+
+/*
+Theme Name: アドダス
+Author: アドダス
+Author URI: http://addas.jp/
+*/
+
+/**
+ふっこう割り style.css
+**/
+.search-title {color: #f4c700; margin: 40px 0 20px 0; font-weight: 600;}
+.hanbai {padding: 10px 20px; font-weight: 600; background-color: #df4473; border-radius: 4px;
+-webkit-transition: all .3s;
+transition: all .3s;
+color: #fff;
+}
+
+.kanbai {padding: 10px 20px; font-weight: 600; background-color: #f58e0c; border-radius: 4px;
+-webkit-transition: all .3s;
+transition: all .3s;
+color: #fff;
+}
+
+.breadcrumb {padding: 8px 120px; margin: 20px; list-style: none; background-color: #fff; }
+.breadcrumb ul {font-size: 0.9em; }
+.breadcrumb ul li {display: inline; list-style: none; background-color: #f4c700; border-radius: 4px; margin: 0 5px; padding: 10px 10px 10px 15px; }
+.breadcrumb ul li:last-child {background-color: #eee; padding: 10px 15px; }
+.breadcrumb ul li:first-child:before {content: none; }
+.breadcrumb ul li:before {content: '›'; margin: 0 5px 0 0; }
+.breadcrumb ul li > a{color: #333; margin-right: 5px; text-decoration: none; }
+.breadcrumb ul li a:hover {color: #333; text-decoration: underline; }
+@media screen and (max-width: 480px) {
+   .breadcrumb ul li span.e-title{ display: block; }
+}
+
+.saikensaku {font-size: 0.7em; margin: 0 0 10px 20px; padding: 10px 20px; background-color: #f4c700; border-radius: 4px; }
+.saikensaku a {color: #fff; }
+
+
+.postcount {color: #f4c700; margin: 0 20px; font-size: 1.5em; font-weight: 300; text-align: center; }
+.postcountnbr {font-size: 2.0em; font-weight: 600; padding: 0 10px; }
+.btn-toagency {color: #fff; background-color: #f4c700; border-color: #f4c700; margin-top: 20px; }
+.planitem {font-size: 22px; border-bottom: 1px solid #f3c600; line-height: 1.3; padding-bottom:10px; margin-top: 0px; }
+.planitem i {color: #f3c600; }
+.serch-agency {font-color: #ab1f1f; }
+.yellow-light {margin-bottom: 30px; padding: 40px 50px 40px 50px; border: 3px solid #f3c600; }
+
+.label-success {padding: .6em; }
+
+.table-sercharea {border-top: 1px solid #ddd; }
+.table-sercharea th {padding: 10px; }
+.table-sercharea td {padding: 10px; }
+
+.table-sercharea > tbody > tr > td,
+.table-sercharea > tbody > tr > th,
+.table-sercharea > thead > tr > td,
+.table-sercharea > thead > tr > th {
+    padding: 10px 20px 10px 20px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+.tourbun{line-height: 1.7; margin:24px 0; }
+
+.mb20 {margin-bottom:20px;}
+.pb20 {padding-bottom:20px;}
+.pt20 {padding-top:20px;}
+
+
+
+/** ==================================================
+**
+**  新規登録
+**
+================================================== **/
+
+.navbar-toggle.collapsed {
+    display: none;
+}
+
+#wpmem_reg {
+    margin: 44px 0;
+}
+
+#wpmem_reg label.text,
+#wpmem_reg label.checkbox,
+#wpmem_reg label.textarea,
+#wpmem_reg label.select,
+#wpmem_reg label.radio,
+#wpmem_login label {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    width: 100%;
+    color: #424242;
+}
+
+#wpmem_reg label.text .req,
+#wpmem_reg label.radio .req,
+#wpmem_reg label.select .req,
+#wpmem_reg .req-text .req {
+    color: #c50030;
+}
+
+#wpmem_reg .div_text,
+#wpmem_reg .div_radio,
+#wpmem_reg .div_select {
+    margin-bottom: 18px;
+}
+
+#wpmem_reg .div_radio {
+    line-height: 40px;
+}
+
+#wpmem_reg .div_text input,
+#wpmem_reg .div_select select {
+    padding: .5rem .75rem;
+    width: 100%;
+    height: 44px;
+    font-size: 14px;
+    line-height: 1.25;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+}
+
+/*  注意事項
+================================================== */
+#wpmem_reg .wrap-attention {
+    margin: .5em 0 1em 1em;
+    padding: 1em;
+    background: #d6d6d6;
+    border-radius: 4px;
+}
+#wpmem_reg .wrap-attention .kome {
+    padding-left: 1em;
+}
+#wpmem_reg .wrap-attention .link-login {
+    padding-left: 1em;
+}
+
+#wpmem_reg .button_div {
+    margin: 44px auto;
+}
+
+#wpmem_reg .button_div input[type="submit"] {
+    display: block;
+    width: 100%;
+    line-height: 44px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 16px;
+    border-radius: .25rem;
+    letter-spacing: 6px;
+    color: #fff;
+    background-color: #44aeea;
+    border-color: #44aeea;
+}
+
+#wpmem_reg .req-text {
+    font-size: 12px;
+}
+
+.wpmem_msg {
+    margin: 44px auto;
+}
+
+.wpmem_msg .alert.alert-success {
+    margin-bottom: 44px;
+}
+
+.wpmem_msg .office {
+    margin-top: 36px;
+    font-size: 12px;
+}
+
+#wpmem_reg input::-webkit-input-placeholder {
+    color: #ccc;
+    font-weight: 400;
+}
+
+#wpmem_reg input:-ms-input-placeholder {
+    color: #ccc;
+    font-weight: 400;
+}
+
+#wpmem_reg input::-moz-placeholder {
+    color: #ccc;
+    font-weight: 400;
+}
+
+@media (min-width: 768px) {
+    #wpmem_reg {
+        margin: 88px auto 44px;
+        padding: 40px 50px;
+        width: 80%;
+        background-color: #f3f3f3;
+        border-radius: 4px;
+    }
+    #wpmem_reg label.text,
+    #wpmem_reg label.checkbox,
+    #wpmem_reg label.textarea,
+    #wpmem_reg label.select,
+    #wpmem_reg label.radio,
+    #wpmem_login label {
+        clear: both;
+        padding-top: 8px;
+        width: 200px;
+        height: 44px;
+        float: left;
+        text-align: right;
+    }
+    #wpmem_reg label + div {
+        width: 600px;
+        float: right;
+    }
+    #wpmem_reg .button_div {
+        clear: both;
+        margin: 0 auto 24px;
+        padding-top: 44px;
+        width: 300px;
+    }
+    #wpmem_reg .req-text {
+        margin: 0 auto;
+        width: 300px;
+    }
+    #wpmem_reg .div_radio {
+        line-height: 22px;
+    }
+    .wpmem_msg {
+        margin: 88px auto;
+        width: 80%;
+    }
+    .wpmem_msg .alert.alert-success {
+        margin-bottom: 44px;
+    }
+    .wpmem_msg .office {
+        margin-top: 36px;
+        padding-bottom: 44px;
+        font-size: 14px;
+    }
+}
+
+.kagoshima-area{background-color:#00a0ca; }

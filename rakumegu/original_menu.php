@@ -253,6 +253,73 @@
 			$rrTaxi[$userName]['stamp'][$stampID]['q10'] 				= $stampQ10;
 			$rrTaxi[$userName]['stamp'][$stampID]['q10con'] 			= $stampQ10Content;
 
+			// 観光施設を検索する
+			// --------------------------------------------------
+				if ( $stampSpotName1 ) {
+					$stampFirst	= intval ( str_replace ( "-", "", $stampSpotDay1 ) );
+					$otherSwitch = 'on';
+					$visitName = $stampSpotName1;
+					// $rrPlace からエリアを取得
+					foreach ($rrPlace as $valuep) {
+						if ( $valuep['name']  === $stampSpotName1 ) {
+							$visitArea = $valuep['area'];
+							if ( $stampFirst >= 20161101 && $stampFirst <= 20161130 ) {
+								$visitPlace[$visitArea][$visitName]['taxi']['m11'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampFirst >= 20161201 && $stampFirst <= 20161231 ) {
+								$visitPlace[$visitArea][$visitName]['taxi']['m12'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampFirst >= 20170101 && $stampFirst <= 20170131 ) {
+								$visitPlace[$visitArea][$visitName]['taxi']['m01'] += 1;
+								$otherSwitch = 'off';
+							}
+						}
+					}
+					if ( $otherSwitch == 'on' ) {
+						if ( $stampFirst >= 20161101 && $stampFirst <= 20161130 ) {
+							$visitPlace['other'][$visitName]['taxi']['m11'] += 1;
+						} elseif ( $stampFirst >= 20161201 && $stampFirst <= 20161231 ) {
+							$visitPlace['other'][$visitName]['taxi']['m12'] += 1;
+						} elseif ( $stampFirst >= 20170101 && $stampFirst <= 20170131 ) {
+							$visitPlace['other'][$visitName]['taxi']['m01'] += 1;
+						}
+						$visitPlace['other'][$visitName]['num'][] = $stampName; // 証明書番号
+					}
+
+				}
+				if ( $stampSpotName2 ) {
+					$stampSecond	= intval ( str_replace ( "-", "", $stampSpotDay2 ) );
+					$otherSwitch = 'on';
+					$visitName = $stampSpotName2;
+					// $rrPlace からエリアを取得
+					foreach ($rrPlace as $valuep) {
+						if ( $valuep['name']  === $stampSpotName2 ) {
+							$visitArea = $valuep['area'];
+							if ( $stampSecond >= 20161101 && $stampSecond <= 20161130 ) {
+								$visitPlace[$visitArea][$visitName]['taxi']['m11'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampSecond >= 20161201 && $stampSecond <= 20161231 ) {
+								$visitPlace[$visitArea][$visitName]['taxi']['m12'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampSecond >= 20170101 && $stampSecond <= 20170131 ) {
+								$visitPlace[$visitArea][$visitName]['taxi']['m01'] += 1;
+								$otherSwitch = 'off';
+							}
+						}
+					}
+					if ( $otherSwitch == 'on' ) {
+						if ( $stampSecond >= 20161101 && $stampSecond <= 20161130 ) {
+							$visitPlace['other'][$visitName]['taxi']['m11'] += 1;
+						} elseif ( $stampSecond >= 20161201 && $stampSecond <= 20161231 ) {
+							$visitPlace['other'][$visitName]['taxi']['m12'] += 1;
+						} elseif ( $stampSecond >= 20170101 && $stampSecond <= 20170131 ) {
+							$visitPlace['other'][$visitName]['taxi']['m01'] += 1;
+						}
+						$visitPlace['other'][$visitName]['num'][] = $stampName; // 証明書番号
+					}
+
+				}
+
 		} elseif( $userType == 'rentalcar' ) {
 
 			$rrRentalcar[$userName]['stamp'][$stampID]['num'] 			= $stampName;
@@ -282,6 +349,73 @@
 			$rrRentalcar[$userName]['stamp'][$stampID]['q10'] 			= $stampQ10;
 			$rrRentalcar[$userName]['stamp'][$stampID]['q10con'] 		= $stampQ10Content;
 
+			// 観光施設を検索する
+			// --------------------------------------------------
+				if ( $stampSpotName1 ) {
+					$stampFirst	= intval ( str_replace ( "-", "", $stampSpotDay1 ) );
+					$otherSwitch = 'on';
+					$visitName = $stampSpotName1;
+					// $rrPlace からエリアを取得
+					foreach ($rrPlace as $valuep) {
+						if ( $valuep['name']  === $stampSpotName1 ) {
+							$visitArea = $valuep['area'];
+							if ( $stampFirst >= 20161101 && $stampFirst <= 20161130 ) {
+								$visitPlace[$visitArea][$visitName]['rental']['m11'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampFirst >= 20161201 && $stampFirst <= 20161231 ) {
+								$visitPlace[$visitArea][$visitName]['rental']['m12'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampFirst >= 20170101 && $stampFirst <= 20170131 ) {
+								$visitPlace[$visitArea][$visitName]['rental']['m01'] += 1;
+								$otherSwitch = 'off';
+							}
+						}
+					}
+					if ( $otherSwitch == 'on' ) {
+						if ( $stampFirst >= 20161101 && $stampFirst <= 20161130 ) {
+							$visitPlace['other'][$visitName]['rental']['m11'] += 1;
+						} elseif ( $stampFirst >= 20161201 && $stampFirst <= 20161231 ) {
+							$visitPlace['other'][$visitName]['rental']['m12'] += 1;
+						} elseif ( $stampFirst >= 20170101 && $stampFirst <= 20170131 ) {
+							$visitPlace['other'][$visitName]['rental']['m01'] += 1;
+						}
+						$visitPlace['other'][$visitName]['num'][] = $stampName; // 証明書番号
+					}
+
+				}
+				if ( $stampSpotName2 ) {
+					$stampSecond	= intval ( str_replace ( "-", "", $stampSpotDay2 ) );
+					$otherSwitch = 'on';
+					$visitName = $stampSpotName2;
+					// $rrPlace からエリアを取得
+					foreach ($rrPlace as $valuep) {
+						if ( $valuep['name']  === $stampSpotName2 ) {
+							$visitArea = $valuep['area'];
+							if ( $stampSecond >= 20161101 && $stampSecond <= 20161130 ) {
+								$visitPlace[$visitArea][$visitName]['rental']['m11'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampSecond >= 20161201 && $stampSecond <= 20161231 ) {
+								$visitPlace[$visitArea][$visitName]['rental']['m12'] += 1;
+								$otherSwitch = 'off';
+							} elseif ( $stampSecond >= 20170101 && $stampSecond <= 20170131 ) {
+								$visitPlace[$visitArea][$visitName]['rental']['m01'] += 1;
+								$otherSwitch = 'off';
+							}
+						}
+					}
+					if ( $otherSwitch == 'on' ) {
+						if ( $stampSecond >= 20161101 && $stampSecond <= 20161130 ) {
+							$visitPlace['other'][$visitName]['rental']['m11'] += 1;
+						} elseif ( $stampSecond >= 20161201 && $stampSecond <= 20161231 ) {
+							$visitPlace['other'][$visitName]['rental']['m12'] += 1;
+						} elseif ( $stampSecond >= 20170101 && $stampSecond <= 20170131 ) {
+							$visitPlace['other'][$visitName]['rental']['m01'] += 1;
+						}
+						$visitPlace['other'][$visitName]['num'][] = $stampName; // 証明書番号
+					}
+
+				}
+
 		}
 
 	endwhile;
@@ -298,23 +432,27 @@
 		'post_type'			=> 'post',
 		'post_status'		=> 'publish',
 		'category_name'		=> 'info',
-		'posts_per_page'	=> 1,
+		'posts_per_page'	=> 5,
 	);
 	$the_query = new WP_Query( $argsNews );
 	if ( $the_query->have_posts() ) :
-	while ( $the_query->have_posts() ) : $the_query->the_post();
 
 		echo '<h1 class="title"><span class="dashicons dashicons-megaphone"></span>おしらせ</h1>';
 		echo '<div class="postbox wrap-news mb-base">';
 		echo '<h2 class="hndle ui-sortable-handle"><span>事務局からのおしらせ</span></h2>';
 		echo '<div class="inside">';
+
+	while ( $the_query->have_posts() ) : $the_query->the_post();
+
 		echo '<h3>' . get_the_title() . '</h3>';
 		echo '<p class="news-date"><span class="dashicons dashicons-clock"></span>' . get_the_time('Y-m-d') . '</p>';
 		echo '<div class="contents">' . get_the_content() . '</div>';
+
+	endwhile;
+
 		echo '</div>';
 		echo '</div>';
 
-	endwhile;
 	endif;
 
 
@@ -444,7 +582,7 @@ if( $agrLevel >= 7 ) {
 
 	}
 	// echo '<pre>';
-	// echo var_dump($stpTX);
+	// echo var_dump($rrPlace);
 	// echo '</pre>';
 
 
@@ -550,6 +688,7 @@ if( $agrLevel >= 7 ) {
 	}
 
 
+
 	// 円グラフ用の集計
 	// --------------------------------------------------
 	$resultALL 	= $resultTAXI + $resultRENT;	// すべての割引金額
@@ -604,6 +743,285 @@ if( $agrLevel >= 7 ) {
 
 
 
+	// 観光施設の集計
+	// --------------------------------------------------
+	echo '<h1 class="title" style="margin-top:70px;"><span class="dashicons dashicons-palmtree"></span>観光施設</h1>';
+
+		echo '<div class="wrap-kanko clearfix"><div class="box-right">';
+		echo '<h2><i class="fa fa-camera-retro fa-fw" aria-hidden="true"></i>各観光エリアに訪れた回数</h2>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>エリア</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace ) ) {
+				foreach ($visitPlace as $key1 => $value1) {
+					$taxiMonth11 	= 0;
+					$taxiMonth12 	= 0;
+					$taxiMonth01 	= 0;
+					$rentalMonth11 	= 0;
+					$rentalMonth12 	= 0;
+					$rentalMonth01 	= 0;
+					foreach ($value1 as $key2 => $value2) {
+						$taxiMonth11 	+= $value2["taxi"]["m11"];
+						$taxiMonth12 	+= $value2["taxi"]["m12"];
+						$taxiMonth01 	+= $value2["taxi"]["m01"];
+						$rentalMonth11 	+= $value2["rental"]["m11"];
+						$rentalMonth12 	+= $value2["rental"]["m12"];
+						$rentalMonth01 	+= $value2["rental"]["m01"];
+					}
+					$taxiALL 	= $taxiMonth11 + $taxiMonth12 + $taxiMonth01;
+					$rentalALL 	= $rentalMonth11 + $rentalMonth12 + $rentalMonth01;
+					$trALL = $taxiALL + $rentalALL;
+					$aryStampGraph[$key1]['cnt'] = $trALL;
+					echo '<tr>
+								<td>' . $key1 . '</td>
+								<td>' . number_format( $taxiMonth11 ). '回</td>
+								<td>' . number_format( $rentalMonth11 ). '回</td>
+								<td>' . number_format( $taxiMonth12 ). '回</td>
+								<td>' . number_format( $rentalMonth12 ). '回</td>
+								<td>' . number_format( $taxiMonth01 ). '回</td>
+								<td>' . number_format( $rentalMonth01 ). '回</td>
+								<td>' . number_format( $taxiALL ). '回</td>
+								<td>' . number_format( $rentalALL ). '回</td>
+								<td>' . number_format( $trALL ). '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table></div>';
+
+		// 円グラフ
+		// --------------------------------------------------
+		// echo '<pre>';
+		// echo var_dump($aryStampGraph);
+		// echo '</pre>';
+		echo '<div class="displayHidden" style="display:none;">';
+			echo '<p id="areaKagoshima">' . $aryStampGraph['鹿児島エリア']['cnt'] . '</p>'; // 鹿児島
+			echo '<p id="areaAira">' . $aryStampGraph['姶良・伊佐エリア']['cnt'] . '</p>'; 	// 姶良・伊佐
+			echo '<p id="areaHokusatsu">' . $aryStampGraph['北薩エリア']['cnt'] . '</p>'; 	// 北薩
+			echo '<p id="areaNansatsu">' . $aryStampGraph['南薩エリア']['cnt'] . '</p>'; 	// 南薩
+			echo '<p id="areaOsumi">' . $aryStampGraph['大隅エリア']['cnt'] . '</p>'; 		// 大隅
+			echo '<p id="areaTane">' . $aryStampGraph['種子島エリア']['cnt'] . '</p>'; 		// 種子島
+			echo '<p id="areaYaku">' . $aryStampGraph['屋久島エリア']['cnt'] . '</p>'; 		// 屋久島
+			echo '<p id="areaAmami">' . $aryStampGraph['奄美群島エリア']['cnt'] . '</p>'; 	// 奄美群島
+			echo '<p id="areaOther">' . $aryStampGraph['other']['cnt'] . '</p>'; 		// その他
+		echo '</div>';
+		echo '<div class="box-left"><canvas id="sightGraph" width="350" height="200"></canvas></div></div>';
+
+
+
+		echo '<h2 style="margin-top:70px;">各観光施設</h2>';
+		echo '<h3>鹿児島エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['鹿児島エリア'] ) ) {
+				foreach ($visitPlace['鹿児島エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ). '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ). '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ). '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ). '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ). '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ). '回</td>
+								<td>' . number_format( $taxiALL ). '回</td>
+								<td>' . number_format( $rentalALL ). '回</td>
+								<td>' . number_format( $trALL ). '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>姶良・伊佐エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['姶良・伊佐エリア'] ) ) {
+				foreach ($visitPlace['姶良・伊佐エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>北薩エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['北薩エリア'] ) ) {
+				foreach ($visitPlace['北薩エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>南薩エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['南薩エリア'] ) ) {
+				foreach ($visitPlace['南薩エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>大隅エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['大隅エリア'] ) ) {
+				foreach ($visitPlace['大隅エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>種子島エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['種子島エリア'] ) ) {
+				foreach ($visitPlace['種子島エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>屋久島エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['屋久島エリア'] ) ) {
+				foreach ($visitPlace['屋久島エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>奄美群島エリア</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['奄美群島エリア'] ) ) {
+				foreach ($visitPlace['奄美群島エリア'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+		echo '<h3>その他</h3>';
+		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>施設名</th><th>証明書番号</th><th>11月（T）</th><th>11月（R）</th><th>12月（T）</th><th>12月（R）</th><th>1月（T）</th><th>1月（R）</th><th>合計（T）</th><th>合計（R）</th><th>総合計</th></tr></thead><tbody>';
+			if ( !empty( $visitPlace['other'] ) ) {
+				// echo '<pre>';
+				// echo var_dump($visitPlace['other']);
+				// echo '</pre>';
+				foreach ($visitPlace['other'] as $key => $value) {
+					$taxiALL 	= $value["taxi"]["m11"] + $value["taxi"]["m12"] + $value["taxi"]["m01"];
+					$rentalALL 	= $value["rental"]["m11"] + $value["rental"]["m12"] + $value["rental"]["m01"];
+					$trALL = $taxiALL + $rentalALL;
+					// 証明書番号の集計
+					if ( !empty( $value['num'] ) ) {
+						foreach ($value['num'] as $valueNum) {
+							$outputNum = '<span class="disp-block">' . $valueNum . '</span>';
+						}
+					} else {
+						$outputNum = '';
+					}
+
+					echo '<tr>
+								<td>' . $key . '</td>
+								<td>' . $outputNum . '</td>
+								<td>' . number_format( $value["taxi"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m11"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m12"] ) . '回</td>
+								<td>' . number_format( $value["taxi"]["m01"] ) . '回</td>
+								<td>' . number_format( $value["rental"]["m01"] ) . '回</td>
+								<td>' . number_format( $taxiALL ) . '回</td>
+								<td>' . number_format( $rentalALL ) . '回</td>
+								<td>' . number_format( $trALL ) . '回</td>
+						</tr>';
+				}
+			}
+		echo '</tbody></table>';
+
+
+
+
 	echo '<h1 class="title" style="margin-top:70px;"><span class="dashicons dashicons-awards"></span>各タクシー会社 割引金額<small>（' . count($stpTX) . '社）</small></h1>';
 		echo '<table class="wp-list-table widefat fixed striped posts tbl-taxi mb-base"><thead><tr><th>会社名</th><th>11月</th><th>12月</th><th>1月</th><th>合計</th></tr></thead>';
 		echo '<tbody>';
@@ -632,18 +1050,22 @@ if( $agrLevel >= 7 ) {
 		}
 		echo '</tbody></table>';
 
+		// アンケートの集計
+		// --------------------------------------------------
 		// echo '<pre>';
-		// echo var_dump($stpRC);
+		// echo var_dump($rrTaxi);
 		// echo '</pre>';
+		// echo '--------------------------------------------------';
 		// echo '<pre>';
 		// echo var_dump($rrRentalcar);
 		// echo '</pre>';
+
 
 } else {
 
 // =================================
 //
-// ログインユーザー・・・各タクシー・レンタカー会社
+// ログインユーザー・・・各タクシー・レンタカー会社　記事がなくてもエラーがでないように1101行目に出る。
 //
 // =================================
 
@@ -692,63 +1114,69 @@ if( $agrLevel >= 7 ) {
 
 	}
 
-	foreach ( $aryStamp as $value ) {
-		$stpDay 	= intval ( str_replace ( "-", "", $value['useafter'] ) ); // 利用終了日を数値に変換
-		$stpPB 		= intval ( $value['pricebefore'] ); // 割引前の利用料金を数値に変換
-		$stpPA 		= intval ( $value['priceafter'] ); // 割引後の利用料金を数値に変換
+	if ( !empty( $aryStamp ) ) {
 
-		// 割引金額の算出
-		if ( $stpPA == 0 ) {
-			$stpPL 	= $stpPB;
-		} else {
-			$stpPL 	= $stpPB - $stpPA;
-		}
+		foreach ( $aryStamp as $value ) {
+			$stpDay 	= intval ( str_replace ( "-", "", $value['useafter'] ) ); // 利用終了日を数値に変換
+			$stpPB 		= intval ( $value['pricebefore'] ); // 割引前の利用料金を数値に変換
+			$stpPA 		= intval ( $value['priceafter'] ); // 割引後の利用料金を数値に変換
 
-		if ( $stpDay >= 20161101 && $stpDay <= 20161130 ) {
-			// 11月の証明書集計
-			// ----------------------------------------
-			$stp11++;
-			$num11 = $stp11 + 10000;
-			$stpPB11 += $stpPL;
+			// 割引金額の算出
+			if ( $stpPA == 0 ) {
+				$stpPL 	= $stpPB;
+			} else {
+				$stpPL 	= $stpPB - $stpPA;
+			}
 
-			$aryName11[$num11]['num'] 		= $value['num']; 		// 利用証明書番号 	- 11月
-			$aryName11[$num11]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 11月
-			$aryName11[$num11]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 11月
-			$aryName11[$num11]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 11月
-			$aryName11[$num11]['price'] 	= $stpPL; 				// 割引金額 			- 11月
-			$aryName11[$num11]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 11月
+			if ( $stpDay >= 20161101 && $stpDay <= 20161130 ) {
+				// 11月の証明書集計
+				// ----------------------------------------
+				$stp11++;
+				$num11 = $stp11 + 10000;
+				$stpPB11 += $stpPL;
 
-		} elseif ( $stpDay >= 20161201 && $stpDay <= 20161231 ) {
-			// 12月の証明書集計
-			// ----------------------------------------
-			$stp12++;
-			$num12 = $stp12 + 20000;
-			$stpPB12 += $stpPL;
+				$aryName11[$num11]['num'] 		= $value['num']; 		// 利用証明書番号 	- 11月
+				$aryName11[$num11]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 11月
+				$aryName11[$num11]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 11月
+				$aryName11[$num11]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 11月
+				$aryName11[$num11]['price'] 	= $stpPL; 				// 割引金額 			- 11月
+				$aryName11[$num11]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 11月
 
-			$aryName12[$num12]['num'] 		= $value['num']; 		// 利用証明書番号 	- 12月
-			$aryName12[$num12]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 12月
-			$aryName12[$num12]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 12月
-			$aryName12[$num12]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 12月
-			$aryName12[$num12]['price'] 	= $stpPL; 				// 割引金額 			- 12月
-			$aryName12[$num12]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 12月
+			} elseif ( $stpDay >= 20161201 && $stpDay <= 20161231 ) {
+				// 12月の証明書集計
+				// ----------------------------------------
+				$stp12++;
+				$num12 = $stp12 + 20000;
+				$stpPB12 += $stpPL;
 
-		} elseif ( $stpDay >= 20170101 && $stpDay <= 20170131 ) {
-			// 1月の証明書集計
-			// ----------------------------------------
-			$stp01++;
-			$num01 = $stp01 + 30000;
-			$stpPB01 += $stpPL;
+				$aryName12[$num12]['num'] 		= $value['num']; 		// 利用証明書番号 	- 12月
+				$aryName12[$num12]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 12月
+				$aryName12[$num12]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 12月
+				$aryName12[$num12]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 12月
+				$aryName12[$num12]['price'] 	= $stpPL; 				// 割引金額 			- 12月
+				$aryName12[$num12]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 12月
 
-			$aryName01[$num01]['num'] 		= $value['num']; 		// 利用証明書番号 	- 1月
-			$aryName01[$num01]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 1月
-			$aryName01[$num01]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 1月
-			$aryName01[$num01]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 1月
-			$aryName01[$num01]['price'] 	= $stpPL; 				// 割引金額 			- 1月
-			$aryName01[$num01]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 1月
+			} elseif ( $stpDay >= 20170101 && $stpDay <= 20170131 ) {
+				// 1月の証明書集計
+				// ----------------------------------------
+				$stp01++;
+				$num01 = $stp01 + 30000;
+				$stpPB01 += $stpPL;
+
+				$aryName01[$num01]['num'] 		= $value['num']; 		// 利用証明書番号 	- 1月
+				$aryName01[$num01]['first'] 	= $value['spotname1']; 	// 観光施設1回目 		- 1月
+				$aryName01[$num01]['second'] 	= $value['spotname2']; 	// 観光施設2回目 		- 1月
+				$aryName01[$num01]['priceB'] 	= $stpPB; 				// 割引前の利用金額 	- 1月
+				$aryName01[$num01]['price'] 	= $stpPL; 				// 割引金額 			- 1月
+				$aryName01[$num01]['priceA'] 	= $stpPA; 				// 割引後の利用金額 	- 1月
+
+			}
 
 		}
 
 	}
+
+
 	// 証明書枚数と割引金額の算出（合計）
 	$stpAll 	= $stp11 + $stp12 + $stp01;
 	$stpPBAll 	= $stpPB11 + $stpPB12 + $stpPB01;

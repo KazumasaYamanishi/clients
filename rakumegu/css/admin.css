@@ -5,3 +5,29 @@
 **  ユーザー
 **
 ================================================== **/
+
+.clearfix:after {
+    content:" ";
+    display:block;
+    clear:both;
+}
+
+.wrap-kanko {
+	width: 1400px;
+}
+.wrap-kanko .box-left {
+	float: left;
+	width: 350px;
+}
+.wrap-kanko .box-right {
+	float: right;
+	width: 1050px;
+}
+
+.box.box-3 .child {
+	width: 32%;
+	float: left;
+}
+.box.box-3 > .child:not(:last-child) {
+	margin-right: 2%;
+}

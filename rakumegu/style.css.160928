@@ -1,0 +1,193 @@
+@charset "utf-8";
+
+/*
+Theme Name: アドダス
+Author: アドダス
+Author URI: http://addas.jp/
+*/
+
+
+/** ==================================================
+**
+**  新規登録
+**
+================================================== **/
+
+.navbar-toggle.collapsed {
+    display: none;
+}
+
+#wpmem_reg {
+    margin: 44px 0;
+}
+
+#wpmem_reg label.text,
+#wpmem_reg label.checkbox,
+#wpmem_reg label.textarea,
+#wpmem_reg label.select,
+#wpmem_reg label.radio,
+#wpmem_login label {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    width: 100%;
+    color: #424242;
+}
+
+#wpmem_reg label.text .req,
+#wpmem_reg label.radio .req,
+#wpmem_reg label.select .req,
+#wpmem_reg .req-text .req {
+    color: #c50030;
+}
+
+#wpmem_reg .div_text,
+#wpmem_reg .div_radio,
+#wpmem_reg .div_select {
+    margin-bottom: 18px;
+}
+
+#wpmem_reg .div_radio {
+    line-height: 40px;
+}
+
+#wpmem_reg .div_text input,
+#wpmem_reg .div_select select {
+    padding: .5rem .75rem;
+    width: 100%;
+    height: 44px;
+    font-size: 14px;
+    line-height: 1.25;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+}
+
+/*  注意事項
+================================================== */
+#wpmem_reg .wrap-attention {
+    margin: .5em 0 1em 1em;
+    padding: 1em;
+    background: #d6d6d6;
+    border-radius: 4px;
+}
+#wpmem_reg .wrap-attention .kome {
+    padding-left: 1em;
+}
+#wpmem_reg .wrap-attention .link-login {
+    padding-left: 1em;
+}
+
+#wpmem_reg .button_div {
+    margin: 44px auto;
+}
+
+#wpmem_reg .button_div input[type="submit"] {
+    display: block;
+    width: 100%;
+    line-height: 44px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: 16px;
+    border-radius: .25rem;
+    letter-spacing: 6px;
+    color: #fff;
+    background-color: #44aeea;
+    border-color: #44aeea;
+}
+
+#wpmem_reg .req-text {
+    font-size: 12px;
+}
+
+.wpmem_msg {
+    margin: 44px auto;
+}
+
+.wpmem_msg .alert.alert-success {
+    margin-bottom: 44px;
+}
+
+.wpmem_msg .office {
+    margin-top: 36px;
+    font-size: 12px;
+}
+
+#wpmem_reg input::-webkit-input-placeholder {
+    color: #ccc;
+    font-weight: 400;
+}
+
+#wpmem_reg input:-ms-input-placeholder {
+    color: #ccc;
+    font-weight: 400;
+}
+
+#wpmem_reg input::-moz-placeholder {
+    color: #ccc;
+    font-weight: 400;
+}
+
+@media (min-width: 768px) {
+    #wpmem_reg {
+        margin: 88px auto 44px;
+        padding: 40px 50px;
+        width: 80%;
+        background-color: #f3f3f3;
+        border-radius: 4px;
+    }
+    #wpmem_reg label.text,
+    #wpmem_reg label.checkbox,
+    #wpmem_reg label.textarea,
+    #wpmem_reg label.select,
+    #wpmem_reg label.radio,
+    #wpmem_login label {
+        clear: both;
+        padding-top: 8px;
+        width: 200px;
+        height: 44px;
+        float: left;
+        text-align: right;
+    }
+    #wpmem_reg label + div {
+        width: 600px;
+        float: right;
+    }
+    #wpmem_reg .button_div {
+        clear: both;
+        margin: 0 auto 24px;
+        padding-top: 44px;
+        width: 300px;
+    }
+    #wpmem_reg .req-text {
+        margin: 0 auto;
+        width: 300px;
+    }
+    #wpmem_reg .div_radio {
+        line-height: 22px;
+    }
+    .wpmem_msg {
+        margin: 88px auto;
+        width: 80%;
+    }
+    .wpmem_msg .alert.alert-success {
+        margin-bottom: 44px;
+    }
+    .wpmem_msg .office {
+        margin-top: 36px;
+        padding-bottom: 44px;
+        font-size: 14px;
+    }
+}
