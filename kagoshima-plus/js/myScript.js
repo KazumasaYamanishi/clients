@@ -26,18 +26,19 @@ jQuery(document).ready(function($){
 /* --------------------------------------------------
   Infinite Scroll
 -------------------------------------------------- */
-jQuery(document).ready(function($){
-	$('.row').infinitescroll({
-		loading: {
-			finishedMsg: "<span class='finished_message'>すべてのコンテンツを読み込みました。</span>",
-			img: "http://www.tjkagoshima.com/plus/wp-content/themes/addas/img/loading.gif",
-			msgText: "<p class='text-center'>読込中</p>"
-		},
-		navSelector  : ".pagenavi", 		// ナビゲーション要素を指定
-		nextSelector : ".pagenavi a", 		// ナビゲーションの「次へ」の要素を指定
-		itemSelector : ".col-sm-3", 		// 表示させる要素を指定
-	});
-});
+// jQuery(document).ready(function($){
+// 	$('#extra-area .row').infinitescroll({
+// 		loading: {
+// 			finishedMsg: "<span class='finished_message'>すべてのコンテンツを読み込みました。</span>",
+// 			img: "http://www.tjkagoshima.com/plus/wp-content/themes/addas/img/loading.gif",
+// 			msgText: "<p class='text-center'>読込中</p>"
+// 		},
+// 		navSelector  : ".pagenavi", 		// ナビゲーション要素を指定
+// 		nextSelector : ".pagenavi a", 		// ナビゲーションの「次へ」の要素を指定
+// 		itemSelector : ".col-sm-3", 		// 表示させる要素を指定
+// 	});
+// 	$('.height-some').matchHeight();
+// });
 /* --------------------------------------------------
   チェックボックスをボタン風に
 -------------------------------------------------- */

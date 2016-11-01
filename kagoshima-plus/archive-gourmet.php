@@ -14,6 +14,8 @@
 
 <div class="container">
 
+	<div id="debug-area"></div>
+
 	<?php
 		// 検索フォーム
 		// ==================================================
@@ -23,8 +25,27 @@
 		// 4．検索結果ページ（search.php）を表示
 	?>
 
-	<div class="wrap-search-detail clearfix">
-		<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">詳細検索</button>
+	<div class="wrap-search-detail">
+		<div class="row row-0">
+			<div class="col-xs-8">
+				<select name="select-gourmet" id="select-gourmet" class="form-control">
+					<option value="default" selected>おすすめ順</option>
+					<option value="keyword-c">クーポンあり</option>
+					<option value="keyword-l">ランチ</option>
+					<option value="area-kagoshima">鹿児島市エリア</option>
+					<option value="area-aira">姶良エリア</option>
+					<option value="area-kirishima">霧島エリア</option>
+					<option value="area-hokusatsu">北薩エリア</option>
+					<option value="area-nakasatsu">中薩エリア</option>
+					<option value="area-nansatsu">南薩エリア</option>
+					<option value="area-osumi">大隅エリア</option>
+					<option value="area-rito">離島エリア</option>
+				</select>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">詳細検索</button>
+			</div>
+		</div>
 	</div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-lg" role="document">
@@ -43,6 +64,8 @@
 	</div>
 
 
+	<div class="extra-error alert alert-danger">お探しの記事が見つかりませんでした。</div>
+	<div id="extra-area">
 	<?php
 
 		$rowNum = 0;
@@ -86,11 +109,13 @@
 		$tel 			= post_custom('tel'); 				// 電話番号
 		$introduction 	= post_custom('introduction'); 		// 店舗紹介
 		$areaKagoshima 	= post_custom('area-kagoshima'); 	// 鹿児島市エリア
-		$areaAira 		= post_custom('area-aira'); 		// 姶良市・霧島市エリア
+		$areaAira 		= post_custom('area-aira'); 		// 姶良市エリア
+		$areaKirishima 	= post_custom('area-kirishima'); 	// 霧島エリア
 		$areaHokusatsu 	= post_custom('area-hokusatsu'); 	// 北薩エリア
 		$areaNakasatsu 	= post_custom('area-nakasatsu'); 	// 中薩エリア
 		$areaNansatsu 	= post_custom('area-nansatsu'); 	// 南薩エリア
 		$areaOsumi 		= post_custom('area-osumi'); 		// 大隅エリア
+		$areaRito 		= post_custom('area-rito'); 		// 離島エリア
 		$genre 			= post_custom('genre'); 			// ジャンル
 		$keywords 		= post_custom('keywords'); 			// キーワード
 
@@ -139,11 +164,13 @@
 					echo '<div class="wrap-tel-adrs bg-base-light"><ul class="list-inline">';
 							$areaAll = array();
 							if( $areaKagoshima ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア</li>';
-							if( $areaAira ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市・霧島市エリア</li>';
+							if( $areaAira ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市エリア</li>';
+							if( $areaKirishima ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>霧島エリア</li>';
 							if( $areaHokusatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>北薩エリア</li>';
 							if( $areaNakasatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>中薩エリア</li>';
 							if( $areaNansatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>南薩エリア</li>';
 							if( $areaOsumi ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>大隅エリア</li>';
+							if( $areaRito ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>離島エリア</li>';
 					echo '</ul></div>';
 					// ジャンル
 					// --------------------------------------------------
@@ -200,6 +227,7 @@
 			echo '</div>';
 		}
 	?>
+	</div>
 
 	<div class="pagenavi">
 		<?php

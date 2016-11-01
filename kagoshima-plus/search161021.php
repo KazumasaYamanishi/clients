@@ -184,54 +184,68 @@
 
 
 <?php
-$args = array(
+
+	// $test =array(
+	// 	'p' => 187,
+	// );
+	// $test_query = new WP_Query( $test );
+	// if ( $test_query->have_posts() ) :
+	// while ( $test_query->have_posts() ) : $test_query->the_post();
+	// 	echo the_title();
+	// 	echo '<pre>';
+	// 	echo var_dump($test_query);
+	// 	echo '</pre>';
+	// endwhile;
+	// else:
+	// 	echo '<h4>お探しのテスト記事はありませんでした。</h4>';
+	// endif;
+	// echo '<pre>';
+	// echo var_dump($args_value);
+	// echo '</pre>';
+	$args = array(
 		'post_type' => 'gourmet',
-		'post_status'    => 'publish',
+		'post_status' => 'publish',
 		'posts_per_page' => -1,
+		'meta_query' 	=> array(
+			// 'relation' => 'AND',
+			// array(
+				// 'relation' => 'OR',
+				// array(
+				// 	'key' => 'genre',
+				// 	'value' => '洋食',
+				// ),
+				// array(
+					'key' => 'genre',
+					'value' => '洋食',
+				// ),
+			// ),
+			// array(
+			// 	// 'relation' => 'OR',
+			// 	array(
+			// 		'key' => 'area-hokusatsu',
+			// 		'value' => '出水市',
+			// 	),
+			// ),
+			// array(
+			// 	// 'relation' => 'OR',
+			// 	array(
+			// 		'key' => 'keywords',
+			// 		'value' => 'クーポン付き',
+			// 	),
+			// ),
+		),
 	);
-
-
-
-
-$the_query = new WP_Query( $args );
-
-
+	// echo '<pre>';
+	// echo var_dump($args);
+	// echo '</pre>';
+	$the_query = new WP_Query( $args );
 	if ( $the_query->have_posts() ) :
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 ?>
 
 
-		<h4>■<?php the_title(); ?></h4>
-<div class="alert alert-info">
-<small>
-<?php 
-$custom_fields = get_post_custom($post_id); 
-echo 'ジャンル=[ / ';
-foreach($custom_fields['genre'] as $value){
-echo $value  ." / " ;
-}
-echo ']<br>';
-echo 'エリア=[ / ';
-foreach($custom_fields['area-kagoshima'] as $value){echo $value  ." / " ;}
-foreach($custom_fields['area-aira'] as $value){echo $value  ." / " ;}
-foreach($custom_fields['area-kirishima'] as $value){echo $value  ." / " ;}
-foreach($custom_fields['area-hokusatsu'] as $value){echo $value  ." / " ;}
-foreach($custom_fields['area-nakasatsu'] as $value){echo $value  ." / " ;}
-foreach($custom_fields['area-nansatsu'] as $value){echo $value  ." / " ;}
-foreach($custom_fields['area-osumi'] as $value){echo $value  ." / " ;}
-foreach($custom_fields['area-rito'] as $value){echo $value  ." / " ;}
-echo ']<br>';
+		<h4><?php the_title(); ?></h4>
 
-echo 'キーワード=[ / ';
-foreach($custom_fields['keywords'] as $value){
-echo $value  ." / " ;
-}
-echo ']<br>';
-
-
-?>
-</small>
-</div>
 
 <?php
 	endwhile;

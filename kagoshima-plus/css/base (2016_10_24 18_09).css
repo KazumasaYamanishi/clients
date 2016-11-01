@@ -18,7 +18,6 @@ body {
     color: #424242;
     line-height: 1.64;
     letter-spacing: 1px;
-    background-color: #f6f6f6;
 }
 
 p {
@@ -301,32 +300,12 @@ div.aligncenter {
 
 /* ==================================================
 **
-**  Form
-**
-================================================== */
-select.form-control {
-    border: 1px solid #0071b2;
-    border-radius: .25rem;
-}
-
-/* ==================================================
-**
 **  Button
 **
 ================================================== */
 
 .btn {
     border-radius: .25rem;
-}
-
-.btn-primary:focus,
-.btn-primary.active.focus,
-.btn-primary.active:focus,
-.btn-primary.active:hover,
-.btn-primary:active.focus,
-.btn-primary:active:focus,
-.btn-primary:active:hover {
-    outline: none;
 }
 
 
@@ -347,24 +326,13 @@ select.form-control {
 
 .thumbnail .caption {
     color: #424242;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.64;
-    background-color: #f6f6f6;
-    padding: 10px 20px 6px 20px;
-}
-
-.thumbnail .caption-magazine {
-    color: #424242;
-    font-size: 14px;
-    line-height: 1.64;
-    background-color: #f6f6f6;
-    padding: 10px 20px 6px 20px;
 }
 
 .thumbnail .caption h4 {
     color: #0071b2;
     letter-spacing: 0;
-    font-size: 22px;
 }
 
 .thumbnail .caption h4 + .wrap-intro {
@@ -382,12 +350,6 @@ select.form-control {
 
 .wrap-thumbnail .main-img.lr-center {
     margin-bottom: 0;
-}
-
-.post-meta-top {
-    size: 14px;
-    color: #c3c3c3;
-    letter-spacing: -1px;
 }
 
 
@@ -652,8 +614,8 @@ header .navbar #wrap-gnav #g_menu_company .navbar-nav li.active a {
 
 .page-title {
     padding: 10px 0;
-    background-color: #ededed;
-    /*background-color: rgba(0, 113, 178, .15);*/
+    /*background-color: #e9e9e9;*/
+    background-color: rgba(0, 113, 178, .15);
 }
 
 .page-title .title {
@@ -670,7 +632,6 @@ header .navbar #wrap-gnav #g_menu_company .navbar-nav li.active a {
     background-size: contain;
     text-indent: -9999em;
     line-height: 44px;
-    height: 50px;
 }
 
 
@@ -682,8 +643,7 @@ header .navbar #wrap-gnav #g_menu_company .navbar-nav li.active a {
 
 .title-bg-img {
     text-indent: -9999em;
-    height: 85px;
-    margin: 40px 0 16px 0;
+    height: 105px;
 }
 
 .wrap-magazine .title-bg-img {
@@ -749,8 +709,7 @@ header .navbar #wrap-gnav #g_menu_company .navbar-nav li.active a {
     border-radius: 0;
     font-size: 11px;
     letter-spacing: 0;
-    background-color: #f6f6f6;
-    /*background-color: rgba(0, 113, 178, .05);*/
+    background-color: rgba(0, 113, 178, .05);
 }
 
 
@@ -926,16 +885,15 @@ aside {
 
 footer {
     margin-top: 44px;
-    background-color: #ededed;
+    background-color: #005484;
     color: #fff;
 }
 
 footer .copy {
     margin-bottom: 0;
     text-align: center;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 44px;
-    color: #b2b2b2;
 }
 
 
@@ -1073,12 +1031,6 @@ footer .copy {
     border-radius: .25rem;
 }
 
-.extra-error {
-    display: none;
-    text-align: center;
-    letter-spacing: 0;
-}
-
 
 /* ==================================================
 **
@@ -1092,16 +1044,6 @@ footer .copy {
 
 .bg-base-light {
     background-color: #f1f1f1;
-}
-
-.bg-base-super-light {
-    background-color: #f6f6f6;
-    padding: 20px 0;
-}
-
-.bg-base-sns {
-    background-color: #ededed;
-    padding: 20px 0;
 }
 
 .lr-center {
@@ -1333,7 +1275,3 @@ br.pc-break {
         margin-bottom: 100px;
     }
 }
-
-[0x7FFF3A6A70E3] ANOMALY: use of REX.w is meaningless (default operand size is 64)
-[0x7FFF3A6A70E3] ANOMALY: use of REX.w is meaningless (default operand size is 64)
-

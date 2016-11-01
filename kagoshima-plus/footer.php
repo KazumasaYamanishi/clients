@@ -1,6 +1,5 @@
-
 <aside>
-	<div class="wrap-sns bg-base-light">
+	<div class="wrap-sns bg-base-sns">
 		<div class="container">
 			<ul class="list-inline text-center">
 				<li>
@@ -38,18 +37,21 @@
 </aside>
 <footer>
 	<div class="container">
-		<p class="copy">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></p>
+		<p class="copy">COPYRIGHT 2016 kagoshima plus</p>
 	</div>
 </footer>
 <!-- end of #wrapper --></div>
 <p id="toPageTop"><a href="#wrapper">ページトップへ戻る</a></p>
 
 
+
 <?php wp_footer(); ?>
 <script src="<?php bloginfo('template_url'); ?>/js/slider.js"></script>
 <?php // Infinite Scroll ?>
-<script src="<?php bloginfo('template_url'); ?>/js/jquery.infinitescroll.min.js"></script>
 <script src="<?php bloginfo('template_url'); ?>/js/myScript.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/select-event.js"></script>
+<!-- <script src="<?php bloginfo('template_url'); ?>/js/jquery.infinitescroll.min.js"></script> -->
+
 
 
 </body>
