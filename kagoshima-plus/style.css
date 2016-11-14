@@ -353,12 +353,12 @@ Author URI: http://addas.jp/
 
 /*** メインイメージの有料会員、クーポンのバッチ設定 ***/
 
-.post-type-archive-gourmet article > .inner .wrap-thumbnail,
+.post-type-archive article > .inner .wrap-thumbnail,
 .single-gourmet article > .inner .tab-content .wrap-thumbnail {
     position: relative;
 }
 
-.post-type-archive-gourmet article > .inner .wrap-thumbnail .icon-coupon,
+.post-type-archive article > .inner .wrap-thumbnail .icon-coupon,
 .single-gourmet article > .inner .tab-content .wrap-thumbnail .icon-coupon {
     position: absolute;
     top: 0;
@@ -370,7 +370,7 @@ Author URI: http://addas.jp/
     width: 54px;
 }
 
-.post-type-archive-gourmet article > .inner .wrap-thumbnail .icon-status,
+.post-type-archive article > .inner .wrap-thumbnail .icon-status,
 .single-gourmet article > .inner .tab-content .wrap-thumbnail .icon-status {
     position: absolute;
     bottom: 3px;
@@ -513,5 +513,21 @@ Author URI: http://addas.jp/
     width: 80%;
 }
 
-[0x7FFF3A6A70E3] ANOMALY: use of REX.w is meaningless (default operand size is 64)
-[0x7FFF3A6A70E3] ANOMALY: use of REX.w is meaningless (default operand size is 64)
+
+
+
+
+/* ==================================================
+**
+**  固定ページ
+**
+================================================== */
+
+/*** ライター募集中 ***/
+.page-id-74 article .box-blue ul.kome {
+    text-indent: 0;
+    padding-left: 1.5em;
+}
+.page-id-74 article .box-blue ul li {
+    font-size: 12px;
+}

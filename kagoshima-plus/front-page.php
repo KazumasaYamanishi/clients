@@ -232,7 +232,7 @@
 		if ( $the_query->have_posts() ) :
 			echo '<div class="wrap-events-tj">';
 			echo '<div class="container"><h2 class="title-bg-img">TJ KAGOSHIMA EVENT TJかごしま イベント情報</h2></div>';
-			echo '<div class=""><div class="row">';
+			echo '<div class="container"><div class="row">';
 			while ( $the_query->have_posts() ) : $the_query->the_post();
 				$bnr = post_custom('banner');
 				$src =  wp_get_attachment_image_src($bnr, 'full');

@@ -2,6 +2,57 @@
 	/*
 		Template Name: アーカイブ ビューティー＆ヘルス
 	*/
+			function DB_account() {
+				$value['url'] 	= 'localhost';
+				$value['user'] 	= '0068-5252';
+				$value['pass'] 	= 'emulator709';
+				$value['db'] 	= 'database';
+				return $value;
+			}
+			function DB_connect() {
+				$account 	= DB_account();
+				$link 		= mysql_connect( $account['url'], $account['user'], $account['pass'] ) or die( "MySQLへの接続に失敗しました。" );
+				$selectdb 	= mysql_select_db( $account['db'], $link ) or die( "データベースの選択に失敗しました。" );
+				return $link;
+			}
+			function query( $query ) {
+				$db 	= DB_connect();
+				$query 	= mb_convert_kana( $query, "asKV" );
+				$retun 	= mysql_query( $query, $db );
+				if( mysql_errno( $db ) ) return False;
+				return $retun;
+			}
+			$postID = array();
+			$i = 0;
+			if ( have_posts() ) :
+				while ( have_posts() ) : the_post();
+					$postID[$i] = get_the_ID();
+					$postID[$i]['status'] = post_custom('member-status');
+					$i++;
+				endwhile;
+			endif;
+			// 今日の日付を取得
+			$today = date("Y-m-d H:i:s");
+			$i = 0;
+			foreach ($postID as $value) {
+				$date = query( "SELECT * FROM wpf0uwxjbk_postmeta WHERE post_id = $value AND `meta_key` = 'beauty-rand'" );
+				// ステータス取得
+				$setRandom = mt_rand( 1, 5000 );
+				if( $date && mysql_num_rows( $date ) ) {
+					while( $ary = mysql_fetch_array( $date ) ) {
+						// randomdate（ランダムの数値を入れた日付）を取得
+						$randomdate = $ary['beauty-date'];
+						if( $randomdate != $today ) {
+							$setDate 		= $today;
+							$sql 			= "UPDATE wpf0uwxjbk_postmeta SET `meta_value` = $setRandom WHERE post_id = $value AND `meta_key` = 'beauty-rand'";
+							$result_flag 	= mysql_query( $sql );
+							if( !$result_flag ) {
+								die( 'INSERTクエリーに失敗しました。' . mysql_error() );
+							}
+						}
+					}
+				}
+			}
 ?>
 
 <?php get_header(); ?>
@@ -54,154 +105,130 @@
 			</div>
 		</div>
 		<div class="extra-error alert alert-danger">お探しの記事が見つかりませんでした。</div>
-
-
-
-
-
-
-	<div id="extra-area">
-	<?php
-		$rowNum = 0;
-		$args = array(
-			'post_type' 	=> 'beauty',
-			'post_status' 	=> 'publish',
-			'orderby' 		=> 'meta_value',
-			'order' 		=> 'DESC',
-			'meta_key' 		=> 'member-status-beauty',
-			'posts_per_page' => -1,
-		);
-		$the_query = new WP_Query( $args );
-		if($the_query->have_posts()): while($the_query->have_posts()):$the_query->the_post();
-		global $wpdb;
-		$query 	= "SELECT meta_id,post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post->ID ORDER BY meta_id ASC";
-		$cf 	= $wpdb->get_results($query, ARRAY_A);
-		// *** クーポン 値を取得
-		$couponName 		= array();
-		$couponIntroduction = array();
-		$couponAttention 	= array();
-		$couponDay 			= array();
-		foreach( $cf as $row ){
-			if( $row['meta_key'] == "coupon-name-beauty" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponName, $row['meta_value'] );
-				}
-			}
-			if( $row['meta_key'] == "coupon-introduction-beauty" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponIntroduction, $row['meta_value'] );
-				}
-			}
-			if( $row['meta_key'] == "coupon-attention-beauty" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponAttention, $row['meta_value'] );
-				}
-			}
-			if( $row['meta_key'] == "coupon-day-beauty" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponDay, $row['meta_value'] );
-				}
-			}
-		}
-		$lengthCoupon = count ( $couponName );
-		$memberStatus 	= post_custom('member-status-beauty'); 	// 会員ステータス
-		$areaKagoshima 	= post_custom('area-kagoshima-beauty'); 	// 鹿児島市エリア
-		$areaAira 		= post_custom('area-aira-beauty'); 		// 姶良市エリア
-		$areaKirishima 	= post_custom('area-kirishima-beauty'); 	// 霧島エリア
-		$areaHokusatsu 	= post_custom('area-hokusatsu-beauty'); 	// 北薩エリア
-		$areaNakasatsu 	= post_custom('area-nakasatsu-beauty'); 	// 中薩エリア
-		$areaNansatsu 	= post_custom('area-nansatsu-beauty'); 	// 南薩エリア
-		$areaOsumi 		= post_custom('area-osumi-beauty'); 		// 大隅エリア
-		$areaRito 		= post_custom('area-rito-beauty'); 		// 離島エリア
-		$genre 			= post_custom('genre-beauty'); 			// ジャンル
-		$rowNum++;
-		$reNum = $rowNum % 4;
-		if($reNum === 1) echo '<div class="row row-10">';
-	?>
-
-	<div class="col-xs-6 col-sm-3">
-		<article<?php if( $memberStatus == '有料' ) echo ' class="pay-mbr"'; ?>>
-			<div class="inner height-some">
-				<?php
-					// アイキャッチ画像
-					echo '<div class="wrap-thumbnail"><img src="';
-					if ( has_post_thumbnail() ) {
-						$image_id = get_post_thumbnail_id ();
-						$image_url = wp_get_attachment_image_src ($image_id, true);
-						echo $image_url[0];
-					} else {
-						echo get_bloginfo( 'template_directory' ) . '/img/thumbnail.png';
-					}
-					echo '" alt="' . get_the_title() . '" class="main-img lr-center">';
-					// *** クーポン判定
-					if ( $lengthCoupon > 0 ) {
-						echo '<img src="' . get_template_directory_uri() . '/img/icon-q.png" alt="" class="icon-coupon">';
-					}
-					// *** 有料会員判定
-					if ( $memberStatus ) {
-						echo '<img src="' . get_template_directory_uri() . '/img/icon-good.png" alt="" class="icon-status">';
-					}
-					// *** .wrap-thumbnail end
-					echo '</div>';
-					// 店名
-					echo '<div class="wrap-name bg-base">';
-						echo '<h1><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></h1>';
-					echo '</div>';
-					// エリア
-					echo '<div class="wrap-tel-adrs bg-base-light">';
-							$areaAll = array();
-							if( $areaKagoshima ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア</li>';
-							if( $areaAira ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市エリア</li>';
-							if( $areaKirishima ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>霧島エリア</li>';
-							if( $areaHokusatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>北薩エリア</li>';
-							if( $areaNakasatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>中薩エリア</li>';
-							if( $areaNansatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>南薩エリア</li>';
-							if( $areaOsumi ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>大隅エリア</li>';
-							if( $areaRito ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>離島エリア</li>';
-					echo '</div>';
-					// ジャンル
-					// --------------------------------------------------
-					if ( !empty($genre) ) {
-						echo '<div class="wrap-genre bg-base-light"><ul class="list-inline">';
-						if ( is_array ( $genre ) ) {
-							foreach ( $genre as $value ) {
-								echo '<li>' . $value . '</li>';
-							}
-						} else {
-							echo '<li>' . $genre . '</li>';
-						}
-						echo '</ul></div>';
-					}
-					echo '<a href="' . get_the_permalink() . '" class="link-cover">' . get_the_title() . '</a>';
-				?>
-			</div>
-		</article>
-	</div>
-
-
-	<?php
-
-		// 1行に4つカードが埋まっていれば .row を閉じる
-		if($reNum === 0) {
-			echo '</div>';
-			$endDiv = 'off';
-		} else {
-			$endDiv = 'on';
-		}
-		// ループ処理終了
-		endwhile; endif;
-		// 最終行のカードが4未満なら .row を閉じないといけないための処理
-		if($endDiv === 'on') {
-			echo '</div>';
-		}
-	?>
-	</div>
-	<?php wp_reset_query(); ?>
-	<div class="pagenavi">
+		<div id="extra-area">
+			<div class="row row-10">
 		<?php
-			// ページナビ
-			posts_nav_link();
+			if ( have_posts() ) :
+				while ( have_posts() ) : the_post();
+					global $wpdb;
+					$query 	= "SELECT meta_id,post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post->ID ORDER BY meta_id ASC";
+					$cf 	= $wpdb->get_results($query, ARRAY_A);
+
+					// *** クーポン 値を取得
+					$couponName 		= array();
+					$couponIntroduction = array();
+					$couponAttention 	= array();
+					$couponDay 			= array();
+					foreach( $cf as $row ){
+						if( $row['meta_key'] == "coupon-name-beauty" ){
+							if ( !empty ( $row['meta_value'] ) ) {
+								array_push( $couponName, $row['meta_value'] );
+							}
+						}
+						if( $row['meta_key'] == "coupon-introduction-beauty" ){
+							if ( !empty ( $row['meta_value'] ) ) {
+								array_push( $couponIntroduction, $row['meta_value'] );
+							}
+						}
+						if( $row['meta_key'] == "coupon-condition-beauty" ){
+							if ( !empty ( $row['meta_value'] ) ) {
+								array_push( $couponCondition, $row['meta_value'] );
+							}
+						}
+						if( $row['meta_key'] == "coupon-attention-beauty" ){
+							if ( !empty ( $row['meta_value'] ) ) {
+								array_push( $couponAttention, $row['meta_value'] );
+							}
+						}
+						if( $row['meta_key'] == "coupon-day-beauty" ){
+							if ( !empty ( $row['meta_value'] ) ) {
+								array_push( $couponDay, $row['meta_value'] );
+							}
+						}
+					}
+					$lengthCoupon = count ( $couponName );
+					// *** 会員ステータス
+					$memberStatus 	= post_custom('member-status-beauty');
 		?>
+
+						<div class="col-xs-6 col-sm-3">
+							<article>
+								<div class="inner height-some">
+									<?php
+										// アイキャッチ画像
+										echo '<div class="wrap-thumbnail"><img src="';
+										if ( has_post_thumbnail() ) {
+											$image_id = get_post_thumbnail_id ();
+											$image_url = wp_get_attachment_image_src ($image_id, true);
+											echo $image_url[0];
+										} else {
+											echo get_bloginfo( 'template_directory' ) . '/img/thumbnail.png';
+										}
+										echo '" alt="' . get_the_title() . '" class="main-img lr-center">';
+										// *** クーポン判定
+										if ( $lengthCoupon > 0 ) {
+											echo '<img src="' . get_template_directory_uri() . '/img/icon-q.png" alt="" class="icon-coupon">';
+										}
+										// *** 有料会員判定
+										if ( $memberStatus ) {
+											echo '<img src="' . get_template_directory_uri() . '/img/icon-good.png" alt="" class="icon-status">';
+										}
+										// *** .wrap-thumbnail end
+										echo '</div>';
+										// 店名＆店舗紹介
+										echo '<div class="wrap-name bg-base">';
+											// 店名
+											echo '<h1>' . get_the_title() . '</h1>';
+											// 店舗紹介
+											// echo '<div class="wrap-intro">';
+											// echo esc_html($introduction);
+											// echo '</div>';
+										echo '</div>';
+										// エリア
+										$areaKagoshima 	= post_custom('area-kagoshima-beauty'); // 鹿児島市エリア
+										$areaAira 		= post_custom('area-aira-beauty'); 		// 姶良市エリア
+										$areaKirishima 	= post_custom('area-kirishima-beauty'); // 霧島エリア
+										$areaHokusatsu 	= post_custom('area-hokusatsu-beauty'); // 北薩エリア
+										$areaNakasatsu 	= post_custom('area-nakasatsu-beauty'); // 中薩エリア
+										$areaNansatsu 	= post_custom('area-nansatsu-beauty'); 	// 南薩エリア
+										$areaOsumi 		= post_custom('area-osumi-beauty'); 	// 大隅エリア
+										$areaRito 		= post_custom('area-rito-beauty'); 		// 離島エリア
+										echo '<div class="wrap-tel-adrs bg-base-light"><ul class="list-inline">';
+												$areaAll = array();
+												if( $areaKagoshima ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア</li>';
+												if( $areaAira ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市エリア</li>';
+												if( $areaKirishima ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>霧島エリア</li>';
+												if( $areaHokusatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>北薩エリア</li>';
+												if( $areaNakasatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>中薩エリア</li>';
+												if( $areaNansatsu ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>南薩エリア</li>';
+												if( $areaOsumi ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>大隅エリア</li>';
+												if( $areaRito ) 		echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>離島エリア</li>';
+										echo '</ul></div>';
+										// ジャンル
+										// --------------------------------------------------
+										$genre = post_custom('genre-beauty');
+										if ( !empty($genre) ) {
+											echo '<div class="wrap-genre bg-base-light"><ul class="list-inline">';
+											if ( is_array ( $genre ) ) {
+												foreach ( $genre as $value ) {
+													echo '<li>' . $value . '</li>';
+												}
+											} else {
+												echo $genre;
+											}
+											echo '</ul></div>';
+										}
+										echo '<a href="' . get_the_permalink() . '" class="link-cover">' . get_the_title() . '</a>';
+									?>
+								</div>
+							</article>
+						</div>
+
+	<?php
+			endwhile;
+		endif;
+	?>
+		</div>
 	</div>
 
 </div>

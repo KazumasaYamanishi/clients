@@ -9,7 +9,7 @@
 		<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 			<div class="inner">
 				<p class="wrap-blog-meta"><?php the_time('Y.m.d'); ?></p>
-				<h1 class="title"><?php the_title(); ?></h1>
+				<h1 class="title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
 			</div>
 		</article>
 	<?php endwhile; endif; ?>

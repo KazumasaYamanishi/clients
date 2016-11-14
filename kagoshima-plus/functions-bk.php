@@ -35,7 +35,6 @@
 	register_nav_menu( 'g_menu1', 'グローバルナビ1' );
 	register_nav_menu( 'g_menu_info', 'インフォメーションなど' );
 	register_nav_menu( 'g_menu_company', '主に固定ページメニュー' );
-	register_nav_menu( 'gnav-pc', 'グローバルナビPC' );
 	register_nav_menu( 'f_menu', 'フッターメニュー' );
 	register_nav_menu( 'g_menu_sp', 'スマホメニュー' );
 	add_theme_support( 'menus' );
@@ -520,7 +519,7 @@ function extraGourmetAjax(){
 	$extra = $_POST['selectKey'];
 
 	if ( $extra === 'default' ) {
-		$selectKey 		= 'member-status';
+		$selectKey 		= '';
 		$selectValue 	= '';
 	} elseif ( $extra === 'keyword-c' ) {
 		$selectKey 		= 'keywords';
@@ -530,7 +529,7 @@ function extraGourmetAjax(){
 		$selectValue 	= 'ランチあり';
 	} elseif ( $extra === 'area-kagoshima' ) {
 		$selectKey 		= 'area-kagoshima';
-		$selectValue 	= array('鹿児島市全域','天文館周辺','鹿児島中央駅周辺','鹿児島市役所周辺','城南町〜泉町周辺','鹿児島駅周辺','吉野町周辺','草牟田・伊敷周辺','荒田周辺','鴨池・与次郎周辺','紫原・桜ヶ丘周辺','新栄町・宇宿周辺','中山周辺','谷山・平川町周辺','鹿児島市郊外全般');
+		$selectValue 	= '';
 	} elseif ( $extra === 'area-aira' ) {
 		$selectKey 		= 'area-aira';
 		$selectValue 	= '';
@@ -561,19 +560,13 @@ function extraGourmetAjax(){
 	$args = array(
 		'post_type' 	=> 'gourmet',
 		'post_status' 	=> 'publish',
-		'orderby' 		=> 'meta_value',
+		'orderby' 		=> 'member-status',
 		'order' 		=> 'DESC',
-		'meta_key' 		=> 'member-status',
-		'meta_query' => array(
-			array(
-					'key' => $selectKey,
-				),
-		),
+		'meta_key' 		=> $selectKey,
+		'meta_value' 	=> $selectValue,
 	);
 	$the_query = new WP_Query( $args );
-
 	$i = 0;
-
 	if ( $the_query->have_posts() ) :
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 		$returnObj[$i]['post_title'] = get_the_title();
@@ -657,7 +650,7 @@ function extraBeautyAjax(){
 	$extra = $_POST['selectKey'];
 
 	if ( $extra === 'default' ) {
-		$selectKey 		= 'member-status-beauty';
+		$selectKey 		= '';
 		$selectValue 	= '';
 	} elseif ( $extra === 'area-kagoshima-beauty' ) {
 		$selectKey 		= 'area-kagoshima-beauty';
@@ -692,19 +685,13 @@ function extraBeautyAjax(){
 	$args = array(
 		'post_type' 	=> 'beauty',
 		'post_status' 	=> 'publish',
-		'orderby' 		=> 'meta_value',
+		'orderby' 		=> 'member-status-beauty',
 		'order' 		=> 'DESC',
-		'meta_key' 		=> 'member-status-beauty',
-		'meta_query' => array(
-			array(
-					'key' => $selectKey,
-				),
-		),
+		'meta_key' 		=> $selectKey,
+		'meta_value' 	=> $selectValue,
 	);
 	$the_query = new WP_Query( $args );
-
 	$i = 0;
-
 	if ( $the_query->have_posts() ) :
 	while ( $the_query->have_posts() ) : $the_query->the_post();
 		$returnObj[$i]['post_title'] = get_the_title();
@@ -733,11 +720,6 @@ function extraBeautyAjax(){
 					array_push( $couponIntroduction, $row['meta_value'] );
 				}
 			}
-			if( $row['meta_key'] == "coupon-condition-beauty" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponCondition, $row['meta_value'] );
-				}
-			}
 			if( $row['meta_key'] == "coupon-attention-beauty" ){
 				if ( !empty ( $row['meta_value'] ) ) {
 					array_push( $couponAttention, $row['meta_value'] );
@@ -754,18 +736,18 @@ function extraBeautyAjax(){
 			$returnObj[$i]['post_coupon_src'] = get_template_directory_uri() . '/img/icon-q.png';
 		}
 		// *** 有料会員判定
-		if ( post_custom('member-status') == '有料' ) {
+		if ( post_custom('member-status-beauty') == '有料' ) {
 			$returnObj[$i]['post_member_src'] = get_template_directory_uri() . '/img/icon-good.png';
 		}
 		// *** エリア
-		if ( post_custom('area-kagoshima-beauty') ) 	$returnObj[$i]['post_area'] = '鹿児島市エリア';
-		if ( post_custom('area-aira-beauty') ) 			$returnObj[$i]['post_area'] = '姶良市エリア';
-		if ( post_custom('area-kirishima-beauty') ) 	$returnObj[$i]['post_area'] = '霧島エリア';
-		if ( post_custom('area-hokusatsu-beauty') ) 	$returnObj[$i]['post_area'] = '北薩エリア';
-		if ( post_custom('area-nakasatsu-beauty') ) 	$returnObj[$i]['post_area'] = '中薩エリア';
-		if ( post_custom('area-nansatsu-beauty') ) 		$returnObj[$i]['post_area'] = '南薩エリア';
-		if ( post_custom('area-osumi-beauty') ) 		$returnObj[$i]['post_area'] = '大隅エリア';
-		if ( post_custom('area-rito-beauty') ) 			$returnObj[$i]['post_area'] = '離島エリア';
+		if ( post_custom('area-kagoshima-beauty') ) $returnObj[$i]['post_area'] = '鹿児島市エリア';
+		if ( post_custom('area-aira-beauty') ) 		$returnObj[$i]['post_area'] = '姶良市エリア';
+		if ( post_custom('area-kirishima-beauty') ) $returnObj[$i]['post_area'] = '霧島エリア';
+		if ( post_custom('area-hokusatsu-beauty') ) $returnObj[$i]['post_area'] = '北薩エリア';
+		if ( post_custom('area-nakasatsu-beauty') ) $returnObj[$i]['post_area'] = '中薩エリア';
+		if ( post_custom('area-nansatsu-beauty') ) 	$returnObj[$i]['post_area'] = '南薩エリア';
+		if ( post_custom('area-osumi-beauty') ) 	$returnObj[$i]['post_area'] = '大隅エリア';
+		if ( post_custom('area-rito-beauty') ) 		$returnObj[$i]['post_area'] = '離島エリア';
 		// *** ジャンル
 		$returnObj[$i]['post_genre'] = post_custom('genre-beauty');
 		// *** リンク
@@ -780,140 +762,7 @@ function extraBeautyAjax(){
 }
 add_action( "wp_ajax_extraBeautyAjax" , "extraBeautyAjax" );
 add_action( "wp_ajax_nopriv_extraBeautyAjax" , "extraBeautyAjax" );
-// ==================================================
-//
-//	並べ替え - 温泉
-//
-// ==================================================
-function extraHotspringsAjax(){
 
-	// JSから受け渡しするデータ
-	$extra = $_POST['selectKey'];
-
-	if ( $extra === 'default' ) {
-		$selectKey 		= 'member-status-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-kirishima-hotsprings' ) {
-		$selectKey 		= 'area-kirishima-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-nakasatsu-hotsprings' ) {
-		$selectKey 		= 'area-nakasatsu-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-kagoshima-hotsprings' ) {
-		$selectKey 		= 'area-kagoshima-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-osumi-hotsprings' ) {
-		$selectKey 		= 'area-osumi-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-ibusuki-hotsprings' ) {
-		$selectKey 		= 'area-ibusuki-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-nansatsu-hotsprings' ) {
-		$selectKey 		= 'area-nansatsu-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-satsuma-hotsprings' ) {
-		$selectKey 		= 'area-satsuma-hotsprings';
-		$selectValue 	= '';
-	} elseif ( $extra === 'area-rito-hotsprings' ) {
-		$selectKey 		= 'area-rito-hotsprings';
-		$selectValue 	= '';
-	}
-
-	// JSON配列の初期化
-	$returnObj = array();
-
-	// 抽出用の配列作成
-	$args = array(
-		'post_type' 	=> 'hotsprings',
-		'post_status' 	=> 'publish',
-		'orderby' 		=> 'meta_value',
-		'order' 		=> 'DESC',
-		'meta_key' 		=> 'member-status-hotsprings',
-		'meta_query' => array(
-			array(
-					'key' => $selectKey,
-				),
-		),
-	);
-	$the_query = new WP_Query( $args );
-
-	$i = 0;
-
-	if ( $the_query->have_posts() ) :
-	while ( $the_query->have_posts() ) : $the_query->the_post();
-		$returnObj[$i]['post_title'] = get_the_title();
-		// *** 会員ステータスのチェック
-		$returnObj[$i]['post_member'] = post_custom('member-status-hotsprings');
-		// *** アイキャッチ画像のチェック
-		if ( has_post_thumbnail() ) {
-			$image_id = get_post_thumbnail_id ();
-			$image_url = wp_get_attachment_image_src ($image_id, true);
-			$returnObj[$i]['post_eyecatch'] = $image_url[0];
-		} else {
-			$returnObj[$i]['post_eyecatch'] = get_bloginfo( 'template_directory' ) . '/img/thumbnail.png';
-		}
-		// *** クーポン判定
-		global $wpdb;
-		$query 	= "SELECT meta_id,post_id,meta_key,meta_value FROM $wpdb->postmeta WHERE post_id = $post->ID ORDER BY meta_id ASC";
-		$cf 	= $wpdb->get_results($query, ARRAY_A);
-		foreach( $cf as $row ){
-			if( $row['meta_key'] == "coupon-name-hotsprings" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponName, $row['meta_value'] );
-				}
-			}
-			if( $row['meta_key'] == "coupon-introduction-hotsprings" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponIntroduction, $row['meta_value'] );
-				}
-			}
-			if( $row['meta_key'] == "coupon-condition-hotsprings" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponCondition, $row['meta_value'] );
-				}
-			}
-			if( $row['meta_key'] == "coupon-attention-hotsprings" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponAttention, $row['meta_value'] );
-				}
-			}
-			if( $row['meta_key'] == "coupon-day-hotsprings" ){
-				if ( !empty ( $row['meta_value'] ) ) {
-					array_push( $couponDay, $row['meta_value'] );
-				}
-			}
-		}
-		$lengthCoupon = count ( $couponName );
-		if ( $lengthCoupon > 0 ) {
-			$returnObj[$i]['post_coupon_src'] = get_template_directory_uri() . '/img/icon-q.png';
-		}
-		// *** 有料会員判定
-		if ( post_custom('member-status') == '有料' ) {
-			$returnObj[$i]['post_member_src'] = get_template_directory_uri() . '/img/icon-good.png';
-		}
-		// *** エリア
-		if ( post_custom('area-kirishima-hotsprings') ) 	$returnObj[$i]['post_area'] = '霧島市エリア';
-		if ( post_custom('area-nakasatsu-hotsprings') ) 			$returnObj[$i]['post_area'] = '中薩エリア';
-		if ( post_custom('area-kagoshima-hotsprings') ) 	$returnObj[$i]['post_area'] = '鹿児島市エリア';
-		if ( post_custom('area-osumi-hotsprings') ) 	$returnObj[$i]['post_area'] = '大隅エリア';
-		if ( post_custom('area-ibusuki-hotsprings') ) 	$returnObj[$i]['post_area'] = '指宿市エリア';
-		if ( post_custom('area-nansatsu-hotsprings') ) 		$returnObj[$i]['post_area'] = '南薩エリア';
-		if ( post_custom('area-satsuma-hotsprings') ) 		$returnObj[$i]['post_area'] = '薩摩川内市エリア';
-		if ( post_custom('area-rito-hotsprings') ) 			$returnObj[$i]['post_area'] = '北薩エリア';
-		// *** ジャンル
-		$returnObj[$i]['post_genre'] = post_custom('keywords-hotsprings');
-		// *** リンク
-		$returnObj[$i]['post_link'] = get_the_permalink();
-		$i++;
-	endwhile;
-	endif;
-
-	// JSON形式に出力
-	echo json_encode( $returnObj );
-	die();
-}
-add_action( "wp_ajax_extraHotspringsAjax" , "extraHotspringsAjax" );
-add_action( "wp_ajax_nopriv_extraHotspringsAjax" , "extraHotspringsAjax" );
 
 
 
@@ -961,6 +810,8 @@ add_action( "wp_ajax_nopriv_extraHotspringsAjax" , "extraHotspringsAjax" );
 			// $query->set('orderby', array('meta_value_num' => 'ASC', 'date' => 'DESC') );
 			// order は不要
 			// $query->set('order', 'DESC');
+
+
 			$meta_query = array(
 				'status_id' => array(
 						'key' => 'member-status',
@@ -977,58 +828,10 @@ add_action( "wp_ajax_nopriv_extraHotspringsAjax" , "extraHotspringsAjax" );
 			);
 			$query->set('meta_query', $meta_query);
 			$query->set('orderby', $orderby);
-		}
-		if( $query->is_post_type_archive( 'beauty' ) ) {
-			// $query->set('meta_key', 'beauty-rand');
-			// $query->set('meta_key', 'member-status');
-			// $query->set('orderby', array('member-status' => 'DESC', 'beauty-rand' => 'ASC') );
-			// $query->set('orderby', array('member-status' => 'DESC') );
-			// orderby に orderby => order 形式の配列で条件と並び順を渡してあげればOK
-			// $query->set('orderby', array('meta_value_num' => 'ASC', 'date' => 'DESC') );
-			// order は不要
-			// $query->set('order', 'DESC');
-			$meta_query = array(
-				'status_id' => array(
-						'key' => 'member-status-beauty',
-						'type' => 'CHAR',
-					),
-				'beauty_id' => array(
-						'key' => 'beauty-rand',
-						'type' => 'NUMERIC',
-					),
-			);
-			$orderby = array(
-				'status_id' => 'DESC',
-				'beauty_id' => 'ASC',
-			);
-			$query->set('meta_query', $meta_query);
-			$query->set('orderby', $orderby);
-		}
-		if( $query->is_post_type_archive( 'hotsprings' ) ) {
-			// $query->set('meta_key', 'hotsprings-rand');
-			// $query->set('meta_key', 'member-status');
-			// $query->set('orderby', array('member-status' => 'DESC', 'hotsprings-rand' => 'ASC') );
-			// $query->set('orderby', array('member-status' => 'DESC') );
-			// orderby に orderby => order 形式の配列で条件と並び順を渡してあげればOK
-			// $query->set('orderby', array('meta_value_num' => 'ASC', 'date' => 'DESC') );
-			// order は不要
-			// $query->set('order', 'DESC');
-			$meta_query = array(
-				'status_id' => array(
-						'key' => 'member-status-hotsprings',
-						'type' => 'CHAR',
-					),
-				'hotsprings_id' => array(
-						'key' => 'hotsprings-rand',
-						'type' => 'NUMERIC',
-					),
-			);
-			$orderby = array(
-				'status_id' => 'DESC',
-				'hotsprings_id' => 'ASC',
-			);
-			$query->set('meta_query', $meta_query);
-			$query->set('orderby', $orderby);
+
+
+
+
 		}
 	}
 	add_action('pre_get_posts', 'change_posts_query');
