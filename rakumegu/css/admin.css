@@ -31,3 +31,8 @@
 .box.box-3 > .child:not(:last-child) {
 	margin-right: 2%;
 }
+
+.postbox.wrap-news .inside {
+	max-height: 400px;
+	overflow: auto;
+}

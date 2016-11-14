@@ -7,11 +7,11 @@
     <img src="<?php echo get_template_directory_uri(); ?>/img/about-text-sp.png" alt="らくらくめぐり" class="lr-center">
 </div>
 <?php
-	// ==================================================
-	//
-	// かごしまらくらくめぐりとは？
-	//
-	// ==================================================
+    // ==================================================
+    //
+    // かごしまらくらくめぐりとは？
+    //
+    // ==================================================
 ?>
     <div class="wrap-top-about">
         <div class="gnav-bg">
@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-sm-8">
                         <h3 class="text-center topttl mb32 fs32">鹿児島県が実施する<br>タクシー・レンタカーの<br>利用料金の補助です。</h3>
-                        <p>平成28年11月1日〜平成29年1月31日までの利用が対象になります。鹿児島県内の<u><a href="/participate/">宿泊施設</a></u><sup>※</sup>に1泊して<u><a href="/carrental/">領収書等</a></u>をもらい、<a href="/taxi">タクシー</a>・<a href="/carrental/">レンタカー</a>利用中に<u><a href="/facility/">『指定らくめぐり施設』</a></u>2カ所を巡り「かごしまらくめぐり利用証明書」にスタンプをもらえば、タクシー・レンタカー利用料金が最大5,000円割引！是非『かごしまらくめぐり』で鹿児島県の隅々まで“楽（らく）”に“楽（たの）”しく観光をしてください。
+                        <p>平成28年11月1日〜平成29年1月31日までの利用が対象になります。鹿児島県内の<u><a href="/participate/">宿泊施設</a></u><sup>※</sup>に1泊して<u><a href="/about-receipt/">領収書等</a></u>をもらい、<a href="/taxi">タクシー</a>・<a href="/carrental/">レンタカー</a>利用中に<u><a href="/facility/">『指定らくめぐり施設』</a></u>2カ所を巡り「かごしまらくめぐり利用証明書」にスタンプをもらえば、タクシー・レンタカー利用料金が最大5,000円割引！是非『かごしまらくめぐり』で鹿児島県の隅々まで“楽（らく）”に“楽（たの）”しく観光をしてください。
                             <small><span class="kome-red">※</span>宿泊施設については鹿児島県内の旅館業許可を受けている宿泊施設が対象となります（但し同伴施設を除く）。</small></p>
                     </div>
                 </div>
@@ -33,11 +33,11 @@
         </section>
     </div>
     <?php
-	// ==================================================
-	//
-	// かごしまらくらくめぐりを利用するには？
-	//
-	// ==================================================
+    // ==================================================
+    //
+    // かごしまらくらくめぐりを利用するには？
+    //
+    // ==================================================
 ?>
         <div class="wrap-top-howto mt80">
             <div class="gnav-bg">
@@ -56,7 +56,7 @@
                         <div class="box-alert">
                             <div class="icon-top"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-rentacar2.png" alt="レンタカー"></div>
                             <h3 class="text-center topttl mb24"><a href="/carrental/">レンタカー</a>をご利用の場合</h3>
-                            <p class="">本サイトに掲載の<u><a href="/carrental/">レンタカー会社（営業所）</a></u>でレンタカー<sup>※1</sup></u>を借りる際に『かごしまらくめぐり証明書』を受け取る</p>
+                            <p class="">本サイトに掲載の<u><a href="/carrental/">レンタカー会社（営業所）</a></u>でレンタカー<sup>※1</sup>を借りる際に『かごしまらくめぐり証明書』を受け取る</p>
                         </div>
                     </div>
                 </div>
@@ -87,78 +87,81 @@
                         </div>
                     </div>
                 </div>
-        <div class="under-attention">
-                <p><span class="kome-red">※2</span>　<a href="/participate/">宿泊施設</a>の領収書等の宛名と『かごしまらくめぐり証明書』に記入する代表者名は同一である必要があります。またレンタカーをご利用の場合はさらに貸渡契約書の契約者名と同一である必要があります。</p>
-                <p><span class="kome-red">※3</span>　<a href="/participate/">宿泊施設</a>の領収書等に記載の宿泊日は、<a href="https://kg-rakumegu.com/faq/" style="text-decoration:underline;">FAQ参照</a>（ご利用のタクシー・レンタカーの利用終了日から10日前までのものである必要があります！）。</p>
-        </div>
-        <div class="yajirushi text-center"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="box-alert alert-white">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <h3 class="topttl mb24">専用のスタンプをもらう</h3>
-                            <p class="">本サイトに掲載の<a href="/facility/">指定らくめぐり施設</a><sup>※4</sup>を巡って『かごしまらくめぐり証明書』に専用のスタンプをもらう</p>
-                        </div>
-                        <div class="col-sm-5">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/stampmorau.png" alt="スタンプもらう">
-                        </div>
-                    </div>
+                <div class="under-attention">
+                    <p><span class="kome-red">※2</span>　<a href="/participate/">宿泊施設</a>の領収書等の宛名と『かごしまらくめぐり証明書』に記入する代表者名は同一である必要があります。またレンタカーをご利用の場合はさらに貸渡契約書の契約者名と同一である必要があります。</p>
+                    <p><span class="kome-red">※3</span>　<a href="/participate/">宿泊施設</a>の領収書等に記載の宿泊日は、<a href="https://kg-rakumegu.com/faq/" style="text-decoration:underline;">FAQ参照</a>（ご利用のタクシー・レンタカーの利用終了日から10日前までのものである必要があります！）。</p>
                 </div>
-            </div>
-        </div>
-        <div class="under-attention">
-            <p><span class="kome-red">※4</span>　<a href="/facility/">「指定らくめぐり施設」</a>では、施設のご利用（入場、買い物、食事等）をお願いいたします。有料施設の場合は入場料等が必要になりますので、予めご了承ください。</p>
-        </div>
-        <div class="yajirushi text-center"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="box-alert alert-white">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <h3 class="topttl mb24">領収書等の準備、必要事項を記入</h3>
-                            <p class="">『かごしまらくめぐり証明書』に<a href="/participate/">宿泊施設</a>の領収書等を準備し、アンケート項目等必要事項を記入のうえ・・・</p>
-                        </div>
-                        <div class="col-sm-5">
-                            <img src="<?php echo get_template_directory_uri(); ?>/img/kinyuunoue.png" alt="記入">
+                <div class="yajirushi text-center"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="box-alert alert-white">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h3 class="topttl mb24">専用のスタンプをもらう</h3>
+                                    <p class="">本サイトに掲載の<a href="/facility/">指定らくめぐり施設</a><sup>※4</sup>を巡って『かごしまらくめぐり証明書』に専用のスタンプをもらう</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/stampmorau.png" alt="スタンプもらう">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="yajirushi text-center"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="box-alert">
-                    <div class="icon-top"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-taxi.svg" alt="タクシー"></div>
-                    <h3 class="text-center topttl mb24">タクシー利用の方</h3>
-                    <p>精算時にタクシー乗務員にご提出ください。ご利用料金より最大5,000円<sup>※6</sup>が割引となります。</p>
-                    <h3 class="text-center topttl mb24">使用例</h3>
-                    <p>タクシー利用料金が1万円のとき、<a href="/facility/">指定らくめぐり施設</a>を2ヵ所めぐり「かごしまらくめぐり証明書」を提出で5,000円割引となります。</p>
+                <div class="under-attention">
+                    <p><span class="kome-red">※4</span>　<a href="/facility/">「指定らくめぐり施設」</a>では、施設のご利用（入場、買い物、食事等）をお願いいたします。有料施設の場合は入場料等が必要になりますので、予めご了承ください。</p>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="box-alert">
-                    <div class="icon-top"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-car.svg" alt="レンタカー"></div>
-                    <h3 class="text-center topttl mb24">レンタカー利用の方</h3>
-                    <p>レンタカー返却時に窓口の担当にご提出ください。ご利用料金より最大5,000円<sup>※5※6</sup>が割引となります。</p>
-                    <h3 class="text-center topttl mb24">使用例</h3>
-                    <p>レンタカー利用料金が1万円の時、<a href="/facility/">指定らくめぐり施設</a>を2ヵ所めぐり「かごしまらくめぐり証明書」提出で5,000円キャッシュバック！</p>
+                <div class="yajirushi text-center"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="box-alert alert-white">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <h3 class="topttl mb24">領収書等の準備、必要事項を記入</h3>
+                                    <p class="">『かごしまらくめぐり証明書』に<a href="/participate/">宿泊施設</a>の領収書等を準備し、アンケート項目等必要事項を記入のうえ・・・</p>
+									<p class="kome-red"><strong>領収金額について</strong></p>
+									<p>領収金額の記載がもらえなかった場合は、利用証明書提出時に、タクシー乗務員・レンタカー係員に金額を口頭でお伝え下さい<span class="kome-red">※</span>大まかな金額でもかまいません。</p>
+                                    <a href="/about-receipt/" class="btn btn-primary">領収金額等</a>
+                                </div>
+                                <div class="col-sm-5">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/img/kinyuunoue.png" alt="記入">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="under-attention">
-            <p><span class="kome-red">※5</span>　レンタカーご利用で免責補償に未加入の場合、割引となる金額の上限は4,000円となります。またオプション費用や事故時の経費などは割引の対象外となります。</p>
-            <p><span class="kome-red">※6</span>　タクシー・レンタカーのご利用が5,000円を下回った場合、割引となるのはご利用になった金額のみとなります。</p>
-        </div>
-        </section>
+                <div class="yajirushi text-center"><i class="fa fa-arrow-down" aria-hidden="true"></i></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="box-alert">
+                            <div class="icon-top"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-taxi.svg" alt="タクシー"></div>
+                            <h3 class="text-center topttl mb24">タクシー利用の方</h3>
+                            <p>精算時にタクシー乗務員にご提出ください。ご利用料金より最大5,000円<sup>※6</sup>が割引となります。</p>
+                            <h3 class="text-center topttl mb24">使用例</h3>
+                            <p>タクシー利用料金が1万円のとき、<a href="/facility/">指定らくめぐり施設</a>を2ヵ所めぐり「かごしまらくめぐり証明書」を提出で5,000円割引となります。</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="box-alert">
+                            <div class="icon-top"><img src="<?php echo get_template_directory_uri(); ?>/img/icon-car.svg" alt="レンタカー"></div>
+                            <h3 class="text-center topttl mb24">レンタカー利用の方</h3>
+                            <p>レンタカー返却時に窓口の担当にご提出ください。ご利用料金より最大5,000円<sup>※5※6</sup>が割引となります。</p>
+                            <h3 class="text-center topttl mb24">使用例</h3>
+                            <p>レンタカー利用料金が1万円の時、<a href="/facility/">指定らくめぐり施設</a>を2ヵ所めぐり「かごしまらくめぐり証明書」提出で5,000円キャッシュバック！</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="under-attention">
+                    <p><span class="kome-red">※5</span>　レンタカーご利用で免責補償に未加入の場合、割引となる金額の上限は4,000円となります。またオプション費用や事故時の経費などは割引の対象外となります。</p>
+                    <p><span class="kome-red">※6</span>　タクシー・レンタカーのご利用が5,000円を下回った場合、割引となるのはご利用になった金額のみとなります。</p>
+                </div>
+            </section>
         </div>
         <?php
-	// ==================================================
-	//
-	// 注意事項
-	//
-	// ==================================================
+    // ==================================================
+    //
+    // 注意事項
+    //
+    // ==================================================
 ?>
             <div class="wrap-top-attention mt80">
                 <div class="gnav-bg">
@@ -183,4 +186,35 @@
                     </div>
                 </section>
             </div>
-            <?php get_footer(); ?>
+            <?php
+    // ==================================================
+    //
+    // 資料ダウンロード
+    //
+    // ==================================================
+?>
+                <div class="wrap-top-attention mt80">
+                    <div class="gnav-bg">
+                        <h1 class="text-center topttl pts20">資料ダウンロード</h1>
+                    </div>
+                    <section class="container1008 mt40">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="">
+                                    <p class="text-center topttl dl-siryo"><a href="<?php echo get_template_directory_uri(); ?>/img/panfu.pdf" alt="パンフレット" target="_blank"><span style="font-size:40px; color:#7e5000;"><i class="fa fa-map" aria-hidden="true"></i></span><br>パンフレット</a></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="">
+                                    <p class="text-center topttl dl-siryo"><a href="<?php echo get_template_directory_uri(); ?>/img/tirasi.pdf" alt="チラシ" target="_blank"><span style="font-size:40px; color:#7e5000;"><i class="fa fa-file-text" aria-hidden="true"></i></span><br>チラシ</a></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="">
+                                    <p class="text-center topttl dl-siryo"><a href="/wp-content/uploads/2016/10/pamphlet-add.pdf" alt="追加施設" target="blank"><span style="font-size:40px; color:#7e5000;"><i class="fa fa-flag" aria-hidden="true"></i></span><br>追加施設案内</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <?php get_footer(); ?>

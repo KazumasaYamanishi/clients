@@ -432,7 +432,7 @@
 		'post_type'			=> 'post',
 		'post_status'		=> 'publish',
 		'category_name'		=> 'info',
-		'posts_per_page'	=> 5,
+		'posts_per_page'	=> -1,
 	);
 	$the_query = new WP_Query( $argsNews );
 	if ( $the_query->have_posts() ) :

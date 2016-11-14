@@ -249,11 +249,22 @@
 //	ビジュアルとテキストエディタの往復でもソースが変わらないようにする
 //
 // ==================================================
-	add_filter('tiny_mce_before_init', 'tinymce_init');
-	function tinymce_init( $init ) {
-		$init['verify_html'] = false;
-		return $init;
-	}
+	// add_filter('tiny_mce_before_init', 'tinymce_init');
+	// function tinymce_init( $init ) {
+	// 	$init['verify_html'] = false;
+	// 	return $init;
+	// }
+// ==================================================
+//
+//	ビジュアルエディタ・HTMLエディタを非表示
+//
+// ==================================================
+	// add_filter( 'wp_editor_settings', function ( $settings ) {
+	//     if ( user_can_richedit() ) {
+	//         $settings['quicktags'] = false;
+	//     }
+ //    	return $settings;
+	// });
 // ==================================================
 //
 //	固定ページのみ自動整形機能を無効化します。
