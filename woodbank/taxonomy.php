@@ -106,12 +106,35 @@ if($_GET['filter1']) {$order_key="i-case"; $order_by ="meta_value_num"; $order_j
 
 <div class="sort-navi controls">
 
-	<button class="sort btn" data-sort="itemno:asc" onclick="setCookie( 'cookie_itemno', '1', 1 );">品番順</button>
-	<button class="sort btn" data-sort="tanka:desc" onclick="setCookie( 'cookie_tankad', '1', 1 );">ケース単価高い順</button>
-	<button class="sort btn" data-sort="tanka:asc" onclick="setCookie( 'cookie_tankaa', '1', 1 );">ケース単価安い順</button>
+<?php
+if(is_mobile()){
+$tab01="品番順▲";
+$tab02="C/S単価▼";
+$tab03="C/S単価▲";
+$tab04="在庫あり";
+$tab05="床暖房用";
+}else{
+$tab01="品番順";
+$tab02="ケース単価高い順";
+$tab03="ケース単価安い順";
+$tab04="在庫あり";
+$tab05="床暖房用";
+}
+?>
+<!--
+	<button class="sort btn" data-sort="itemno:asc" onclick="setCookie( 'cookie_itemno', '1', 1 );"><?php echo $tab01;?></button>
+	<button class="sort btn" data-sort="tanka:desc" onclick="setCookie( 'cookie_tankad', '1', 1 );"><?php echo $tab02;?></button>
+	<button class="sort btn" data-sort="tanka:asc" onclick="setCookie( 'cookie_tankaa', '1', 1 );"><?php echo $tab03;?></button>
+	<button class="filter btn" data-filter=".zaiko" onclick="setCookie( 'cookie_zaiko', '1', 1 );"><?php echo $tab04;?></button>
+	<button class="filter btn" data-filter=".yukadan" onclick="setCookie( 'cookie_yukadan', '1', 1 );"><?php echo $tab05;?></button>
+-->
+	<button class="sort btn" data-sort="itemno:asc"><?php echo $tab01;?></button>
+	<button class="sort btn" data-sort="tanka:desc"><?php echo $tab02;?></button>
+	<button class="sort btn" data-sort="tanka:asc"><?php echo $tab03;?></button>
+	<button class="filter btn" data-filter=".zaiko"><?php echo $tab04;?></button>
+	<button class="filter btn" data-filter=".yukadan"><?php echo $tab05;?></button>
 
-	<button class="filter btn" data-filter=".zaiko" onclick="setCookie( 'cookie_zaiko', '1', 1 );">在庫あり</button>
-	<button class="filter btn" data-filter=".yukadan" onclick="setCookie( 'cookie_yukadan', '1', 1 );">床暖房用</button>
+
 
 <!-- <button class="filter btn" onclick="$('#item-container').mixItUp('filter','all')">Reset</button> -->
 <!-- <button class="filter btn active" data-filter="all">すべて</button> -->
@@ -160,13 +183,17 @@ if($_GET['filter1']) {$order_key="i-case"; $order_by ="meta_value_num"; $order_j
 	<!-- <article> -->
 		<h1 class="item-title"><?php echo $ttl;?></h1>
 		<div class="row">
-			<div class="col-sm-4">
-				<img src="<?php echo $image[0]; ?>" alt="<?php echo $ttl; ?>" class="lr-center">
+			<div class="col-sm-4 col-xsxs-12">
+<?php if($image[0]): ?>
+		<img src="<?php echo $image[0]; ?>" alt="<?php echo $ttl; ?>" class="lr-center">
+<?php else: ?>
+		<img src="<?php echo get_template_directory_uri(); ?>/img/items/default.jpg" alt="<?php echo $ttl; ?>" class="lr-center">
+<?php endif; ?>
+
+<?php if(!is_mobile()): ?>
 				<div class="wrap-btn">
-					<!-- <a href="#" class="btn btn-primary btn-block btn-lg">サンプル請求する</a> -->
 					<form action="" method="post" style="display:none;">
 						<input type="hidden" name="item_id" value="<?php echo $iNumber; ?>" />
-						<!-- <input type="hidden" name="item_name" value="<?php echo $iGrade;?>" /> -->
 						<input type="hidden" name="item_name" value="<?php echo $ttl;?>" />
 						<input type="hidden" name="item_image" value="<?php echo $image[0]; ?>">
 						<input type="hidden" name="ticket" value="<?php echo $_SESSION['ticket']; ?>">
@@ -182,9 +209,11 @@ if($_GET['filter1']) {$order_key="i-case"; $order_by ="meta_value_num"; $order_j
 					&s1n=<?php echo $ttl; ?>
 					"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>この商品についてお問い合わせ</a>
 				</div>
+<?php endif; ?>
+
 			</div>
-			<div class="col-sm-8">
-				<table class="table">
+			<div class="col-sm-8 col-xsxs-12">
+				<table class="table catitem-list">
 					<tbody>
 						<tr>
 							<th>商品番号</th>
@@ -203,7 +232,7 @@ if($_GET['filter1']) {$order_key="i-case"; $order_by ="meta_value_num"; $order_j
 							<td>長さ<?php if(!empty($iSizeD)) echo number_format($iSizeD); ?>mm × 巾<?php if(!empty($iSizeW)) echo number_format($iSizeW); ?>mm × 厚さ<?php if(!empty($iSizeH)) echo number_format($iSizeH); ?>mm</td>
 						</tr>
 						<tr>
-							<th>1ケースあたりの入数・重量・平米</th>
+							<th><?php if(is_mobile()): echo "C/Sあたりの<br>入数･重量･平米"; else: echo "1ケースあたりの<br>入数・重量・平米"; endif;?></th>
 							<td><?php if(!empty($iCaseU)) echo number_format($iCaseU); ?>枚 <?php if(!empty($iCaseW)) echo number_format($iCaseW); ?>kg <?php if(!empty($iCaseM)) echo number_format($iCaseM); ?>m<sup>2</sup></td>
 						</tr>
 						<tr>
@@ -211,11 +240,45 @@ if($_GET['filter1']) {$order_key="i-case"; $order_by ="meta_value_num"; $order_j
 							<td><?php echo $iStock; ?><?php if(!empty($iNote)): ?> <span class="text-danger">※<?php echo $iNote; ?></span><?php endif; ?></td>
 						</tr>
 						<tr>
-							<th>ケース単価（平米単価）</th>
-							<td class="text-danger"><strong><?php if(!empty($iCase)) echo number_format($iCase); ?>円（<?php if(!empty($iMeter)) echo number_format($iMeter); ?>円）</strong></td>
+							<th>
+<?php 
+if(is_mobile()){ 
+	echo "C/S単価"; 
+	if(!empty($iMeter)) echo '<br>(&#13217;単価)';
+} else { 
+	echo "ケース単価"; 
+	if(!empty($iMeter)) echo '(平米単価)';
+}
+?>
+
+</th>
+
+							<td class="text-danger"><strong><?php if(!empty($iCase)) echo number_format($iCase); ?>円<br class="visible-xs-block" /><?php if(!empty($iMeter)) echo '('.number_format($iMeter).'円)'; ?></strong></td>
 						</tr>
 					</tbody>
 				</table>
+
+<?php if(is_mobile()): ?>
+				<div class="wrap-btn">
+					<form action="" method="post" style="display:none;">
+						<input type="hidden" name="item_id" value="<?php echo $iNumber; ?>" />
+						<input type="hidden" name="item_name" value="<?php echo $ttl;?>" />
+						<input type="hidden" name="item_image" value="<?php echo $image[0]; ?>">
+						<input type="hidden" name="ticket" value="<?php echo $_SESSION['ticket']; ?>">
+						<button  class="btn btn-primary btn-block btn-lg" type='submit' name='sample' val='1'>サンプル請求</button>
+					</form>
+					<a  class="btn btn-primary btn-block btn-lg" 
+					href="<?php echo home_url(); ?>/sample/?item_id=<?php echo $iNumber; ?>
+					&item_name=<?php echo $ttl; ?>
+					&item_image=<?php echo $image[0]; ?>
+					"><i class="fa fa-truck fa-fw" aria-hidden="true"></i>サンプル請求</a>
+					<a  class="btn btn-default btn-block btn-lg" 
+					href="<?php echo home_url(); ?>/contact-item/?s1i=<?php echo $iNumber; ?>
+					&s1n=<?php echo $ttl; ?>
+					"><i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i>商品お問い合わせ</a>
+				</div>
+<?php endif; ?>
+
 			</div>
 		</div>
 	</article>
@@ -224,6 +287,7 @@ if($_GET['filter1']) {$order_key="i-case"; $order_by ="meta_value_num"; $order_j
 ?>
 <div class="gap"></div>
 <div class="gap"></div>
+
 </div><!-- #item-container .item-container -->
 
 
@@ -242,11 +306,10 @@ if($_GET['filter1']) {$order_key="i-case"; $order_by ="meta_value_num"; $order_j
 ?>
 <?php get_template_part( 'to-sample' ); //サンプル請求バナー等表示 to-sample.php ?>
 
-
-
 </div><!-- end of main -->
 <div class="side s-height-some"><?php get_sidebar(); ?></div>
-</div>
+</div><!-- .container main-container -->
+
 
 <script type="text/javascript">
 function setCookie( $cookieName, $cookieValue, $days ){
@@ -278,7 +341,7 @@ function displayCookie( $cookieName, $output ){
 </script>
 
 <?php //↓サンプル表示用で追加 ?>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
 <!--
 <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.utility-kit.js"></script>
 <script>
