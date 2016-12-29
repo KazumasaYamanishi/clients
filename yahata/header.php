@@ -108,8 +108,16 @@
     if(is_front_page()) {
         echo '<div id="inner-slider">';
         echo '<div class="container">';
-        echo '<h1>のびのびとした環境で<br class="pc-break">すなおでやさしい元気な子どもに</h1>';
-        // echo '<p class="lead">この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています</p>';
+        $today = date("Y/m/d"); // 今日の日付を取得
+        $target_day = "2017/01/01"; // 2017年1月1日以降であれば
+        if( strtotime($today) >= strtotime($target_day) ) {
+            echo '<h1>謹賀新年</h1>';
+            echo '<p class="lead">あけましておめでとうございます！<br>ことしもみんなげんきいっぱいあそぼうね</p>';
+            echo '<p class="lead">やはた幼稚園 職員一同</p>';
+        } else {
+            echo '<h1>のびのびとした環境で<br class="pc-break">すなおでやさしい元気な子どもに</h1>';
+            // echo '<p class="lead">この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています</p>';
+        }
         echo '</div>';
         echo '</div>';
     } else {
@@ -130,8 +138,8 @@
 ?>
 <div class="wrap-mimiTab">
     <ul>
-        <li><a href="<?php echo home_url(); ?>/open">情報公開・苦情相談</a></li>
-        <li><a href="<?php echo home_url(); ?>/download">ダウンロード</a></li>
+        <!-- <li><a href="<?php echo home_url(); ?>/open">情報公開・苦情相談</a></li> -->
+        <!-- <li><a href="<?php echo home_url(); ?>/download">ダウンロード</a></li> -->
     </ul>
 </div>
 

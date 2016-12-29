@@ -92,19 +92,11 @@
 		$(function(){
 			$("#wrap-slider").vegas({
 				slides: [
-					<?php
-						$today = date("Y/m/d"); // 今日の日付を取得
-				        $target_day = "2017/01/01"; // 2017年1月1日以降であれば
-				        if( strtotime($today) >= strtotime($target_day) ) {
-				        	echo '{ src: "' . get_template_directory_uri() . '/img/slide-newyear.jpg" },';
-				        } else {
-				        	echo '{ src: "' . get_template_directory_uri() . '/img/slider01.jpg" },';
-				        	echo '{ src: "' . get_template_directory_uri() . '/img/slider02.jpg" },';
-				        	echo '{ src: "' . get_template_directory_uri() . '/img/slider03.jpg" },';
-				        	echo '{ src: "' . get_template_directory_uri() . '/img/slider04.jpg" },';
-				        	echo '{ src: "' . get_template_directory_uri() . '/img/slider05.jpg" }';
-				        }
-					?>
+					{ src: "<?php echo get_template_directory_uri(); ?>/img/slider01.jpg" },
+					{ src: "<?php echo get_template_directory_uri(); ?>/img/slider02.jpg" },
+					{ src: "<?php echo get_template_directory_uri(); ?>/img/slider03.jpg" },
+					{ src: "<?php echo get_template_directory_uri(); ?>/img/slider04.jpg" },
+					{ src: "<?php echo get_template_directory_uri(); ?>/img/slider05.jpg" }
 				],
 			    delay: 7000,
 			    timer: false,

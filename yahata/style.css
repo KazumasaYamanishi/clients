@@ -409,16 +409,16 @@ body.home .wrap-news ul li a .news-title {
 
 #contact article input[type=submit] {
     color: #fff;
-    background-color: #0275d8;
-    border-color: #0275d8;
+    background-color: #f15a24;
+    border-color: #f15a24;
     border-style: solid;
     line-height: 44px;
 }
 
 #contact article input[name=submitBack] {
     color: #424242;
-    background-color: #d4d4d4;
-    border: 1px solid #8c8c8c;
+    background-color: #f15a24;
+    border: 1px solid #f15a24;
 }
 
 @media (min-width: 768px) {
