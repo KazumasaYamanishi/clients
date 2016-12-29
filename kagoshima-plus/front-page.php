@@ -66,7 +66,7 @@
 		);
 		$the_query = new WP_Query( $args );
 		if ( $the_query->have_posts() ) :
-			echo '<div class="wrap-magazine"><div class="container container-margin-off"><h2 class="title-bg-img">TJ最新号</h2>';
+			echo '<div class="wrap-magazine"><div class="container"><h2 class="title-bg-img">TJ最新号</h2></div><div class="container container-margin-off">';
 			while ( $the_query->have_posts() ) : $the_query->the_post();
 				$bnr = post_custom('banner');
 				$src =  wp_get_attachment_image_src($bnr, 'full');
@@ -88,6 +88,15 @@
 	// 今月等のアイコンが入るようにプログラミングする
 	// リンク先の固定ページもその月のイベントが表示されるようにプログラミングする
 	// ==================================================
+		$ttt 		= date("Y-m-d");
+		$thisMonth 	= date('Y/m', strtotime($ttt));
+		$next1Month = date('Y/m', strtotime($ttt . " +1 month"));
+		$next2Month = date('Y/m', strtotime($ttt . " +2 month"));
+		$next3Month = date('Y/m', strtotime($ttt . " +3 month"));
+		$bgTM 		= 'bg-e-month-' . substr($thisMonth, -2);
+		$bgN1M 		= 'bg-e-month-' . substr($next1Month, -2);
+		$bgN2M 		= 'bg-e-month-' . substr($next2Month, -2);
+		$bgN3M 		= 'bg-e-month-' . substr($next3Month, -2);
 		?>
 
 
@@ -97,26 +106,18 @@
 				</div>
 				<div class="bg-base-light">
 					<div class="container">
-						<div class="row">
+						<div class="row box-80per">
 							<div class="col-xs-6 col-sm-3">
-								<a href="<?= home_url(); ?>/events-thismonth/">
-									<img src="<?= get_template_directory_uri(); ?>/img/btn-10.png" alt="今月のイベント" class="">
-								</a>
+								<a href="<?= home_url(); ?>/events/date/<?= $thisMonth; ?>" class="bg-events <?= $bgTM; ?>">今月のイベント</a>
 							</div>
 							<div class="col-xs-6 col-sm-3">
-								<a href="<?= home_url(); ?>/events-nextmonth/">
-									<img src="<?= get_template_directory_uri(); ?>/img/bnr-11.png" alt="翌月のイベント" class="">
-								</a>
+								<a href="<?= home_url(); ?>/events/date/<?= $next1Month; ?>" class="bg-events <?= $bgN1M; ?>">翌月のイベント</a>
 							</div>
 							<div class="col-xs-6 col-sm-3 mt22-sp">
-								<a href="<?= home_url(); ?>/events-next2month/">
-									<img src="<?= get_template_directory_uri(); ?>/img/bnr-12.png" alt="翌々月のイベント" class="">
-								</a>
+								<a href="<?= home_url(); ?>/events/date/<?= $next2Month; ?>" class="bg-events <?= $bgN2M; ?>">翌々月のイベント</a>
 							</div>
 							<div class="col-xs-6 col-sm-3 mt22-sp">
-								<a href="<?= home_url(); ?>/events-next3month/">
-									<img src="<?= get_template_directory_uri(); ?>/img/bne-01.png" alt="以降のイベント" class="">
-								</a>
+								<a href="<?= home_url(); ?>/events/date/<?= $next3Month; ?>" class="bg-events <?= $bgN3M; ?>">翌々々月のイベント</a>
 							</div>
 						</div>
 					</div>
@@ -129,7 +130,7 @@
 	// ==================================================
 	// 特集記事
 	// ==================================================
-		$args = array(
+/*		$args = array(
 			'post_type' 		=> 'feature',
 			'post_status' 		=> 'publish',
 			'posts_per_page' 	=> 4,
@@ -152,10 +153,10 @@
 
 
 				<div class="col-sm-3">
-					<div class="thumbnail">
+					<div class="thumbnail height-some">
 						<img src="<?php echo $src; ?>" alt="<?php echo the_title(); ?>" class="main-img">
 						<div class="caption">
-							<h4><?php echo the_title(); ?></h4>
+							<h4 class=""><?php echo the_title(); ?></h4>
 							<div class="wrap-intro">
 								<?= post_custom('midashi'); ?>
 							</div>
@@ -166,11 +167,11 @@
 				</div>
 		<?php
 			endwhile;
-			echo '</div></div></div>';
+			echo '</div></div></div><div class="container"><div class="view-more"><a href="/plus/feature/">MORE</a></div></div>';
 		endif;
 		wp_reset_postdata();
 
-
+*/
 
 	// ==================================================
 	// 街ネタ
@@ -201,7 +202,7 @@
 					<div class="thumbnail">
 						<img src="<?php echo $src; ?>" alt="<?php echo the_title(); ?>" class="main-img">
 						<div class="caption">
-							<h4><?php echo the_title(); ?></h4>
+							<h4 class="height-some"><?php echo the_title(); ?></h4>
 							<div class="wrap-intro">
 								<?= post_custom('introduction'); ?>
 							</div>
@@ -212,7 +213,7 @@
 				</div>
 		<?php
 			endwhile;
-			echo '</div></div></div>';
+			echo '</div></div></div><div class="container"><div class="view-more"><a href="/plus/townnews/">MORE</a></div></div>';
 		endif;
 		wp_reset_postdata();
 
@@ -224,7 +225,7 @@
 		$args = array(
 			'post_type' 		=> 'events',
 			'post_status' 		=> 'publish',
-			'posts_per_page' 	=> 2,
+			'posts_per_page' 	=> 4,
 			'meta_key' 			=> 'tj-events',
 			'meta_value' 		=> 'on',
 		);
@@ -232,14 +233,14 @@
 		if ( $the_query->have_posts() ) :
 			echo '<div class="wrap-events-tj">';
 			echo '<div class="container"><h2 class="title-bg-img">TJ KAGOSHIMA EVENT TJかごしま イベント情報</h2></div>';
-			echo '<div class="container"><div class="row">';
+			echo '<div class="container"><div class="row row-10">';
 			while ( $the_query->have_posts() ) : $the_query->the_post();
-				$bnr = post_custom('banner');
+				$bnr = post_custom('banner-events');
 				$src =  wp_get_attachment_image_src($bnr, 'full');
 				if ( $src ) {
-					echo '<div class="col-sm-6"><p><a href="' . get_the_permalink() . '"><img src="' . $src[0] . '" alt="' . get_the_title() . '" class="lr-center"></a></p></div>';
+					echo '<div class="col-xs-6 col-sm-3"><p><a href="' . get_the_permalink() . '"><img src="' . $src[0] . '" alt="' . get_the_title() . '" class="lr-center"></a></p></div>';
 				} else {
-					echo '<div class="col-sm-6"><p><a href="' . get_the_permalink() . '"><img src="' . get_template_directory_uri() . '/img/bnr-11.jpg" alt="' . get_the_title() . '" class="lr-center"></a></p></div>';
+					echo '<div class="col-xs-6 col-sm-3"><p><a href="' . get_the_permalink() . '"><img src="' . get_template_directory_uri() . '/img/bnr-11.jpg" alt="' . get_the_title() . '" class="lr-center"></a></p></div>';
 				}
 			endwhile;
 			echo '</div></div></div>';
@@ -274,23 +275,24 @@
 
 
 				<div class="col-sm-3">
-					<div class="thumbnail">
+					<div class="thumbnail height-some">
 						<img src="<?php echo $src; ?>" alt="<?php echo the_title(); ?>" class="main-img">
 						<div class="caption">
-							<h4><?php echo the_title(); ?></h4>
+							<h4 class=""><?php echo the_title(); ?></h4>
 							<div class="post-meta">
-								<dl class="clearfix">
-									<dt>公演日</dt><dd><?php echo post_custom('reserve-day'); ?></dd>
-									<dt>会場</dt><dd><?php echo post_custom('reserve-name'); ?></dd>
-								</dl>
+								<div class="clearfix">
+									<div><i class="fa fa-calendar-minus-o" aria-hidden="true"></i><?php echo post_custom('reserve-day'); ?></div>
+									<div><i class="fa fa-map-marker" aria-hidden="true"></i><?php echo post_custom('reserve-name'); ?></div>
+								</div>
 							</div>
 						</div>
 						<a href="<?php echo the_permalink(); ?>" class="link-cover"><?php echo the_title(); ?></a>
 					</div>
 				</div>
+
 		<?php
 			endwhile;
-			echo '</div></div></div>';
+			echo '</div></div></div><div class="container"><div class="view-more reseve-red"><a href="/plus/reserveseat/">MORE</a></div></div>';
 		endif;
 		wp_reset_postdata();
 
@@ -314,10 +316,10 @@
 
 	<div class="container container-margin-off">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-6">
 				<div class="wrap-info">
 					<h2 class="title-bg-img">インフォメーション</h2>
-					<div class="inner">
+					<div class="inner height-some">
 						<?php
 							$args = array(
 								'post_type' 		=> 'post',
@@ -333,6 +335,7 @@
 									<li>
 										<span class="news-date"><?php the_time('Y.m.d'); ?></span>
 										<span class="news-title"><?php the_title(); ?></span>
+										<a href="<?php the_permalink(); ?>" class="link-cover"><?php the_title(); ?></a>
 									</li>
 							<?php
 								endwhile;
@@ -343,10 +346,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-4">
+<!--			<div class="col-sm-4">
 				<div class="wrap-presents">
 					<h2 class="title-bg-img">プレゼント</h2>
-					<div class="inner">
+					<div class="inner height-some">
 						<?php
 							$args = array(
 								'post_type' 		=> 'post',
@@ -362,6 +365,7 @@
 									<li>
 										<span class="news-date"><?php the_time('Y.m.d'); ?></span>
 										<span class="news-title"><?php the_title(); ?></span>
+										<a href="<?php the_permalink(); ?>" class="link-cover"><?php the_title(); ?></a>
 									</li>
 							<?php
 								endwhile;
@@ -371,11 +375,11 @@
 						?>
 					</div>
 				</div>
-			</div>
-			<div class="col-sm-4">
+			</div> -->
+			<div class="col-sm-6">
 				<div class="wrap-correction">
 					<h2 class="title-bg-img">お詫びと訂正</h2>
-					<div class="inner">
+					<div class="inner height-some">
 						<?php
 							$args = array(
 								'post_type' 		=> 'post',
@@ -391,6 +395,7 @@
 									<li>
 										<span class="news-date"><?php the_time('Y.m.d'); ?></span>
 										<span class="news-title"><?php the_title(); ?></span>
+										<a href="<?php the_permalink(); ?>" class="link-cover"><?php the_title(); ?></a>
 									</li>
 							<?php
 								endwhile;
@@ -433,16 +438,16 @@
 				<div class="col-xs-6 col-sm-15">
 					<div class="thumbnail">
 						<img src="<?php echo $src; ?>" alt="<?php echo the_title(); ?>" class="main-img">
-						<div class="caption">
-							<p class="text-center"><?php echo post_custom('issue-day'); ?></p>
+						<!-- <div class="caption">
+							<p class="text-center height-some"><?php echo mb_convert_kana(post_custom('issue-day-separate'),'nr'); ?></p>
 							<p class="box-round"><?php echo post_custom('genre'); ?></p>
-						</div>
+						</div> -->
 						<a href="<?php echo the_permalink(); ?>" class="link-cover"><?php echo the_title(); ?></a>
 					</div>
 				</div>
 		<?php
 			endwhile;
-			echo '</div></div></div></div>';
+			echo '</div><div class="view-more"><a href="/plus/separate/">MORE</a></div></div></div><div></div></div>';
 		endif;
 		wp_reset_postdata();
 ?>

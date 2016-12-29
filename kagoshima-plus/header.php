@@ -30,9 +30,9 @@
 			<p class="site-description text-center">TJカゴシマの生活応援サイト</p>
 			<div class="wrap-sns">
 				<ul class="list-inline">
-					<li><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></li>
-					<li><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></li>
-					<li><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"></i></span></li>
+					<li><span class="fa-stack fa-lg"><a href="//twitter.com/tj_kagoshima" target="blank"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></a></span></li>
+					<li><span class="fa-stack fa-lg"><a href="//www.facebook.com/TJKagoshima" target="blank"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></a></span></li>
+					<li><span class="fa-stack fa-lg"><a href="//instagram.com/explore/tags/tjカゴシマ/" target="blank"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"></i></a></span></li>
 				</ul>
 			</div>
 		</div>

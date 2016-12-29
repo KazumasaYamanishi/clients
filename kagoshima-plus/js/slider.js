@@ -1,8 +1,8 @@
 $(function(){
 	$setElm = $('.wideslider');
-	baseWidth = 740;
+	baseWidth = 384;
 	// baseHeight = 460;
-	baseHeight = 740;
+	baseHeight = 384;
 	minWidth = 320;
 
 	slideSpeed = 1500;

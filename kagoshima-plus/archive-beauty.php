@@ -179,6 +179,8 @@
 										echo '<div class="wrap-name bg-base">';
 											// 店名
 											echo '<h1>' . get_the_title() . '</h1>';
+											// よみがな
+											echo '<span class="span-kana">' . post_custom('kana-beauty') . '</span>';
 											// 店舗紹介
 											// echo '<div class="wrap-intro">';
 											// echo esc_html($introduction);

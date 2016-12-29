@@ -2,6 +2,23 @@
 
 // ==================================================
 //
+//	特定ユーザーごとに管理メニューを隠す
+//
+// ==================================================
+function remove_menus(){
+	if( !current_user_can('level_10') ) {
+		remove_menu_page( 'edit-comments.php' );			// コメント
+		remove_menu_page( 'tools.php' );					// ツール
+		remove_menu_page( 'edit.php?post_type=hospital' );	// 病院
+		remove_menu_page( 'edit.php?post_type=care' );		// 介護
+		remove_menu_page( 'edit.php?post_type=housing' );	// 家づくり
+		remove_menu_page( 'edit.php?post_type=bridal' );	// ブライダル
+	}
+}
+add_action( 'admin_menu', 'remove_menus' );
+
+// ==================================================
+//
 //	外部のjQueryを読み込む
 //
 // ==================================================
@@ -75,69 +92,69 @@
 // ==================================================
 	if (function_exists('register_sidebar')) {
 		register_sidebar( array(
-			'name' => __( '広告エリア' ),
-			'id' => 'ad_widget',
-			'before_widget' => '<li class="widget-container ad_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="ad_widget">',
-			'after_title' => '</h3>',
+			'name' 			=> __( '広告エリア' ),
+			'id' 			=> 'kokoku_widget',
+			'before_widget' => '<li class="widget-container kokoku_widget">',
+			'after_widget' 	=> '</li>',
+			'before_title' 	=> '<h3 class="kokoku_widget">',
+			'after_title' 	=> '</h3>',
 		));
 		register_sidebar( array(
-			'name' => __( '人気の記事' ),
-			'id' => 'ppost_widget',
+			'name' 			=> __( '人気の記事' ),
+			'id' 			=> 'ppost_widget',
 			'before_widget' => '<li class="widget-container ppost_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="ppost_widget">',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</li>',
+			'before_title' 	=> '<h3 class="ppost_widget">',
+			'after_title' 	=> '</h3>',
 		));
 		register_sidebar( array(
-			'name' => __( '新着記事' ),
-			'id' => 'rentry_widget',
+			'name' 			=> __( '新着記事' ),
+			'id' 			=> 'rentry_widget',
 			'before_widget' => '<li class="widget-container rentry_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="rentry_widget">',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</li>',
+			'before_title' 	=> '<h3 class="rentry_widget">',
+			'after_title' 	=> '</h3>',
 		));
 		register_sidebar( array(
-			'name' => __( 'カテゴリー' ),
-			'id' => 'category_widget',
+			'name' 			=> __( 'カテゴリー' ),
+			'id' 			=> 'category_widget',
 			'before_widget' => '<li class="widget-container category_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="category_widget">',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</li>',
+			'before_title' 	=> '<h3 class="category_widget">',
+			'after_title' 	=> '</h3>',
 		));
 		register_sidebar( array(
-			'name' => __( 'キーワード検索' ),
-			'id' => 'search_widget',
+			'name' 			=> __( 'キーワード検索' ),
+			'id' 			=> 'search_widget',
 			'before_widget' => '<li class="widget-container search_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="search_widget">',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</li>',
+			'before_title' 	=> '<h3 class="search_widget">',
+			'after_title' 	=> '</h3>',
 		));
 		register_sidebar( array(
-			'name' => __( 'エディタについて' ),
-			'id' => 'about_widget',
+			'name' 			=> __( 'エディタについて' ),
+			'id' 			=> 'about_widget',
 			'before_widget' => '<li class="widget-container about_widget">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3 class="about_widget">',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</li>',
+			'before_title' 	=> '<h3 class="about_widget">',
+			'after_title' 	=> '</h3>',
 		));
 		register_sidebar( array(
-			'name' => __( 'Side Widget' ),
-			'id' => 'side-widget',
+			'name' 			=> __( 'Side Widget' ),
+			'id' 			=> 'side-widget',
 			'before_widget' => '<li class="widget-container">',
-			'after_widget' => '</li>',
-			'before_title' => '<h3>',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</li>',
+			'before_title' 	=> '<h3>',
+			'after_title' 	=> '</h3>',
 		));
 		// フッターエリアのウィジェット
 		register_sidebar( array(
-			'name' => __( 'Footer Widget' ),
-			'id' => 'footer-widget',
+			'name' 			=> __( 'Footer Widget' ),
+			'id' 			=> 'footer-widget',
 			'before_widget' => '<div class="widget-area"><ul><li class="widget-container">',
-			'after_widget' => '</li></ul></div>',
-			'before_title' => '<h3>',
-			'after_title' => '</h3>',
+			'after_widget' 	=> '</li></ul></div>',
+			'before_title' 	=> '<h3>',
+			'after_title' 	=> '</h3>',
 		));
 	}
 // ==================================================
@@ -1035,8 +1052,8 @@ add_action( "wp_ajax_nopriv_extraHotspringsAjax" , "extraHotspringsAjax" );
 
 
 
-
-
+	// img srcset 無効化
+	add_filter( 'wp_calculate_image_srcset', '__return_false' );
 
 
 

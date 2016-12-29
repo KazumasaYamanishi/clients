@@ -16,6 +16,10 @@
 
 ?>
 <div class="container">
+
+			<div class="row row-40">
+				<div class="col-sm-8">
+
 	<article>
 		<div class="inner">
 			<?php
@@ -32,7 +36,7 @@
 					echo '" alt="' . get_the_title() . '" class="main-img lr-center"></div>';
 				// 別冊名
 				// --------------------------------------------------
-					echo '<h1 class="title">' . get_the_title() . '</h1>';
+					echo '<h1>' . get_the_title() . '</h1>';
 			?>
 			<div class="wrap-contents">
 				<?php
@@ -43,7 +47,7 @@
 						echo '</div>';
 					// ジャンルなど
 					// --------------------------------------------------
-						echo '<div class="wrap-table"><table class="table"><tbody>';
+						echo '<div class="wrap-table m-lr-20-30"><table class="table"><tbody>';
 							// *** ジャンル
 							if( post_custom('genre-separate') ) {
 								echo '<tr><th>ジャンル</th><td>';
@@ -72,7 +76,7 @@
 					// 備考
 					// --------------------------------------------------
 						if( post_custom('note-separate') ) {
-							echo '<div class="wrap-note"><h3 class="title">備考</h3><div class="inner-note">';
+							echo '<div class="wrap-note m-lr-20-30"><h3 class="title">備考</h3><div class="inner-note">';
 								echo post_custom('note-separate');
 							echo '</div></div>';
 						}
@@ -94,7 +98,7 @@
 									}
 								}
 								$length = count( $outsideIcon );
-								echo '<div class="wrap-outside"><ul>';
+								echo '<div class="wrap-outside"><ul class="list-unstyled">';
 								for ( $i = 0; $i < $length; $i++ ) {
 									$postImg = wp_get_attachment_image ( $outsideIcon[$i], 'full' );
 									echo '<li><a href="' . $outsideSite[$i] . '" target="_blank">' . $postImg . '</a></li>';
@@ -103,13 +107,18 @@
 							// 購読申し込み
 							// --------------------------------------------------
 								if( post_custom('subscription-separate') ) {
-									echo '<p><a href="#">購読のお申し込みはこちらから</a></p>';
+									echo '<p><a href="#" class="">購読のお申し込みはこちらから</a></p>';
 								}
 						}
 				?>
 			</div>
 		</div>
 	</article>
+
+				</div>
+					<?php get_sidebar(); ?>
+			</div>
+
 </div>
 <?php endwhile; endif; ?>
 

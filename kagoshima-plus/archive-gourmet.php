@@ -192,6 +192,8 @@
 										echo '<div class="wrap-name bg-base">';
 											// 店名
 											echo '<h1>' . get_the_title() . '</h1>';
+											// よみがな
+											echo '<span class="span-kana">' . post_custom('kana') . '</span>';
 											// 店舗紹介
 											// echo '<div class="wrap-intro">';
 											// echo esc_html($introduction);
@@ -206,6 +208,12 @@
 										$areaNansatsu 	= post_custom('area-nansatsu'); 	// 南薩エリア
 										$areaOsumi 		= post_custom('area-osumi'); 		// 大隅エリア
 										$areaRito 		= post_custom('area-rito'); 		// 離島エリア
+										// echo '<pre>';
+										// echo var_dump($areaKagoshima);
+										// echo '</pre>';
+										// echo '<pre>';
+										// echo var_dump($areaAira);
+										// echo '</pre>';
 										echo '<div class="wrap-tel-adrs bg-base-light"><ul class="list-inline">';
 												$areaAll = array();
 												if( $areaKagoshima ) 	echo '<li><i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア</li>';
@@ -264,6 +272,9 @@
 		endif;
 	?>
 		</div>
+	    <div class="text-center">
+	        <?php nofx_wp_pagenavi(); ?>
+	    </div>
 	</div>
 
 </div>

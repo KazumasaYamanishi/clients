@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
 <?php
+	// 街ネタ
 	// タイトル表示
 	// ==================================================
 	get_template_part( 'title' );
@@ -21,6 +22,10 @@
 
 ?>
 <div class="container">
+
+			<div class="row row-40">
+				<div class="col-sm-8">
+
 	<article>
 		<div class="inner">
 			<?php
@@ -37,7 +42,7 @@
 					echo '" alt="' . get_the_title() . '" class="main-img lr-center"></div>';
 				// タイトル
 				// --------------------------------------------------
-					echo '<h1 class="title">' . get_the_title() . '</h1>';
+					echo '<h1>' . get_the_title() . '</h1>';
 			?>
 			<div class="wrap-contents">
 				<?php
@@ -48,7 +53,7 @@
 						echo '</div>';
 					// エリア
 					// --------------------------------------------------
-						echo '<div class="wrap-table"><table class="table"><tbody>';
+						echo '<div class="wrap-table m-lr-20-30"><table class="table"><tbody>';
 							// *** 鹿児島市エリア
 							if( $areaKagoshima ) {
 								echo '<tr><th>鹿児島市エリア</th><td><ul>';
@@ -143,7 +148,7 @@
 					// カテゴリ
 					// --------------------------------------------------
 						if( post_custom('category-townnews') ) {
-							echo '<div><h2 class="title">カテゴリー</h2><ul>';
+							echo '<div class="m-lr-20-30"><h2 class="title">カテゴリー</h2><ul>';
 							if( is_array( post_custom('category-townnews') ) ) {
 								foreach (post_custom('category-townnews') as $value) {
 									echo '<li>' . $value . '</li>';
@@ -164,6 +169,11 @@
 			</div>
 		</div>
 	</article>
+
+				</div>
+					<?php get_sidebar(); ?>
+			</div>
+
 </div>
 <?php endwhile; endif; ?>
 

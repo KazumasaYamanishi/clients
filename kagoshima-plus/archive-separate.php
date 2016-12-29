@@ -25,6 +25,7 @@
 			<div class="col-xs-6 col-sm-3">
 				<article>
 					<div class="inner height-some">
+
 						<?php
 							// アイキャッチ画像
 							// --------------------------------------------------
@@ -72,6 +73,9 @@
 				endif;
 			?>
 		</div>
+	    <div class="text-center">
+	        <?php nofx_wp_pagenavi(); ?>
+	    </div>
 	</div>
 </div>
 

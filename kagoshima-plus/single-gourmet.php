@@ -10,6 +10,7 @@
 	// カスタムフィールドの値を取得
 	// ==================================================
 	$memberStatus 	= post_custom('member-status'); 	// 会員ステータス
+	$kana 			= post_custom('kana'); 				// よみがな
 	$city 			= post_custom('city'); 				// 市町村
 	$address 		= post_custom('address'); 			// 市町村以降の住所
 	$lat 			= post_custom('lat'); 				// 緯度
@@ -42,6 +43,10 @@
 	$note 			= post_custom('note'); 				// 備考
 ?>
 <div class="container">
+
+			<div class="row row-40">
+				<div class="col-sm-8">
+
 	<article<?php if( $memberStatus == '有料' ) echo ' class="pay-mbr"'; ?>>
 		<div class="inner">
 			<?php
@@ -72,6 +77,7 @@
 							// *** クーポン 値を取得
 							$couponName 		= array();
 							$couponIntroduction = array();
+							$couponCondition = array();
 							$couponAttention 	= array();
 							$couponDay 			= array();
 							foreach( $cf as $row ){
@@ -83,6 +89,11 @@
 								if( $row['meta_key'] == "coupon-introduction" ){
 									if ( !empty ( $row['meta_value'] ) ) {
 										array_push( $couponIntroduction, $row['meta_value'] );
+									}
+								}
+								if( $row['meta_key'] == "coupon-condition" ){
+									if ( !empty ( $row['meta_value'] ) ) {
+										array_push( $couponCondition, $row['meta_value'] );
 									}
 								}
 								if( $row['meta_key'] == "coupon-attention" ){
@@ -126,77 +137,81 @@
 							echo '<h1>' . get_the_title() . '</h1>';
 							// *** 店舗紹介
 							echo '<div class="wrap-intro">';
-							echo esc_html($introduction);
+							//   echo esc_html($introduction);
+							echo $introduction;
 							echo '</div>';
 						?>
 						<?php
 							// お店の基本情報
 							// ==================================================
 						?>
-						<h2><object type="image/svg+xml" data="<?= get_template_directory_uri(); ?>/img/icon-comment.svg"></object>お店の基本情報</h2>
-						<table class="table">
-							<tbody>
-								<tr>
-									<th>店名</th><td><?= the_title(); ?></td>
-								</tr>
-								<tr>
-									<th>エリア</th><td>
-										<?php
-											if( $areaKagoshima ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア';
-											if( $areaAira ) 		echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市・霧島市エリア';
-											if( $areaHokusatsu ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>北薩エリア';
-											if( $areaNakasatsu ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>中薩エリア';
-											if( $areaNansatsu ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>南薩エリア';
-											if( $areaOsumi ) 		echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>大隅エリア';
-										?>
-									</td>
-								</tr>
-								<tr>
-									<th>ジャンル</th><td>
-										<?php
-											if ( is_array ( $genre ) ) {
-												echo '<ul class="list-inline">';
-												foreach ( $genre as $value ) {
-													echo '<li>' . $value . '</li>';
-												}
-												echo '</ul>';
-											} else {
-												echo $genre;
-											}
-										?>
-									</td>
-								</tr>
-								<?php if ( !empty($tel) ) echo '<tr><th>電話番号</th><td>' . $tel .'</td></tr>'; ?>
-								<?php if ( !empty($city) || !empty($address) ) echo '<tr><th>住所</th><td>' . $city . $address .'</td></tr>'; ?>
-								<?php if ( !empty($car) ) echo '<tr><th>駐車場</th><td>' . $car .'</td></tr>'; ?>
-								<?php if ( !empty($openLast) ) echo '<tr><th>営業時間</th><td>' . $openLast .'</td></tr>'; ?>
-								<?php if ( !empty($holiday) ) echo '<tr><th>定休日</th><td>' . $holiday .'</td></tr>'; ?>
-								<?php if ( !empty($credit) ) : ?>
+						<div class="m-lr-20-30">
+							<h2><object type="image/svg+xml" data="<?= get_template_directory_uri(); ?>/img/icon-comment.svg"></object>お店の基本情報</h2>
+							<table class="table">
+								<tbody>
 									<tr>
-										<th>カード</th><td>
+										<th>店名</th><td><?= the_title(); ?></td>
+									</tr>
+									<?php if ( !empty($kana) ) echo '<tr><th>ふりがな</th><td>' . $kana .'</td></tr>'; ?>
+									<tr>
+										<th>エリア</th><td>
 											<?php
-												if ( is_array ( $credit ) ) {
+												if( $areaKagoshima ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>鹿児島市エリア';
+												if( $areaAira ) 		echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>姶良市・霧島市エリア';
+												if( $areaHokusatsu ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>北薩エリア';
+												if( $areaNakasatsu ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>中薩エリア';
+												if( $areaNansatsu ) 	echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>南薩エリア';
+												if( $areaOsumi ) 		echo '<i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>大隅エリア';
+											?>
+										</td>
+									</tr>
+									<tr>
+										<th>ジャンル</th><td>
+											<?php
+												if ( is_array ( $genre ) ) {
 													echo '<ul class="list-inline">';
-													foreach ( $credit as $value ) {
+													foreach ( $genre as $value ) {
 														echo '<li>' . $value . '</li>';
 													}
 													echo '</ul>';
 												} else {
-													echo $credit;
+													echo $genre;
 												}
 											?>
 										</td>
 									</tr>
-								<?php endif; ?>
-								<?php if ( !empty($seat) ) echo '<tr><th>席数</th><td>' . $seat .'</td></tr>'; ?>
-								<?php if ( !empty($private) ) echo '<tr><th>個室</th><td>' . $private .'</td></tr>'; ?>
-								<?php if ( !empty($reserve) ) echo '<tr><th>貸切</th><td>' . $reserve .'</td></tr>'; ?>
-								<?php if ( !empty($charge) ) echo '<tr><th>サービス料チャージ料</th><td>' . $charge .'</td></tr>'; ?>
-								<?php if ( !empty($tabaco) ) echo '<tr><th>タバコ</th><td>' . $tabaco .'</td></tr>'; ?>
-								<?php if ( !empty($site) ) echo '<tr><th>Web</th><td><a href="' . $site . '" target="_blank">' . $site . '</a></td></tr>'; ?>
-								<?php if ( !empty($note) ) echo '<tr><th>備考</th><td>' . $note .'</td></tr>'; ?>
-							</tbody>
-						</table>
+									<?php if ( !empty($tel) ) echo '<tr><th>電話番号</th><td>' . $tel .'</td></tr>'; ?>
+									<?php if ( !empty($city) || !empty($address) ) echo '<tr><th>住所</th><td>' . $city . $address .'</td></tr>'; ?>
+									<?php if ( !empty($car) ) echo '<tr><th>駐車場</th><td>' . $car .'</td></tr>'; ?>
+									<?php if ( !empty($openLast) ) echo '<tr><th>営業時間</th><td>' . $openLast .'</td></tr>'; ?>
+									<?php if ( !empty($holiday) ) echo '<tr><th>定休日</th><td>' . $holiday .'</td></tr>'; ?>
+									<?php if ( !empty($credit) ) : ?>
+										<tr>
+											<th>カード</th><td>
+												<?php
+													if ( is_array ( $credit ) ) {
+														echo '<ul class="list-inline">';
+														foreach ( $credit as $value ) {
+															echo '<li>' . $value . '</li>';
+														}
+														echo '</ul>';
+													} else {
+														echo $credit;
+													}
+												?>
+											</td>
+										</tr>
+									<?php endif; ?>
+									<?php if ( !empty($seat) ) echo '<tr><th>席数</th><td>' . $seat .'</td></tr>'; ?>
+									<?php if ( !empty($private) ) echo '<tr><th>個室</th><td>' . $private .'</td></tr>'; ?>
+									<?php if ( !empty($reserve) ) echo '<tr><th>貸切</th><td>' . $reserve .'</td></tr>'; ?>
+									<?php if ( !empty($charge) ) echo '<tr><th>サービス料チャージ料</th><td>' . $charge .'</td></tr>'; ?>
+									<?php if ( !empty($tabaco) ) echo '<tr><th>タバコ</th><td>' . $tabaco .'</td></tr>'; ?>
+									<?php if ( !empty($site) ) echo '<tr><th>Web</th><td><a href="' . $site . '" target="_blank">' . $site . '</a></td></tr>'; ?>
+									<?php if ( !empty($note) ) echo '<tr><th>備考</th><td>' . $note .'</td></tr>'; ?>
+								</tbody>
+							</table>
+						</div>
 					</div>
 
 
@@ -243,7 +258,7 @@
 							$otherMenuPrice 		= array();
 
 							// *** 人気メニュー
-							echo '<h2 class="ttl-popular"><object type="image/svg+xml" data="' . get_template_directory_uri() . '/img/icon-ninkimenu.svg"></object>人気メニュー</h2>';
+							echo '<div class="m-lr-20-30"><h2 class="ttl-popular"><object type="image/svg+xml" data="' . get_template_directory_uri() . '/img/icon-ninkimenu.svg"></object>人気メニュー</h2></div>';
 							foreach( $cf as $row ){
 								if( $row['meta_key'] == "menu-name" ){
 									array_push( $menuName, $row['meta_value'] );
@@ -265,13 +280,14 @@
 								echo '<div class="wrap-menu">';
 								$postImg = wp_get_attachment_image ( $menuPhoto[$i], 'full' );
 								echo '<figure class="postImg">' . $postImg . '</figure>';
+								echo '<div class="m-lr-20-30">';
 								echo '<h4 class="ttl">' . $menuName[$i] . '</h4>';
 								echo '<div class="wrap-intro">' . $menuIntroduction[$i] . '</div>';
 								echo '<p class="price">' . $menuPrice[$i] . '円</p>';
-								echo '</div>';
+								echo '</div></div>';
 							}
 
-							// *** その他主なメニュー
+							// *** その他の人気メニュー
 							foreach( $cf as $row ){
 								if( $row['meta_key'] == "other-menu-name" ){
 									array_push( $otherMenuName, $row['meta_value'] );
@@ -283,7 +299,7 @@
 
 							$length = count ( $otherMenuName );
 
-							echo '<div class="wrap-other-menu"><h2><object type="image/svg+xml" data="' . get_template_directory_uri() . '/img/icon-tamenu.svg"></object>その他主なメニュー</h2><table class="table"><tbody>';
+							echo '<div class="wrap-other-menu m-lr-20-30"><h2><object type="image/svg+xml" data="' . get_template_directory_uri() . '/img/icon-tamenu.svg"></object>その他の人気メニュー</h2><table class="table menu-table"><tbody>';
 							for ( $i = 0; $i < $length; $i++ ) {
 								echo '<tr>';
 								echo '<th>' . $otherMenuName[$i] . '</th>';
@@ -302,9 +318,11 @@
 								// 地図
 								// ==================================================
 								if( $lat && $lng ) {
-									echo do_shortcode('[map lat="' . $lat . '" lng="' . $lng . '" height="600px" zoom="17"]');
+									// echo do_shortcode('[map lat="' . $lat . '" lng="' . $lng . '" height="600px" zoom="17"]');
+									echo do_shortcode('[map lat=' . $lat . ' lng=' . $lng . ' height="600px" zoom="17"]');
 								} else {
-									echo do_shortcode('[map addr="' . $city . $address . '" height="600px" zoom="17"]');
+									// echo do_shortcode('[map addr="' . $city . $address . '" height="600px" zoom="17"]');
+									echo do_shortcode('[map addr=' . $city . $address . ' height="600px" zoom="17"]');
 								}
 							?>
 						</div>
@@ -317,14 +335,15 @@
 							// クーポン
 							// ==================================================
 							for ( $i = 0; $i < $lengthCoupon; $i++ ) {
-								echo '<div class="box-default wrap-coupon">';
+								echo '<div class="box-default wrap-coupon m-lr-20-30">';
 								echo '<h4 class="ttl">' . $couponName[$i] . '</h4>';
 								echo '<div class="wrap-intro">' . $couponIntroduction[$i] . '</div>';
-								echo '<div class="wrap-attention"><h5><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i>注意事項</h5>' . $couponAttention[$i] . '</div>';
+								echo '<div class="wrap-attention"><h5><i class="fa fa-exclamation-circle fa-fw" aria-hidden="true"></i>ご利用条件</h5>' . $couponCondition[$i] . '</div>';
 								echo '<p class="limit">有効期限<span class="contents">' . $couponDay[$i] . '</span></p>';
 								echo '</div>';
 							}
 						?>
+						<div class="caution"><h5>◆クーポンご利用上のご注意</h5><p>クーポンの有効期限と利用条件は、お店によって異なります。また、お店によってはランチタイムや営業日、営業時間帯によってご利用になれない場合があります。必ずご確認の上、ご利用ください。</p></div>
 					</div>
 
 
@@ -336,14 +355,19 @@
 				// ==================================================
 				if(is_mobile()) {
 			?>
-				<div class="box-default box-container wrap-call">
-					<a href="tel:<?= $tel; ?>" class="text-center"><i class="fa fa-volume-control-phone fa-fw" aria-hidden="true"></i>電話をする</a>
+				<div class="box-default box-container wrap-call m-lr-20-30">
+					<a href="tel:<?= $tel; ?>" class="text-center"><i class="fa fa-volume-control-phone fa-fw" aria-hidden="true"></i>電話をする<br><span class="callshop"><?= $tel; ?></span></a>
 				</div>
 			<?php
 				}
 			?>
 		</div>
 	</article>
+
+				</div>
+					<?php get_sidebar(); ?>
+			</div>
+
 </div>
 <?php endwhile; endif; ?>
 

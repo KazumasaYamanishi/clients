@@ -65,6 +65,9 @@
 				endif;
 			?>
 		</div>
+		<div class="text-center">
+	        <?php nofx_wp_pagenavi(); ?>
+	    </div>
 	</div>
 </div>
 

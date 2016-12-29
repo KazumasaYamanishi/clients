@@ -14,8 +14,15 @@
 
 ?>
 <div class="container">
+
+			<div class="row row-40">
+				<div class="col-sm-8">
+
 	<article>
 		<div class="inner">
+			
+
+			
 			<?php
 				// アイキャッチ画像
 				// --------------------------------------------------
@@ -75,8 +82,14 @@
 						<?php echo do_shortcode( "[map width='100%' height='350px' lat=" . post_custom('lat-feature') . " lng=" . post_custom('lng-feature') . "]" ); ?>
 					</div>
 			</div>
+
 		</div>
 	</article>
+
+				</div>
+					<?php get_sidebar(); ?>
+			</div>
+
 </div>
 <?php endwhile; endif; ?>
 

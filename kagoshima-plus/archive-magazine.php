@@ -14,7 +14,7 @@
 
 <div class="container">
 	<div id="extra-area">
-		<div class="row row-10">
+		<div class="row row-40">
 			<?php
 				$args = array(
 					'post_type' 		=> 'magazine',
@@ -28,9 +28,12 @@
 
 
 
-			<div class="col-xs-12 col-sm-3">
+			<div class="col-sm-8">
 				<article>
 					<div class="inner height-some">
+
+<h1 class="single-title-top"><?php echo the_title(); ?></h1>
+<div class="time-tj-saisin">Posted<?php the_time('Y.m.d'); ?></div>
 						<?php
 							// アイキャッチ画像
 							// --------------------------------------------------
@@ -46,21 +49,21 @@
 							// 紹介文
 							// --------------------------------------------------
 								if( post_custom('introduction-magazine') ) {
-									echo '<div class="wrap-name bg-base">';
+									echo '<div class="wrap-name">';
 											echo post_custom('introduction-magazine');
 									echo '</div>';
 								}
 							// 特集1
 							// --------------------------------------------------
 								if( post_custom('title-01-magazine') || post_custom('intro-01-magazine') || post_custom('photo-01-magazine') ) {
-									echo '<div class="wrap-tel-adrs bg-base-light">';
+									echo '<div class="wrap-tel-adrs">';
 										$bnr = post_custom('photo-01-magazine');
 										$src =  wp_get_attachment_image_src($bnr, 'full');
 										if ( $src ) {
 											echo '<p><img src="' . $src[0] . '" alt="' . get_the_title() . '"></p>';
 										}
 										if ( post_custom('title-01-magazine') ) {
-											echo '<p>' . post_custom('title-01-magazine') . '</p>';
+											echo '<p class="title-arc">' . post_custom('title-01-magazine') . '</p>';
 										}
 										if ( post_custom('intro-01-magazine') ) {
 											echo '<div class="wrap-intro">' . post_custom('intro-01-magazine') . '</div>';
@@ -70,14 +73,14 @@
 							// 特集2
 							// --------------------------------------------------
 								if( post_custom('title-02-magazine') || post_custom('intro-02-magazine') || post_custom('photo-02-magazine') ) {
-									echo '<div class="wrap-tel-adrs bg-base">';
+									echo '<div class="wrap-tel-adrs">';
 										$bnr = post_custom('photo-02-magazine');
 										$src =  wp_get_attachment_image_src($bnr, 'full');
 										if ( $src ) {
 											echo '<p><img src="' . $src[0] . '" alt="' . get_the_title() . '"></p>';
 										}
 										if ( post_custom('title-02-magazine') ) {
-											echo '<p>' . post_custom('title-02-magazine') . '</p>';
+											echo '<p class="title-arc">' . post_custom('title-02-magazine') . '</p>';
 										}
 										if ( post_custom('intro-02-magazine') ) {
 											echo '<div class="wrap-intro">' . post_custom('intro-02-magazine') . '</div>';
@@ -87,14 +90,14 @@
 							// 特集3
 							// --------------------------------------------------
 								if( post_custom('title-03-magazine') || post_custom('intro-03-magazine') || post_custom('photo-03-magazine') ) {
-									echo '<div class="wrap-tel-adrs bg-base-light">';
+									echo '<div class="wrap-tel-adrs">';
 										$bnr = post_custom('photo-03-magazine');
 										$src =  wp_get_attachment_image_src($bnr, 'full');
 										if ( $src ) {
 											echo '<p><img src="' . $src[0] . '" alt="' . get_the_title() . '"></p>';
 										}
 										if ( post_custom('title-03-magazine') ) {
-											echo '<p>' . post_custom('title-03-magazine') . '</p>';
+											echo '<p class="title-arc">' . post_custom('title-03-magazine') . '</p>';
 										}
 										if ( post_custom('intro-03-magazine') ) {
 											echo '<div class="wrap-intro">' . post_custom('intro-03-magazine') . '</div>';
@@ -112,6 +115,7 @@
 			<?php
 				endwhile;
 				endif;
+				get_sidebar();
 			?>
 		</div>
 	</div>

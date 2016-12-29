@@ -35,8 +35,8 @@ Author URI: http://addas.jp/
 
 
 /*.wideslider ul li img {
-		margin: 0 12px;
-	}*/
+        margin: 0 12px;
+    }*/
 
 .wideslider ul li img {
     display: none;
@@ -128,21 +128,26 @@ Author URI: http://addas.jp/
 }
 
 .wrap-reserveseat .thumbnail .caption .post-meta dl dt {
-    display: none;
+    /*    display: none; */
+    text-align: center;
+    color: #5f9dce;
 }
 
 .wrap-reserveseat .thumbnail .caption .post-meta dl dd {
     padding: 15px;
-    width: 50%;
-    float: left;
-    background-color: #e5e5e5;
+    /*    width: 50%; */
+    /*    float: left; */
     text-align: center;
+    margin-bottom: 10px;
 }
 
-.wrap-reserveseat .thumbnail .caption .post-meta dl > dd:last-child {
+.wrap-reserveseat .thumbnail .caption .post-meta dl>dd:last-child {
     border-left: 1px solid #f1f1f1;
 }
 
+.wrap-reserveseat .post-meta {
+    font-size: 11px;
+}
 
 /*** インフォ、プレゼント、お詫びと訂正 ***/
 
@@ -162,359 +167,65 @@ Author URI: http://addas.jp/
 }
 
 @media (min-width: 768px) {
-    .wideslider ul li img {
-        margin: 0 12px;
+    /*.wideslider ul li img {
+        padding: 0 12px;
+    }*/
+    .wideslider ul li {
+        float: none;
+        display: inline-block;
+    }
+    .wideslider ul > li:first-child a {
+        display: block;
+    }
+    .slider_prev img {
+        right: -25px;
+    }
+    .slider_next img {
+        left: -25px;
     }
 }
 
 
 /* ==================================================
 **
-**  グルメ
+**  スマホのメニューの色
 **
 ================================================== */
 
+#menu-item-40 a{background-color: rgba(255, 255, 255, .85); color: #0071b2;} /*HOME*/
+#menu-item-133 a{background-color: rgba(220, 83, 128, 1); color: #fff;} /*グルメ*/
+#menu-item-190 a{background-color: rgba(254, 174, 222, 1); color: #fff;} /*ビューティ*/
+#menu-item-234 a{background-color: rgba(0, 128, 214, 1); color: #fff;} /*温泉*/
+#menu-item-236 a{background-color: rgba(237, 179, 118, 1); color: #fff;} /*イベント*/
+#menu-item-1016 a{background-color: rgba(171, 219, 88, 1); color: #fff;} /*病院*/
+#menu-item-1017 a{background-color: rgba(50, 151, 80, 1); color: #fff;} /*家づくり*/
+#menu-item-1018 a{background-color: rgba(232, 114, 141, 1); color: #fff;} /*ブライダル*/
 
-/*.post-type-archive-gourmet .wrap-search {
-		margin-left: -15px;
-		margin-right: -15px;
-	}*/
-
-
-/*** パンくず ***/
-
-
-/*.post-type-archive-gourmet .wrap-breadcrumbs + .container {*/
-
-.wrap-breadcrumbs + .container {
-    padding-left: 10px;
-    padding-right: 10px;
-}
+/* #menu-item-133.active a {background-color: rgba(220, 83, 128, .5); color: #fff;} */
 
 
-/*** アーカイブページ article ***/
+/* ==================================================
+**
+**  フロント追記
+**
+================================================== */
 
-
-/*.post-type-archive-gourmet article {*/
-
-.post-type-archive article {
-    position: relative;
-    margin: 0 0 22px;
-    background-color: #f1f1f1;
-}
-
-
-/*** アーカイブページ 店名 ***/
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-name {*/
-
-.post-type-archive article > .inner .wrap-name {
-    padding: 10px;
-}
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-name h1,*/
-
-.post-type-archive article > .inner .wrap-name h1,
-.single-gourmet article > .inner h1 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: #0071b2;
-    font-size: 14px;
-    letter-spacing: 0;
-}
-
-
-/*** アーカイブページ 紹介文 ***/
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-name .wrap-intro {*/
-
-.post-type-archive article > .inner .wrap-name .wrap-intro {
+.view-more {
+    /*top view more*/
     font-size: 11px;
-    letter-spacing: 0;
-}
-
-
-/*** アーカイブページ 電話番号 ***/
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-tel-adrs {*/
-
-.post-type-archive article > .inner .wrap-tel-adrs {
-    padding: 10px 0;
-    font-size: 11px;
-}
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-tel-adrs ul {*/
-
-.post-type-archive article > .inner .wrap-tel-adrs ul {
-    margin: 0;
-}
-
-
-/*** アーカイブページ ジャンルなど ***/
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-genre,
-		.post-type-archive-gourmet article > .inner .wrap-service {*/
-
-.post-type-archive article > .inner .wrap-genre,
-.post-type-archive article > .inner .wrap-service {
-    padding: 10px;
-}
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-genre ul,
-		.post-type-archive-gourmet article > .inner .wrap-service ul {*/
-
-.post-type-archive article > .inner .wrap-genre ul,
-.post-type-archive article > .inner .wrap-service ul {
-    margin: 0;
-    font-size: 11px;
-    letter-spacing: 0;
-}
-
-
-/*.post-type-archive-gourmet article > .inner .wrap-genre,
-		.post-type-archive-gourmet article > .inner .wrap-service {*/
-
-.post-type-archive article > .inner .wrap-genre,
-.post-type-archive article > .inner .wrap-service {
-    border-top: 1px dashed #dbdbdb;
-}
-
-.single-gourmet article > .inner h1 {
-    font-size: 18px;
-}
-
-
-/*** シングル ***/
-
-.single-gourmet article {
-    margin-top: -22px;
-    margin-left: -15px;
-    margin-right: -15px;
-}
-
-.single-gourmet article > .inner h1 {
-    font-size: 18px;
-}
-
-
-/*  .single-gourmet article > .inner h1,
-	.single-gourmet article > .inner .wrap-intro,
-	.single-gourmet article > .inner .tab-content {
-		margin-left: 15px;
-		margin-right: 15px;
-	}*/
-
-.single-gourmet article > .inner h1 {
-    margin-top: 15px;
-}
-
-.single-gourmet article > .inner h2 {
-    position: relative;
-    margin: 22px 15px;
-    font-size: 16px;
-    color: #0071b2;
-}
-
-.single-gourmet article > .inner .lr-center {
-    margin-bottom: 10px;
-}
-
-
-/*** タブメニュー ***/
-
-.single-gourmet article > .inner .tab-content .table {
-    font-size: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-.single-gourmet article > .inner .tab-content .table th,
-.single-gourmet article > .inner .tab-content .table td {
-    vertical-align: middle;
-}
-
-.single-gourmet article > .inner .tab-content .table th {
-    background-color: #f1f1f1;
+    margin-top: 16px;
     text-align: center;
-    width: 7em;
-    border-right: 1px solid #ddd;
+    padding: 10px;
+    background-color: #0071b2;
+    letter-spacing: 0;
+    line-height: 1.4;
+    border-radius: 60px;
+    color: #fff;
+    margin-left: auto;
 }
-
-.single-gourmet article > .inner .tab-content .table td ul {
-    margin-bottom: 0;
+.view-more a {
+    color: #fff;
 }
-
-
-/*** メインイメージの有料会員、クーポンのバッチ設定 ***/
-
-.post-type-archive article > .inner .wrap-thumbnail,
-.single-gourmet article > .inner .tab-content .wrap-thumbnail {
-    position: relative;
-}
-
-.post-type-archive article > .inner .wrap-thumbnail .icon-coupon,
-.single-gourmet article > .inner .tab-content .wrap-thumbnail .icon-coupon {
-    position: absolute;
-    top: 0;
-    right: 10px;
-    width: 30px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-thumbnail .icon-coupon {
-    width: 54px;
-}
-
-.post-type-archive article > .inner .wrap-thumbnail .icon-status,
-.single-gourmet article > .inner .tab-content .wrap-thumbnail .icon-status {
-    position: absolute;
-    bottom: 3px;
-    left: 10px;
-    width: 30px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-thumbnail .icon-status {
-    bottom: 10px;
-    width: 54px;
-}
-
-.single-gourmet article > .inner .tab-content #Section1 h1,
-.single-gourmet article > .inner .tab-content #Section1 .wrap-intro {
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.single-gourmet article > .inner .tab-content #Section1 h2 object {
-    margin: -6px 2px 0 0;
-    width: 26px;
-}
-
-
-/*** 写真 ***/
-
-.single-gourmet article > .inner .tab-content .box-card .figure-caption {
-    margin-bottom: 0;
-    padding: 10px 10px 10px 24px;
-    text-indent: -8px;
-    background-color: #f5f5f5;
-    font-size: 12px;
-}
-
-
-/*** メニュー ***/
-
-.single-gourmet article > .inner .tab-content #Section3 .ttl-popular object {
-    margin-top: -14px;
-    width: 32px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-menu {
-    background-color: #f5f5f5;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-menu .ttl,
-.single-gourmet article > .inner .tab-content .wrap-menu .wrap-intro,
-.single-gourmet article > .inner .tab-content .wrap-menu .price {
-    margin-left: 15px;
-    margin-right: 15px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-menu .ttl {
-    margin-top: 14px;
-    font-size: 14px;
-    color: #0071b2;
-    font-weight: 600;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-menu .wrap-intro {
-    margin-bottom: 6px;
-    font-size: 12px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-menu .price {
-    margin-bottom: 0;
-    padding-bottom: 10px;
-    color: #c93a40;
-    font-weight: 600;
-    text-align: right;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-other-menu h2 {
-    margin-bottom: 16px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-other-menu h2 object {
-    margin-top: -6px;
-    width: 26px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-other-menu .table th {
-    width: 20em;
-    text-align: left;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-other-menu .table td {
-    text-align: right;
-}
-
-
-/*** クーポン ***/
-
-.single-gourmet article > .inner .tab-content .wrap-coupon {
-    margin: 22px 20px 0;
-    padding: 15px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-coupon h4 {
-    margin-top: 0;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-coupon .wrap-intro {
-    margin: 0;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-coupon .wrap-attention {
-    margin: 1rem 0;
-    padding: 1rem;
-    background-color: #f2dede;
-    border-color: #ebcccc;
-    color: #a94442;
-    border-radius: .25rem;
-    font-size: 12px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-coupon .wrap-attention h5 {
-    margin-top: 4px;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-coupon .limit {
-    margin-bottom: 0;
-    font-weight: 600;
-}
-
-.single-gourmet article > .inner .tab-content .wrap-coupon .limit .contents {
-    margin-left: 1em;
-}
-
-
-/*** 電話をする ***/
-
-.single-gourmet article > .inner .wrap-call {
-    margin: 44px auto 0 auto;
-    width: 80%;
-}
-
-
-
 
 
 /* ==================================================
@@ -523,11 +234,249 @@ Author URI: http://addas.jp/
 **
 ================================================== */
 
+
 /*** ライター募集中 ***/
+
 .page-id-74 article .box-blue ul.kome {
     text-indent: 0;
     padding-left: 1.5em;
 }
+
 .page-id-74 article .box-blue ul li {
     font-size: 12px;
 }
+
+
+/* ==================================================
+**
+**  シングル
+**
+================================================== */
+
+.single .table>tbody>tr>td,
+.single .table>tbody>tr>th,
+.single .table>tfoot>tr>td,
+.single .table>tfoot>tr>th,
+.single .table>thead>tr>td,
+.single .table>thead>tr>th {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+  .single .table>tbody>tr>td,
+  .single .table>tbody>tr>th,
+  .single .table>tfoot>tr>td,
+  .single .table>tfoot>tr>th,
+  .single .table>thead>tr>td,
+  .single .table>thead>tr>th {
+      padding: 18px;
+      vertical-align: middle;
+  }
+}
+
+/* ==================================================
+**
+**  アーカイブ　追記
+**
+================================================== */
+
+.span-kana {
+  font-size: 11px;
+}
+@media (min-width: 768px) {
+  .span-kana {
+    font-size: 11px;
+  }
+}
+
+
+/* ==================================================
+**
+**  シングル - TJ最新号
+**
+================================================== */
+.post-type-archive-magazine .wrap-thumbnail:before,
+.post-type-archive-separate .wrap-thumbnail:before,
+.single .wrap-thumbnail:before {
+    display: none;
+}
+
+.post-type-archive-magazine .wrap-thumbnail img.main-img,
+.post-type-archive-separate .wrap-thumbnail img.main-img,
+.single .wrap-thumbnail img.main-img {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+}
+
+/* ==================================================
+**
+**  追加川原とりあえず20161202
+**
+================================================== */
+
+@media (min-width: 768px) {
+  .thumbnail .caption h4 {
+      font-size: 16px;
+      line-height: 1.4;
+  }
+  .title-bg-img {
+      text-indent: -9999em;
+      height: 52px;
+      margin: 64px 0 24px 0;
+  }
+  .wrap-events .bg-base-light {
+      padding: 40px 0;
+  }
+  .thumbnail .caption {
+      text-align: justify;
+box-shadow: none;
+  }
+  .wrap-reserveseat .thumbnail .caption .post-meta {
+      font-size: 11px;
+      /* padding: 15px; */
+      margin-bottom: 10px;
+  }
+  .bg-base-super-light {
+      background-color: #f1f1f1;
+      padding: 40px 0;
+  }
+  header .navbar .navbar-header {
+      position: relative;
+      height: 120px;
+  }
+  .page-title {
+      padding: 24px 0;
+      background-color: #ededed;
+  }
+  .side {
+      padding: 0;
+      margin: 0;
+  }
+  .side ul {
+      list-style: none;
+  }
+  .side ul li {
+      margin-bottom: 20px;
+  }
+  .single article .inner .nav-tabs {
+      margin: 0 0 32px 0;
+      border-bottom: none;
+      padding-top: 20px;
+  }
+  .single article .inner .nav-tabs > li.active {
+      border-bottom: 2px solid rgba(0, 113, 178, .6);
+  }
+  .single article {
+      padding: 0 10px 10px 10px;
+      background-color: #fff;
+  }
+  .category-info article,
+  .category-presents article,
+  .category-correction article,
+  .post-type-archive-magazine article {
+      padding: 0 48px 10px 48px;
+      background-color: #fff;
+  }
+  .category-info article .inner,
+  .category-presents article .inner,
+  .category-correction article .inner {
+      padding: 30px 10px 10px 10px;
+      border-bottom: 1px dotted #424242;
+  }
+  .single article .inner .wrap-contents .wrap-map {
+      margin: 0;
+  }
+  .breadcrumb {
+      margin: 12px -15px 22px;
+      padding: 10px;
+      border-radius: 0;
+      font-size: 11px;
+      letter-spacing: 0;
+      background-color: #f6f6f6;
+  }
+  .single article .inner h1.title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.4;
+      padding-top: 32px;
+  }
+  /*アーカイブ、info,お詫び、プレゼント、タイトル*/
+  .title-arc {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.4;
+  }
+  /*TJ最新号H1タイトル*/
+  .single-title-top {
+      margin: 0px 0 6px;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.4;
+      padding: 34px 0 20px 0;
+      border-bottom: 1px solid #eee;
+  }
+  .time-single {
+      /*シングル投稿時間*/
+      font-size: 12px;
+      margin-bottom: 32px;
+  }
+  .time-tj-saisin {
+      /*tj最新号投稿時間*/
+      font-size: 12px;
+      margin-bottom: 24px;
+  }
+  .view-more {
+      /*top view more*/
+      font-size: 11px;
+      margin-top: 16px;
+      text-align: center;
+      padding: 10px;
+      width: 10%;
+      background-color: #0071b2;
+      letter-spacing: 0;
+      line-height: 1.4;
+      border-radius: 60px;
+      color: #fff;
+      margin-left: auto;
+  }
+  .view-more a {
+      color: #fff;
+  }
+  .reseve-red {
+      background-color: #c63043;
+  }
+  a img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+  a:hover img {
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+  .single .wrap-thumbnail {
+      margin: 0px -10px 18px;
+  }
+  .inner h1 {
+      line-height: 1.6;
+  }
+}
+
+.time-single {
+    margin-bottom: 32px;
+}
+
+.wrap-separate .thumbnail {
+    margin-bottom: 10px;
+}
+
+/*シングル投稿時間*/
