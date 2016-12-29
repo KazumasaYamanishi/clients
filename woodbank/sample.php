@@ -66,7 +66,7 @@ echo '<div class="alert alert-info text-center" role="alert"><p>サンプル商�
 ?>
 <div id="sample-cart" class="row">
 
-	<div class="col-4 item-list">
+	<div class="col-sm-6 item-list">
 		<h1><span class="title-b">フローリング</span><span class="title-w">Flooring</span></h1>
 		
 		<ul class="list-unstyled">
@@ -84,7 +84,7 @@ echo '<div class="alert alert-info text-center" role="alert"><p>サンプル商�
 			<?php endforeach; ?>
 		</ul>
 	</div>
-	<div class="col-4 item-list">
+	<div class="col-sm-6 item-list">
 		<h1><span class="title-b">羽目板</span><span class="title-w">Paneling</span></h1>
 		
 		<ul class="list-unstyled">
@@ -101,8 +101,7 @@ echo '<div class="alert alert-info text-center" role="alert"><p>サンプル商�
 				<li><a href="<?php echo home_url() . '/cat_paneling/' . $value->slug; ?>"><?php echo $value->name; ?><span class="badge"><?php echo $value->count; ?></span></a></li>
 			<?php endforeach; ?>
 		</ul>
-	</div>
-	<div class="col-4 item-list">
+
 		<h1><span class="title-b">デッキ材</span><span class="title-w">Decking</span></h1>
 		
 		<ul class="list-unstyled">
@@ -119,8 +118,7 @@ echo '<div class="alert alert-info text-center" role="alert"><p>サンプル商�
 				<li><a href="<?php echo home_url() . '/cat_decking/' . $value->slug; ?>"><?php echo $value->name; ?><span class="badge"><?php echo $value->count; ?></span></a></li>
 			<?php endforeach; ?>
 		</ul>
-	</div>
-	<div class="col-4 item-list">
+
 		<h1><span class="title-b">その他</span><span class="title-w">Other</span></h1>
 		
 		<ul class="list-unstyled">
@@ -181,7 +179,7 @@ if(isset($_SESSION['sample']) and count($_SESSION['sample']) > 3 ) {
 echo '<div class="alert alert-info text-center" role="alert"><p>カットサンプルは３枚までとなっております。</p></div>';
 }else{
 ?>
-<a id="sample-link" class="btn btn-block btn-danger" href="<?php echo $self_url; ?>?fm=1<?php echo $opt;?>">上記商品のカットサンプルを請求する</a>
+<a id="sample-link" class="btn btn-block btn-info" href="<?php echo $self_url; ?>?fm=1<?php echo $opt;?>">上記商品のカットサンプルを請求する</a>
 <?php
 }
 ?>

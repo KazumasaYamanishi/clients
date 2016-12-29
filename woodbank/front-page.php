@@ -22,12 +22,11 @@
 //
 //	==================================================
 ?>
+<!--
 <div class="wrap-recommend">
-	<h2 class="text-center"><img src="<?php echo get_template_directory_uri(); ?>/img/title-rec.png" alt="recommend"></h2>
+	<h2 class="text-center"><img src="<?php //echo get_template_directory_uri(); ?>/img/title-rec.png" alt="recommend"></h2>
 </div>
-
-
-
+-->
 <?php
 //	==================================================
 //
@@ -52,10 +51,17 @@
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-md-3 col-sm-3">
+			<div class="col-md-3 col-sm-3 col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_flooring/' . $value->slug; ?>" class="box-items">
 					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
-					<h4 class="text-center"><?php echo $value->name; ?></h4>
+<?php 
+$item_name = $value->name;
+$item_name= str_replace("(", "<small>(", $item_name);
+$item_name= str_replace(")", ")</small>", $item_name);
+$item_name= str_replace("（", "<small>（", $item_name);
+$item_name= str_replace("）", "）</small>", $item_name);
+?>
+					<h4 class="text-center"><?php echo $item_name; ?></h4>
 				</a>
 				<?php // echo var_dump($value); ?>
 			</div>
@@ -76,10 +82,17 @@
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-md-3 col-sm-3">
+			<div class="col-md-3 col-sm-3 col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_paneling/' . $value->slug; ?>" class="box-items">
 					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
-					<h4 class="text-center"><?php echo $value->name; ?></h4>
+<?php 
+$item_name = $value->name;
+$item_name= str_replace("(", "<small>(", $item_name);
+$item_name= str_replace(")", ")</small>", $item_name);
+$item_name= str_replace("（", "<small>（", $item_name);
+$item_name= str_replace("）", "）</small>", $item_name);
+?>
+					<h4 class="text-center"><?php echo $item_name; ?></h4>
 				</a>
 			</div>
 		<?php endforeach; ?>
@@ -99,10 +112,17 @@
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-md-3 col-sm-3">
+			<div class="col-md-3 col-sm-3 col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_decking/' . $value->slug; ?>" class="box-items">
 					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
-					<h4 class="text-center"><?php echo $value->name; ?></h4>
+<?php 
+$item_name = $value->name;
+$item_name= str_replace("(", "<small>(", $item_name);
+$item_name= str_replace(")", ")</small>", $item_name);
+$item_name= str_replace("（", "<small>（", $item_name);
+$item_name= str_replace("）", "）</small>", $item_name);
+?>
+					<h4 class="text-center"><?php echo $item_name; ?></h4>
 				</a>
 			</div>
 		<?php endforeach; ?>
@@ -122,10 +142,17 @@
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-md-3 col-sm-3">
+			<div class="col-md-3 col-sm-3 col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_other/' . $value->slug; ?>" class="box-items">
 					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
-					<h4 class="text-center"><?php echo $value->name; ?></h4>
+<?php 
+$item_name = $value->name;
+$item_name= str_replace("(", "<small>(", $item_name);
+$item_name= str_replace(")", ")</small>", $item_name);
+$item_name= str_replace("（", "<small>（", $item_name);
+$item_name= str_replace("）", "）</small>", $item_name);
+?>
+					<h4 class="text-center"><?php echo $item_name; ?></h4>
 				</a>
 			</div>
 		<?php endforeach; ?>
@@ -188,7 +215,8 @@
 
 </div><!-- end of main -->
 <div class="side height-some"><?php get_sidebar(); ?></div>
-</div>
+</div><!-- .container main-container -->
+
 
 
 

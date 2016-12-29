@@ -1,7 +1,5 @@
 <?php get_header(); ?>
 
-
-
 <?php
 //	==================================================
 //
@@ -10,7 +8,6 @@
 //	==================================================
 ?>
 <?php get_template_part( 'title' ); ?>
-
 
 
 <?php
@@ -40,6 +37,13 @@
 			<?php the_content(); ?>
 		</div>
 	</article>
+
+<?php if($_GET['i']): ?>
+	<div class="text-center" style="margin-top:20px;">
+	<a class="btn btn-default" href="<?php echo $_SERVER['HTTP_REFERER']; ?>#p<?php echo $_GET['i'];?>"><i class="fa fa-arrow-circle-left fa-fw" aria-hidden="true"></i>検索結果に戻る</a>
+	</div>
+<?php endif; ?>
+
 <?php endwhile; endif; ?>
 
 
@@ -53,11 +57,9 @@
 ?>
 <?php get_template_part( 'to-sample' ); //サンプル請求バナー等表示 to-sample.php ?>
 
-
-
 </div><!-- end of main -->
 <div class="side height-some"><?php get_sidebar(); ?></div>
-</div>
+</div><!-- .container main-container -->
 
 
 

@@ -762,7 +762,7 @@ function bootstrap_pagination($range){
    
   if(1 != $pages){
     echo '<ul class="pagination">';
-    echo '<li class="disabled"><a href="#">'.$paged.' / '.$pages.'</a></li>';
+if(!is_mobile())  echo '<li class="disabled"><a href="#">'.$paged.' / '.$pages.'</a></li>';
 
     if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<li><a href='".get_pagenum_link(1)."'>&laquo;</a></li>";
     if($paged > 1 && $showitems < $pages) echo "<li><a href='".get_pagenum_link($paged - 1)."'>&lsaquo;</a></li>";
@@ -776,5 +776,35 @@ function bootstrap_pagination($range){
     if ($paged < $pages && $showitems < $pages) echo "<li><a href='".get_pagenum_link($paged + 1)."'>&rsaquo;</a></li>";
     if ($paged < $pages-1 && $paged+$range-1 < $pages && $showitems < $pages) echo "<li><a href='".get_pagenum_link($pages)."'>&raquo;</a></li>";
     echo "</ul>\n";
+
   }
 }
+
+/*
+function change_posts_per_page($query) {
+ if( is_admin() || ! $query->is_main_query() ){
+     return;
+ }
+ 
+ if ( $query->is_search() ) {
+     $query->set( 'posts_per_page', '5' );
+     return;
+ }
+ 
+}
+add_action( 'pre_get_posts', 'change_posts_per_page' );
+*/
+
+/* 投稿内で [home_url] と記述する */
+function shortcode_homeurl() {
+    return home_url();
+}
+add_shortcode('home_url', 'shortcode_homeurl');
+
+
+/* 投稿内で [wp_url] と記述する */
+function shortcode_wpurl() {
+    return site_url();
+}
+add_shortcode('wp_url', 'shortcode_wpurl');
+

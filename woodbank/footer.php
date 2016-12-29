@@ -1,12 +1,39 @@
+<?php if(!is_mobile()) echo '<div class="container">';?>
 <footer id="footer" class="clearfix">
 	<div class="container text-center">
 		<p class="company-name">WOOD BANK ウッドバンク</p>
-		<p class="company-info">〒897-1123 <br class="visible-xs-block" />鹿児島県南さつま市加世田高橋1963-5<br class="visible-xs-block" /> TEL 0120-022-730<br class="visible-xs-block" /> FAX 0993-53-8308</p>
-		<p class="copy">Copyright &copy; <?php echo date('Y'); ?> WOOD BANK ウッドバンク<span class="hidden-xs"> All Rights Reserved.</span></p>
+		<p class="company-info">〒897-1123 <br class="visible-xs-block" />鹿児島県南さつま市<br class="visible-xs-block" />加世田高橋1963-5<br class="visible-xs-block" /> TEL 0120-022-730<br class="visible-xs-block" /> FAX 0993-53-8308</p>
+		<p class="copy">Copyright &copy; <?php echo date('Y'); ?> WOOD BANK<span class="hidden-xs"> ウッドバンク</span><span class="hidden-xs"> All Rights Reserved.</span></p>
 	</div>
 </footer>
+<?php if(!is_mobile()) echo '</div>';?>
+
 <!-- end of #wrapper --></div>
 <p id="toPageTop"><a href="#wrapper">ページトップへ戻る</a></p>
+
+
+<!-- 検索 モーダル・ダイアログ -->
+<div class="modal fade" id="search-modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+				<h4 class="modal-title">記事の検索</h4>
+			</div>
+			<div class="modal-body">
+<form method="get" class="searchform" action="<?php echo esc_url( home_url('/') ); ?>">
+	<input type="search" placeholder="キーワード" name="s" class="searchfield" value="">
+	<input type="submit" value="&#xf002;&nbsp;検索" alt="検索" title="検索" class="searchsubmit">
+</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 <?php wp_footer(); ?>
 
@@ -37,7 +64,18 @@ $(function(){
   });
 });
 </script>
-
+<script>
+/*
+window.onload = function(){
+    $(function() {
+        //ページの読み込みが完了したのでアニメーションはフェードアウトさせる
+        $(".loading").fadeOut();
+        //ページの表示準備が整ったのでコンテンツをフェードインさせる
+        $(".pdf-view").fadeIn();
+    });
+}
+*/
+</script>
 
 <script src="<?php bloginfo('template_url'); ?>/js/myScript.js"></script>
 

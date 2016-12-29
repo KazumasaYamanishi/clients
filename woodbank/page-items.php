@@ -29,7 +29,7 @@ $cols = 3;
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-sm-<?php echo $cols;?>">
+			<div class="col-sm-<?php echo $cols;?> col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_flooring/' . $value->slug; ?>" class="box-items">
 					<div class="header embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
 					<h4 class="text-center"><?php echo $value->name; ?></h4>
@@ -53,7 +53,7 @@ $cols = 3;
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-sm-<?php echo $cols;?>">
+			<div class="col-sm-<?php echo $cols;?> col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_paneling/' . $value->slug; ?>" class="box-items">
 					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
 					<h4 class="text-center"><?php echo $value->name; ?></h4>
@@ -76,8 +76,54 @@ $cols = 3;
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-sm-<?php echo $cols;?>">
+			<div class="col-sm-<?php echo $cols;?> col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_decking/' . $value->slug; ?>" class="box-items">
+					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
+					<h4 class="text-center"><?php echo $value->name; ?></h4>
+				</a>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<h3><span class="first">フリー板</span><span class="second">Free</span></h3>
+	<div class="row">
+		<?php
+			// ==============================
+			// フリー板
+			// ==============================
+			$taxonomies = array(
+				'cat_free'
+			);
+			$args = array(
+				'get' => 'all'
+			);
+			$terms = get_terms($taxonomies, $args);
+			foreach($terms as $key => $value):
+		?>
+			<div class="col-sm-<?php echo $cols;?> col-xsxs-6">
+				<a href="<?php echo home_url() . '/cat_free/' . $value->slug; ?>" class="box-items">
+					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
+					<h4 class="text-center"><?php echo $value->name; ?></h4>
+				</a>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<h3><span class="first">框・踏板・巾木</span><span class="second">Free</span></h3>
+	<div class="row">
+		<?php
+			// ==============================
+			// 框・踏板・巾木
+			// ==============================
+			$taxonomies = array(
+				'cat_frame'
+			);
+			$args = array(
+				'get' => 'all'
+			);
+			$terms = get_terms($taxonomies, $args);
+			foreach($terms as $key => $value):
+		?>
+			<div class="col-sm-<?php echo $cols;?> col-xsxs-6">
+				<a href="<?php echo home_url() . '/cat_frame/' . $value->slug; ?>" class="box-items">
 					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
 					<h4 class="text-center"><?php echo $value->name; ?></h4>
 				</a>
@@ -99,8 +145,31 @@ $cols = 3;
 			$terms = get_terms($taxonomies, $args);
 			foreach($terms as $key => $value):
 		?>
-			<div class="col-sm-<?php echo $cols;?>">
+			<div class="col-sm-<?php echo $cols;?> col-xsxs-6">
 				<a href="<?php echo home_url() . '/cat_other/' . $value->slug; ?>" class="box-items">
+					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
+					<h4 class="text-center"><?php echo $value->name; ?></h4>
+				</a>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<h3><span class="first">ファニチャー</span><span class="second">Other</span></h3>
+	<div class="row">
+		<?php
+			// ==============================
+			// ファニチャー
+			// ==============================
+			$taxonomies = array(
+				'cat_furniture'
+			);
+			$args = array(
+				'get' => 'all'
+			);
+			$terms = get_terms($taxonomies, $args);
+			foreach($terms as $key => $value):
+		?>
+			<div class="col-sm-<?php echo $cols;?> col-xsxs-6">
+				<a href="<?php echo home_url() . '/cat_furniture/' . $value->slug; ?>" class="box-items">
 					<div class="header  embed-responsive embed-responsive-50by50"><img src="<?php echo get_template_directory_uri(); ?>/img/items/<?php echo $value->slug; ?>.jpg" alt="<?php echo $value->name; ?>" class="lr-center embed-responsive-item"></div>
 					<h4 class="text-center"><?php echo $value->name; ?></h4>
 				</a>

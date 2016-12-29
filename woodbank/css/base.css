@@ -23,7 +23,8 @@ body {
     padding: 0;
     color: #424242;
     font-weight: 500;
-    font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;
+/*font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', Meiryo, メイリオ, Osaka, 'MS PGothic', arial, helvetica, sans-serif;*/
+font-family:"游ゴシック", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", sans-serif;
     text-align: justify;
     text-justify: inter-ideograph;
 }
@@ -114,7 +115,13 @@ x:default {
     box-shadow: #000 0 0 0;
 }
 
-
+a[href$=".pdf"]:after {   
+	content: "\f1c1";
+	font-family: FontAwesome;
+	padding-left:5px;
+	color:#C40002;
+}  
+#search-modal{display:none;}
 /*  ==================================================
 **
 **  title
@@ -123,6 +130,7 @@ x:default {
 
 .page-title .title {
     text-align: center;
+    margin: 42px 0;
 }
 
 
@@ -235,6 +243,13 @@ div.aligncenter {
     color: #000;
 }
 
+.inner iframe,
+.inner dl,
+.inner ul,
+.inner ol,
+.inner table,
+.inner p {margin-left:1em;margin-right:1em;}
+
 .lr-center {
     display: block;
     margin-left: auto;
@@ -295,6 +310,14 @@ div.aligncenter {
     background: linear-gradient(transparent 40%, #ffff66 40%);
 }
 
+#sample-cart .badge,
+.side-list .badge {display:none;}
+
+#sample-cart a:hover .badge,
+.side-list a:hover .badge {
+ display:inline-block;
+}
+
 
 /*  ==================================================
 **
@@ -308,4 +331,250 @@ div.aligncenter {
 
 .wrap-news h2 .sub-title {
     display: block;
+}
+
+/*dl*/
+
+.dl-horizontal dt {
+    vertical-align: middle;
+}
+
+.dl-horizontal dt {
+    clear: left;
+    float: left;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 10em;
+    font-size:12px;
+    line-height:40px;
+}
+.dl-horizontal dt span{
+    background-color:#c40002;
+    color:#FFF;
+    font-size:10px;
+    display:inline-block;
+    text-align:center;
+    margin-left:5px;
+    padding:6px 6px;
+    bottom:4px;
+    line-height:16px;
+}
+
+
+.dl-horizontal dd {
+    vertical-align: middle;
+}
+
+.dl-horizontal dd {
+    padding-left: 11em;
+    margin-left:0;
+    font-size:16px;
+    line-height:54px;
+    border-bottom: 1px dotted #414141;
+}
+#home .dl-horizontal dt {
+    line-height:30px;
+}
+#home .dl-horizontal dd {
+    line-height:30px;
+}
+#home .dl-horizontal dd a{
+    line-height:1.2 !important;
+}
+
+
+#home .dl-horizontal dt span{
+padding:0 6px;
+}
+
+
+/*  ==================================================
+**
+**  商品カテゴリーヘッダー
+**
+==================================================  */
+
+.category_header {margin-bottom:30px;}
+.category_header h1 {font-size:1.5rem;}
+.category_header h2 span {width:20%;text-align:center;padding:10px;font-size:1.2rem;}
+
+.category_header h2 span.title-b {display:inline-block;border:1px #000 solid;background:#000; color:#FFF;}
+.category_header h2 span.title-w {display:inline-block;border:1px #000 solid;background:#FFF; color:#000;}
+
+.sort-navi{margin-bottom:30px;text-align:center;}
+.sort-navi button{width:16%;}
+.sort-navi button.active{
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+}
+
+
+.item-container {
+	padding:0;
+	text-align:justify;
+}
+
+.item-container .mix,
+.item-container .gap {
+	display:inline-block;
+	width:100%;
+}
+
+#item-container .mix {
+	display:none;
+}
+
+.fail-message{
+  display:none;
+}
+.fail .fail-message{
+  display:block;
+}
+
+
+
+
+
+h1.item-title {font-size:1.2rem;font-weight:500;}
+.lead {
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+
+/*検索*/
+.search-item{font-size:0.9rem;margin-bottom:10px;padding-bottom:10px;border-bottom:1px #000000 dotted;}
+
+.search-item h3{font-weight:500;margin-bottom:0;margin-top:0;}
+.search-item h3 a{color:#1a0dab;}
+.search-item h3 a:hover{text-decoration:underline;}
+.search-item h3 a:visited {color:#932674;} 
+.search-item ul{margin:0;padding:0;list-style-type:none;}
+.search-item .page-breadcrumb{margin:-0.5em 0 0;padding-left:1.5rem;color:#999;font-size:10px;}
+.search .hit-count{border-bottom:1px #333 solid;margin-left:-15px; margin-right:-15px;margin-bottom:10px;padding-bottom:15px; }
+
+.pagination {
+    border-radius: 4px;
+    display: inline-block;
+    margin: 20px 0;
+    padding-left: 0;
+}
+.pagination > li {
+    display: inline;
+}
+.pagination > .active > a, 
+.pagination > .active > a:focus, 
+.pagination > .active > a:hover, 
+.pagination > .active > span, 
+.pagination > .active > span:focus, 
+.pagination > .active > span:hover {
+    background-color: #4D4D4D;
+    border-color: #4D4D4D;
+    color: #fff;
+    cursor: default;
+    z-index: 3;
+}
+
+.pagination > li > a, .pagination > li > span {
+    background-color: #fff;
+    border: 1px solid #4D4D4D;
+    color: #4D4D4D;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+
+/*流れ*/
+.fs3{margin-top:1em;margin-bottom:1em;font-size:60px;}
+
+/*Q＆A*/
+.qaItem dt {font-weight:600;margin-bottom:20px;color: #c40002;padding-left:29px;text-indent:-29px;}
+.qaItem dd {margin-left:0;padding-left:0;padding-left:29px;text-indent:-29px;margin-bottom:42px;padding-bottom:15px;border-bottom:1px #ccc dotted;}
+.qaItem dt:before,
+.qaItem dd:before {display:inline-block;font-size:14px;width:24px;height:24px;text-align:center;font-weight:600;border-radius:4px;margin-right:5px;}
+
+.qaItem dt:before {content:"Q";background-color:#999;color:#FFF;text-indent:0;}
+.qaItem dd:before {content:"A";background-color:#414141;color:#FFF;text-indent:0;}
+
+/*シングル*/
+.single-pager{margin:50px 0 30px;}
+.pull-left,
+.pull-right {
+	width:48%;
+}
+.pull-left table,
+.pull-right table {
+	width:100%;
+}
+
+.pull-left span,
+.pull-right  span {
+display:inline-block;
+}
+.pull-left table td,
+.pull-right  table td {
+	vertical-align: top;
+}
+
+.pull-right {
+	text-align:right;
+}
+
+/*送料*/
+.inner .table_carry th {
+	text-align:center;
+	background-color: #4d4d4d !important;
+	color:#FFF;
+padding-top:0.5em !important;padding-bottom:0.5em !important;
+}
+
+.inner .table_carry td {
+	text-align:center;
+padding-top:0.5em !important;padding-bottom:0.5em !important;
+}
+.inner .table_carry .td-number td{text-align:right;}
+.price-list {
+	display:inline-block;
+}
+.price-list li:last-child {
+margin-top:5px;
+padding-top:5px;
+border-top:1px #ccc solid;
+list-style-type:none;
+margin-left:-1em;
+padding-left:1em;
+}
+
+
+/*bootstrap*/
+.embed-responsive.embed-responsive-16by9 {
+    padding-bottom: 56.25%;
+}
+.embed-responsive.embed-responsive-50by50 {
+    padding-bottom: 100%;
+}
+
+.embed-responsive {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+.embed-responsive .embed-responsive-item, .embed-responsive iframe, .embed-responsive embed, .embed-responsive object, .embed-responsive video {
+    border: 0 none;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+border:1px #000000 solid;
 }
